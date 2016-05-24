@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+  <title>Crisp Cloud Solutions</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- CSS LIBRARIES AND PLUGINS -->
+  <link rel="stylesheet" type="text/css" href="../../bower_components/font-awesome/css/font-awesome.min.css"/>
+  <link rel="stylesheet" type="text/css" href="../../bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" type="text/css" href="../../bower_components/angular-timeline/dist/angular-timeline.css"/>
+  <link rel="stylesheet" type="text/css" href="../../bower_components/angular-timeline/dist/angular-timeline-bootstrap.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/style.css">
+<!-- BASE URL -->
+  <base href="/"></base>
+</head>
+
+<body>
+<!-- DEFAULT NAVBAR -->
+  <nav class="nav navbar-dark bg-primary" role="navigation">
+    <div class="nav-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+      <label class="navbar-brand">Crisp Cloud Solutions</label>
+
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="upload" style="color:white">FORUM</a></li>
+        <li><a href="/" style="color:white">HOME</a></li>
+      </ul>
+    </div>
+  </nav>
+
+<!-- TEMPLATE VIEW -->
+	<ng-view></ng-view>
+
+<!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <center class="text-muted"><i class="fa fa-copyright" aria-hidden="true"> Designed and Developed By Crisp Team</i></center>
+    </div>
+  </footer>
+
+<!-- LIBRARIES AND PLUGINS -->
+  <!-- <script src="bower_components/jquery/dist/jquery.min.js"></script> -->
+  <script src="bower_components/angular/angular.min.js"></script>
+  <script src="bower_components/angular-route/angular-route.min.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="bower_components/fusioncharts/fusioncharts.js"></script>
+  <script src="bower_components/fusioncharts/fusioncharts.charts.js"></script>
+  <script src="bower_components/fusioncharts/themes/fusioncharts.theme.ocean.js"></script>
+  <script src="bower_components/vendor/vendor.js"></script>
+  <script src="bower_components/ui-accordion/dist/scripts/ui-accordion.js"></script>
+  <script src="bower_components/angular-timeline/dist/angular-timeline.js"></script>
+  <script src="bower_components/ng-file-upload/ng-file-upload.min.js"></script>
+  <script src="bower_components/ng-file-upload/ng-file-upload-shim.min.js"></script>
+<!-- CORE -->
+  <script src="app/core/module.js"></script>
+  <script src="app/core/config.js"></script>
+<!-- HOME -->
+  <script src="app/Home/homeService.js"></script> 
+  <script src="app/Home/homeController.js"></script> 
+<!-- UPLOAD -->
+  <script src="app/Upload/uploadController.js"></script>
+
+</body>
+</html>

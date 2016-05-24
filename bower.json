@@ -1,0 +1,22 @@
+{
+  "name": "projectdemo",
+  "description": "Student Project Details",
+  "main": "app.js",
+  "authors": [
+    "GANESH KUMAR R"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "dependencies": {
+    "angular": "^1.5.5",
+    "angular-fusioncharts": "^0.0.2",
+    "angular-route": "^1.5.5",
+    "angular-timeline": "^1.6.2",
+    "bootstrap": "^3.3.6",
+    "font-awesome": "^4.6.3",
+    "fusioncharts": "^3.10.1",
+    "ng-file-upload": "^12.0.4",
+    "ui-accordion": "^1.2.3",
+    "vendor": "^1.2.3"
+  }
+}

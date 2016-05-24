@@ -1,0 +1,32 @@
+{
+  "name": "projectdemo",
+  "version": "1.0.0",
+  "description": "Student Project Details",
+  "main": "server.js",
+  "scripts": {
+    "test": "npm unit test"
+  },
+  "author": "GANESH KUMAR R",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "compression": "^1.6.2",
+    "dateformat": "^1.0.12",
+    "events": "^1.1.0",
+    "express": "^4.13.4",
+    "express-session": "^1.13.0",
+    "fs": "0.0.2",
+    "method-override": "^2.3.5",
+    "morgan": "^1.7.0",
+    "multer": "^1.1.0",
+    "mysql": "^2.10.2",
+    "path": "^0.12.7",
+    "sloc": "^0.1.10"
+  },
+  "devDependencies": {
+    "bower": "^1.7.9",
+    "cloc": "^2.0.0",
+    "gulp": "^3.9.1",
+    "gulp-uglify": "^1.5.3"
+  }
+}
