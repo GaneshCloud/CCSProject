@@ -1,6 +1,6 @@
 'use strict';
 
-var app=angular.module('myApp',['ngRoute','angular-timeline','uiAccordion','ngFileUpload']);
+var myApp=angular.module('myApp',['ngRoute','angular-timeline','uiAccordion','ngFileUpload','ngProgress','angularSpinners','ui.bootstrap']);
 
-console.log(app+'module loaded');
+console.log(myApp+'module loaded');
 

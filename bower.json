@@ -17,6 +17,8 @@
     "fusioncharts": "^3.10.1",
     "ng-file-upload": "^12.0.4",
     "ui-accordion": "^1.2.3",
-    "vendor": "^1.2.3"
+    "vendor": "^1.2.3",
+    "angular-spinners": "^3.1.2",
+    "ngprogress": "^1.1.3"
   }
 }

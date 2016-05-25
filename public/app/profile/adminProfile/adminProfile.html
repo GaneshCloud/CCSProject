@@ -1,0 +1,458 @@
+
+<spinner name="html5spinner" ng-cloak="">
+    <div class="overlay"></div>
+    <div class="spinner">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+    </div>
+    <div class="please-wait">Please Wait...</div>
+</spinner>
+
+<div>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Settings <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+
+                            <li align = 'right' ng-show="userCredentials && google_link">
+
+                                <a ng-click="addGoogleAccount()">
+
+                                    <span class="glyphicon glyphicon-retweet"></span>Link Google Account
+
+                                </a>
+
+                            </li>
+
+                            <li align = 'right' ng-show="userCredentials && fb_link">
+
+                                <a ng-click="addFacebookAccount()">
+
+                                    <span class="glyphicon glyphicon-retweet"></span>Link Facebook Account
+
+                                </a>
+
+                            </li>
+
+                            <li align = 'right'  ng-show="!userCredentials">
+
+                                <a ng-click="goToDashboard()">
+
+                                    <span class="glyphicon glyphicon-th-large"></span>Dashboard
+
+                                </a>
+
+                            </li>
+
+                            <li align = 'right' ng-show="userCredentials">
+
+                                <a ng-click='onChangePassword()'>
+
+                                    <span class="glyphicon glyphicon-lock"></span>Change Password
+
+                                </a>
+
+                            </li>
+
+                            <li class="divider"  ng-show="userCredentials"></li>
+
+                            <li align='right'>
+
+                                <a ng-click='onLogout()'>
+
+                                    <span class="glyphicon glyphicon-log-out"></span>Log Out
+
+                                </a>
+
+                            </li>
+
+                        </ul>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+</div>
+
+<div class="container">
+
+    <div id="page-wrapper">
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="row pull-right">
+
+                    <div class="input-group">
+                        <input type="text" ng-model="search" class="form-control" placeholder="Search Profile"></input>
+                        <span class="glyphicon glyphicon-search form-control-feedback" aria-hidden="true"></span>
+                    </div>
+
+                </div>
+                <h1 class="page-header">Profiles</h1>
+
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+
+        <div class="row">
+
+            <div ng-repeat='user in userDetailsFilter | filter:search'>
+                <div class="col-lg-4 col-md-6">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-7">
+
+                                    <div>
+
+                                        <label>{{((user.fname)?user.fname:((user.fb_fname)?user.fb_fname:((user.g_fname)?user.g_fname:'')))+ ' ' + ((user.mname)?user.mname:'') + ' ' + ((user.lname)?user.lname:'')}}</label>
+
+                                    </div>
+
+                                    <div>
+
+                                        <label>{{((user.contact)?user.contact:'Contact Empty')}}</label>
+
+                                    </div>
+
+                                    <div>
+
+                                        <label>{{((user.email)?user.email:'Email unavailable') }}</label>
+
+                                    </div>
+
+                                </div>
+                                <div class="col-xs-5 text-right">
+                                    <div class="pull-right">
+
+                                        <input type="image" class="img-responsive" width="50" ng-src="{{getImageSrcProfile(user)}}">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a data-toggle="modal" data-target="{{'#'+user.id}}">
+                            <div class="panel-footer">
+                                <span class="pull-left">View Profile</span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="{{user.id}}" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">{{((user.fname)?user.fname:((user.fb_fname)?user.fb_fname:((user.g_fname)?user.g_fname:'')))+ '' + ((user.mname)?user.mname:'') + '' + ((user.lname)?user.lname:'')}}</h4>
+                            </div>
+
+                            <div class="modal-body">
+
+                                <div class="row"  ng-show = "(user.userid)?true:false">
+
+                                    <form role="form" class="form-horizontal">
+
+                                        <div class="col-md-4" >
+
+                                            <div class="form-group">
+
+                                                <input type="image" style="padding: 2px" class="img-responsive" width="300" ng-src="{{getImageSrc(user.profile_pic)}}">
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-md-8">
+
+                                            <div class="form-group">
+
+                                                <div>
+
+                                                    <label class="label-align col-md-5">UserId/Reg No</label>
+
+                                                    <div class="col-md-7">
+
+                                                        <label>{{user.userid}}</label>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="form-group" >
+
+                                                <label class="label-align col-md-5">Email</label>
+
+                                                <div class="col-md-7">
+
+                                                    <label>{{user.email}}</label>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="form-group" >
+
+                                                <label class="label-align col-md-5">Contact</label>
+
+                                                <div class="col-md-7">
+
+                                                    <label>{{user.contact}}</label>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="form-group">
+
+                                                <label class="label-align col-md-5">Address</label>
+
+                                                <div class="col-md-7">
+
+                                                    <label >{{user.address}}</label>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="form-group">
+
+                                                <label class="label-align col-md-5">College</label>
+
+                                                <div class="col-md-7">
+
+                                                    <label>{{user.college}}</label>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="form-group">
+
+                                                <label class="label-align col-md-5">Course</label>
+
+                                                <div class="col-md-7">
+
+                                                    <label>{{user.course}}</label>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="form-group">
+
+                                                <label class="label-align col-md-5">Branch</label>
+
+                                                <div class="col-md-7">
+
+                                                    <label>{{user.branch}}</label>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="form-group">
+
+                                                <label class="label-align col-md-5">Year</label>
+
+                                                <div class="col-md-7">
+
+                                                    <label>{{user.year}}</label>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="form-group">
+
+                                                <label class="label-align col-md-5">Project Cost</label>
+
+                                                <div class="col-md-7">
+
+                                                    <label>{{user.project_fee}}</label>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="form-group">
+
+                                                <label class="label-align col-md-5">Amount Paid</label>
+
+                                                <div class="col-md-7">
+
+                                                    <label>{{user.fees_paid}}</label>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="form-group">
+
+                                                <label class="label-align col-md-5">Balance Amount</label>
+
+                                                <div class="col-md-7">
+
+                                                    <label>{{user.fees_balance}}</label>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </form>
+
+                                </div>
+
+                                <div class="row" ng-show = "(user.facebook_img)?true:false">
+
+                                    <form role="form" class="form-horizontal">
+
+                                        <div class="col-md-4" >
+
+                                            <div class="form-group">
+
+                                                <input type="image" class="img-responsive" width="300" ng-src="{{getImageSrc(user.facebook_img)}}">
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-md-8">
+
+                                            <div class="form-group">
+
+                                                <div>
+
+                                                    <label class="label-align col-md-5">Facebook Profile Name</label>
+
+                                                    <div class="col-md-7">
+
+                                                        <label>{{user.fb_fname + '' + ((user.fb_mname)?user.fb_mname:'') + '' + ((user.fb_lname)?user.fb_lname:'')}}</label>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="form-group" >
+
+                                                <label class="label-align col-md-5">Email</label>
+
+                                                <div class="col-md-7">
+
+                                                    <label>{{user.fb_email}}</label>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </form>
+
+                                </div>
+
+                                <div class="row" ng-show = "(user.google_img)?true:false">
+
+                                    <form role="form" class="form-horizontal">
+
+                                        <div class="col-md-4" >
+
+                                            <div class="form-group">
+
+                                                <input type="image" class="img-responsive" width="300" ng-src="{{getImageSrc(user.google_img)}}">
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-md-8">
+
+                                            <div class="form-group">
+
+                                                <div>
+
+                                                    <label class="label-align col-md-5">Google Profile Name</label>
+
+                                                    <div class="col-md-7">
+
+                                                        <label>{{user.g_fname + '' + ((user.g_mname)?user.g_mname:'') + '' + ((user.g_lname)?user.g_lname:'')}}</label>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="form-group" >
+
+                                                <label class="label-align col-md-5">Email</label>
+
+                                                <div class="col-md-7">
+
+                                                    <label>{{user.g_email}}</label>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </form>
+
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-sm-offset-4" style="padding: 0px">
+
+        <pagination
+                ng-model="cur_page"
+                total-items="totalLength"
+                items-per-page="items_per_page"
+                max-size="max_size"
+                boundary-links="true">
+        </pagination>
+
+    </div>
+
+</div>

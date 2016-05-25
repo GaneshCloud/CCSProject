@@ -1,0 +1,77 @@
+/**
+ * Created by CSS on 25-05-2016.
+ */
+
+(function() {
+
+    function loginController($scope,$window,loginService,ngProgressFactory,
+                             spinnerService) {
+
+        $scope.progressbar = ngProgressFactory.createInstance();
+
+        $scope.userCredentials = false;
+
+        $scope.loginWithFacebook = function() {
+            $scope.progressbar.start();
+            spinnerService.show('html5spinner');
+            loginService.loginWithFacebook().then(function() {
+                $scope.progressbar.complete();
+                spinnerService.hide('html5spinner');
+            });
+
+        };
+
+        $scope.loginWithGoogle = function() {
+
+            $scope.progressbar.start();
+            spinnerService.show('html5spinner');
+
+            loginService.loginWithGoogle().then(function() {
+                $scope.progressbar.complete();
+                spinnerService.hide('html5spinner');
+            });
+
+        };
+
+        $scope.isInputValid = function(input) {
+            return input.$valid;
+        };
+
+        $scope.isInputInvalid = function(input) {
+            return input.$dirty && input.$invalid;
+        };
+
+        $scope.isPasswordValid = function(newPassword) {
+            return newPassword.$valid;
+        };
+
+        $scope.isPasswordInvalid = function(newPassword) {
+            return newPassword.$dirty && newPassword.$invalid;
+        };
+
+        $scope.submit = function(user, password) {
+            $scope.progressbar.start();
+            spinnerService.show('html5spinner');
+            console.log('username --->' + user);
+            loginService.verifyUser(user.$viewValue, password.$modelValue)
+                .then(function(result) {
+                    if (result !== '') {
+                        loginService.profilePage().then(function() {
+                            $scope.progressbar.complete();
+                            spinnerService.hide('html5spinner');
+                        });
+                    }else {
+                        loginService.loginPageWithError().then(function() {
+                            $scope.progressbar.complete();
+                            spinnerService.hide('html5spinner');
+                        });
+                    }
+                });
+
+        };
+
+    }
+
+    myApp.controller('loginController',loginController);
+
+})();

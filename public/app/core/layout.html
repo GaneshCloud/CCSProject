@@ -11,8 +11,57 @@
   <link rel="stylesheet" type="text/css" href="../../bower_components/angular-timeline/dist/angular-timeline.css"/>
   <link rel="stylesheet" type="text/css" href="../../bower_components/angular-timeline/dist/angular-timeline-bootstrap.css"/>
   <link rel="stylesheet" type="text/css" href="../css/style.css">
+  <style>
+
+    .tab-content {
+      padding: 10px;
+    }
+
+    .btn.nohover:hover {
+      /* here copy default .btn class styles */
+      cursor:default !important;
+      /* or something like that */
+    }
+
+    .label-align{
+      text-align: right;
+    }
+
+    .divclass{
+      display: inline-block;
+      vertical-align: middle;
+      width: 40%;
+    }
+
+    .align-middle{
+      margin-top: 10%;
+      margin-bottom: 10%;
+    }
+
+    .vcenter {
+      display: inline-block;
+      vertical-align: middle;
+      float: none;
+    }
+
+    .navbar{
+      color: black;
+      background-color: #837E7C;
+    }
+
+    @media only screen and (max-width : 480px)   {
+
+      #heading span,a{
+        display: inline-block;
+        width: 100%;
+        margin-top: 10px;
+      }
+
+    }
+
+  </style>
 <!-- BASE URL -->
-  <base href="/"></base>
+  <base href="/">
 </head>
 
 <body>
@@ -32,6 +81,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li><a href="upload" style="color:white">FORUM</a></li>
         <li><a href="/" style="color:white">HOME</a></li>
+
       </ul>
     </div>
   </nav>
@@ -47,7 +97,7 @@
   </footer>
 
 <!-- LIBRARIES AND PLUGINS -->
-  <!-- <script src="bower_components/jquery/dist/jquery.min.js"></script> -->
+   <script src="bower_components/jquery/dist/jquery.min.js"></script>
   <script src="bower_components/angular/angular.min.js"></script>
   <script src="bower_components/angular-route/angular-route.min.js"></script>
   <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -59,14 +109,47 @@
   <script src="bower_components/angular-timeline/dist/angular-timeline.js"></script>
   <script src="bower_components/ng-file-upload/ng-file-upload.min.js"></script>
   <script src="bower_components/ng-file-upload/ng-file-upload-shim.min.js"></script>
+  <script src="bower_components/angular-spinners/dist/angular-spinners.js"></script>
+  <script src="bower_components/ngprogress/build/ngProgress.js"></script>
+  <script type="text/javascript" data-require="ui-bootstrap@*" data-semver="0.12.1" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.1.min.js"></script>
 <!-- CORE -->
   <script src="app/core/module.js"></script>
   <script src="app/core/config.js"></script>
 <!-- HOME -->
-  <script src="app/Home/homeService.js"></script> 
-  <script src="app/Home/homeController.js"></script> 
+  <script src="app/project/home/homeService.js"></script>
+  <script src="app/project/home/homeController.js"></script>
 <!-- UPLOAD -->
-  <script src="app/Upload/uploadController.js"></script>
+  <script src="app/project/upload/uploadController.js"></script>
+
+<!--Login-->
+  <script src="app/profile/login/loginService.js"></script>
+  <script src="app/profile/login/loginController.js"></script>
+
+  <!--User Profile-->
+  <script src="app/profile/userProfile/userProfileService.js"></script>
+  <script src="app/profile/userProfile/userProfileController.js"></script>
+  <script src="app/profile/userProfile/modal/profileViewModalController.js"></script>
+
+  <!--User Dashboard-->
+  <script src="app/profile/userDashboard/userDashboardService.js"></script>
+  <script src="app/profile/userDashboard/userDashboardController.js"></script>
+
+  <!--Admin Dashboard-->
+  <script src="app/profile/adminDashboard/adminDashboardService.js"></script>
+  <script src="app/profile/adminDashboard/adminDashboardController.js"></script>
+
+  <!--Admin Profile-->
+  <script src="app/profile/adminProfile/adminProfileService.js"></script>
+  <script src="app/profile/adminProfile/adminProfileController.js"></script>
+
+  <!--Change Password-->
+  <script src="app/profile/changePassword/changePasswordService.js"></script>
+  <script src="app/profile/changePassword/changePasswordController.js"></script>
+
+  <!--Logout-->
+  <script src="app/profile/logout/logoutService.js"></script>
+  <script src="app/profile/logout/logoutController.js"></script>
+
 
 </body>
 </html>

@@ -1,0 +1,622 @@
+
+<spinner name="html5spinner" ng-cloak="">
+    <div class="overlay"></div>
+    <div class="spinner">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+    </div>
+    <div class="please-wait">Please Wait...</div>
+</spinner>
+
+<div>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Settings <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+
+                            <li align = 'right' ng-show="userCredentials && google_link">
+
+                                <a ng-click="addGoogleAccount()">
+
+                                    <span class="glyphicon glyphicon-retweet"></span>Link Google Account
+
+                                </a>
+
+                            </li>
+
+                            <li align = 'right' ng-show="userCredentials && !google_link && !getView('google')">
+
+                                <a ng-click="viewChange('google')">
+
+                                    <span class="glyphicon glyphicon-retweet"></span>Google View
+
+                                </a>
+
+                            </li>
+
+                            <li align = 'right' ng-show="userCredentials && fb_link">
+
+                                <a ng-click="addFacebookAccount()">
+
+                                    <span class="glyphicon glyphicon-retweet"></span>Link Facebook Account
+
+                                </a>
+
+                            </li>
+
+                            <li align = 'right' ng-show="userCredentials && !fb_link && !getView('facebook')">
+
+                                <a ng-click="viewChange('facebook')">
+
+                                    <span class="glyphicon glyphicon-retweet"></span>Facebook View
+
+                                </a>
+
+                            </li>
+
+                            <li align = 'right' ng-show="userCredentials && (!fb_link || !google_link) && !getView('local')">
+
+                                <a ng-click="viewChange('local')">
+
+                                    <span class="glyphicon glyphicon-retweet"></span>Local View
+
+                                </a>
+
+                            </li>
+
+                            <li align = 'right' ng-show="userCredentials">
+
+                                <a ng-click="onEditPersonalData()">
+
+                                    <span class="glyphicon glyphicon-pencil"></span>Edit
+
+                                </a>
+
+                            </li>
+
+                            <li align = 'right' ng-show="userCredentials">
+
+                                <a ng-click='onChangePassword()'>
+
+                                    <span class="glyphicon glyphicon-lock"></span>Change Password
+
+                                </a>
+
+                            </li>
+
+                            <li class="divider"  ng-show="userCredentials"></li>
+
+                            <li align='right'>
+
+                                <a ng-click='goToDashboard()'>
+
+                                    <span class="glyphicon glyphicon-th-large"></span>Dashboard
+
+                                </a>
+
+                            </li>
+
+                            <li align='right'>
+
+                                <a ng-click='onLogout()'>
+
+                                    <span class="glyphicon glyphicon-log-out"></span>Log Out
+
+                                </a>
+
+                            </li>
+
+                        </ul>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+</div>
+
+<div class="container">
+
+    <div class="panel-group" id='localView'  ng-show="getView('local')">
+
+        <div class="panel panel-info  container-fluid">
+
+            <div class="panel-body">
+
+                <div class="jumbotron">
+
+                    <div class="container">
+
+                        <div align="right">
+
+                            <div style="width: 300px; height: 10px;" id="result"></div>
+
+                        </div>
+
+                        <form role="form" class="form-horizontal" novalidate name="personalDataForm">
+
+                            <div class="col-md-4" >
+
+                                <div class="form-group" data-toggle="tooltip" title="Click to change Profile Picture" >
+
+                                    <img ngf-src="file" class="image-holder img-responsive" ng-click="triggerUpload()" width = '300'/>
+
+                                    <input type="file" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" id="fileInput" style="display:none" onchange="angular.element(this).scope().uploadFile(this.files)"/>
+
+
+                                </div>
+
+                                <div class="form-group">
+
+                                    <button type="button" ng-show = 'imageChanged' class="btn btn-danger btn-sm" ng-click = 'fileUpload()'>
+
+                                        <span class="glyphicon glyphicon-cloud-upload"></span>Upload
+
+                                    </button>
+
+                                    <button type="button" ng-show = 'imageChanged' class="btn btn-danger btn-sm" ng-click = 'onCancelFileUpload()'>
+
+                                        <span class="glyphicon glyphicon-off"></span>Cancel
+
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-8">
+
+                                <div class="form-group">
+
+                                    <label class="label-align col-md-5">Name</label>
+
+                                    <div class="col-md-7">
+
+                                        <label ng-hide="editPersonalData">{{personalData.fname + ' ' + ((personalData.mname)?personalData.mname:'') + ' ' + ((personalData.lname)?personalData.lname:'')}}</label>
+
+                                        <div ng-show="editPersonalData">
+
+                                            <div class="col-md-4">
+
+                                                <input type="text" class="form-control" placeholder="First Name" ng-model="personalData.fname" ng-change="dataChanges()">
+
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <input type="text" class="form-control" placeholder="Middle Name" ng-model="personalData.mname" ng-change="dataChanges()">
+
+                                            </div>
+
+                                            <div class="col-md-4">
+
+                                                <input type="text" class="form-control" placeholder="Last Name" ng-model="personalData.lname" ng-change="dataChanges()">
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group">
+
+                                    <div>
+
+                                        <label class="label-align col-md-5">UserId/Reg No</label>
+
+                                        <div class="col-md-7">
+
+                                            <label>{{personalData.userid}}</label>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group" ng-class="{'has-error':isEmailInvalid(personalDataForm.email)}">
+
+                                    <label class="label-align col-md-5">Email</label>
+
+                                    <div class="col-md-7">
+
+                                        <label ng-hide="editPersonalData">{{personalData.email}}</label>
+
+                                        <input type="email" class="form-control" name="email" ng-show="editPersonalData" ng-model="personalData.email" placeholder="Email ex.abc@email.com" ng-change="dataChanges()">
+
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group" ng-class="{'has-error':isContactInvalid(personalDataForm.contact)}">
+
+                                    <label class="label-align col-md-5">Contact</label>
+
+                                    <div class="col-md-7">
+
+                                        <label ng-hide="editPersonalData">{{personalData.contact}}</label>
+
+                                        <input type="text" class="form-control" name="contact" ng-pattern="/^\d+$/" ng-show="editPersonalData" ng-model="personalData.contact" required placeholder="Contact" ng-change="dataChanges()">
+
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label class="label-align col-md-5">Address</label>
+
+                                    <div class="col-md-7">
+
+                                        <label ng-hide="editPersonalData">{{personalData.address}}</label>
+
+                                        <input type="text" class="form-control" ng-show="editPersonalData" ng-model="personalData.address" placeholder="Address" ng-change="dataChanges()">
+
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label class="label-align col-md-5">College</label>
+
+                                    <div class="col-md-7">
+
+                                        <label ng-hide="editPersonalData">{{personalData.college}}</label>
+
+                                        <input type="text" class="form-control" ng-show="editPersonalData" ng-model="personalData.college" placeholder="College" ng-change="dataChanges()">
+
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label class="label-align col-md-5">Course</label>
+
+                                    <div class="col-md-7">
+
+                                        <label ng-hide="editPersonalData">{{personalData.course}}</label>
+
+                                        <input type="text" class="form-control" ng-show="editPersonalData" ng-model="personalData.course" placeholder="Course" ng-change="dataChanges()">
+
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label class="label-align col-md-5">Branch</label>
+
+                                    <div class="col-md-7">
+
+                                        <label ng-hide="editPersonalData">{{personalData.branch}}</label>
+
+                                        <input type="text" class="form-control" ng-show="editPersonalData" ng-model="personalData.branch" placeholder="Branch" ng-change="dataChanges()">
+
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label class="label-align col-md-5">Year</label>
+
+                                    <div class="col-md-7">
+
+                                        <label ng-hide="editPersonalData">{{personalData.year}}</label>
+
+                                        <div ng-show="editPersonalData">
+
+                                            <select class="form-control" ng-options="year for year in years" ng-model = "personalData.year" ng-change="dataChanges()"></select>
+
+                                        </div>
+
+
+
+                                        <!--<input type="text" class="form-control"  ng-model="personalData.year"></input> -->
+
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label class="label-align col-md-5">Project Cost</label>
+
+                                    <div class="col-md-7">
+
+                                        <label>{{personalData.project_fee}}</label>
+
+                                        <!--<input type="text" class="form-control"  ng-model="personalData.year"></input> -->
+
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label class="label-align col-md-5">Amount Paid</label>
+
+                                    <div class="col-md-7">
+
+                                        <label>{{personalData.fees_paid}}</label>
+
+                                        <!--<input type="text" class="form-control"  ng-model="personalData.year"></input> -->
+
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label class="label-align col-md-5">Balance Amount</label>
+
+                                    <div class="col-md-7">
+
+                                        <label>{{personalData.fees_balance}}</label>
+
+                                        <!--<input type="text" class="form-control"  ng-model="personalData.year"></input> -->
+
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group" ng-show='editPersonalData' align="center">
+
+                                    <button type="button" class="btn btn-danger btn-sm" ng-disabled="!personalDataForm.$valid || !dataChanged" ng-click="onSubmitPersonalData()">
+
+                                        <span class="glyphicon glyphicon-refresh"></span>Update</button>
+
+                                    <button type="button" class="btn btn-danger btn-sm" ng-click="onCancelPersonalData()">
+
+                                        <span class="glyphicon glyphicon-off"></span>Cancel</button>
+
+                                </div>
+
+
+                            </div>
+
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div id="facebookView" class="panel-group" ng-show="getView('facebook')">
+
+        <div class="panel panel-info  container-fluid">
+
+            <div class="panel-body">
+
+                <div class="jumbotron">
+
+                    <div class="container">
+
+                        <div align="right">
+
+                            <div style="width: 300px; height: 10px;" id="result"></div>
+
+                        </div>
+
+                        <form role="form" class="form-horizontal" novalidate name="facebookDataForm">
+
+                            <div class="col-md-4" >
+
+                                <div class="form-group" data-toggle="tooltip" title="Click to change Profile Picture" >
+
+                                    <img ngf-src="getImageSrc(personalData.facebook_img)" class="image-holder img-responsive" width = '300'/>
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-8">
+
+                                <div class="form-group">
+
+                                    <label class="label-align col-md-5">Name</label>
+
+                                    <div class="col-md-7">
+
+                                        <label ng-hide="editPersonalData">{{personalData.fb_fname + ' ' + ((personalData.fb_mname)?personalData.fb_mname:'') + ' ' + ((personalData.fb_lname)?personalData.fb_lname:'')}}</label>
+
+                                        <div ng-show="editPersonalData">
+
+                                            <div class="col-md-4">
+
+                                                <input type="text" class="form-control" placeholder="First Name" ng-model="personalData.fb_fname" ng-change="dataChanges()">
+
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <input type="text" class="form-control" placeholder="Middle Name" ng-model="personalData.fb_mname" ng-change="dataChanges()">
+
+                                            </div>
+
+                                            <div class="col-md-4">
+
+                                                <input type="text" class="form-control" placeholder="Last Name" ng-model="personalData.fb_lname" ng-change="dataChanges()">
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group" ng-class="{'has-error':isEmailInvalid(facebookDataForm.email)}">
+
+                                    <label class="label-align col-md-5">Email</label>
+
+                                    <div class="col-md-7">
+
+                                        <label ng-hide="editPersonalData">{{personalData.fb_email}}</label>
+
+                                        <input type="email" class="form-control" name="email" ng-show="editPersonalData" ng-model="personalData.fb_email" placeholder="Email ex.abc@email.com" ng-change="dataChanges()">
+
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group" ng-show='editPersonalData' align="center">
+
+                                    <button type="button" class="btn btn-danger btn-sm" ng-disabled="!facebookDataForm.$valid || !dataChanged" ng-click="onSubmitPersonalData()">
+
+                                        <span class="glyphicon glyphicon-refresh"></span>Update</button>
+
+                                    <button type="button" class="btn btn-danger btn-sm" ng-click="onCancelPersonalData()">
+
+                                        <span class="glyphicon glyphicon-off"></span>Cancel</button>
+
+                                </div>
+
+
+                            </div>
+
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div id="googleView" class="panel-group" ng-show="getView('google')">
+
+        <div class="panel panel-info  container-fluid">
+
+            <div class="panel-body">
+
+                <div class="jumbotron">
+
+                    <div class="container">
+
+                        <div align="right">
+
+                            <div style="width: 300px; height: 10px;" id="result"></div>
+
+                        </div>
+
+                        <form role="form" class="form-horizontal" novalidate name="googleDataForm">
+
+                            <div class="col-md-4" >
+
+                                <div class="form-group" data-toggle="tooltip" title="Click to change Profile Picture" >
+
+                                    <img ngf-src="getImageSrc(personalData.google_img)" class="image-holder img-responsive" width = '300'/>
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-8">
+
+                                <div class="form-group">
+
+                                    <label class="label-align col-md-5">Name</label>
+
+                                    <div class="col-md-7">
+
+                                        <label ng-hide="editPersonalData">{{personalData.g_fname + ' ' + ((personalData.g_mname)?personalData.g_mname:'') + ' ' + ((personalData.g_lname)?personalData.g_lname:'')}}</label>
+
+                                        <div ng-show="editPersonalData">
+
+                                            <div class="col-md-4">
+
+                                                <input type="text" class="form-control" placeholder="First Name" ng-model="personalData.g_fname" ng-change="dataChanges()">
+
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <input type="text" class="form-control" placeholder="Middle Name" ng-model="personalData.g_mname" ng-change="dataChanges()">
+
+                                            </div>
+
+                                            <div class="col-md-4">
+
+                                                <input type="text" class="form-control" placeholder="Last Name" ng-model="personalData.g_lname" ng-change="dataChanges()">
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group" ng-class="{'has-error':isEmailInvalid(googleDataForm.email)}">
+
+                                    <label class="label-align col-md-5">Email</label>
+
+                                    <div class="col-md-7">
+
+                                        <label ng-hide="editPersonalData">{{personalData.fb_email}}</label>
+
+                                        <input type="email" class="form-control" name="email" ng-show="editPersonalData" ng-model="personalData.g_email" placeholder="Email ex.abc@email.com" ng-change="dataChanges()">
+
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group" ng-show='editPersonalData' align="center">
+
+                                    <button type="button" class="btn btn-danger btn-sm" ng-disabled="!googleDataForm.$valid || !dataChanged" ng-click="onSubmitPersonalData()">
+
+                                        <span class="glyphicon glyphicon-refresh"></span>Update</button>
+
+                                    <button type="button" class="btn btn-danger btn-sm" ng-click="onCancelPersonalData()">
+
+                                        <span class="glyphicon glyphicon-off"></span>Cancel</button>
+
+                                </div>
+
+
+                            </div>
+
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
