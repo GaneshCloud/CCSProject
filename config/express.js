@@ -44,8 +44,8 @@ module.exports = function() {
 	app.use(express.static('./public'));
 	
 	//require('../routes/pageReload.server.routes.js')(app);
-	require('../routes/home.server.routes.js')(app);
-	require('../routes/upload.server.routes.js')(app);
+	require('../routes/project.home.server.routes.js')(app);
+	require('../routes/project.upload.server.routes.js')(app);
 	require('../routes/layout.server.routes.js')(app);
 
 	//app.use(express.static('./public'));
