@@ -11,6 +11,8 @@
 
         $scope.userCredentials = false;
 
+        loginService.profilePage();
+
         $scope.loginWithFacebook = function() {
             $scope.progressbar.start();
             spinnerService.show('html5spinner');
