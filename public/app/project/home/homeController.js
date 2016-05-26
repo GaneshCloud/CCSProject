@@ -2,7 +2,7 @@
 
 (function(){
 
-	function homeController($scope,homeService,$window,loginService){
+	function homeController($scope,homeService,$window,userDashboardService){
 		$scope.datas=[];
 		$scope.events=[];
 		$scope.myDataSource={};
@@ -11,7 +11,9 @@
 		$scope.simpleAccordionOptions={
 	        closeOthers:true  
 	    };
-		
+
+		userDashboardService.checkUser();
+
 		$scope.onLogout = function(){
 			if ($window.confirm("Are You Sure ! Do you need to Log Out?")) {
 				homeService.logout();
@@ -118,7 +120,7 @@
 						$window.alert('Data save Failed');
 					});
 			}else{
-				return;
+				console.log('question length is zero');
 			}		
 		};
 	}

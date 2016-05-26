@@ -2,7 +2,9 @@
 
 (function(){
 
-	function uploadController(Upload,$window,$scope){
+	function uploadController(Upload,$window,$scope,userDashboardService){
+
+        userDashboardService.checkUser();
 		//var vm = this;
         $scope.submit = function(){ //function to call on form submit
             if ($scope.uploadForm.file.$valid && $scope.file) { //check if from is valid
