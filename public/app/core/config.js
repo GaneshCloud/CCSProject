@@ -3,10 +3,6 @@
 myApp.config(function($routeProvider, $locationProvider){
 
 	$routeProvider.
-		when("/project/home",{
-			controller: "homeController",
-			templateUrl: "../app/project/home/home.html"
-		}).
 		when("/", {
 			controller: "loginController",
 			templateUrl:"../app/profile/login/login.html"
@@ -21,11 +17,11 @@ myApp.config(function($routeProvider, $locationProvider){
 		}).
 		when("/profile/adminDashboard",{
 			templateUrl:"../app/profile/adminDashboard/adminDashboard.html",
-			controller:"adminDashboardController",
+			controller:"adminDashboardController"
 		}).
 		when("/profile/adminProfile",{
 			templateUrl:"../app/profile/adminProfile/adminProfile.html",
-			controller:"adminProfileController",
+			controller:"adminProfileController"
 		}).
 		when('/profile/chooseProfileViews',{
 			templateUrl: '../app/profile/userProfile/modal/chooseProfileViews.html',
@@ -39,10 +35,14 @@ myApp.config(function($routeProvider, $locationProvider){
 			templateUrl:'../app/profile/logout/logout.html',
 			controller:'logoutContoller'
 		}).
-		when("/upload", {
+		when("/project/home",{
+			controller: "homeController",
+			templateUrl: "../app/project/home/home.html"
+		}).
+		when("/project/upload", {
 			controller: "uploadController",
 			controllerAs: "up",
-			templateUrl: "../app/Upload/upload.html"		
+			templateUrl: "../app/project/upload/upload.html"
 		}).
 		when("/error",{
 			templateUrl: "../app/Error/error.html"		
