@@ -4,7 +4,7 @@
 
 (function() {
 
-    function loginController($scope,$window,loginService,ngProgressFactory,
+    function loginController($scope,loginService,ngProgressFactory,
                              spinnerService) {
 
         $scope.progressbar = ngProgressFactory.createInstance();
@@ -13,10 +13,12 @@
 
         loginService.profilePage();
 
+
         $scope.loginWithFacebook = function() {
             $scope.progressbar.start();
             spinnerService.show('html5spinner');
             loginService.loginWithFacebook().then(function() {
+                $rootScope.isLogin=true;
                 $scope.progressbar.complete();
                 spinnerService.hide('html5spinner');
             });
@@ -29,6 +31,7 @@
             spinnerService.show('html5spinner');
 
             loginService.loginWithGoogle().then(function() {
+                $rootScope.isLogin=true;
                 $scope.progressbar.complete();
                 spinnerService.hide('html5spinner');
             });
@@ -57,7 +60,8 @@
             console.log('username --->' + user);
             loginService.verifyUser(user.$viewValue, password.$modelValue)
                 .then(function(result) {
-                    if (result !== '') {
+                    if (result !== '') {;
+                        $rootScope.isLogin=true;
                         loginService.profilePage().then(function() {
                             $scope.progressbar.complete();
                             spinnerService.hide('html5spinner');
