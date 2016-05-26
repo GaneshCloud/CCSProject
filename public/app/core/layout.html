@@ -10,7 +10,9 @@
   <link rel="stylesheet" type="text/css" href="../../bower_components/bootstrap/dist/css/bootstrap.min.css"/>
   <link rel="stylesheet" type="text/css" href="../../bower_components/angular-timeline/dist/angular-timeline.css"/>
   <link rel="stylesheet" type="text/css" href="../../bower_components/angular-timeline/dist/angular-timeline-bootstrap.css"/>
-  <link rel="stylesheet" type="text/css" href="../../css/style.css">
+  <link rel="stylesheet" type="text/css" href="../css/style.css">
+  <link rel="stylesheet" type="text/css" href="../css/star.css">
+  <link rel="stylesheet" type="text/css" href="../css/modalscroll.css">
   <style>
 
     .tab-content {
@@ -64,9 +66,9 @@
   <base href="/">
 </head>
 
-<body ng-controller="layoutController">
+<body>
 <!-- DEFAULT NAVBAR -->
-  <nav class="nav navbar-dark bg-primary" role="navigation" ng-model="isLogin" ng-show="isLogin">
+  <nav class="nav navbar-dark bg-primary" role="navigation">
     <div class="nav-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
             <span class="sr-only">Toggle navigation</span>
@@ -79,7 +81,7 @@
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="project/upload" style="color:white">FORUM</a></li>
+        <li><a href="upload" style="color:white">FORUM</a></li>
         <li><a href="/" style="color:white">HOME</a></li>
 
       </ul>
@@ -115,8 +117,6 @@
 <!-- CORE -->
   <script src="app/core/module.js"></script>
   <script src="app/core/config.js"></script>
-  <script src="app/core/layoutController.js"></script>
-
 <!-- HOME -->
   <script src="app/project/home/homeService.js"></script>
   <script src="app/project/home/homeController.js"></script>
@@ -149,9 +149,13 @@
   <script src="app/profile/changePassword/changePasswordController.js"></script>
 
   <!--Logout-->
-  <script src="app/profile/logout/logoutService.js"></script>
+  <!--<script src="app/profile/logout/logoutService.js"></script>-->
   <script src="app/profile/logout/logoutController.js"></script>
 
+ <!----forum-------->
+  <script src="app/forum/home/forumHomeService.js"></script>
+  <script src="app/forum/home/forumHomeControll.js"></script>
+  <script src="app/forum/home/forumHomeSearchfilter.js"></script>
 
 </body>
 </html>

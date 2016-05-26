@@ -7,7 +7,7 @@
 
 (function(){
 
-    function userDashboardController($scope,$window,userDashboardService,ngProgressFactory,spinnerService){
+    function userDashboardController($scope,$window,userDashboardService,forumService,ngProgressFactory,spinnerService){
 
         userDashboardService.checkUser();
         $scope.progressbar = ngProgressFactory.createInstance();
@@ -56,7 +56,17 @@
                 $scope.progressbar.complete();
                 spinnerService.hide('html5spinner');
             });
-        }
+        };
+        
+        $scope.openUserForum=function()
+        {
+            $scope.progressbar.start();
+            spinnerService.show('html5spinner');
+            userDashboardService.openUserForum().then(function(){
+                $scope.progressbar.complete();
+                spinnerService.hide('html5spinner');
+            });    
+        };
 
     }
 

@@ -64,6 +64,7 @@ module.exports = function() {
 	require('../routes/profile.adminProfile.server.routes.js')(app);
 	require('../routes/profile.changePassword.server.routes')(app);
 	require('../routes/profile.logout.server.routes')(app);
+	require('../routes/forum.home.server.routes.js')(app);
 
 
 

@@ -44,8 +44,12 @@ myApp.config(function($routeProvider, $locationProvider){
 			controllerAs: "up",
 			templateUrl: "../app/project/upload/upload.html"
 		}).
+	    when('/forum/home',{
+		    controller:'forumController',
+			templateUrl:'../app/forum/home/forum.html'
+	    }).
 		when("/error",{
-			templateUrl: "../app/Error/error.html"		
+			templateUrl: "../app/project/Error/error.html"
 		}).
 		otherwise({
 			redirectTo:"/error"

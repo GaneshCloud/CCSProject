@@ -1,0 +1,406 @@
+
+<div>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Settings <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+
+                            <li align='right'>
+
+                                <a ng-click='goToDashboard()'>
+
+                                    <span class="glyphicon glyphicon-th-large"></span>Dashboard
+
+                                </a>
+
+                            </li>
+
+                            <li align='right'>
+
+                                <a ng-click='onLogout()'>
+
+                                    <span class="glyphicon glyphicon-log-out"></span>Log Out
+
+                                </a>
+
+                            </li>
+
+                        </ul>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </nav>
+</div>
+
+<div class="container-fluid">
+    <div class="row content">
+        <div class="col-sm-3 sidenav">
+            <br>
+            <br>
+            <div class="panel panel-info">
+                <div class="panel-heading">
+
+                    <h3>Forum </h3>
+
+                </div>
+
+                <div class="panel-body">
+
+                    A forum consists of a tree like directory structure. The top end is "Categories".
+
+                    A forum can be divided into categories for the relevant discussions.
+
+                    A forum's topic, each new discussion started is called a thread,
+
+                    and can be replied to by as many people as so wish.
+
+                    A forum can be divided into categories for the relevant discussions.
+
+                    A forum consists of a tree like directory structure. The top end is "Categories".
+
+                    A discussion group is a group of individuals with similar interest,
+
+                    who gather either formally or informally to bring up ideas, solve problems or give comments.
+
+                    A thread (sometimes called a topic) is a collection of posts, usually displayed from oldest to latest,
+
+                    although this is typically configurable:
+
+                </div>
+            </div>
+
+
+            <div class="panel panel-info">
+                <div class="panel-heading">
+
+                    <h3>Social Network</h3>
+
+                </div>
+
+                <div class="panel-body">
+
+                    <a class="btn btn-block btn-social btn-twitter">
+                        <span class="fa fa-twitter  fa-3x"></span>
+                        Sign in with Twitter
+                    </a>
+
+                    <br>
+
+                    <a class="btn btn-block btn-social btn-facebook">
+                        <span class="fa fa-facebook  fa-3x"></span>
+                        Sign in with facebook
+                    </a>
+
+
+                    <a class="btn btn-block btn-social btn-google">
+                        <span class="fa fa-google  fa-3x"></span>
+                        Sign in with google
+                    </a>
+
+
+                    <a class="btn btn-block btn-social btn-yahoo">
+                        <span class="fa fa-yahoo fa-3x"></span>
+                        Sign in with yahoo
+                    </a>
+
+                </div>
+            </div>
+        </div>
+
+
+
+<!-- Collpse Button -->
+<div class="col-sm-9">
+       <br>
+       <br>
+    <div>
+        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo1"> 
+         POST TOPIC
+        </button>
+    </div>
+
+<!-- Collpse Button -->
+    <br>
+<!-- Collpse Comment Box -->
+    <div id="demo1" class="collapse">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+              <h4><small>LEAVE YOUR COMMENT</small></h4>
+        </div>
+            <div class="panel-body"> 
+
+                  <div class="form-group">
+
+                        <label for="sel1">Select Catagory:</label>
+                        <select ng-model="selectedName" ng-options="x for x in names" 
+                        class="form-control" required="">
+                            <option value="General">General</option>
+                            <!-- <option value="Artical">Artical</option> -->
+                            <option value="news List">News List</option>
+                        </select>
+                    </div>
+                <form name="question">
+
+                    <label>Topic:</label> 
+
+                    <textarea class="form-control" rows="2" ng-model="post.question" placeholder="Enter Topic here..." required></textarea><br>
+
+                    <label>Explanation:</label> 
+
+                    <textarea class="form-control" rows="4" ng-model="post.Explation" placeholder="Explat here..." required></textarea><br>
+                </form>
+                <br>
+                <br>
+                <br>
+                <button type="button" class="btn btn-success" ng-disabled="question.$invalid" ng-click="postForumquestion()">submit
+                </button>
+            </div>
+        </div>
+    </div>
+<!-- Collpse Comment Box -->
+
+    <div class="panel panel-info">
+        <div class="panel-heading">
+
+          <h4><font color="gray"><span class="glyphicon glyphicon-tasks" 
+            data-toggle="collapse" data-target="#demo"></span> 
+            CATEGORY</font></h4>
+
+        </div>
+
+<!-- Search BOX -->
+        <div id="demo" class="collapse">
+            <div class="panel-body"> 
+
+                <form class="navbar-form navbar-right" role="search">
+                    <div class="input-group">
+                       <input type="text" ng-model="search" class="form-control" placeholder="Search">
+                       <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                    </div>
+                </form>
+
+<!-- Search BOX -->
+
+
+<!-- Select Box -->
+                <form class="navbar-form navbar-left">
+                    <div class="form-group">
+                        <label for="sel1">Select Catagory:</label>
+                        <select ng-model="Category" ng-change="GetType()">
+                        <option value=''>---Select---</option>
+                         <option>All</option>
+                        <option active="true">General</option>
+                        <option>News List</option>
+                        </select>
+                    </div>
+
+                </form>
+<!-- Select Box -->
+            </div>
+        </div>
+    </div>
+    <hr>
+<!-- Question Table Box -->
+    <div class="panel panel-info" border-color: #52A1B1;>
+        <div class="panel-heading">
+           <h4> <font color="gray"> <span class="glyphicon glyphicon-folder-open"></span>
+           THREDS/TOPIC</font></h4>
+        </div>
+        <div class="panel-body"> 
+           <div class="table">
+              <table class="table">
+              <thead bgcolor="#52A1B1">
+                  <tr>
+                      <th ng-click="sort(question.Question)"><font color="white">Topic &nbsp;
+                      <span class="glyphicon sort-icon" ng-show="sortKey==question.Question" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                      </font>
+                      </th>
+                      <th><font color="white">DATE</font></th>
+                      <th><font color="white">Rating</font></th>
+                    
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr ng-repeat-start="question in filteredDoc | orderBy:sortKey:reverse">
+                  
+                        <td>
+                          <font color="blue"><h4>{{question.Question}}</h4></font>
+                          <button ng-if="question.expanded" 
+                          ng-click="question.expanded = false">-</button>
+                          <button ng-if="!question.expanded" ng-click="question.expanded = true">+</button>   
+                          <font color="black">{{question.Explation}} </font>      
+                        </td>
+                        <td>{{question.Dates |  date:'yyyy-MM-dd - h:mma'}}</td>
+                        <td>
+                           <div class="cont">
+                            <div class="stars">
+                              <form>
+                                <input class="star star-5" id="star-5-2{{$index}}" type="radio" ng-click="getStar(question.qusId,5)" value="5" ng-checked="toCheck(question.rating,5)" name="star"/>
+                                <label class="star star-5" for="star-5-2{{$index}}" ></label>
+
+                                <input class="star star-4" id="star-4-2{{$index}}" ng-checked="toCheck(question.rating,4)" type="radio" ng-click="getStar(question.qusId,4)" 
+                                value="4" name="star"/>
+                                <label class="star star-4" for="star-4-2{{$index}}"></label>
+
+                                <input class="star star-3" id="star-3-2{{$index}}" ng-checked="toCheck(question.rating,3)" type="radio" ng-click="getStar(question.qusId,3)" value="3" name="star"/>
+                                <label class="star star-3" for="star-3-2{{$index}}"></label>
+
+                                <input class="star star-2" id="star-2-2{{$index}}" ng-checked="toCheck(question.rating,2)" type="radio" ng-click="getStar(question.qusId,2)" value="2" name="star"/>
+                                <label class="star star-2" for="star-2-2{{$index}}" ></label>
+
+                                <input class="star star-1" id="star-1-2{{$index}}" ng-checked="toCheck(question.rating,1)" type="radio" ng-click="getStar(question.qusId,1)" value="1" name="star"/>
+                                <label class="star star-1" for="star-1-2{{$index}}"></label>
+                              </form>
+                            </div>
+                          </div>
+                       </td>                        
+                  </tr>
+                  <tr ng-if="question.expanded">
+                    <td colspan="{{colspan}}">
+                      <div>
+                          <table>
+                              <tr>
+                                <td>
+                                    <h4><span class="glyphicon glyphicon-pencil"></span>
+                                        <label for="exampleTextarea">Leave a Comment:</label></h4>
+                                    <form class="form form-horizontal" name="myform" role="form">
+                                        <div class="form-group"> 
+                                            <!-- <textarea class="form-control" class="col-xs-4" name="text" rows="3" ng-model="Comment" placeholder="comment here..." required>
+                                            </textarea> -->
+                                            <textarea name="text" rows="5" ng-model="Comment" placeholder="comment here..." required="" style="margin-left: 0px; margin-right: 0px; width: 838px;" class="col-xs-4"></textarea>
+                                        </div> 
+                                        <div class="form-group">
+                                          <button ng-init="qusId=question.qusId" ng-disabled="myform.$invalid" data-ng-click="postAnswer(qusId,Comment)" class="btn btn-success">submit</button>
+                                        </div>
+                                        <br>
+                                        <h4><span class="glyphicon glyphicon-envelope"></span>
+                                        Recent post:</h4>
+                                    </form>
+                                   </td>
+                              </tr>
+                              <tr ng-repeat='answer in question.answers | limitTo:5'>
+                                  <td>
+                                       <hr> {{answer.Answers}}
+                                     <br><br>
+                                         <font color="green"><span class="glyphicon glyphicon-calendar"></span>{{answer.Date | date:'yyyy-MM-dd - h:mma'}}</font>
+                                  </td>
+                              </tr>
+                          </table>
+                      </div>
+                    </td>
+                </tr>
+
+                <tr ng-if="question.expanded" ng-repeat-end="">
+                    <td colspan="3">
+                          <br>                          
+                          Inbox <span class="badge"> {{ question.answers.length }}</span></a> 
+                                   <!-- Button trigger modal -->
+                          <button type="button" class="btn btn-warning" data-toggle="modal" 
+                              data-target="{{'#'+question.qusId}}">
+                              <span class="glyphicon glyphicon-eye-open"></span> View All Post
+                          </button>
+                          <div id="{{question.qusId}}" class="modal fade">
+                             <div class="modal-dialog">
+                                  <div class="modal-content">
+                                      <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title">All Post</h4>
+                                      </div>
+                                      <div class="modal-body">
+                                           <p ng-repeat="answer in question.answers | limitTo:500000:0">{{ answer.Answers }}
+                                             <br><font color="red" ng-model="feedback.Date"> {{ answer.Date  |  date:'yyyy-MM-dd - h:mma' }}</font>
+                                             <hr>
+                                          </p>
+                                      </div>
+                                      <div class="modal-footer">
+                                          <button type="button"  class="btn btn-primary" data-dismiss="modal">Close
+                                          </button>
+                                      </div>
+                                </div>
+                                  <!-- /.modal-content -->
+                              </div>
+                          <!-- /.modal-dialog -->
+                          </div>
+                    </td>
+                </tr>
+          </tbody>
+      </table>
+
+<!-- Question Table Box -->
+
+
+<!-- Pagination -->
+        <pagination class = "pager" 
+
+                          ng-model="curpage"
+                          total-items="totalItems"
+                          items-per-page="itemspage"
+                          max-size="maxSize"
+                          boundary-links="true">
+        </pagination>
+
+
+          
+         
+<!-- Pagination -->
+         <div class="navbar-form navbar-left">
+           <div class="alert alert-info">
+                <h4>Total Topic:{{fliter}}</h4>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+    </div>
+<!-- <script src="../controller/star.js"></script> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+      
+
+
+
+
+
+
+
+
+
