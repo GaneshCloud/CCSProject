@@ -5,8 +5,8 @@
 (function() {
 
     function adminProfileController($scope,$window,adminProfileService,
-                                    ngProgressFactory,spinnerService,filterFilter) {
-
+                                    ngProgressFactory,spinnerService,filterFilter,adminDashboardService) {
+        adminDashboardService.checkAdmin();
         $scope.progressbar = ngProgressFactory.createInstance();
 
         $scope.userCredentials = false;

@@ -2,7 +2,7 @@
  * Created by CSS on 25-05-2016.
  */
 angular.module('myApp')
-    .factory('adminDashboardService', function($http, $window, $q, Upload, $timeout) {
+    .factory('adminDashboardService', function($http, $window, $q) {
         var httpPromise;
         return {
 
@@ -24,6 +24,33 @@ angular.module('myApp')
 
             goToAdminDashboard: function () {
                 $window.location.href = '/profile/adminDashboard';
+            },
+
+            checkAdmin: function () {
+                var dfr = $q.defer();
+
+                httpPromise = $http({
+                    method: 'get',
+
+                    url: '/getPersonalData'
+
+                });
+
+                httpPromise.then(function (response) {
+                    dfr.resolve(response);
+
+                    if (response.data.userType === 'admin') {
+                        
+                    } else if(response.data.userType === 'user') {
+                        $window.location.href = '/profile/userDashboard';
+                    }else {
+                        $window.location.href = '/';
+                    }
+                }, function (error) {
+                    console.error(error);
+                });
+
+                return dfr.promise;
             }
 
         };
