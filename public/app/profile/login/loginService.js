@@ -55,8 +55,10 @@ angular.module('myApp')
 
                     if (response.data.userType === 'admin') {
                         $window.location.href = '/profile/adminDashboard';
-                    } else {
+                    } else if(response.data.userType === 'user') {
                         $window.location.href = '/profile/userDashboard';
+                    }else {
+                        $window.location.href = '/';
                     }
                 }, function (error) {
                     console.error(error);
