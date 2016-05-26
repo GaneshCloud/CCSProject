@@ -2,7 +2,7 @@
 
 (function(){
 
-	function homeController($scope,homeService,$window){
+	function homeController($scope,homeService,$window,loginService){
 		$scope.datas=[];
 		$scope.events=[];
 		$scope.myDataSource={};
@@ -11,7 +11,7 @@
 		$scope.simpleAccordionOptions={
 	        closeOthers:true  
 	    };
-
+		
 		$scope.onLogout = function(){
 			if ($window.confirm("Are You Sure ! Do you need to Log Out?")) {
 				homeService.logout();
@@ -21,7 +21,7 @@
 		$scope.goToDashboard = function(){
 				homeService.goToDashboard();
 		};
-		
+
 		homeService.data()	//Get project data from homeService on page load
 			.success(function(results){	//success function
 				if(results.length>0){
