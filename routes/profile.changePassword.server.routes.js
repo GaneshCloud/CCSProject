@@ -8,7 +8,7 @@
 
 module.exports = function(app) {
 
-    var layout = require('../controllers/project.layout.server.controller');
+    var layout = require('../controllers/layout.server.controller.js');
 
     // app.get('/', layout.layout);
 
