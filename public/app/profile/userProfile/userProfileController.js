@@ -5,8 +5,9 @@
 
 (function() {
 
-    function userProfileController($scope,$window,$modal,$timeout,$http,userProfileService,ngProgressFactory,spinnerService) {
+    function userProfileController($scope,$window,userProfileService,ngProgressFactory,spinnerService,userDashboardService) {
 
+        userDashboardService.checkUser();
         $scope.progressbar = ngProgressFactory.createInstance();
 
         $scope.personalData = [];
