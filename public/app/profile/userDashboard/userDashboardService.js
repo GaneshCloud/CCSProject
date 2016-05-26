@@ -28,7 +28,7 @@ angular.module('myApp')
             userProjects: function () {
                 $window.location.href = '/project/home'
             },
-            
+
             checkUser: function () {
                 var dfr = $q.defer();
 

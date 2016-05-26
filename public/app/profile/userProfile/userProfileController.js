@@ -8,6 +8,7 @@
     function userProfileController($scope,$window,userProfileService,ngProgressFactory,spinnerService,userDashboardService) {
 
         userDashboardService.checkUser();
+
         $scope.progressbar = ngProgressFactory.createInstance();
 
         $scope.personalData = [];

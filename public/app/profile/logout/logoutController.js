@@ -4,11 +4,13 @@
 
 (function() {
 
-    function logoutController($scope,ngProgressFactory) {
+    function logoutController($scope,ngProgressFactory,$location) {
 
         $scope.progressbar = ngProgressFactory.createInstance();
 
         $scope.userCredentials = false;
+        
+        $location.path='/';
 
     }
 
