@@ -13,21 +13,14 @@
 	    };
 
 		$scope.onLogout = function(){
-
 			if ($window.confirm("Are You Sure ! Do you need to Log Out?")) {
-
 				homeService.logout();
-
 			}
-
 		};
 
 		$scope.goToDashboard = function(){
-
 				homeService.goToDashboard();
-
 		};
-		
 		
 		homeService.data()	//Get project data from homeService on page load
 			.success(function(results){	//success function
