@@ -5,7 +5,7 @@
  * Created by CSS on 25-05-2016.
  */
 angular.module('myApp')
-    .factory('userDashboardService', function($http, $window, $q, Upload, $timeout) {
+    .factory('userDashboardService', function($http, $window, $q) {
         var httpPromise;
         return {
 
@@ -28,9 +28,32 @@ angular.module('myApp')
             userProjects: function () {
                 $window.location.href = '/project/home'
             },
+            
+            checkUser: function () {
+                var dfr = $q.defer();
 
-            userDashbaord: function () {
-                $window.location.href = '/profile/userDashboard';
+                httpPromise = $http({
+                    method: 'get',
+
+                    url: '/getPersonalData'
+
+                });
+
+                httpPromise.then(function (response) {
+                    dfr.resolve(response);
+
+                    if (response.data.userType === 'admin') {
+                        $window.location.href = '/profile/adminDashboard';
+                    } else if(response.data.userType === 'user') {
+
+                    }else {
+                        $window.location.href = '/';
+                    }
+                }, function (error) {
+                    console.error(error);
+                });
+
+                return dfr.promise;
             }
 
         };

@@ -9,6 +9,7 @@
 
     function userDashboardController($scope,$window,userDashboardService,ngProgressFactory,spinnerService){
 
+        userDashboardService.checkUser();
         $scope.progressbar = ngProgressFactory.createInstance();
 
         $scope.userCredentials = false;
