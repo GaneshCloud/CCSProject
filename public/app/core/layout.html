@@ -64,9 +64,9 @@
   <base href="/">
 </head>
 
-<body>
+<body ng-controller="layoutController">
 <!-- DEFAULT NAVBAR -->
-  <nav class="nav navbar-dark bg-primary" role="navigation">
+  <nav class="nav navbar-dark bg-primary" role="navigation" ng-model="isLogin" ng-show="isLogin">
     <div class="nav-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
             <span class="sr-only">Toggle navigation</span>
@@ -115,6 +115,8 @@
 <!-- CORE -->
   <script src="app/core/module.js"></script>
   <script src="app/core/config.js"></script>
+  <script src="app/core/layoutController.js"></script>
+
 <!-- HOME -->
   <script src="app/project/home/homeService.js"></script>
   <script src="app/project/home/homeController.js"></script>
