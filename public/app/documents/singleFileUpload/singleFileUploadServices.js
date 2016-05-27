@@ -19,7 +19,13 @@ myApp.factory('uploadSingleServices', function($http,$window) {
             },
             documentList:function(){
                 $window.location.href="/documents/documentList";
-            }
+            },
+            logout: function () {
+                $window.location.href = '/logout';
+            },
+            goToDashboard: function () {
+                $window.location.href = '/profile/adminDashboard';
+            },
             
         };
     });

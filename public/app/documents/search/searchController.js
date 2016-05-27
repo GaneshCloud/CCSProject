@@ -114,7 +114,22 @@ myApp.controller('searchController', function($scope,documentSearchServices,icon
 
         };
 
-        
+        // lodout
+        $scope.onLogout = function(){
+
+            if ($window.confirm("Are You Sure ! Do you need to Log Out?")) {
+
+                documentSearchServices.logout();
+
+            }
+
+        };
+        //Dashboard
+        $scope.goToDashboard = function(){
+
+            documentSearchServices.goToDashboard();
+
+        };
        //initially calls the function 
        $scope.searchData();
        $scope.getDepartment();

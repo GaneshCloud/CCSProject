@@ -69,7 +69,7 @@
 
         //function for getting data from database//
         $scope.getData = function() {
-
+               
                 documentListServices.get()
 
                 .success(function(data) {
@@ -104,12 +104,12 @@
             });
         };
 
-//function for searching documents//
+        //function for searching documents//
         $scope.searchData = function() {
-
-
-
-                documentListServices.search("?docType="+$scope.searchkey.docType+"&dep="+$scope.searchkey.dep+"&page="+$scope.page+"&serStr="+$scope.search)
+               
+               
+                
+            documentListServices.search("?docType="+$scope.searchkey.docType+"&dep="+$scope.searchkey.dep+"&page="+$scope.page+"&serStr="+$scope.search)
                 .success(function(data) {
 
                     $scope.searchres = data;
@@ -142,7 +142,7 @@
                 });
         };
 
-//function for delete a document//
+        //function for delete a document//
          $scope.deleteDoc = function(id) {
                 $scope.selId=id;
                 documentListServices.delete({ID:+$scope.selId})
@@ -161,7 +161,22 @@
                 
         };
 
-        
+     // lodout
+     $scope.onLogout = function(){
+
+         if ($window.confirm("Are You Sure ! Do you need to Log Out?")) {
+
+             documentListServices.logout();
+
+         }
+
+     };
+     //Dashboard
+     $scope.goToDashboard = function(){
+
+         documentListServices.goToDashboard();
+
+     };
 
      //call the functions when the page is loading//
         $scope.getDepartment();

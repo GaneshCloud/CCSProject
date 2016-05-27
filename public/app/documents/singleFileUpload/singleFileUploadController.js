@@ -104,6 +104,23 @@ myApp.controller('singleFileUploadController', function($scope,uploadSingleServi
           });
         });
 
+        // lodout
+        $scope.onLogout = function(){
+
+        if ($window.confirm("Are You Sure ! Do you need to Log Out?")) {
+
+            uploadSingleServices.logout();
+
+        }
+
+        };
+        //Dashboard
+        $scope.goToDashboard = function(){
+
+            uploadSingleServices.goToDashboard();
+
+        };
+
 
     });
       
