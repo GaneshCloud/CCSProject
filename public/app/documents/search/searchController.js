@@ -1,6 +1,6 @@
 
 'use strict';
-myApp.controller('searchController', function($scope,documentSearchServices,iconServices,userDashboardService) {
+myApp.controller('searchController', function($scope,documentSearchServices,iconServices,userDashboardService,$window) {
         
         $scope.searchkey = {};              //model for search key object
         $scope.searchkey.docType=-1;        //docType property of search key object
