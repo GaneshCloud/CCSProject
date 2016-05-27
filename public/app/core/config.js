@@ -65,7 +65,7 @@ myApp.config(function($routeProvider, $locationProvider){
 			controller: 'searchController'
 		}).
 		when('/documents/documentList', {
-			templateUrl: 'app/documents/documentlist/documentList.html',
+			templateUrl: 'app/documents/documentList/documentList.html',
 			controller:   'documentListController'
 		}).
 		when('/documents/multipleFileUpload', {
