@@ -65,7 +65,12 @@ module.exports = function() {
 	require('../routes/profile.changePassword.server.routes')(app);
 	require('../routes/profile.logout.server.routes')(app);
 	require('../routes/forum.home.server.routes.js')(app);
-
+	require("../routes/documents.documentList.server.routes")(app);
+	require("../routes/documents.singleFileUpload.server.routes")(app);
+	require("../routes/documents.multipleFileUpload.server.routes")(app);
+	require("../routes/documents.star.server.routes")(app);
+	require("../routes/documents.viewDocument.server.routes")(app);
+	require("../routes/documents.search.server.routes")(app);
 
 
 	require('../routes/layout.server.routes.js')(app);	//layout page route

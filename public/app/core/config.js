@@ -51,6 +51,30 @@ myApp.config(function($routeProvider, $locationProvider){
 		when("/error",{
 			templateUrl: "../app/project/Error/error.html"
 		}).
+		when('/documents/editDoc', {
+			templateUrl: 'app/documents/singleFileUpload/singleFileUpload.html',
+			controller: 'singleFileUploadController'
+		}).
+		when('/documents/singleFileUpload', {
+			templateUrl: 'app/documents/singleFileUpload/singleFileUpload.html',
+			controller: 'singleFileUploadController'
+		}).
+		when('/documents/documentSearch', {
+			templateUrl: 'app/documents/search/search.html',
+			controller: 'searchController'
+		}).
+		when('/documents/documentList', {
+			templateUrl: 'app/documents/documentlist/documentList.html',
+			controller:   'documentListController'
+		}).
+		when('/documents/multipleFileUpload', {
+			templateUrl: 'app/documents/multipleFileUpload/multipleFileUpload.html',
+			controller:   'multipleFileUploadController'
+		}).
+		when('/documents/viewDocument', {
+			templateUrl: 'app/documents/viewDocument/viewDocument.html',
+			controller:   'viewDocumentController'
+		}).
 		otherwise({
 			redirectTo:"/error"
 		});

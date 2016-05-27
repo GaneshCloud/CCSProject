@@ -19,7 +19,7 @@ angular.module('myApp')
             },
 
             adminDocumentaion: function () {
-                $window.location.href = '/adminDocumentation';
+                $window.location.href = '/documents/singleFileUpload';
             },
 
             goToAdminDashboard: function () {

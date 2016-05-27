@@ -22,7 +22,7 @@ angular.module('myApp')
             },
 
             userDocumentation: function () {
-                $window.location.href = '/userDocumentation';
+                $window.location.href = '/documents/documentSearch';
             },
 
             userProjects: function () {

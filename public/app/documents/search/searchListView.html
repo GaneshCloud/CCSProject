@@ -1,0 +1,50 @@
+
+
+           
+              
+              <span ng-if="noData"><h4>No Record Found</h4></span>
+              
+              <table class="table table-condensed table-bordered table-responsive">
+                <thead>
+                  <tr style="cursor: pointer;">
+                    <th>Sl No</th>
+                    <th ng-click="orderMe('DOCCAPTION')" style="width:200px;">Caption</th>
+                    <th ng-click="orderMe('DEP_NAME')" >Department</th>
+                    <th ng-click="orderMe('DOCDATE')">Posted Date</th>
+                    <th ng-click="orderMe('DOCNOVIEWS')">Views</th>
+                    <th ng-click="orderMe('DOCNODOWN')">Downloads</th>
+                    <th ng-click="orderMe('star')">Rating</th>
+                  </tr>
+                </thead>
+                <tbody>
+                <!--filter:search |-->
+                  <tr ng-repeat="x in filteredRes |  orderBy:field:isReverse">
+                    <td>{{$index+1}}</td>
+                    <td style="overflow: hidden;"><img ng-src="{{ getIcon(x.DOCTYPE) }}">&nbsp;&nbsp;&nbsp;<a href="/documents/viewDocument?id={{x.ID}}
+                  &type={{x.DOCTYPE}}">{{x.DOCCAPTION}}</a></td>
+                    <td>{{x.DEP_NAME}}</td>
+                    <td>{{x.DOCDATE | date:"dd-MM-yyyy"}}</td>
+                    <td>{{x.DOCNOVIEWS}}</td>
+                    <td>{{x.DOCNODOWN}}</td>
+                    <td>
+
+                      <div class="stars" style="width: 150px;">
+    
+                        <input class="star star-5" id="star-5-2" type="radio" value="5"  name="star{{x.ID}}" ng-checked="{{x.star===5}}" disabled="true" />
+                        <label class="star star-5" for="star-5-2" ng-model="star" style="font-size: 20px"></label>
+                        <input class="star star-4" id="star-4-2" type="radio" value="4" name="{{x.ID}}" ng-checked="{{x.star===4}}"  disabled="true" />
+                        <label class="star star-4" ng-model="star" for="star-4-2" style="font-size: 20px"></label>
+                        <input class="star star-3" id="star-3-2" type="radio" value="3" name="{{x.ID}}" ng-checked="{{x.star===3}}"  disabled="true" />
+                        <label class="star star-3" for="star-3-2" style="font-size: 20px"></label >
+                        <input class="star star-2" id="star-2-2" type="radio" value="2" name="{{x.ID}}" ng-checked="{{x.star===2}}"  disabled="true" />
+                        <label class="star star-2" for="star-2-2" style="font-size: 20px"></label>
+                        <input class="star star-1" id="star-1-2" type="radio" value="1" name="{{x.ID}}" ng-checked="{{x.star===1}}"  disabled="true" />
+                        <label class="star star-1" for="star-1-2" style="font-size: 20px"></label>
+    
+                    </div>
+                  </td>
+                </tr>
+                  
+                </tbody>
+            </table>
+<!--</div>-->

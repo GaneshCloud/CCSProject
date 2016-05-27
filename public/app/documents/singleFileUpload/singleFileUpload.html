@@ -1,0 +1,117 @@
+
+<div class="navbar navbar-fixed">
+    <h4>Crisp Cloud Solution</h4>
+</div>
+<div class="container" style="padding-top: 25px;">
+  
+  <div class="row">
+
+    <div class="col-sm-10 col-sm-offset-1" >
+    
+        <div class="panel panel-default">
+          <div id="heading" class="panel-heading"><span id="head">Upload the Documents</span><a ng-click="documentList()" class="col-sm-offset-5 btn btn-default">View Documents</a> <a class="btn btn-primary" ng-click="multipleFileUpload()">Multiple File Upload</a> </div>
+          <div class="panel-body" >
+            <form class="form-horizontal" role="form" method="post" action="/documents/upload" enctype="multipart/form-data" name="frmDoc" id="frmDoc" novalidate onsubmit="false" >
+                
+                <input type="hidden" value="{{formData.ID}}" name="docId" id="docId" >
+                <div class="form-group">
+                    <label class="control-label col-sm-5" for="caption">Caption of the Document <span style="color: red">*</span> </label>
+                    <div class="col-sm-7">
+                      <input type="text" class="form-control" id="docCaption" name="docCaption" placeholder="" ng-model="formData.DOCCAPTION" ng-maxlength="50" ng-minlength="0" required="true" >
+                      <span style="color: red"  ng-show="isErr=(frmDoc.docCaption.$error.maxlength && frmDoc.docCaption.$dirty)">Maximum 50 Characters allowed</span>
+
+                      <span style="color: red" ng-show="isErr=frmDoc.docCaption.$error.required && frmDoc.docCaption.$touched">This is Mandatory</span>
+
+                    </div>
+                    
+                </div>
+
+                <div class="form-group">
+                   <label class="control-label col-sm-5" for="docType">Type of the Documents <span style="color: red">*</span> </label>
+                   <div class="col-sm-7">          
+                     <select class="form-control" name="docType" id="docType" ng-model="formData.DOCTYPE" required="" ng-change="getPattern(formData.DOCTYPE)">
+
+                     <option ng-repeat="t in type" ng-value="{{t.id}}" ng-selected="t.id==formData.DOCTYPE">{{t.type}}</option>
+                      
+                     </select>
+                     <span style="color: red" ng-show="isErr=frmDoc.docType.$touched && frmDoc.docType.$invalid">Please select the Document Type</span>
+                   </div>
+                </div>
+
+                <div class="form-group">
+                   <label class="control-label col-sm-5" for="docDep">Department<span style="color: red">*</span></label>
+                   <div class="col-sm-7">          
+                      <select class="form-control" name="docDep" id="docDep" ng-model="formData.DOCDEP" required="true">
+                      
+                       <option ng-repeat="d in dep" ng-value="{{d.DEP_ID}}" ng-selected="d.DEP_ID==formData.DOCDEP">{{d.DEP_NAME}}</option>
+                       
+                     </select>
+
+                     <span style="color: red" ng-show="isErr=frmDoc.docDep.$invalid && frmDoc.docDep.$touched">Please select the Department</span>
+
+                   </div>
+                </div>
+
+                <div class="form-group">
+                   <label class="control-label col-sm-5" for="docKey">Keywords</label>
+                   <div class="col-sm-7">          
+                     <textarea class="form-control" placeholder="" rows="5" name="docKey" id="docKey" ng-model="formData.DOCKEY" ng-maxlength="50" ng-minlength="0">
+                       
+                     </textarea>
+
+                     <span style="color: red" ng-show="isErr=frmDoc.docKey.$error.maxlength && frmDoc.docKey.$dirty">Maximum 30 Characters allowed</span>
+
+                   </div>
+                </div>
+
+                <div class="form-group">
+                   <label class="control-label col-sm-5" for="docDesc">Description</label>
+                   <div class="col-sm-7">          
+                     <textarea class="form-control" placeholder="" rows="5" name="docDesc" id="docDesc" ng-model="formData.DOCDESC" ng-maxlength="50" ng-minlength="0">
+                       
+                     </textarea>
+
+                     <span style="color: red" ng-show="isErr=frmDoc.docDesc.$error.maxlength && frmDoc.docDesc.$dirty">Maximum 30 Characters allowed</span>
+
+                   </div>
+                </div>
+
+                <div class="form-group">
+                   <label class="control-label col-sm-5" for="docFile">Choose File<span style="color: red">*</span></label>
+                   <div class="col-sm-7">          
+                     <input type="file" class="form-control" name="docFile" id="docFile" ng-model="formData.DOCFILE" accept="{{docPattern}}"  valid-file required file-upload/>
+
+                     <!--<input type="file" ngf-select ng-model="file" name="doc_file" id="doc_file" ngf-pattern="{{doc_pattern}}" accept="{{doc_pattern}}" ngf-max-size="20MB"  />-->
+
+                            
+
+                     
+
+                   </div>
+
+                   
+
+                </div>
+                
+
+
+                
+                
+            </form>
+           <div class="col-sm-offset-5">
+                   
+                    <button ng-click="saveDoc()" ng-disabled="frmDoc.$invalid" class="btn btn-primary ">Submit</button>
+                    
+                    
+                   
+                </div>
+          </div>
+          
+        </div>
+
+    </div>
+   
+  </div>
+</div>
+
+

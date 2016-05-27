@@ -11,7 +11,7 @@
         $scope.userCredentials = false;
 
         adminDashboardService.checkAdmin();
-
+        
         $scope.openProfilePage = function(){
             $scope.progressbar.start();
             spinnerService.show('html5spinner');

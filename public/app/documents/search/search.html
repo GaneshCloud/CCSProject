@@ -1,0 +1,96 @@
+
+<div class="navbar navbar-fixed">
+    <h4>Crisp Cloud Solution</h4>
+</div>
+<div class="container" style="padding-top: 25px;">
+  <div class="row">
+      <div class="panel panel-default">
+        <div class="panel-heading">Technical Documents</div>
+        <div class="panel-body" style="padding-left: 0px;padding-right: 0px">
+          <div class="form-inline" style="padding-left: 15px">
+            
+           
+
+              <div class="inner-addon right-addon form-group col-sm-offset-0">
+              <label class="control-label">Search</label>
+                  <i class="glyphicon glyphicon-search"></i>
+                  <input type="text" class="form-control" ng-change="searchData()" ng-model="search"/>
+
+              </div>
+             
+
+              <div class="form-group col-sm-offset-3">
+                   <label class="control-label" for="dep">Department</label>
+                          
+
+                     <select class="form-control" ng-model="searchkey.dep" ng-change="searchData()">
+                      
+                       <option ng-repeat="d in dep" ng-value="{{d.DEP_ID}}">{{d.DEP_NAME}}</option>
+                     
+                     </select>
+                   
+              </div>
+         
+           
+          </div>
+          
+          <br>
+          <br>
+          <div class="form-group" style="padding:0px 15px 0px 15px">
+
+            <ul class="nav nav-pills nav-justified">
+                <li style="cursor: pointer;" ng-class="getClass(-1)" ><a ng-click="changeDocument(-1); searchData()">All&nbsp;&nbsp;&nbsp;<img src="images/documents/all.png"></a></li>
+                <li style="cursor: pointer;" ng-class="getClass(1)" ><a ng-click="changeDocument(1); searchData()">PDF&nbsp;&nbsp;&nbsp;<img src="images/documents/pdf.png"></a></li>
+                <li style="cursor: pointer;" ng-class="getClass(2)"><a ng-click="changeDocument(2) ;searchData()">Word&nbsp;&nbsp;&nbsp;<img src="images/documents/word.png"></a></li>
+                <li style="cursor: pointer;" ng-class="getClass(3)" ><a ng-click="changeDocument(3); searchData()">Slides&nbsp;&nbsp;&nbsp;<img src="images/documents/ppt.png"></a></li>
+                <li style="cursor: pointer;" ng-class="getClass(4)" ><a ng-click="changeDocument(4); searchData()">Images&nbsp;&nbsp;&nbsp;<img src="images/documents/image.png" s></a></li>
+                <li style="cursor: pointer;" ng-class="getClass(5)" ><a ng-click="changeDocument(5); searchData()">Archives&nbsp;&nbsp;&nbsp;<img src="images/documents/zip.png"></a></li>
+
+                <li ng-class="getClass(6)" ><a ng-click="changeDocument(6); searchData()">Videos&nbsp;&nbsp;&nbsp;<img src="images/documents/video.png"></a></li>
+                
+                
+            </ul>
+
+
+           </div>
+
+           
+           <br>
+           <br>
+
+           <div style="float: right;margin-right: 25px; cursor: pointer;"><img ng-show="st_lst" ng-click="changeView()" src="images/documents/list.png" id="list"><img ng-hide="st_lst" ng-click="changeView()" src="images/documents/tile.png" id="tiles"></div>
+
+
+           <div class="form-group"   style="padding: 25px" ng-include="srcViews">
+
+           </div>
+
+         
+
+
+           <hr>
+            
+            <div class="col-sm-offset-4" style="padding: 0px" ng-hide="noData">
+
+          
+              <pagination  
+                  ng-model="curPage"
+                  total-items="searchres.length"
+                  items-per-page="itemsPage"
+                  max-size="maxSize"  
+                  boundary-links="true">
+              </pagination>
+
+            </div>
+
+
+            
+
+      </div>
+  </div>
+  
+</div>
+</div>
+
+
+ 

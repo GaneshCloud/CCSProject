@@ -1,0 +1,164 @@
+
+
+<div class="navbar navbar-fixed">
+    <h4>Crisp Cloud Solution</h4>
+</div>
+<div class="container" style="padding-top: 25px;">
+  
+  <div class="row">
+    <div class="col-sm-3">
+
+    </div>
+    <div class="col-sm-12">
+    
+        <div class="panel panel-default" >
+          <div id="heading" class="panel-heading"><span>Document List</span><a ng-click="newDocument()" class="col-sm-offset-10 btn btn-default">New </a> </div>
+          <div class="panel-body">
+
+            <div class="col-sm-12 row form-inline" style="padding: 0px;height: auto; min-height: 50px ;text-align: center;">
+             <div class="form-group">
+              <label class="control-label">Search</label>
+              
+                  <input type="text" class="form-control" ng-change="searchData()" ng-model="search"/>
+              
+              </div>
+              <div class="form-group">
+                <label class="control-label">Department</label>
+                <select class="form-control" ng-model="searchkey.dep" ng-change="searchData()">
+                      
+                       <option ng-repeat="d in dep" ng-value="{{d.DEP_ID}}">{{d.DEP_NAME}}</option>
+                     
+                </select>
+               </div>
+               <div class="form-group"> 
+                <label class="control-label">Document Type</label>
+                <select class="form-control" name="doc_type" id="doc_type" ng-model="searchkey.docType" required="" ng-change="searchData()">
+
+                     <option ng-repeat="t in type" ng-value="{{t.id}}" ng-selected="t.id==formData.DOC_TYPE">{{t.type}}</option>
+                      
+                     </select>
+                 </div>        
+                   
+                 
+                   
+            </div>
+
+          <div >
+          
+            <table class="table table-condensed table-bordered table-responsive">
+                <thead>
+                  <tr style="cursor: pointer;">
+                    <th>Sl No</th>
+                    <th style="width:200px;" ng-click="orderMe('DOC_CAPTION')">Caption</th>
+                    <th ng-click="orderMe('DEP_NAME')">Department</th>
+                    <th ng-click="orderMe('DOC_DATE')">Date</th>
+                    <th ng-click="orderMe('DOC_NO_VIEWS')">Views</th>
+                    <th ng-click="orderMe('DOC_NO_DOWN')">Downloads</th>
+                    <th ng-click="orderMe('star')">Rting</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="doc in filteredRes |orderBy:field:isReverse ">
+                    <td>{{$index+1}}</td>
+                    <td style="overflow: hidden;"><img ng-src="{{ getIcon(doc.DOCTYPE) }}">&nbsp;&nbsp;&nbsp;<a href="/documents/viewDocument?id={{doc.ID}}
+                  &type={{doc.DOCTYPE}}">{{doc.DOCCAPTION}}</a></td>
+                    <td>{{doc.DEP_NAME}} </td>
+                    <td>{{doc.DOCDATE | myDate}}</td>
+                    <td>{{doc.DOCNOVIEWS}}</td>
+                    <td>{{doc.DOCNODOWN}}</td>
+                    <td style="cursor: pointer;" ng-click="getRateInfo(doc.ID)">
+                     
+                      <div class="stars" style="width: 150px;cursor: pointer;">
+    
+                        <input class="star star-5" id="star-5-2" type="radio" value="5"  name="star{{doc.ID}}" ng-checked="{{doc.star==5}}" disabled="true" />
+                        <label class="star star-5" for="star-5-2" ng-model="star" style="font-size: 20px"></label>
+                        <input class="star star-4" id="star-4-2" type="radio" value="4" name="{{doc.ID}}" ng-checked="{{doc.star==4}}"  disabled="true" />
+                        <label class="star star-4" ng-model="star" for="star-4-2" style="font-size: 20px"></label>
+                        <input class="star star-3" id="star-3-2" type="radio" value="3" name="{{doc.ID}}" ng-checked="{{doc.star==3}}"  disabled="true" />
+                        <label class="star star-3" for="star-3-2" style="font-size: 20px"></label >
+                        <input class="star star-2" id="star-2-2" type="radio" value="2" name="{{doc.ID}}" ng-checked="{{doc.star==2}}"  disabled="true" />
+                        <label class="star star-2" for="star-2-2" style="font-size: 20px"></label>
+                        <input class="star star-1" id="star-1-2" type="radio" value="1" name="{{doc.ID}}" ng-checked="{{doc.star==1}}"  disabled="true" />
+                        <label class="star star-1" for="star-1-2" style="font-size: 20px"></label>
+    
+                    </div>
+
+                  </td>
+                    <td><a href="/documents/editDoc?id={{doc.ID}}">Edit<span class="glyphicon glyphicon-pencil"></span></a></td>
+                    <td style="cursor: pointer;"><a ng-click="deleteDoc(doc.ID)">Delete<span class="glyphicon glyphicon-remove"></span></a></td>
+                  </tr>
+                  
+                </tbody>
+            </table>
+            </div>
+            <div class="col-sm-offset-0 col-sm-12" style="padding: 0px">
+
+              <pagination 
+                  ng-model="curPage"
+                  total-items="searchres.length"
+                  items-per-page="itemsPage"
+                  max-size="maxSize"  
+                  boundary-links="true">
+              </pagination>
+
+
+            </div>
+          </div>
+        </div>
+
+    </div>
+   
+  </div>
+</div>
+<script type="text/javascript">
+
+ 
+</script>
+
+
+
+<div id="popup1" ng-style="popup" class="overlay">
+  <div class="popup" style="overflow: auto;">
+    <h3>Star Rating Report</h3>
+    <a class="close" ng-click="popup={'visibility': 'hide','opacity': 0}">&times;</a>
+    <div class="content">
+      <table class="table table-condensed table-bordered">
+        
+        <thead>
+        <tr>
+          <th>Sl No</th>
+          <th>User Id</th>
+          <th>Name</th>
+          <th>Date</th>
+          <th>Stars</th>
+          </tr>
+        </thead>
+        <tr ng-repeat="rate in rateInfo">
+          <td>{{$index+1}}</td>
+          <td>{{rate.USER_ID}}</td>
+          <td>{{rate.fname}}</td>
+          <td>{{rate.STAR_DATE | date:"dd-MM-yyyy"}}</td>
+          <td>
+            <div class="stars" style="width: 150px;cursor: pointer;">
+    
+                        <input class="star star-5" id="star-5-2" type="radio" value="5"  name="star{{rate.ID}}" ng-checked="{{rate.STARS==5}}" disabled="true" />
+                        <label class="star star-5" for="star-5-2" ng-model="star" style="font-size: 20px"></label>
+                        <input class="star star-4" id="star-4-2" type="radio" value="4" name="{{rate.ID}}" ng-checked="{{rate.STARS==4}}"  disabled="true" />
+                        <label class="star star-4" ng-model="star" for="star-4-2" style="font-size: 20px"></label>
+                        <input class="star star-3" id="star-3-2" type="radio" value="3" name="{{rate.ID}}" ng-checked="{{rate.STARS==3}}"  disabled="true" />
+                        <label class="star star-3" for="star-3-2" style="font-size: 20px"></label >
+                        <input class="star star-2" id="star-2-2" type="radio" value="2" name="{{rate.ID}}" ng-checked="{{rate.STARS==2}}"  disabled="true" />
+                        <label class="star star-2" for="star-2-2" style="font-size: 20px"></label>
+                        <input class="star star-1" id="star-1-2" type="radio" value="1" name="{{rate.ID}}" ng-checked="{{rate.STARS==1}}"  disabled="true" />
+                        <label class="star star-1" for="star-1-2" style="font-size: 20px"></label>
+    
+                    </div>
+          </td>
+        </tr>
+
+
+      </table>
+    </div>
+ </div>

@@ -1,0 +1,116 @@
+
+
+<div class="container" style="padding-top: 25px;">
+  <div class="row">
+     <div class="panel panel-default" class="row" style="height: auto;">
+          <div class="panel-heading"><span style="width: 800px;"><b>{{doc.DOCCAPTION}}</b></span>
+          
+          <span  class="col-sm-offset-4"><a href="/api/download?id={{doc.ID}}" target="_blank">Download</a> &nbsp;&nbsp;&nbsp;Posted:{{doc.DOCDATE|myDate}} | Views:{{doc.DOCNOVIEWS}} | Downloads: {{doc.DOCNODOWN}} </span></div>
+
+          <div class="panel-body">
+           
+          <div>
+            
+             <div >
+               <span class="star-ratingg">
+                  <div class="stars">
+    
+                    <input class="star star-5" id="star-5-2" type="radio" value="5"  name="star" ng-checked="star==5" ng-disabled="is_admin" ng-click="staring(5)" />
+                    <label class="star star-5" for="star-5-2" ng-model="star" ></label>
+                    <input class="star star-4" id="star-4-2" type="radio" value="4" name="star" ng-checked="star==4" ng-disabled="is_admin" ng-click="staring(4)"/>
+                    <label class="star star-4" ng-model="star" for="star-4-2"></label>
+                    <input class="star star-3" id="star-3-2" type="radio" value="3" name="star" ng-checked="star==3" ng-disabled="is_admin" ng-click="staring(3)"/>
+                    <label class="star star-3" for="star-3-2"></label>
+                    <input class="star star-2" id="star-2-2" type="radio" value="2" name="star" ng-checked="star==2" ng-disabled="is_admin" ng-click="staring(2)"/>
+                    <label class="star star-2" for="star-2-2"></label>
+                    <input class="star star-1" id="star-1-2" type="radio" value="1" name="star" ng-checked="star==1" ng-disabled="is_admin" ng-click="staring(1)"/>
+                    <label class="star star-1" for="star-1-2"></label>
+    
+                </div>
+
+
+              </span>
+                
+             </div>
+             <strong ng-hide="is_admin" class="choice">Choose a rating</strong>
+            <div name="description">
+              {{doc.DOCDESC}}
+              <br>
+              <br>
+
+            </div>
+            <div class="col-sm-12" >
+            
+            <!-- for device-->
+            <div id="prev_next" style="text-align: center; padding-bottom: 25px;">
+              
+              <button class="btn btn-primary" ng-click="getPrevios(doc.ID)">Previous</button> 
+              <button class="btn btn-primary" ng-click="getNext(doc.ID)">Next</button> 
+            
+            </div>
+            
+
+            <!-- for device-->
+
+            <div id="previous" class="col-sm-2" style="padding-top: 25%;">
+              <img src="images/documents/32/left.png" style="cursor: pointer;" ng-click="getPrevios(doc.ID)">
+            </div>
+
+
+              <div ng-switch="doc.DOCTYPE">
+                  <div ng-switch-when="4">
+                      <div  class="col-sm-8 centre1">
+                         <img id="image_viewer" ng-src="{{thisFile}}"    class="col-sm-12">
+                      </div>
+
+                  </div>
+                  <div ng-switch-when="6">
+                   
+
+                      <div align="center" class="embed-responsive embed-responsive-16by9 col-sm-8 col-sm-offset-0" >
+                        <video controls class="embed-responsive-item">
+                            <source ng-src="{{thisFile}}" type=video/mp4>
+                        </video>
+                      </div>   
+                  </div>
+                  <div ng-switch-when="5">
+                    <div  class="col-sm-8 centre1">
+                        <div id="output" style="border: 1px solid;padding-left: 15px">
+                  
+                          <table>
+                            <tr ng-repeat="f in files"> 
+                              <td>{{f.file}}</td>
+                            </tr>
+                          </table>
+                </div>
+                    </div>    
+                  </div>
+
+                  <div ng-switch-default>
+                    <div  class="col-sm-8 centre">
+                       <iframe src="http://docs.google.com/gview?url=www.tutorialspoint.com/ajax/ajax_tutorial.pdf
+                       &embedded=true" class="col-sm-12" style=" height:700px;" frameborder="1"></iframe>
+                    </div>
+                  </div>
+  
+            </div>
+
+             
+
+            
+            <div  id="next" class="col-sm-2" style="padding-top: 25%;">
+              <img src="images/documents/32/right.png" style="cursor: pointer;" ng-click="getNext(doc.ID)">
+            </div>
+
+           
+            </div>
+            
+          </div>
+
+          
+        </div>
+</div>
+</div>
+</div>
+ 
+
