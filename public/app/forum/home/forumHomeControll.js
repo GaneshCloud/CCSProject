@@ -1,5 +1,5 @@
 (function() {
-  function forumController($scope,$http,forumService,filterFilter) {
+  function forumController($scope,$window,forumService,filterFilter) {
     $scope.getForumQus = [];
     $scope.Forumanswers = [];
     $scope.Question = '';
