@@ -231,3 +231,41 @@ INSERT INTO `tbl_doc_stars` (`ID`, `DOC_ID`, `STARS`, `USER_ID`, `STAR_DATE`) VA
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+
+
+--
+-- Table structure for table `erp_database`
+--
+
+CREATE TABLE IF NOT EXISTS `erp_database` (
+  `projectCode` varchar(50) NOT NULL,
+  `Title` varchar(50) NOT NULL,
+  `Department` varchar(50) NOT NULL,
+  `subHeads` varchar(50) NOT NULL,
+  `Software` int(50) NOT NULL,
+  `Hardware` int(11) NOT NULL,
+  `catlogCode` varchar(50) NOT NULL,
+  `Domain` varchar(50) NOT NULL,
+  `id` int(1) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=40 ;
+
+--
+-- Dumping data for table `erp_database`
+--
+
+INSERT INTO `erp_database` (`projectCode`, `Title`, `Department`, `subHeads`, `Software`, `Hardware`, `catlogCode`, `Domain`, `id`) VALUES
+('orange', 'Aeronatical Projects', 'ECE', 'CEC-PC BASED', 5000, 500, 'CIVIL DESIGN PROJECTS', 'BIOMEDICAL PROJECTS', 12),
+('domain', 'Mechanical Projects', 'mechanical', 'CEA-ATMEL', 10000, 10000, 'CDB BIO MEDICAL PROJECTS', 'RFID', 16),
+('manoj', 'Mechanical Projects', 'mechanical', 'CEA-ATMEL', 10000, 1000, 'CDB BIO MEDICAL PROJECTS', 'RFID', 17),
+('rakesh', 'Aeronatical Projects', 'ECE', 'CEC-PC BASED', 500, 500, 'CIVIL DESIGN PROJECTS', 'BIOMEDICAL PROJECTS', 18),
+('senthil12', 'Aeronatical Projects', 'ECE', 'CEC-PC BASED', 500, 500, 'CIVIL DESIGN PROJECTS', 'BIOMEDICAL PROJECTS', 20),
+('orange', 'Aeronatical Projects', 'mechanical', 'CEC-PC BASED', 2500, 2500, 'C,C++ AND VC++ PROJECTS', 'RFID', 22),
+('fcxbcf', 'Aeronatical Projects', 'mechanical', 'CEA-ATMEL', 1500, 1250, 'CIVIL DESIGN PROJECTS', 'RFID', 23),
+('4556', 'Embaded projects', 'mechatronics', 'CEA-ATMEL', 1500, 1234, 'C,C++ AND VC++ PROJECTS', 'ROBOTICS', 26),
+('32125', 'Aeronatical Projects', 'mechatronics', 'CEA-OTHERS', 1800, 1500, 'CIS-C# NET PROJECTS', 'BIOMEDICAL PROJECTS', 28),
+('hari', 'ECE Projects', 'mechanical', 'CEA-ATMEL', 1500, 1500, 'CDB BIO MEDICAL PROJECTS', 'ROBOTICS', 29),
+('sudhan', 'Embaded projects', 'mechanical', 'CEA-ATMEL', 5000, 5000, 'CIVIL DESIGN PROJECTS', 'BIOMEDICAL PROJECTS', 30),
+('senthil', 'Mechanical Projects', 'mechanical', 'CEA-ATMEL', 5000, 2500, 'CAD/CAM/CAE PROJECTS', 'RFID', 31),
+('sasi', 'Aeronatical Projects', 'mechanical', 'CEA-ATMEL', 1500, 1500, 'CIS-C# NET PROJECTS', 'RFID', 32),
+('dfgdf', 'Mechanical Projects', 'mechatronics', 'CEA-ATMEL', 2000, 2000, 'CDB BIO MEDICAL PROJECTS', 'ROBOTICS', 38);
