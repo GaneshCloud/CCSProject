@@ -347,7 +347,7 @@ function updateGooglePersonalData(req,profile,accessToken){
                         console.error(error);
                         deferred.reject(error);
                     }
-                    if(result){
+                    if(result && (result.length > 0)){
 
                         data = result[0];
 

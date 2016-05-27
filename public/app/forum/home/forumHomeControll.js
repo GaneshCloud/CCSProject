@@ -12,7 +12,27 @@
     $scope.filteredDoc = [];
     $scope.maxSize = 4;
     $scope.totalItems = 0;
-    
+
+
+    // -------------------------lodout------------------------------------------------- //
+    $scope.onLogout = function(){
+
+      if ($window.confirm("Are You Sure ! Do you need to Log Out?")) {
+
+        forumService.logout();
+
+      }
+
+    };
+    // -------------------------Dashboard------------------------------------------------- //
+    $scope.goToDashboard = function(){
+
+      forumService.goToDashboard();
+
+    };
+
+
+
 
     // --------------------------------------- GET FORUM QUESTION ANSWERS ----------------//
 
@@ -103,22 +123,6 @@
       $scope.filteredDoc = $scope.filteredDocs.slice(begin, end);
     }, true);
 
-    // -------------------------lodout------------------------------------------------- //
-    $scope.onLogout = function(){
-
-      if ($window.confirm("Are You Sure ! Do you need to Log Out?")) {
-
-        forumService.logout();
-
-      }
-
-    };
-    // -------------------------Dashboard------------------------------------------------- //
-    $scope.goToDashboard = function(){
-
-      forumService.goToDashboard();
-
-    };
 
     getForum($scope.forumtype);
   }
