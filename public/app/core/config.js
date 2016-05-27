@@ -44,6 +44,10 @@ myApp.config(function($routeProvider, $locationProvider){
 			controllerAs: "up",
 			templateUrl: "../app/project/upload/upload.html"
 		}).
+		when("/project/projectReg",{
+			controller:"projectRegController",
+			templateUrl:"../app/project/projectReg/projectReg.html"
+	    }).
 	    when('/forum/home',{
 		    controller:'forumController',
 			templateUrl:'../app/forum/home/forum.html'

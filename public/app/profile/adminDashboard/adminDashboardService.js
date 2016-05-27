@@ -22,6 +22,11 @@ angular.module('myApp')
                 $window.location.href = '/documents/singleFileUpload';
             },
 
+            projectReg: function () {
+
+                $window.location.href = '/project/projectReg';
+            },
+
             goToAdminDashboard: function () {
                 $window.location.href = '/profile/adminDashboard';
             },

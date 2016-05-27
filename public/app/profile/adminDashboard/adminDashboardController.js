@@ -47,6 +47,17 @@
 
         };
 
+        $scope.openProjectReg=function(){
+            $scope.progressbar.start();
+            spinnerService.show('html5spinner');
+            adminDashboardService.projectReg().then(function(){
+                $scope.progressbar.complete();
+                spinnerService.hide('html5spinner');
+            });
+
+
+        };
+
     }
 
     myApp.controller('adminDashboardController',adminDashboardController);
