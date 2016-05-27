@@ -1,6 +1,6 @@
 
 'use strict';
-myApp.controller('singleFileUploadController', function($scope,uploadSingleServices,adminDashboardService) {
+myApp.controller('singleFileUploadController', function($scope,uploadSingleServices,adminDashboardService,$window) {
   
         //document.getElementById("docCaption").focus();
         $scope.formData = {
