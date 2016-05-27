@@ -54,6 +54,10 @@ angular.module('myApp')
                 });
 
                 return dfr.promise;
+            },
+
+            openUserForum: function () {
+                $window.location.href = '/forum/home';
             }
 
         };
