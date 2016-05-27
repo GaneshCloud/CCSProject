@@ -1,6 +1,6 @@
 'use strict';
 
- myApp.controller('documentListController', function($scope,documentListServices,starServices,iconServices,adminDashboardService) {
+ myApp.controller('documentListController', function($scope,documentListServices,starServices,iconServices,adminDashboardService,$window) {
         
 
 
@@ -161,7 +161,7 @@
                 
         };
 
-     // lodout
+     // logout
      $scope.onLogout = function(){
 
          if ($window.confirm("Are You Sure ! Do you need to Log Out?")) {
