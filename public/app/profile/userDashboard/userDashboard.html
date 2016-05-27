@@ -8,79 +8,50 @@
     <div class="please-wait">Please Wait...</div>
 </spinner>
 
-<div>
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Settings <span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-
-                            <li align = 'right' ng-show="userCredentials && google_link">
-
-                                <a ng-click="addGoogleAccount()">
-
-                                    <span class="glyphicon glyphicon-retweet"></span>Link Google Account
-
-                                </a>
-
-                            </li>
-
-                            <li align = 'right' ng-show="userCredentials && fb_link">
-
-                                <a ng-click="addFacebookAccount()">
-
-                                    <span class="glyphicon glyphicon-retweet"></span>Link Facebook Account
-
-                                </a>
-
-                            </li>
-
-                            <li align = 'right' ng-show="userCredentials">
-
-                                <a ng-click='onChangePassword()'>
-
-                                    <span class="glyphicon glyphicon-lock"></span>Change Password
-
-                                </a>
-
-                            </li>
-
-                            <li class="divider"  ng-show="userCredentials"></li>
-
-                            <li align='right'>
-
-                                <a ng-click='onLogout()'>
-
-                                    <span class="glyphicon glyphicon-log-out"></span>Log Out
-
-                                </a>
-
-                            </li>
-
-                        </ul>
-
-                    </li>
-
-                </ul>
-
-            </div>
+    <nav class="nav navbar-dark bg-primary" role="navigation">
+        <div class="nav-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <label class="navbar-brand">Crisp Cloud Solutions</label>
 
         </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="color:white">Settings <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
 
+                        <li align='right'>
+
+                            <a ng-click='goToDashboard()'>
+
+                                <span class="glyphicon glyphicon-th-large"></span>Dashboard
+
+                            </a>
+
+                        </li>
+
+                        <li align='right'>
+
+                            <a ng-click='onLogout()'>
+
+                                <span class="glyphicon glyphicon-log-out"></span>Log Out
+
+                            </a>
+
+                        </li>
+
+                    </ul>
+
+                </li>
+
+            </ul>
+        </div>
     </nav>
-
-</div>
 
 <div class="container">
 
