@@ -17,7 +17,7 @@ angular.module('myApp')
             getPersonalData: function () {
                 var deferred = $q.defer();
 
-                httpPromise = $http.get('/getPersonalData');
+                httpPromise = $http.get('/connect/getPersonalData');
 
                 httpPromise.then(function (response) {
                     deferred.resolve(response);
@@ -34,7 +34,7 @@ angular.module('myApp')
                 $http({
                     method: 'post',
 
-                    url: '/updatePersonalData',
+                    url: '/connect/updatePersonalData',
 
                     data: personalData
 
@@ -47,7 +47,7 @@ angular.module('myApp')
                 httpPromise = $http({
                     method: 'get',
 
-                    url: '/getPersonalData'
+                    url: '/getLoggedInUser'
 
                 });
 

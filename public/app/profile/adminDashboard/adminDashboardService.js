@@ -32,7 +32,7 @@ angular.module('myApp')
                 httpPromise = $http({
                     method: 'get',
 
-                    url: '/getPersonalData'
+                    url: '/getLoggedInUser'
 
                 });
 
@@ -40,7 +40,7 @@ angular.module('myApp')
                     dfr.resolve(response);
 
                     if (response.data.userType === 'admin') {
-                        
+                        // Already it is in Admin Page
                     } else if(response.data.userType === 'user') {
                         $window.location.href = '/profile/userDashboard';
                     }else {

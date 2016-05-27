@@ -73,6 +73,7 @@ module.exports = function() {
 	require("../routes/documents.search.server.routes")(app);
 
 
+	require('../routes/security.server.routes.js')(app);
 	require('../routes/layout.server.routes.js')(app);	//layout page route
 	
 	return app;

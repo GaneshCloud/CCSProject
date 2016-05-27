@@ -114,20 +114,20 @@
         };
 
         $scope.addFacebookAccount = function() {
-            $scope.progressbar.start();
+            // $scope.progressbar.start();
             spinnerService.show('html5spinner');
             userProfileService.addFacebookAccount().then(function(response) {
-                $scope.progressbar.complete();
+                // $scope.progressbar.complete();
                 spinnerService.hide('html5spinner');
                 $scope.personalData = response.data;
             });
         };
 
         $scope.addGoogleAccount = function() {
-            $scope.progressbar.start();
+            // $scope.progressbar.start();
             spinnerService.show('html5spinner');
             userProfileService.addGoogleAccount().then(function(response) {
-                $scope.progressbar.complete();
+                // $scope.progressbar.complete();
                 spinnerService.hide('html5spinner');
                 $scope.personalData = response.data;
             });
@@ -144,10 +144,10 @@
         $scope.fileUpload = function() {
 
             if ($window.confirm('Are You Sure ! Do you need to update the ProfilPicture?')) {
-                $scope.progressbar.start();
+                // $scope.progressbar.start();
                 spinnerService.show('html5spinner');
                 userProfileService.uploadImage($scope.file).then(function() {
-                    $scope.progressbar.complete();
+                    // $scope.progressbar.complete();
                     spinnerService.hide('html5spinner');
                     $scope.imageChanged = false;
 
@@ -170,10 +170,10 @@
         $scope.onCancelFileUpload = function() {
 
             $scope.imageChanged = false;
-            $scope.progressbar.start();
+            // $scope.progressbar.start();
             spinnerService.show('html5spinner');
             userProfileService.getPersonalData().then(function() {
-                $scope.progressbar.complete();
+                // $scope.progressbar.complete();
                 spinnerService.hide('html5spinner');
             });
 
@@ -238,7 +238,7 @@
 
                 $scope.editPersonalData = false;
 
-                $scope.progressbar.start();
+                // $scope.progressbar.start();
                 spinnerService.show('html5spinner');
                 userProfileService.updatePersonalData($scope.personalData).then(function() {
                     $scope.progressbar.complete();
@@ -275,20 +275,20 @@
 
         $scope.onChangePassword = function() {
             if (($scope.personalData.userType != 'admin') && $scope.personalData.password) {
-                $scope.progressbar.start();
+                // $scope.progressbar.start();
                 spinnerService.show('html5spinner');
                 userProfileService.changePassword().then(function() {
-                    $scope.progressbar.complete();
+                    // $scope.progressbar.complete();
                     spinnerService.hide('html5spinner');
                 });
             }else {
-                $scope.progressbar.start();
+                // $scope.progressbar.start();
                 spinnerService.show('NoPassword');
             }
         };
 
         $scope.okOnCantChangePassword = function() {
-            $scope.progressbar.complete();
+            // $scope.progressbar.complete();
             spinnerService.hide('NoPassword');
         };
 
@@ -344,10 +344,10 @@
         $scope.onLogout = function() {
 
             if ($window.confirm('Are You Sure ! Do you need to Log Out?')) {
-                $scope.progressbar.start();
+                // $scope.progressbar.start();
                 spinnerService.show('html5spinner');
                 userProfileService.logout().then(function() {
-                    $scope.progressbar.complete();
+                    // $scope.progressbar.complete();
                     spinnerService.hide('html5spinner');
                 });
 

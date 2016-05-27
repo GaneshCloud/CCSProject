@@ -30,10 +30,11 @@ passport.use(new facebookStrategy({
         clientID: configAuth.facebookAuth.clientID,
         clientSecret: configAuth.facebookAuth.clientSecret,
         callbackURL: configAuth.facebookAuth.callbackURL,
-        profileFields: ['id', 'displayName', 'photos', 'email']
+        profileFields: ['id', 'displayName', 'photos', 'email'],
+        passReqToCallback: true
     },
-    function (accessToken, refreshToken, profile, done) {
-        personalDataManager.updateFacebookPersonalData(null, profile, accessToken)
+    function (req,accessToken, refreshToken, profile, done) {
+        personalDataManager.updateFacebookPersonalData(req, profile, accessToken)
             .then(function (results) {
                 if (results) {
                     return done(null, results);
@@ -49,10 +50,11 @@ passport.use(new facebookStrategy({
 passport.use(new googleStrategy({
         clientID: configAuth.googleAuth.clientID,
         clientSecret: configAuth.googleAuth.clientSecret,
-        callbackURL: configAuth.googleAuth.callbackURL
+        callbackURL: configAuth.googleAuth.callbackURL,
+        passReqToCallback: true
     },
-    function (accessToken, refreshToken, profile, done) {
-        personaldataManager.updateGooglePersonalData(null, profile, accessToken)
+    function (req,accessToken, refreshToken, profile, done) {
+        personaldataManager.updateGooglePersonalData(req, profile, accessToken)
             .then(function (results) {
                 if (results) {
                     return done(null, results);

@@ -15,11 +15,11 @@
 
 
         $scope.loginWithFacebook = function() {
-            $scope.progressbar.start();
+            // $scope.progressbar.start();
             spinnerService.show('html5spinner');
             loginService.loginWithFacebook().then(function() {
-                $rootScope.isLogin=true;
-                $scope.progressbar.complete();
+                // $rootScope.isLogin=true;
+                // $scope.progressbar.complete();
                 spinnerService.hide('html5spinner');
             });
 
@@ -27,12 +27,12 @@
 
         $scope.loginWithGoogle = function() {
 
-            $scope.progressbar.start();
+            // $scope.progressbar.start();
             spinnerService.show('html5spinner');
 
             loginService.loginWithGoogle().then(function() {
-                $rootScope.isLogin=true;
-                $scope.progressbar.complete();
+                // $rootScope.isLogin=true;
+                // $scope.progressbar.complete();
                 spinnerService.hide('html5spinner');
             });
 
@@ -55,20 +55,19 @@
         };
 
         $scope.submit = function(user, password) {
-            $scope.progressbar.start();
+            // $scope.progressbar.start();
             spinnerService.show('html5spinner');
             console.log('username --->' + user);
             loginService.verifyUser(user.$viewValue, password.$modelValue)
                 .then(function(result) {
                     if (result !== '') {;
-                        $rootScope.isLogin=true;
                         loginService.profilePage().then(function() {
-                            $scope.progressbar.complete();
+                            // $scope.progressbar.complete();
                             spinnerService.hide('html5spinner');
                         });
                     }else {
                         loginService.loginPageWithError().then(function() {
-                            $scope.progressbar.complete();
+                            // $scope.progressbar.complete();
                             spinnerService.hide('html5spinner');
                         });
                     }

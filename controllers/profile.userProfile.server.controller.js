@@ -11,6 +11,10 @@ var googleStrategy = require('passport-google-oauth2').Strategy;
 
 var personaldataManager = require('../config/db/personaldataManager');
 
+var express = require('express');
+
+var router = express.Router();
+
 passport.serializeUser(function (user, done) {
     done(null, user);
 });
@@ -44,10 +48,11 @@ passport.use(new facebookStrategy({
 passport.use(new googleStrategy({
         clientID: configAuth.googleAuth.clientID,
         clientSecret: configAuth.googleAuth.clientSecret,
-        callbackURL: configAuth.googleAuth.callbackURL
+        callbackURL: configAuth.googleAuth.callbackURL,
+        passReqToCallback: true
     },
-    function (accessToken, refreshToken, profile, done) {
-        personaldataManager.updateGooglePersonalData(null, profile, accessToken)
+    function (req,accessToken, refreshToken, profile, done) {
+        personaldataManager.updateGooglePersonalData(req, profile, accessToken)
             .then(function (results) {
                 if (results) {
                     return done(null, results);
@@ -63,7 +68,7 @@ passport.use(new googleStrategy({
 
 ));
 
-exports.getPersonalData = function (req,res) {
+router.get('/getPersonalData', function (req,res) {
     if ((req.session.data && req.session.data.id) || (req.session.passport)) {
         if (req.session.passport) {
             req.session.data = [];
@@ -84,9 +89,9 @@ exports.getPersonalData = function (req,res) {
     } else {
         return;
     }
-};
+});
 
-exports.updatePersonalData = function (req,res) {
+router.post('/updatePersonalData', function (req,res) {
     if (req.session.data && req.session.data.id) {
         personaldataManager.updatePersonalData(req.body)
             .then(function(results) {
@@ -100,22 +105,19 @@ exports.updatePersonalData = function (req,res) {
     } else {
         return;
     }
-};
+});
 
-exports.connectFacebookAccount = function (req,res) {
-    passport.authenticate('facebook', {scope: ['email', 'user_friends', 'manage_pages', 'user_hometown']});
-};
+router.get('/google', passport.authenticate('google', {scope: ['https://www.googleapis.com/auth/plus.login',
+    'https://www.googleapis.com/auth/plus.profile.emails.read'] }));
 
-exports.connectFacebookCallback = function (req,res) {
-    passport.authenticate('facebook', { successRedirect: '/userProfile', failureRedirect: '/' });
-};
+router.get('/google/callback',
+    passport.authenticate('google', { successRedirect: '/profile',
+        failureRedirect: '/' }));
 
-exports.connectGoogleAccount = function (req,res) {
-    passport.authenticate('google', {scope: ['https://www.googleapis.com/auth/plus.login',
-        'https://www.googleapis.com/auth/plus.profile.emails.read'] })
-};
+router.get('/facebook', passport.authenticate('facebook', {scope: ['email', 'user_friends', 'manage_pages', 'user_hometown']}));
 
-exports.connectGoogleCallback = function (req,res) {
-    passport.authenticate('google', { successRedirect: '/userProfile',
-        failureRedirect: '/' })
-};
+router.get('/facebook/callback',
+    passport.authenticate('facebook', { successRedirect: '/profile',
+        failureRedirect: '/' }));
+
+module.exports = router;

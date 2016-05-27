@@ -35,17 +35,16 @@ angular.module('myApp')
                 httpPromise = $http({
                     method: 'get',
 
-                    url: '/getPersonalData'
+                    url: '/getLoggedInUser'
 
                 });
 
                 httpPromise.then(function (response) {
                     dfr.resolve(response);
-
-                    if (response.data.userType === 'admin') {
+                    if(response.data.userType === 'admin') {
                         $window.location.href = '/profile/adminDashboard';
-                    } else if(response.data.userType === 'user') {
-
+                    }else if(response.data.userType === 'user') {
+                        // Already Screen is in User View
                     }else {
                         $window.location.href = '/';
                     }

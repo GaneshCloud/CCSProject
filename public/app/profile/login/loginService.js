@@ -46,7 +46,7 @@ angular.module('myApp')
                 httpPromise = $http({
                     method: 'get',
 
-                    url: '/getPersonalData'
+                    url: '/connect/getPersonalData'
 
                 });
 
