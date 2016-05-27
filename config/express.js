@@ -71,6 +71,8 @@ module.exports = function() {
 	require("../routes/documents.star.server.routes")(app);
 	require("../routes/documents.viewDocument.server.routes")(app);
 	require("../routes/documents.search.server.routes")(app);
+	require("../routes/project.projectReg.server.route")(app);
+
 
 
 	require('../routes/security.server.routes.js')(app);

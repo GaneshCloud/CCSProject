@@ -11,9 +11,6 @@ var router = express.Router();
 //   }
 // });
 
-
-
-
 router.get('/getForum', function(req, res) {
     forumConfig.getForum(req.query.type)
       .then(function(results,error) {
@@ -27,7 +24,6 @@ router.get('/getForum', function(req, res) {
         console.error(JSON.stringify(err));
       });
   });
-
 
 router.post('/postForumquestion', function(req, res) {
     forumConfig.postForumquestion(req.body,req.session.data.userid)
