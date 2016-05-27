@@ -13,7 +13,13 @@ myApp.factory('uploadMultipleServices', function($http,$window) {
             },
             singleFileUpload:function(){
                 $window.location.href="/documents/singleFileUpload";
-            }
+            },
+            logout: function () {
+                $window.location.href = '/logout';
+            },
+            goToDashboard: function () {
+                $window.location.href = '/profile/adminDashboard';
+            },
             
         };
     });

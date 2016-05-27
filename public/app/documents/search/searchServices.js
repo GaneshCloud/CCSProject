@@ -1,6 +1,6 @@
 
 'use strict';
-myApp.factory('documentSearchServices', function($http) {
+myApp.factory('documentSearchServices', function($http,$window) {
     
         return {
             get : function() {
@@ -12,7 +12,13 @@ myApp.factory('documentSearchServices', function($http) {
             },
             getDepartment:function(){
                 return $http.get('/api/dep');
-            }
+            },
+            logout: function () {
+                $window.location.href = '/logout';
+            },
+            goToDashboard: function () {
+                $window.location.href = '/profile/userDashboard';
+            },
             
             
         };

@@ -1,6 +1,6 @@
 
 'use strict';
-myApp.controller('multipleFileUploadController', function($scope,uploadMultipleServices,adminDashboardService) {
+myApp.controller('multipleFileUploadController', function($scope,uploadMultipleServices,adminDashboardService,$window) {
 
       
         $scope.formData = [{
@@ -88,8 +88,23 @@ myApp.controller('multipleFileUploadController', function($scope,uploadMultipleS
               console.log(err);
             });
         };
-       
 
+        // logout
+        $scope.onLogout = function(){
+
+        if ($window.confirm("Are You Sure ! Do you need to Log Out?")) {
+
+            uploadMultipleServices.logout();
+
+        }
+
+        };
+        //Dashboard
+        $scope.goToDashboard = function(){
+
+            uploadMultipleServices.goToDashboard();
+
+        };
         //initially calling the function
         $scope.getDepartment();
       

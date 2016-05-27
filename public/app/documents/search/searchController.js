@@ -1,6 +1,6 @@
 
 'use strict';
-myApp.controller('searchController', function($scope,documentSearchServices,iconServices,userDashboardService) {
+myApp.controller('searchController', function($scope,documentSearchServices,iconServices,userDashboardService,$window) {
         
         $scope.searchkey = {};              //model for search key object
         $scope.searchkey.docType=-1;        //docType property of search key object
@@ -114,7 +114,22 @@ myApp.controller('searchController', function($scope,documentSearchServices,icon
 
         };
 
-        
+        // lodout
+        $scope.onLogout = function(){
+
+            if ($window.confirm("Are You Sure ! Do you need to Log Out?")) {
+
+                documentSearchServices.logout();
+
+            }
+
+        };
+        //Dashboard
+        $scope.goToDashboard = function(){
+
+            documentSearchServices.goToDashboard();
+
+        };
        //initially calls the function 
        $scope.searchData();
        $scope.getDepartment();

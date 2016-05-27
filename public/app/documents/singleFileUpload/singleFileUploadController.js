@@ -1,6 +1,6 @@
 
 'use strict';
-myApp.controller('singleFileUploadController', function($scope,uploadSingleServices,adminDashboardService) {
+myApp.controller('singleFileUploadController', function($scope,uploadSingleServices,adminDashboardService,$window) {
   
         //document.getElementById("docCaption").focus();
         $scope.formData = {
@@ -103,6 +103,23 @@ myApp.controller('singleFileUploadController', function($scope,uploadSingleServi
              $scope.files.push(args.file);
           });
         });
+
+        // lodout
+        $scope.onLogout = function(){
+
+        if ($window.confirm("Are You Sure ! Do you need to Log Out?")) {
+
+            uploadSingleServices.logout();
+
+        }
+
+        };
+        //Dashboard
+        $scope.goToDashboard = function(){
+
+            uploadSingleServices.goToDashboard();
+
+        };
 
 
     });

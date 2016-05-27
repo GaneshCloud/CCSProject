@@ -4,7 +4,7 @@
   "description": "Student Project Details",
   "main": "server.js",
   "scripts": {
-    "test": "npm unit test"
+    "test": "./node_modules/.bin/mocha --reporter spec"
   },
   "author": "GANESH KUMAR R",
   "license": "ISC",
@@ -33,6 +33,7 @@
   },
   "devDependencies": {
     "bower": "^1.7.9",
+    "chai": "^3.5.0",
     "cloc": "^2.0.0",
     "gulp": "^3.9.1",
     "gulp-uglify": "^1.5.3"
