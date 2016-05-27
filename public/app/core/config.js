@@ -33,7 +33,7 @@ myApp.config(function($routeProvider, $locationProvider){
 		}).
 		when('/logout',{
 			templateUrl:'../app/profile/logout/logout.html',
-			controller:'logoutContoller'
+			controller:'logoutController'
 		}).
 		when("/project/home",{
 			controller: "homeController",
@@ -48,9 +48,6 @@ myApp.config(function($routeProvider, $locationProvider){
 		    controller:'forumController',
 			templateUrl:'../app/forum/home/forum.html'
 	    }).
-		when("/error",{
-			templateUrl: "../app/project/Error/error.html"
-		}).
 		when('/documents/editDoc', {
 			templateUrl: 'app/documents/singleFileUpload/singleFileUpload.html',
 			controller: 'singleFileUploadController'
@@ -74,6 +71,9 @@ myApp.config(function($routeProvider, $locationProvider){
 		when('/documents/viewDocument', {
 			templateUrl: 'app/documents/viewDocument/viewDocument.html',
 			controller:   'viewDocumentController'
+		}).
+		when("/error",{
+			templateUrl: "../app/project/error/error.html"
 		}).
 		otherwise({
 			redirectTo:"/error"
