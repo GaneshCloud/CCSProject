@@ -25,10 +25,10 @@
         $scope.onLogout = function(){
 
             if ($window.confirm("Are You Sure ! Do you need to Log Out?")) {
-                $scope.progressbar.start();
+                // $scope.progressbar.start();
                 spinnerService.show('html5spinner');
                 adminDashboardService.logout().then(function(){
-                    $scope.progressbar.complete();
+                    // $scope.progressbar.complete();
                     spinnerService.hide('html5spinner');
                 });
 
@@ -38,10 +38,10 @@
 
         $scope.openAdminDocumentation = function(){
 
-            $scope.progressbar.start();
+            // $scope.progressbar.start();
             spinnerService.show('html5spinner');
             adminDashboardService.adminDocumentaion().then(function(){
-                $scope.progressbar.complete();
+                // $scope.progressbar.complete();
                 spinnerService.hide('html5spinner');
             });
 

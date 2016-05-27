@@ -6,7 +6,9 @@
 
     function adminProfileController($scope,$window,adminProfileService,
                                     ngProgressFactory,spinnerService,filterFilter,adminDashboardService) {
+        
         adminDashboardService.checkAdmin();
+
         $scope.progressbar = ngProgressFactory.createInstance();
 
         $scope.userCredentials = false;
@@ -66,10 +68,10 @@
         };
 
         $scope.goToDashboard = function() {
-            $scope.progressbar.start();
+            // $scope.progressbar.start();
             spinnerService.show('html5spinner');
             adminProfileService.goToAdminDashboard().then(function() {
-                $scope.progressbar.complete();
+                // $scope.progressbar.complete();
                 spinnerService.hide('html5spinner');
             });
         };
@@ -107,10 +109,10 @@
         $scope.onLogout = function() {
 
             if ($window.confirm('Are You Sure ! Do you need to Log Out?')) {
-                $scope.progressbar.start();
+                // $scope.progressbar.start();
                 spinnerService.show('html5spinner');
                 adminProfileService.logout().then(function() {
-                    $scope.progressbar.complete();
+                    // $scope.progressbar.complete();
                     spinnerService.hide('html5spinner');
                 });
 
@@ -126,13 +128,13 @@
         // $watch search to update pagination
         $scope.$watch('search', function(newVal, oldVal) {
             console.log('oldVal' + oldVal);
-            $scope.userDetailsFilter = filterFilter($scope.userDetails, newVal);
-            $scope.totalLength = $scope.userDetailsFilter.length;
+            $scope.userDetailsFilters = filterFilter($scope.userDetails, newVal);
+            $scope.totalLength = $scope.userDetailsFilters.length;
             $scope.max_size = Math.ceil($scope.totalLength / $scope.items_per_page);
             $scope.cur_page = 1;
             var begin = (($scope.cur_page - 1) * $scope.items_per_page), end = begin + $scope.items_per_page;
             console.log(begin + ' ' + end);
-            $scope.userDetailsFilter = $scope.userDetails.slice(begin, end);
+            $scope.userDetailsFilter = $scope.userDetailsFilters.slice(begin, end);
         }, true);
 
         getUserDetails();

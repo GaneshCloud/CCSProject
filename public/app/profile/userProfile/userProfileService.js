@@ -6,7 +6,7 @@ angular.module('myApp')
         var httpPromise;
         return {
             changePassword: function () {
-                $window.location.href = '/changePassword';
+                $window.location.href = '/profile/changePassword';
             },
 
             pageReload: function () {
@@ -32,7 +32,7 @@ angular.module('myApp')
             getPersonalData: function () {
                 var deferred = $q.defer();
 
-                httpPromise = $http.get('/getPersonalData');
+                httpPromise = $http.get('/connect/getPersonalData');
 
                 httpPromise.then(function (response) {
                     deferred.resolve(response);
@@ -64,14 +64,23 @@ angular.module('myApp')
             },
 
             updatePersonalData: function (personalData) {
-                $http({
+
+                var dfr = $q.defer();
+
+                httpPromise = $http({
                     method: 'post',
 
-                    url: '/updatePersonalData',
+                    url: '/connect/updatePersonalData',
 
                     data: personalData
 
                 });
+                httpPromise.then(function (response) {
+                    dfr.resolve(response);
+                }, function (error) {
+                    console.error(error);
+                });
+                return dfr.promise;
             }
 
         };

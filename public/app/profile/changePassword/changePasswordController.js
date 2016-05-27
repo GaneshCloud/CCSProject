@@ -4,11 +4,13 @@
 
 
 (function() {
-    function changePasswordController($scope,$window,changePasswordService,ngProgressFactory,spinnerService) {
+    function changePasswordController($scope,$window,changePasswordService,ngProgressFactory,spinnerService,userDashboardService) {
 
         $scope.progressbar = ngProgressFactory.createInstance();
 
         $scope.userCredentials = false;
+
+        userDashboardService.checkUser();
 
         $scope.isOldPasswordValid = function(oldPassword) {
 
@@ -89,10 +91,10 @@
                 });
 
             } else {
-                $scope.progressbar.start();
+                // $scope.progressbar.start();
                 spinnerService.show('html5spinner');
                 changePasswordService.profilePage().then(function() {
-                    $scope.progressbar.complete();
+                    // $scope.progressbar.complete();
                     spinnerService.hide('html5spinner');
                 });
 
@@ -103,10 +105,10 @@
         $scope.onCancelChangePassword = function() {
 
             if ($window.confirm('Are You Sure ! Do you need to leave the changes?')) {
-                $scope.progressbar.start();
+                // $scope.progressbar.start();
                 spinnerService.show('html5spinner');
                 changePasswordService.profilePage().then(function() {
-                    $scope.progressbar.complete();
+                    // $scope.progressbar.complete();
                     spinnerService.hide('html5spinner');
                 });
 
