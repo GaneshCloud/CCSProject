@@ -14,7 +14,7 @@ function getConnection () {
     port: 3306,
     user: 'root',
     password: '',
-    database: 'personalinfo'
+    database: 'cloudproject'
   });
   connection.connect(function (err) {
     if (err) {

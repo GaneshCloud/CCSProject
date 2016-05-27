@@ -73,7 +73,7 @@ myApp.config(function($routeProvider, $locationProvider){
 			controller:   'viewDocumentController'
 		}).
 		when("/error",{
-			templateUrl: "../app/project/error/error.html"
+			templateUrl: "../app/core/error.html"
 		}).
 		otherwise({
 			redirectTo:"/error"

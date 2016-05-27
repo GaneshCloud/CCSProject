@@ -2,7 +2,7 @@
  * Created by CSS on 25-05-2016.
  */
 angular.module('myApp')
-    .factory('loginService', function($http, $window, $q, Upload, $timeout) {
+    .factory('loginService', function($http, $window, $q) {
         var httpPromise;
         return {
             

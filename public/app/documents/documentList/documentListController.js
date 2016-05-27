@@ -69,7 +69,7 @@
 
         //function for getting data from database//
         $scope.getData = function() {
-               
+
                 documentListServices.get()
 
                 .success(function(data) {
@@ -106,10 +106,10 @@
 
 //function for searching documents//
         $scope.searchData = function() {
-               
-               
-                
-                documentListServices.search("?docType="+$scope.searchkey.docType+"&dep="+$scope.searchkey.dep+"&page="+$scope.page+"&serStr="+$scope.search) 
+
+
+
+                documentListServices.search("?docType="+$scope.searchkey.docType+"&dep="+$scope.searchkey.dep+"&page="+$scope.page+"&serStr="+$scope.search)
                 .success(function(data) {
 
                     $scope.searchres = data;
