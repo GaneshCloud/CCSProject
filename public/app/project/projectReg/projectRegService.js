@@ -29,7 +29,7 @@ myApp.service('projectRegService',function($http,$window){
             $window.location.href = '/logout';
         };
         this.goToDashboard= function () {
-            $window.location.href = '/profile/userDashboard';
+            $window.location.href = '/profile/adminDashboard';
         };
 
     });
