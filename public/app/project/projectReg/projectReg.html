@@ -329,7 +329,7 @@
                                 <tbody>
 
 
-                                <tr ng-repeat="detail in datas | orderBy : predicate : reverse | filter:search | filter:{projectCode:name1,Title:name2,Department:name3,Subheads:name4,Software:name5,catlogCode:name6,Domain:name7}">
+                                <tr ng-repeat="detail in dataFilter | orderBy : predicate : reverse | filter:search | filter:{projectCode:name1,Title:name2,Department:name3,Subheads:name4,Software:name5,catlogCode:name6,Domain:name7}">
 
 
                                     <td ng-hide="hideProjectCode"><input type="text" class="form-control" ng-model="detail.projectCode" ng-show=$index==rowEdit><span ng-hide="$index==rowEdit"> {{ detail.projectCode }}</span></td>
@@ -361,8 +361,25 @@
                                         </a></td>
                                 </tr>
 
+
+
                                 </tbody>
+
+
                             </table>
+
+                            <div ng-hide="showPagination()" class="pager">
+
+                                <pagination
+                                        ng-model="cur_page"
+                                        total-items="totalLength"
+                                        items-per-page="items_per_page"
+                                        max-size="max_size"
+                                        boundary-links="true">
+                                </pagination>
+
+                            </div>
+
                         </div>
                     </div>
 

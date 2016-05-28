@@ -41,10 +41,12 @@ exports.postData=function(req,res){
 exports.EditData=function(req,res){
 
     // console.log(req.params.id);
-    var qry="UPDATE erp_database set ? where id='"+req.params.id+"'";
+    var qry="UPDATE erp_database set projectCode = '"+req.body.projectCode+"',Title = '"+req.body.Title+"', Department = '"+req.body.Department+"',";
+    qry += "subHeads = '"+req.body.subHeads+"',Software = "+req.body.Software+",Hardware = "+req.body.Hardware+", catlogCode = '"+req.body.catlogCode+"',";
+    qry += "Domain = '"+req.body.Domain+"' where id="+req.body.id+"";
 
 
-    connection.query(qry,req.body,function(err,results){
+    connection.query(qry,function(err,results){
         if(err)
         {
             console.log('error when update the data :' +err);

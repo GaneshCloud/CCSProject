@@ -13,11 +13,10 @@ myApp.service('projectRegService',function($http,$window){
             return $http.post('/postdata',data);
         };
 
-        this.updateData=function(id,data)
+        this.updateData=function(data)
         {
 
-
-            return $http.put('/editdata/'+id,data);
+            return $http.post('/editdata',data);
 
         };
 

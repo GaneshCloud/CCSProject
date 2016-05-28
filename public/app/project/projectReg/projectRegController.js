@@ -7,8 +7,22 @@
         $scope.catlogCode = ["CIS-C# NET PROJECTS", "CDB BIO MEDICAL PROJECTS", "C,C++ AND VC++ PROJECTS", "CAD/CAM/CAE PROJECTS", "CIVIL DESIGN PROJECTS"];
         $scope.Domain = ["RFID", "ROBOTICS", "BIOMEDICAL PROJECTS", "C,C++ AND VC++ PROJECTS", "CIVIL DESIGN Projects"];
         // $scope.asc=false;
-        $scope.datas=[];
+
         $scope.isEdit=true;
+
+        $scope.noData = true;
+
+        $scope.cur_page = 1;
+
+        $scope.datas = [];
+
+        $scope.dataFilter = [];
+
+        $scope.items_per_page = 10;
+
+        $scope.totalLength = 0;
+
+        $scope.max_size = Math.ceil($scope.userDetails / $scope.items_per_page);
 
         $scope.new={projectCode:'',
             Title:'',
@@ -20,6 +34,9 @@
             Domain:''
         };
 
+        $scope.showPagination = function() {
+            return $scope.noData;
+        };
 
         $scope.onLogout = function(){
             if ($window.confirm("Are You Sure ! Do you need to Log Out?")) {
@@ -89,9 +106,24 @@
 
                 .success(function(data) {
 
-
                     $scope.datas = data;
-                    console.log("ghj");
+
+                    if ($scope.datas.length > 0) {
+
+                        $scope.noData = false;
+
+                        $scope.totalLength = $scope.datas.length;
+
+                        $scope.max_size = Math.ceil($scope.totalLength / $scope.items_per_page);
+
+                        $scope.$watch('cur_page + items_per_page', function() {
+
+                            var begin = (($scope.cur_page - 1) * $scope.items_per_page), end = begin + $scope.items_per_page;
+                            console.log(begin + ' ' + end);
+                            $scope.dataFilter = $scope.datas.slice(begin, end);
+                            // Alert("data"+$scope.searchres);
+                        });
+                    }
 
                     $scope.new = {
                         projectCode: '',
@@ -167,15 +199,15 @@
             //$scope.updatedata = true;
 
 
-            $scope.datas[rowedit].projectCode=x.projectCode;
-            $scope.datas[rowedit].Title=x.Title;
-            $scope.datas[rowedit].Department=x.Department;
-            $scope.datas[rowedit].subHeads=x.subHeads;
-            $scope.datas[rowedit].Software=x.Software;
-            $scope.datas[rowedit].Hardware=x.Hardware;
-            $scope.datas[rowedit].catlogCode=x.catlogCode;
-            $scope.datas[rowedit].Domain=x.Domain;
-            $scope.datas[rowedit].editData=false;
+            $scope.dataFilter[rowedit].projectCode=x.projectCode;
+            $scope.dataFilter[rowedit].Title=x.Title;
+            $scope.dataFilter[rowedit].Department=x.Department;
+            $scope.dataFilter[rowedit].subHeads=x.subHeads;
+            $scope.dataFilter[rowedit].Software=x.Software;
+            $scope.dataFilter[rowedit].Hardware=x.Hardware;
+            $scope.dataFilter[rowedit].catlogCode=x.catlogCode;
+            $scope.dataFilter[rowedit].Domain=x.Domain;
+            $scope.dataFilter[rowedit].editData=false;
             var data={
                 projectCode : x.projectCode,
                 Title : x.Title,
@@ -184,10 +216,11 @@
                 Software : x.Software,
                 Hardware : x.Hardware,
                 catlogCode : x.catlogCode,
-                Domain : x.Domain
+                Domain : x.Domain,
+                id : $scope.dataFilter[$scope.rowEdit].id
             };
 
-            projectRegService.updateData($scope.datas[$scope.rowEdit].id,data)
+            projectRegService.updateData(data)
 
                 .success(function(data) {
 
