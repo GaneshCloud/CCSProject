@@ -35,11 +35,8 @@
                         </a>
 
                     </li>
-
                 </ul>
-
             </li>
-
         </ul>
     </div>
 </nav>
@@ -307,19 +304,31 @@
                           <br>                          
                           Inbox <span class="badge"> {{ question.answers.length }}</span></a> 
                                    <!-- Button trigger modal -->
-                          <button type="button" class="btn btn-warning" data-toggle="modal" 
+
+                        <button type="button" class="btn btn-warning" data-toggle="modal"
                               data-target="{{'#'+question.qusId}}">
                               <span class="glyphicon glyphicon-eye-open"></span> View All Post
                           </button>
-                          <div id="{{question.qusId}}" class="modal fade">
+
+                        <div id="{{question.qusId}}" class="modal fade">
                              <div class="modal-dialog">
-                                  <div class="modal-content">
+
+                                 <form class="navbar-form navbar-right" role="search">
+                                     <div class="input-group">
+                                         <input type="text" ng-model="filtersearch" class="form-control" placeholder="Search">
+                                         <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                                     </div>
+                                 </form>
+
+
+
+                                 <div class="modal-content">
                                       <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                         <h4 class="modal-title">All Post</h4>
                                       </div>
                                       <div class="modal-body">
-                                           <p ng-repeat="answer in question.answers | limitTo:500000:0">{{ answer.Answers }}
+                                           <p ng-repeat="answer in question.answers | filter:filtersearch | limitTo:500000:0">{{ answer.Answers }}
                                              <br><font color="red" ng-model="feedback.Date"> {{ answer.Date  |  date:'yyyy-MM-dd - h:mma' }}</font>
                                              <hr>
                                           </p>
@@ -330,7 +339,8 @@
                                       </div>
                                 </div>
                                   <!-- /.modal-content -->
-                              </div>
+
+                             </div>
                           <!-- /.modal-dialog -->
                           </div>
                     </td>
@@ -365,7 +375,7 @@
   </div>
 </div>
 </div>
-    </div>
+</div>
 <!-- <script src="../controller/star.js"></script> -->
 
 
