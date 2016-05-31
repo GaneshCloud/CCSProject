@@ -5,13 +5,13 @@ angular.module('myApp').service('forumService', function($http, $q,$window) {
 
     },
 
-    logout: function () {
+    logout: function() {
       $window.location.href = '/logout';
     },
-    goToDashboard: function () {
+    goToDashboard: function() {
       $window.location.href = '/profile/userDashboard';
     },
-    
+
     get: function(type) {
       var defer = $q.defer();
       var httpPromise = $http.get('/forum/getForum?type=' + type);

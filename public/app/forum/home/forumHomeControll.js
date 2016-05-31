@@ -15,9 +15,9 @@
 
 
     // -------------------------lodout------------------------------------------------- //
-    $scope.onLogout = function(){
+    $scope.onLogout = function() {
 
-      if ($window.confirm("Are You Sure ! Do you need to Log Out?")) {
+      if ($window.confirm('Are You Sure ! Do you need to Log Out?')) {
 
         forumService.logout();
 
@@ -25,7 +25,7 @@
 
     };
     // -------------------------Dashboard------------------------------------------------- //
-    $scope.goToDashboard = function(){
+    $scope.goToDashboard = function() {
 
       forumService.goToDashboard();
 
@@ -93,19 +93,19 @@
     $scope.postAnswer = function(qusId, Comment) {
         var data = {
           qusId: qusId,
-          Comment: Comment,
+          Comment: Comment
         };
-      forumService.postAnswer(data).then(function() {
+        forumService.postAnswer(data).then(function() {
           alert('Data Inserted Successfully');
           $scope.Comment = '';
-        getForum($scope.forumtype);
-        //GetForum($scope.answer.Answers);
+          getForum($scope.forumtype);
+          //GetForum($scope.answer.Answers);
         });
 
 
       };
 
-// -------------------------Search------------------------------------------------- //
+    // -------------------------Search------------------------------------------------- //
     $scope.sort = function(keyname) {
       $scope.sortKey = keyname;
       $scope.reverse = !$scope.reverse;
