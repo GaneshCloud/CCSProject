@@ -5,7 +5,7 @@ var forumConfig = require('../config/db/forumManager');
 var router = express.Router();
 
 //
-// router.get('/home', function(req, res) {
+// Router.get('/home', function(req, res) {
 //   {
 //     res.sendfile('./public/forum/home/forum.html');
 //   }
