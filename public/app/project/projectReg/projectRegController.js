@@ -160,12 +160,12 @@
 
 
       projectRegService.postData(data).success(function(data) {
-        alert('The Feedback Saved Successfully!!!'+data);
+        alert('The Feedback Saved Successfully!!!' + data);
         $scope.getFeedbacks();
       }).
         error(function(error) {
-      alert('unable to save the feedback :' + error);
-});
+          alert('unable to save the feedback :' + error);
+        });
 
 
     };
@@ -215,7 +215,7 @@
                 .success(function(data) {
 
 
-                  alert('The Feedback Updated Successfully!!!'+data);
+                  alert('The Feedback Updated Successfully!!!' + data);
 
                   //$window.location.href='/';
                   $scope.rowEdit = -1;
@@ -237,19 +237,19 @@
 
 
     $scope.deleteData = function(id)    {
-      // var del = {id: id};
+      // Var del = {id: id};
       projectRegService.deleteData(id)
 
 
                 .success(function(data) {
 
-                  alert('the data deleted successfully'+data);
+                  alert('the data deleted successfully' + data);
                   $scope.getFeedbacks();
 
 
                 }).
             error(function(error) {
-              alert('unable to delete a feedback'+error);
+              alert('unable to delete a feedback' + error);
             });
     };
 

@@ -54,9 +54,9 @@
 
     $scope.getView = function(value) {
 
-     return ((value == 'local' && localStorage.getItem('localView') == 'true') ||
-          (value == 'facebook' && localStorage.getItem('facebookView') == 'true') ||
-          (value == 'google' && localStorage.getItem('googleView') == 'true'));
+      return ((value == 'local' && localStorage.getItem('localView') == 'true') ||
+           (value == 'facebook' && localStorage.getItem('facebookView') == 'true') ||
+           (value == 'google' && localStorage.getItem('googleView') == 'true'));
 
     };
 
