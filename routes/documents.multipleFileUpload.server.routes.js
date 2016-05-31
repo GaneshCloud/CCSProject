@@ -1,6 +1,6 @@
-module.exports=function(app){
+module.exports = function(app) {
 
-	var multiuploadCtrl=require("../controllers/documents.multipleFileUpload.server.controller");
-	app.post("/uploadMulti",multiuploadCtrl.uploadMultiple);
-	
+  var multiuploadCtrl = require('../controllers/documents.multipleFileUpload.server.controller');
+  app.post('/uploadMulti',multiuploadCtrl.uploadMultiple);
+
 };

@@ -9,8 +9,8 @@
 
 module.exports = function(app) {
 
-    var controller = require('../controllers/profile.logout.server.controller');
+  var controller = require('../controllers/profile.logout.server.controller');
 
-    app.get('/logout', controller.logout);
+  app.get('/logout', controller.logout);
 
 };

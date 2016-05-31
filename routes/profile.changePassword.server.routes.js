@@ -8,8 +8,8 @@
 
 module.exports = function(app) {
 
-    var layout = require('../controllers/layout.server.controller.js');
+  var layout = require('../controllers/layout.server.controller.js');
 
-    // app.get('/', layout.layout);
+  // App.get('/', layout.layout);
 
 };

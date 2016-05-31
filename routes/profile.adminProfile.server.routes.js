@@ -6,8 +6,8 @@
 
 module.exports = function(app) {
 
-    var controller = require('../controllers/profile.adminProfile.server.controller');
+  var controller = require('../controllers/profile.adminProfile.server.controller');
 
-    app.get('/getUserDetails', controller.getUserDetails);
+  app.get('/getUserDetails', controller.getUserDetails);
 
 };
