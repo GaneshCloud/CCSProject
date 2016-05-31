@@ -329,7 +329,7 @@ function updateGooglePersonalData(req,profile,accessToken) {
     }
 
     updatePersonalData(data).then(function(result) {
-      console.log("Result"+result);
+      console.log('Result' + result);
       updateGoogleProfilePicture(profile).then(function(result) {
         deferred.resolve(result);
       });
@@ -370,7 +370,7 @@ function updateGooglePersonalData(req,profile,accessToken) {
                   }
 
                   updatePersonalData(data).then(function(result) {
-                    console.log("Result"+result);
+                    console.log('Result' + result);
                     updateGoogleProfilePicture(profile).then(function(result) {
                       deferred.resolve(result);
                     });
