@@ -54,7 +54,7 @@ passport.use(new googleStrategy({
   passReqToCallback: true
 },
     function(req,accessToken, refreshToken, profile, done) {
-      personaldataManager.updateGooglePersonalData(req, profile, accessToken)
+      personalDataManager.updateGooglePersonalData(req, profile, accessToken)
             .then(function(results) {
               if (results) {
                 return done(null, results);
