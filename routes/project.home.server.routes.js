@@ -1,4 +1,3 @@
-'use strict';
 
 module.exports = function(app) {
   var home = require('../controllers/project.home.server.controller.js');

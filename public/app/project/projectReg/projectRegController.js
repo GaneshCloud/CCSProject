@@ -63,14 +63,14 @@
 
     $scope.order = function(predicate)    {
       $scope.predicate = predicate;
-      if ($scope.predicate == predicate)
+      if ($scope.predicate === predicate)
           $scope.reverse = false;
     };
 
     $scope.order1 = function(predicate)    {
 
       $scope.predicate = predicate;
-      if ($scope.predicate == predicate)
+      if ($scope.predicate === predicate)
           $scope.reverse = true;
 
     };

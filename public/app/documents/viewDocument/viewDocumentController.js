@@ -30,7 +30,7 @@ myApp.controller('viewDocumentController', function($scope,viewDocumentServices,
           viewDocumentServices.getUser()
           .success(function(data) {
             console.log(data);
-            if (data.mode == 'Admin') {
+            if (data.mode === 'Admin') {
               $scope.isAdmin = true;
               $scope.css = 'starDisable.css';
             } else {
@@ -61,7 +61,7 @@ myApp.controller('viewDocumentController', function($scope,viewDocumentServices,
 
               });
 
-    if ($scope.getParameterByName('type') == 5)      {
+    if ($scope.getParameterByName('type') === 5)      {
       viewDocumentServices.getArchieve($scope.getParameterByName('id'))
                   .success(function(data) {
                     console.log(data);
@@ -140,7 +140,7 @@ myApp.controller('viewDocumentController', function($scope,viewDocumentServices,
 
   $scope.getNext = function(id) {
 
-    if ($scope.doc.ID == 'undefined') return;
+    if ($scope.doc.ID === 'undefined') return;
     viewDocumentServices.getNextDoc(id)
             .success(function(data) {
               if (data.length > 0)              {
@@ -150,7 +150,7 @@ myApp.controller('viewDocumentController', function($scope,viewDocumentServices,
                 $scope.thisFile = 'uploads/documents/' + data[0].ID + '.' + filename.split('.').pop();
 
 
-                if ($scope.doc.DOCTYPE == 5) {
+                if ($scope.doc.DOCTYPE === 5) {
 
                   viewDocumentServices.getArchieve($scope.doc.ID)
                   .success(function(data) {
@@ -175,7 +175,7 @@ myApp.controller('viewDocumentController', function($scope,viewDocumentServices,
 
   $scope.getPrevios = function(id) {
 
-    if ($scope.doc.ID == 'undefined') return;
+    if ($scope.doc.ID === 'undefined') return;
     viewDocumentServices.getPrevDoc(id)
             .success(function(data) {
               if (data.length > 0) {
@@ -184,7 +184,7 @@ myApp.controller('viewDocumentController', function($scope,viewDocumentServices,
                 var filename = $scope.doc.DOCFILE;
                 $scope.thisFile = 'uploads/documents/' + data[0].ID + '.' + filename.split('.').pop();
 
-                if ($scope.doc.DOCTYPE == 5) {
+                if ($scope.doc.DOCTYPE === 5) {
                   viewDocumentServices.getArchieve($scope.doc.ID)
                   .success(function(data) {
                     console.log(data);

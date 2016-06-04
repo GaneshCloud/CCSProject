@@ -54,21 +54,21 @@
 
     $scope.getView = function(value) {
 
-      return ((value == 'local' && localStorage.getItem('localView') == 'true') ||
-           (value == 'facebook' && localStorage.getItem('facebookView') == 'true') ||
-           (value == 'google' && localStorage.getItem('googleView') == 'true'));
+      return ((value === 'local' && localStorage.getItem('localView') === 'true') ||
+           (value === 'facebook' && localStorage.getItem('facebookView') === 'true') ||
+           (value === 'google' && localStorage.getItem('googleView') === 'true'));
 
     };
 
     $scope.viewChange = function(value) {
 
-      if (value == 'local') {
+      if (value === 'local') {
 
         localStorage.setItem('localView',true);
         localStorage.setItem('facebookView',false);
         localStorage.setItem('googleView',false);
 
-      }else if (value == 'facebook')	{
+      }else if (value === 'facebook')	{
 
         localStorage.setItem('facebookView',true);
         localStorage.setItem('googleView',false);
@@ -204,7 +204,7 @@
 
       if (oldPassword.$dirty) {
 
-        if (oldPassword.$viewValue == $scope.personalData.password) {
+        if (oldPassword.$viewValue === $scope.personalData.password) {
 
           $scope.isPasswordEditFormValid = true;
 
@@ -269,7 +269,7 @@
     };
 
     $scope.onChangePassword = function() {
-      if (($scope.personalData.userType != 'admin') && $scope.personalData.password) {
+      if (($scope.personalData.userType !== 'admin') && $scope.personalData.password) {
         // $scope.progressbar.start();
         spinnerService.show('html5spinner');
         userProfileService.changePassword().then(function() {
@@ -295,7 +295,7 @@
 
                   $scope.personalData = response.data;
 
-                  if ($scope.personalData.userType == 'admin') {
+                  if ($scope.personalData.userType === 'admin') {
                     $scope.userCredentials = false;
                   }
 

@@ -4,11 +4,11 @@
 
 var q = require('q');
 
-var http = require('https');
+var http = require('http');
 
 var fs  = require('fs');
 
-const fileType = require('file-type');
+var fileType = require('file-type');
 
 var connectionManager = require('./connectionManager');
 

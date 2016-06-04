@@ -37,7 +37,7 @@
 
       if (reNewPassword.$dirty) {
 
-        if (newPassword.$viewValue == reNewPassword.$viewValue) {
+        if (newPassword.$viewValue === reNewPassword.$viewValue) {
 
           $scope.isPasswordEditFormValid = true;
 

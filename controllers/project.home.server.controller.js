@@ -1,4 +1,3 @@
-//'use strict';
 
 var mysql = require('mysql'),
     dateFormat = require('dateformat'),

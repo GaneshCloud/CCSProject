@@ -79,7 +79,7 @@
       });
     };
     $scope.toCheck = function(qusId, value) {
-      return (qusId == value);
+      return (qusId === value);
 
     };
     // -------------------------Get Type---------------------------------------------------- //

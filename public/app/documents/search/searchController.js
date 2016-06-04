@@ -23,7 +23,7 @@ myApp.controller('searchController', function($scope,documentSearchServices,icon
   //Function for get the css class
   $scope.getClass = function(id) {
 
-    return ($scope.searchkey.docType == id?'active' : '');
+    return ($scope.searchkey.docType === id?'active' : '');
   };
 
 
@@ -96,7 +96,7 @@ myApp.controller('searchController', function($scope,documentSearchServices,icon
   //Function for ordering the document
   $scope.orderMe = function(f) {
 
-    if ($scope.field == f) {
+    if ($scope.field === f) {
       $scope.isReverse = !$scope.isReverse;
       return;
     }

@@ -35,7 +35,7 @@ myApp.controller('documentListController', function($scope,documentListServices,
   adminDashboardService.checkAdmin();
   //  Order function based on a order field//
   $scope.orderMe = function(f) {
-    if ($scope.field == f) {
+    if ($scope.field === f) {
       $scope.isReverse = !$scope.isReverse;
       return;
     }

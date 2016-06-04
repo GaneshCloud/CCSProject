@@ -94,7 +94,7 @@ myApp.controller('singleFileUploadController', function($scope,uploadSingleServi
   $scope.getDepartment();
 
 
-  if (window.location.pathname == '/documents/editDoc')
+  if (window.location.pathname === '/documents/editDoc')
 $scope.editForm();
 
   $scope.$on('fileSelected', function(event, args) {
