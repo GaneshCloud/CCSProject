@@ -8,7 +8,7 @@
   "license": "ISC",
   "homepage": "",
   "dependencies": {
-    "angular": "^1.5.5",
+    "angular": "^1.5.6",
     "angular-fusioncharts": "^0.0.2",
     "angular-route": "^1.5.5",
     "angular-timeline": "^1.6.2",
@@ -19,6 +19,11 @@
     "ui-accordion": "^1.2.3",
     "vendor": "^1.2.3",
     "angular-spinners": "^3.1.2",
-    "ngprogress": "^1.1.3"
+    "ngprogress": "^1.1.3",
+    "angular-resource": "^1.5.6",
+    "angular-bootstrap": "^1.3.3"
+  },
+  "devDependencies": {
+    "angular-mocks": "^1.5.6"
   }
 }

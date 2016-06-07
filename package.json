@@ -1,10 +1,11 @@
 {
-  "name": "projectdemo",
+  "name": "crisperp",
   "version": "1.0.0",
   "description": "Student Project Details",
   "main": "server.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha --reporter spec"
+    "test": "./node_modules/.bin/mocha --reporter spec --recursive",
+    "coverage": "istanbul cover ./node_modules/.bin/mocha --reporter spec --recursive"
   },
   "author": "GANESH KUMAR R",
   "license": "ISC",
@@ -21,8 +22,18 @@
     "file-type": "^3.8.0",
     "formidable": "^1.0.17",
     "fs": "0.0.2",
+    "grunt": "^1.0.1",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-cssmin": "^1.0.1",
+    "grunt-contrib-watch": "^1.0.0",
+    "istanbul": "^0.4.3",
+    "jasmine": "^2.4.1",
+    "jasmine-core": "^2.4.1",
+    "jasmine-http-server-spy": "^0.2.0",
+    "jshint-html-reporter": "^0.2.4",
     "karma": "^0.13.22",
     "method-override": "^2.3.5",
+    "mocha": "^2.5.3",
     "morgan": "^1.7.0",
     "multer": "^1.1.0",
     "mysql": "^2.10.2",
@@ -31,13 +42,29 @@
     "passport-google-oauth2": "^0.1.6",
     "path": "^0.12.7",
     "q": "^1.4.1",
+    "sinon": "^1.17.3",
     "sloc": "^0.1.10"
   },
   "devDependencies": {
     "bower": "^1.7.9",
     "chai": "^3.5.0",
     "cloc": "^2.0.0",
+    "grunt": "^1.0.1",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-contrib-uglify": "^1.0.1",
+    "grunt-karma": "^2.0.0",
+    "grunt-mocha-istanbul": "^5.0.1",
+    "grunt-mocha-test": "^0.12.7",
     "gulp": "^3.9.1",
-    "gulp-uglify": "^1.5.3"
+    "gulp-uglify": "^1.5.3",
+    "istanbul": "^0.4.3",
+    "karma": "^0.13.22",
+    "karma-chrome-launcher": "^1.0.1",
+    "karma-coverage": "^1.0.0",
+    "karma-jasmine": "^1.0.2",
+    "karma-phantomjs-launcher": "^1.0.0",
+    "mocha": "^2.5.3",
+    "phantomjs-prebuilt": "^2.1.7"
   }
 }

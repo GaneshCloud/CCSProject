@@ -17,6 +17,7 @@ var mysql=require('mysql'),
             var fileName="";
 
             docService.getDocById(id,function(err,data){
+                if(data.length<=0) return
             fileName=data[0].DOCFILE;
             var ext = fileName.substring(fileName.lastIndexOf('.') + 1);
             var zip = new admZip(__dirname+"/../public/uploads/documents/"+id+"."+ext);
@@ -41,24 +42,30 @@ var mysql=require('mysql'),
 
     exports.viewDocument=function(req,res){
         var id = req.query.id;
+
+        if(id=='' || id==null || isNaN(id)) return res.end("invalid");
         docService.incrViews(id,function(err){
            if(err) throw err;
+            res.end("valid");
         });
 
 
-          res.json={mode:req.session.userMode};
+          //res.json={mode:req.session.userMode};
 
     };
 
     exports.downloadDocument=function(req,resp){
 
         var id = req.query.id;
+
+        if(id=='' || id==null || isNaN(id)) return resp.end("invalid");
         console.log(id);
         var ext="";
         var filename;
 
 
         docService.getDocById(id,function(err,data){
+            if(data.length <=0) resp.end("NO_DOCUMENT");
         filename=data[0].DOCFILE;
         ext = filename.substring(filename.lastIndexOf('.') + 1);
         docService.incrDown(id,function(err,res){
@@ -72,7 +79,7 @@ var mysql=require('mysql'),
                 if (!err) {
                   resp.download(__dirname+"/../public/uploads/documents/"+id+"."+ext);
                 } else {
-                  resp.end("No file found");
+                  resp.end("No_file_found");
                 }
 
               });
@@ -85,6 +92,7 @@ var mysql=require('mysql'),
 
     exports.nextDocument=function(req,res){
         var id=req.query.id;
+        if(id=='' || id==null || isNaN(id)) return res.end("invalid");
 
       docService.getNextDocument(id,function(err,data){
         console.log(data);
@@ -97,6 +105,7 @@ var mysql=require('mysql'),
 
     exports.prevDocument=function(req,res){
       var id=req.query.id;
+        if(id=='' || id==null || isNaN(id)) return res.end("invalid");
 
       docService.getPrevDocument(id,function(err,data){
       console.log(data);
@@ -117,12 +126,15 @@ var mysql=require('mysql'),
         res.end(JSON.stringify(userMode));
     };
 
+
     exports.readZip=function(req,res){
 
       var id=req.query.id;
-      console.log(id);
-      var data=unZipFile(id);
-       console.log("inside");
+        if(id=='' || id==null || isNaN(id)) return res.end("invalid");
+
+        console.log(id);
+        var data=unZipFile(id);
+        console.log("inside");
 
       res.end(JSON.stringify(data));
 
