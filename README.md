@@ -15,7 +15,7 @@ Step ro run project :
 
     6. bower install
 
-    7. node server or node server.js
+    7. node server or node server.js or grunt
 
 
 Database setup guide :

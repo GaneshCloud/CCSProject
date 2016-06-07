@@ -2,69 +2,69 @@
  * Created by CSS on 25-05-2016.
  */
 angular.module('myApp')
-    .factory('changePasswordService', function($http, $window, $q, Upload, $timeout) {
-        var httpPromise;
-        return {
-            
-            pageReload: function () {
-                $window.location.reload();
-            },           
+    .factory('changePasswordService', function($http, $window, $q) {
+      var httpPromise;
+      return {
 
-            logout: function () {
-                $window.location.href = '/logout';
-            },
+        pageReload: function() {
+          $window.location.reload();
+        },
 
-            getPersonalData: function () {
-                var deferred = $q.defer();
+        logout: function() {
+          $window.location.href = '/logout';
+        },
 
-                httpPromise = $http.get('/connect/getPersonalData');
+        getPersonalData: function() {
+          var deferred = $q.defer();
 
-                httpPromise.then(function (response) {
-                    deferred.resolve(response);
-                }, function (error) {
-                    console.error(error);
+          httpPromise = $http.get('/connect/getPersonalData');
 
-                    $window.location.href = '/logout';
-                });
+          httpPromise.then(function(response) {
+            deferred.resolve(response);
+          }, function(error) {
+            console.error(error);
 
-                return deferred.promise;
-            },
+            $window.location.href = '/logout';
+          });
 
-            updatePersonalData: function (personalData) {
-                $http({
-                    method: 'post',
+          return deferred.promise;
+        },
 
-                    url: '/connect/updatePersonalData',
+        updatePersonalData: function(personalData) {
+          $http({
+            method: 'post',
 
-                    data: personalData
+            url: '/connect/updatePersonalData',
 
-                });
-            },
+            data: personalData
 
-            profilePage: function () {
-                var dfr = $q.defer();
+          });
+        },
 
-                httpPromise = $http({
-                    method: 'get',
+        profilePage: function() {
+          var dfr = $q.defer();
 
-                    url: '/getLoggedInUser'
+          httpPromise = $http({
+            method: 'get',
 
-                });
+            url: '/getLoggedInUser'
 
-                httpPromise.then(function (response) {
-                    dfr.resolve(response);
+          });
 
-                    if (response.data.userType === 'admin') {
-                        $window.location.href = '/profile/adminDashboard';
-                    } else {
-                        $window.location.href = '/profile/userProfile';
-                    }
-                }, function (error) {
-                    console.error(error);
-                });
+          httpPromise.then(function(response) {
+            dfr.resolve(response);
 
-                return dfr.promise;
+            if (response.data.userType === 'admin') {
+              $window.location.href = '/profile/adminDashboard';
+            } else {
+              $window.location.href = '/profile/userProfile';
             }
+          }, function(error) {
+            console.error(error);
+          });
 
-        };
+          return dfr.promise;
+        }
+
+      };
     });

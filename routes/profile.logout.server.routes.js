@@ -5,12 +5,11 @@
  * Created by CSS on 25-05-2016.
  */
 
-'use strict';
 
 module.exports = function(app) {
 
-    var controller = require('../controllers/profile.logout.server.controller');
+  var controller = require('../controllers/profile.logout.server.controller');
 
-    app.get('/logout', controller.logout);
+  app.get('/logout', controller.logout);
 
 };

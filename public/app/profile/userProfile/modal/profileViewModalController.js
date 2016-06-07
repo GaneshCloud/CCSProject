@@ -10,13 +10,13 @@
 
         $scope.showView = function(value) {
 
-            if (value == 'local') {
+            if (value === 'local') {
 
                 localStorage.setItem('localView',true);
                 localStorage.setItem('facebookView',false);
                 localStorage.setItem('googleView',false);
 
-            }else if (value == 'facebook')	{
+            }else if (value === 'facebook')	{
 
                 localStorage.setItem('facebookView',true);
                 localStorage.setItem('googleView',false);

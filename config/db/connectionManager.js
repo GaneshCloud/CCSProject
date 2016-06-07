@@ -7,7 +7,7 @@ var q = require('q');
 
 var LOG_PREFIX = '[CONN] - ';
 
-function getConnection () {
+function getConnection() {
   var deferred = q.defer();
   var connection = mysql.createConnection({
     host: '127.0.0.1',
@@ -16,7 +16,7 @@ function getConnection () {
     password: '',
     database: 'cloudproject'
   });
-  connection.connect(function (err) {
+  connection.connect(function(err) {
     if (err) {
       console.error(err);
       deferred.reject(err);
@@ -27,7 +27,7 @@ function getConnection () {
   return deferred.promise;
 }
 
-function prepareQuery (query, parameters) {
+function prepareQuery(query, parameters) {
   if (!query || !parameters) {
     throw new Error('query and parameters function parameters should be specified.');
   }

@@ -5,11 +5,11 @@
 var q = require('q');
 var connectionManager = require('./connectionManager');
 
-function getUserValidity (userid, password) {
+function getUserValidity(userid, password) {
   var deferred = q.defer();
   connectionManager.getConnection()
-    .then(function (connection) {
-      connection.query("SELECT id FROM personaldata where userid = '" + userid + "' and password = '" + password + "' and status = 'active'", function (error, results) {
+    .then(function(connection) {
+      connection.query('SELECT id FROM personaldata where userid = \'' + userid + '\' and password = \'' + password + '\' and status = \'active\'', function(error, results) {
         if (error) {
           console.error(error);
           deferred.reject(error);
@@ -17,7 +17,7 @@ function getUserValidity (userid, password) {
         deferred.resolve(results);
       });
     })
-    .fail(function (err) {
+    .fail(function(err) {
       console.error(JSON.stringify(err));
       deferred.reject(err);
     });

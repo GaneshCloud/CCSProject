@@ -3,19 +3,19 @@
  */
 var personaldataManager = require('../config/db/personaldataManager');
 
-exports.getUserDetails = function (req,res) {
-    if (req.session.data) {
-        personaldataManager.getUserDetails('user')
-            .then(function (results) {
-                if (results) {
-                    req.session.userDetails = results;
-                    res.send(results);
-                }
+exports.getUserDetails = function(req,res) {
+  if (req.session.data) {
+    personaldataManager.getUserDetails('user')
+            .then(function(results) {
+              if (results) {
+                req.session.userDetails = results;
+                res.send(results);
+              }
             })
-            .fail(function (err) {
-                console.error(JSON.stringify(err));
+            .fail(function(err) {
+              console.error(JSON.stringify(err));
             });
-    } else {
-        return;
-    }
-}
+  } else {
+    return;
+  }
+};
