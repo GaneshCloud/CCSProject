@@ -223,7 +223,7 @@ describe('documentList Controller', function() {
                 }
             };
             controllerToTest.searchDocument(req,res); // call the function to be tested
-        });
+        });//this
 
         it('returns the result', function(done) {
             var req = {
