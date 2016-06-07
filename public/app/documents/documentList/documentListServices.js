@@ -26,7 +26,7 @@ myApp.factory('documentListServices', function($http,$window) {
             },
             goToDashboard: function () {
                 $window.location.href = '/profile/adminDashboard';
-            },
+            }
 
                  
         };

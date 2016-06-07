@@ -57,7 +57,7 @@
                 
                 <input type="hidden" value="{{formData.ID}}" name="docId" id="docId" >
                 <div class="form-group">
-                    <label class="control-label col-sm-5" for="caption">Caption of the Document <span style="color: red">*</span> </label>
+                    <label class="control-label col-sm-5" for="docCaption">Caption of the Document <span style="color: red">*</span> </label>
                     <div class="col-sm-7">
                       <input type="text" class="form-control" id="docCaption" name="docCaption" placeholder="" ng-model="formData.DOCCAPTION" ng-maxlength="50" ng-minlength="0" required="true" >
                       <span style="color: red"  ng-show="isErr=(frmDoc.docCaption.$error.maxlength && frmDoc.docCaption.$dirty)">Maximum 50 Characters allowed</span>
@@ -73,7 +73,7 @@
                    <div class="col-sm-7">          
                      <select class="form-control" name="docType" id="docType" ng-model="formData.DOCTYPE" required="" ng-change="getPattern(formData.DOCTYPE)">
 
-                     <option ng-repeat="t in type" ng-value="{{t.id}}" ng-selected="t.id==formData.DOCTYPE">{{t.type}}</option>
+                     <option ng-repeat="t in type" ng-value="t.id" ng-selected="t.id==formData.DOCTYPE">{{t.type}}</option>
                       
                      </select>
                      <span style="color: red" ng-show="isErr=frmDoc.docType.$touched && frmDoc.docType.$invalid">Please select the Document Type</span>
@@ -85,7 +85,7 @@
                    <div class="col-sm-7">          
                       <select class="form-control" name="docDep" id="docDep" ng-model="formData.DOCDEP" required="true">
                       
-                       <option ng-repeat="d in dep" ng-value="{{d.DEP_ID}}" ng-selected="d.DEP_ID==formData.DOCDEP">{{d.DEP_NAME}}</option>
+                       <option ng-repeat="d in dep" ng-value="d.DEP_ID" ng-selected="d.DEP_ID==formData.DOCDEP">{{d.DEP_NAME}}</option>
                        
                      </select>
 

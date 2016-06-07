@@ -11,10 +11,10 @@ var mysql=require('mysql'),
             var dep=req.query.dep;
             var serStr=req.query.serStr;
             var result;
-            console.log(req.session.userMode);
+            // console.log(req.session.userMode);
             res.writeHead(200, {"Content-Type": "application/json"});
 
-
+            if(type==''||type==null || isNaN(type) ||dep==''||dep==null || isNaN(dep)) return res.end("invalid");
 
             console.log("type:"+type+"dep="+dep);
 
@@ -48,6 +48,7 @@ var mysql=require('mysql'),
     exports.editDocument=function(req,res){
 
       var id=req.query.id;
+      if(id=='' || id==null || isNaN(id)) return res.end("invalid");
       docService.getDocById(id,function(err,data){
               if(err) throw err;
               res.end(JSON.stringify(data));
@@ -59,9 +60,10 @@ var mysql=require('mysql'),
     exports.deleteDocument=function(req,res){
         var data = req.body;
         console.log(data);
+        if(data.ID=='' || data.ID==null || isNaN(data.ID)) return res.end("invalid");
         docService.deleteDoc(data,function(){
             console.log("Deleted Record...."+data);
-            res.end();
+            res.end('success');
         });
     };
 

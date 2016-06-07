@@ -18,68 +18,68 @@ var personalDataManager = require('../config/db/personaldataManager');
 
 var router = express.Router();
 
-passport.serializeUser(function (user, done) {
-    done(null, user);
+passport.serializeUser(function(user, done) {
+  done(null, user);
 });
 
-passport.deserializeUser(function (user, done) {
-    done(null, user);
+passport.deserializeUser(function(user, done) {
+  done(null, user);
 });
 
 passport.use(new facebookStrategy({
-        clientID: configAuth.facebookAuth.clientID,
-        clientSecret: configAuth.facebookAuth.clientSecret,
-        callbackURL: configAuth.facebookAuth.callbackURL,
-        profileFields: ['id', 'displayName', 'photos', 'email'],
-        passReqToCallback: true
-    },
-    function (req,accessToken, refreshToken, profile, done) {
-        personalDataManager.updateFacebookPersonalData(req, profile, accessToken)
-            .then(function (results) {
-                if (results) {
-                    return done(null, results);
-                }
+  clientID: configAuth.facebookAuth.clientID,
+  clientSecret: configAuth.facebookAuth.clientSecret,
+  callbackURL: configAuth.facebookAuth.callbackURL,
+  profileFields: ['id', 'displayName', 'photos', 'email'],
+  passReqToCallback: true
+},
+    function(req,accessToken, refreshToken, profile, done) {
+      personalDataManager.updateFacebookPersonalData(req, profile, accessToken)
+            .then(function(results) {
+              if (results) {
+                return done(null, results);
+              }
             })
-            .fail(function (err) {
-                console.error(JSON.stringify(err));
+            .fail(function(err) {
+              console.error(JSON.stringify(err));
             });
     }
 
 ));
 
 passport.use(new googleStrategy({
-        clientID: configAuth.googleAuth.clientID,
-        clientSecret: configAuth.googleAuth.clientSecret,
-        callbackURL: configAuth.googleAuth.callbackURL,
-        passReqToCallback: true
-    },
-    function (req,accessToken, refreshToken, profile, done) {
-        personaldataManager.updateGooglePersonalData(req, profile, accessToken)
-            .then(function (results) {
-                if (results) {
-                    return done(null, results);
-                } else {
-                    return done(null);
-                }
-            })
-            .fail(function (err) {
-                console.error(JSON.stringify(err));
+  clientID: configAuth.googleAuth.clientID,
+  clientSecret: configAuth.googleAuth.clientSecret,
+  callbackURL: configAuth.googleAuth.callbackURL,
+  passReqToCallback: true
+},
+    function(req,accessToken, refreshToken, profile, done) {
+      personalDataManager.updateGooglePersonalData(req, profile, accessToken)
+            .then(function(results) {
+              if (results) {
+                return done(null, results);
+              } else {
                 return done(null);
+              }
+            })
+            .fail(function(err) {
+              console.error(JSON.stringify(err));
+              return done(null);
             });
     }
 
 ));
 
-router.post('/verifyUser',function (req,res) {
-    loginManager.getUserValidity(req.body.user, req.body.password)
-        .then(function (results) {
-            if (results) {
-                req.session.data = results[0];
-                res.send(results[0]);
-            }
+router.post('/verifyUser',function(req,res) {
+  loginManager.getUserValidity(req.body.user, req.body.password)
+        .then(function(results) {
+          if (results) {
+            req.session.data = results[0];
+            res.send(results[0]);
+          }
         })
-        .fail(function (err) {
-            console.error(JSON.stringify(err));
+        .fail(function(err) {
+          console.error(JSON.stringify(err));
         });
 });
 

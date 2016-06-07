@@ -10,10 +10,10 @@ var mysql=require('mysql'),
             var dep=req.query.dep;
             var serStr=req.query.serStr;
             var result;
-            console.log(req.session.userMode);
+        
             res.writeHead(200, {"Content-Type": "application/json"});
 
-
+            if(type==''||type==null || isNaN(type) ||dep==''|| dep==null || isNaN(dep)) return res.end("invalid");
 
             console.log("type:"+type+"dep="+dep);
 

@@ -33,8 +33,12 @@
                     ];//array for store document type
 
         adminDashboardService.checkAdmin();
+     
+     
         //  order function based on a order field//
         $scope.orderMe=function(f){
+
+            if(f===null || f==='') $scope.isReverse=$scope.isReverse;
              if ($scope.field == f){
                $scope.isReverse = !$scope.isReverse;
             return;
@@ -49,10 +53,11 @@
 
         //function for getting ratingInformation of each documents//
         $scope.getRateInfo=function(id){
-            
+
+            if(id=='' || id==null || isNaN(id)) return false;
             starServices.getStarInfo(id)
             .success(function(data){
-               $scope.rateInfo=data;
+                $scope.rateInfo=data;
                 $scope.popup={'visibility': 'visible','opacity': 1};
                
                console.log($scope.rateInfo);
@@ -96,8 +101,6 @@
                 $scope.dep.splice(0, 0,
                 {DEP_ID: "-1", DEP_NAME: "All Department"}
                 );
-
-          
             })
             .error(function(err){
                 console.log(err);
@@ -130,6 +133,7 @@
 
 
         $scope.getIcon = function (id) {
+            if(id==='' ||  id===null || isNaN(id)) return false;
             return iconServices.getIcon(id);
         };
 
