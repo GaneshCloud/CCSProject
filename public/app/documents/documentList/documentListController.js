@@ -1,191 +1,195 @@
+'use strict';
+
+ myApp.controller('documentListController', function($scope,documentListServices,starServices,iconServices,adminDashboardService,$window) {
+        
 
 
-myApp.controller('documentListController', function($scope,documentListServices,starServices,iconServices,adminDashboardService,$window) {
+        $scope.formData = [];               //model for storing the inputting data
+        $scope.filteredRes=[];              //model for store filtered result
+        $scope.searchres=[];                //model for store the search result
+        $scope.docs={};                     //model for store the data from database
+        $scope.search="";                   //model for search key
+        $scope.searchkey = {};              //searchkey model object
+        $scope.searchkey.dep=-1;            //searchkey department model initially -1
+        $scope.curPage=1;                   //current pag no for pagination
+        $scope.itemsPage=5;                 //items per page
+        $scope.searchkey.docType=-1;        //search key doctype
+        $scope.isReverse=false;             //model for ascending and descending
+        $scope.filteredDoc =[];             
+        $scope.field='DOCCAPTION';          //model for ordering field
+        $scope.maxSize = 5;                 //maximum size of the page no to be show
+        $scope.rateInfo=[];                 //model store the rating info
+        $scope.popup='';                    //for popup window
+        $scope.dep='';                      //for department
+        $scope.type=[   
+                     {id:-1,type:'All Document',ptrn:""},
+                     {id:1,type:'PDF Document',ptrn:".pdf"},
+                     {id:2,type:'Word Document',ptrn:".docx"},
+                     {id:3,type:'Slide Document',ptrn:".ppt"},
+                     {id:4,type:'Image Document',ptrn:"image/*"},
+                     {id:5,type:'Archive Document',ptrn:"*.zip|*.rar"},
+                     {id:6,type:'Video Document',ptrn:".mp4"}
+
+                    ];//array for store document type
+
+        adminDashboardService.checkAdmin();
+     
+     
+        //  order function based on a order field//
+        $scope.orderMe=function(f){
+
+            if(f===null || f==='') $scope.isReverse=$scope.isReverse;
+             if ($scope.field == f){
+               $scope.isReverse = !$scope.isReverse;
+            return;
+            }
+
+                $scope.field = f;
+                $scope.isReverse = false;
+
+        };
 
 
 
-  $scope.formData = [];               //Model for storing the inputting data
-  $scope.filteredRes = [];              //Model for store filtered result
-  $scope.searchres = [];                //Model for store the search result
-  $scope.docs = {};                     //Model for store the data from database
-  $scope.search = '';                   //Model for search key
-  $scope.searchkey = {};              //Searchkey model object
-  $scope.searchkey.dep = -1;            //Searchkey department model initially -1
-  $scope.curPage = 1;                   //Current pag no for pagination
-  $scope.itemsPage = 5;                 //Items per page
-  $scope.searchkey.docType = -1;        //Search key doctype
-  $scope.isReverse = false;             //Model for ascending and descending
-  $scope.filteredDoc = [];
-  $scope.field = 'DOCCAPTION';          //Model for ordering field
-  $scope.maxSize = 5;                 //Maximum size of the page no to be show
-  $scope.rateInfo = [];                 //Model store the rating info
-  $scope.popup = '';                    //For popup window
-  $scope.dep = '';                      //For department
-  $scope.type = [
-                     {id: -1,type: 'All Document',ptrn: ''},
-               {id: 1,type: 'PDF Document',ptrn: '.pdf'},
-               {id: 2,type: 'Word Document',ptrn: '.docx'},
-               {id: 3,type: 'Slide Document',ptrn: '.ppt'},
-               {id: 4,type: 'Image Document',ptrn: 'image/*'},
-               {id: 5,type: 'Archive Document',ptrn: '*.zip|*.rar'},
-               {id: 6,type: 'Video Document',ptrn: '.mp4'},
+        //function for getting ratingInformation of each documents//
+        $scope.getRateInfo=function(id){
 
-              ];//Array for store document type
-
-  adminDashboardService.checkAdmin();
-  //  Order function based on a order field//
-  $scope.orderMe = function(f) {
-    if ($scope.field === f) {
-      $scope.isReverse = !$scope.isReverse;
-      return;
-    }
-
-    $scope.field = f;
-    $scope.isReverse = false;
-
-  };
-
-
-
-  //Function for getting ratingInformation of each documents//
-  $scope.getRateInfo = function(id) {
-
-    starServices.getStarInfo(id)
-            .success(function(data) {
-              $scope.rateInfo = data;
-              $scope.popup = {visibility: 'visible',opacity: 1};
-
-              console.log($scope.rateInfo);
-            }).error(function() {
+            if(id=='' || id==null || isNaN(id)) return false;
+            starServices.getStarInfo(id)
+            .success(function(data){
+                $scope.rateInfo=data;
+                $scope.popup={'visibility': 'visible','opacity': 1};
+               
+               console.log($scope.rateInfo);
+            }).error(function(){
 
             });
 
-  };
+        };
 
-  $scope.newDocument = function() {
-    documentListServices.newDocument();
-  };
+        $scope.newDocument=function(){
+            documentListServices.newDocument();
+        };
 
 
-  //Function for getting data from database//
-  $scope.getData = function() {
-
-    documentListServices.get()
+        //function for getting data from database//
+        $scope.getData = function() {
+               
+                documentListServices.get()
 
                 .success(function(data) {
+                    
+                    $scope.docs = data; 
 
-                  $scope.docs = data;
+                    $scope.$watch("cur_page + items_page", function() {
 
-                  $scope.$watch('cur_page + items_page', function() {
+                        var begin = (($scope.curPage - 1) * $scope.itemsPage), end = begin + $scope.itemsPage;
 
-                    var begin = (($scope.curPage - 1) * $scope.itemsPage), end = begin + $scope.itemsPage;
-
-                    $scope.filteredDoc = $scope.docs.slice(begin, end);
-
-                  });
+                        $scope.filteredDoc = $scope.docs.slice(begin, end);
+                       
+                    });
 
                 });
-  };
+        };
 
 
-  //Function for getting department details//
-  $scope.getDepartment = function() {
-    documentListServices.getDepartment()
-            .success(function(data) {
-              $scope.dep = data;
-              $scope.dep.splice(0, 0,
-              {DEP_ID: '-1', DEP_NAME: 'All Department'}
-              );
-
-
+//function for getting department details//
+        $scope.getDepartment=function(){
+            documentListServices.getDepartment()
+            .success(function(data){
+                $scope.dep=data;
+                $scope.dep.splice(0, 0,
+                {DEP_ID: "-1", DEP_NAME: "All Department"}
+                );
             })
-            .error(function(err) {
-              console.log(err);
+            .error(function(err){
+                console.log(err);
             });
-  };
+        };
 
-  //Function for searching documents//
-  $scope.searchData = function() {
-
-
-
-    documentListServices.search('?docType=' + $scope.searchkey.docType + '&dep=' + $scope.searchkey.dep + '&page=' + $scope.page + '&serStr=' + $scope.search)
+        //function for searching documents//
+        $scope.searchData = function() {
+               
+               
+                
+            documentListServices.search("?docType="+$scope.searchkey.docType+"&dep="+$scope.searchkey.dep+"&page="+$scope.page+"&serStr="+$scope.search)
                 .success(function(data) {
 
-                  $scope.searchres = data;
-                  if (data.length <= 0)
-                        $scope.noData = true;
-                  else
-                      $scope.noData = false;
+                    $scope.searchres = data;
+                    if(data.length <= 0) 
+                        $scope.noData=true;
+                    else
+                        $scope.noData=false;
+               
+                $scope.$watch("curPage + itemsPage", function() {
 
-                  $scope.$watch('curPage + itemsPage', function() {
+                        var begin = (($scope.curPage - 1) * $scope.itemsPage), end = begin + $scope.itemsPage;
 
-                    var begin = (($scope.curPage - 1) * $scope.itemsPage), end = begin + $scope.itemsPage;
-
-                    $scope.filteredRes = $scope.searchres.slice(begin, end);
-                  });
+                        $scope.filteredRes = $scope.searchres.slice(begin, end);
+                    });
                 });
 
-  };
+        };
 
 
-  $scope.getIcon = function(id) {
-    return iconServices.getIcon(id);
-  };
+        $scope.getIcon = function (id) {
+            if(id==='' ||  id===null || isNaN(id)) return false;
+            return iconServices.getIcon(id);
+        };
 
-  $scope.editDoc = function(id) {
-
-    $scope.selId = $scope.docs[id].ID;
-    documentListServices.edit()
+        $scope.editDoc=function(id) {
+               
+               $scope.selId=$scope.docs[id].ID;
+                documentListServices.edit()
                 .success(function(data) {
-                  console.log(data);
+                    console.log(data);                  
                 });
-  };
+        };
 
-  //Function for delete a document//
-  $scope.deleteDoc = function(id) {
-    $scope.selId = id;
-    documentListServices.delete({ID: +$scope.selId})
+        //function for delete a document//
+         $scope.deleteDoc = function(id) {
+                $scope.selId=id;
+                documentListServices.delete({ID:+$scope.selId})
                 .success(function(data) {
-                  console.log(data);
-                  console.log('deleted');
-                  $scope.searchData();
-
+                      console.log(data);
+                      console.log("deleted");
+                      $scope.searchData();
+       
                 })
-                .error(function() {
-
-                  $scope.searchData();
+                .error(function(){
+                    
+                $scope.searchData();
                 });
+           
+                   
+                
+        };
+
+     // logout
+     $scope.onLogout = function(){
+
+         if ($window.confirm("Are You Sure ! Do you need to Log Out?")) {
+
+             documentListServices.logout();
+
+         }
+
+     };
+     //Dashboard
+     $scope.goToDashboard = function(){
+
+         documentListServices.goToDashboard();
+
+     };
+
+     //call the functions when the page is loading//
+        $scope.getDepartment();
+        $scope.searchData();
+      
+    });
 
 
-
-  };
-
-  // Logout
-  $scope.onLogout = function() {
-
-    if ($window.confirm('Are You Sure ! Do you need to Log Out?')) {
-
-      documentListServices.logout();
-
-    }
-
-  };
-  //Dashboard
-  $scope.goToDashboard = function() {
-
-    documentListServices.goToDashboard();
-
-  };
-
-  //Call the functions when the page is loading//
-  $scope.getDepartment();
-  $scope.searchData();
-
-});
-
-
-
+ 
 
 
 

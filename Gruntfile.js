@@ -127,6 +127,68 @@ module.exports = function(grunt) {
             options: {
                 port:9000
             }
+        },
+
+        karma: {
+            unit: {
+                options: {
+                    frameworks: ['jasmine'],
+                    // singleRun: true,
+                    browsers: ['Chrome'],
+                    files: [
+                        'public/bower_components/angular/angular.js',
+                        'public/bower_components/angular-mocks/angular-mocks.js',
+                        'public/bower_components/angular-resource/angular-resource.js',
+                        'public/bower_components/angular-bootstrap/ui-bootstrap.js',
+                        'public/bower_components/angular-route/angular-route.min.js',
+                        "public/bower_components/ui-accordion/dist/scripts/ui-accordion.js",
+                        "public/bower_components/angular-timeline/dist/angular-timeline.js",
+                        "public/bower_components/ng-file-upload/ng-file-upload.min.js",
+                        "public/bower_components/ng-file-upload/ng-file-upload-shim.min.js",
+                        "public/bower_components/angular-spinners/dist/angular-spinners.js",
+                        "public/bower_components/ngprogress/build/ngProgress.js",
+
+                        'public/app/core/module.js',
+                        'public/app/documents/documentList/documentListController.js',
+                        'public/app/documents/documentList/documentListServices.js',
+                        'public/app/documents/services/starServices.js',
+                        'public/app/documents/services/iconServices.js',
+                        'public/app/profile/adminDashboard/adminDashboardService.js',
+                        'public/app/documents/filters/commonFilter.js',
+                        'public/app/documents/directives/fileDirective.js',
+
+                        'test/client/**/*.js'
+
+                    ],
+                    concurrency: Infinity,
+                    autoWatch: true,
+                    reporters: ['progress', 'coverage'],
+                    preprocessors: {
+                        // source files, that you wanna generate coverage for
+                        // do not include tests or libraries
+                        // (these files will be instrumented by Istanbul)
+                        'public/app/documents/documentList/documentListController.js': ['coverage'],
+                        'public/app/documents/services/iconServices.js': ['coverage'],
+                        'public/app/documents/services/starServices.js': ['coverage'],
+                        'public/app/documents/directives/fileDirective.js': ['coverage'],
+                        'public/app/documents/filters/commonFilter.js': ['coverage']
+
+                    },
+                    coverageReporter: {
+                        dir: 'Report Angular Testing',
+                        reporters: [
+                            { type: 'html', subdir: 'report-html' },
+                            { type: 'teamcity', subdir: '.', file: 'teamcity.txt' }
+                        ]
+                    },
+                    plugins: [
+                        'karma-jasmine',
+                        'karma-coverage',
+                        'karma-chrome-launcher'
+                    ]
+
+                }
+            }
         }
     });
 
@@ -139,7 +201,16 @@ module.exports = function(grunt) {
         'mocha_istanbul',
         'nodemon'
     ];
+
+    grunt.loadNpmTasks('grunt-mocha-test');
+    grunt.loadNpmTasks('grunt-mocha-istanbul');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-karma');
+
     grunt.registerTask('default',defaultTasks);
     grunt.registerTask('test', ['jshint','mocha_istanbul']);
+    grunt.registerTask('default', ['karma']);
+
+
 
 };
