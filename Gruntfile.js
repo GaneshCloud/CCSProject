@@ -34,7 +34,7 @@ module.exports = function(grunt) {
                 images: [{
                     expand: true,
                     cwd: 'public/',
-                    src: ['**/**/*.{png,jpg,gif}'],
+                    src: ['images/**/*.{png,jpg,gif}'],
                     dest: 'public/build/images/'
                 }]
             }
@@ -42,6 +42,7 @@ module.exports = function(grunt) {
 
         jshint: {
             options: {
+                /*jshint -W030 */
                 reporter: require('jshint-html-reporter'),
                 reporterOutput: 'report/jshint-report.html',
                 force:true,
@@ -116,7 +117,24 @@ module.exports = function(grunt) {
                 },
                 files: {                                   // Dictionary of files
                     'public/dist/index.html': 'public/app/core/layout.html',   // 'destination': 'source'
-                    'public/dist/projectHome.html': 'public/app/project/home/home.html'   // 'destination': 'source'
+                    'public/dist/documents/documentList/documentList.html': 'public/app/documents/documentList/documentList.html',   // 'destination': 'source'
+                    'public/dist/documents/multipleFileUpload/multipleFileUpload.html': 'public/app/documents/multipleFileUpload/multipleFileUpload.html',
+                    'public/dist/documents/search/search.html': 'public/app/documents/search/search.html',
+                    'public/dist/documents/search/searchListView.html': 'public/app/documents/search/searchListView.html',
+                    'public/dist/documents/search/searchTileView.html': 'public/app/documents/search/searchTileView.html',
+                    'public/dist/documents/singleFileUpload/singleFileUpload.html': 'public/app/documents/singleFileUpload/singleFileUpload.html',
+                    'public/dist/documents/viewDocument/viewDocument.html': 'public/app/documents/viewDocument/viewDocument.html',
+                    'public/dist/forum/home/forum.html': 'public/app/forum/home/forum.html',
+                    'public/dist/profile/adminDashboard/adminDashboard.html': 'public/app/profile/adminDashboard/adminDashboard.html',
+                    'public/dist/profile/adminProfile/adminProfile.html': 'public/app/profile/adminProfile/adminProfile.html',
+                    'public/dist/profile/changePassword/changePassword.html': 'public/app/profile/changePassword/changePassword.html',
+                    'public/dist/profile/login/login.html': 'public/app/profile/login/login.html',
+                    'public/dist/profile/logout/logout.html': 'public/app/profile/logout/logout.html',
+                    'public/dist/profile/userDashboard/userDashboard.html': 'public/app/profile/userDashboard/userDashboard.html',
+                    'public/dist/profile/userProfile/userProfile.html': 'public/app/profile/userProfile/userProfile.html',
+                    'public/dist/project/home/home.html': 'public/app/project/home/home.html'
+                    //'public/dist/project/projectReg/projectReg.html': 'public/app/project/projectReg/projectReg.html'
+
                     //'dist/contact.html': 'src/contact.html'
                 }
             },
@@ -154,9 +172,11 @@ module.exports = function(grunt) {
             unit: {
                 options: {
                     frameworks: ['jasmine'],
-                    // singleRun: true,
+                    singleRun: true,
                     browsers: ['Chrome'],
                     files: [
+
+                        //'public/bower_components/**/**/*.js',
                         'public/bower_components/angular/angular.js',
                         'public/bower_components/angular-mocks/angular-mocks.js',
                         'public/bower_components/angular-resource/angular-resource.js',
@@ -169,14 +189,16 @@ module.exports = function(grunt) {
                         "public/bower_components/angular-spinners/dist/angular-spinners.js",
                         "public/bower_components/ngprogress/build/ngProgress.js",
 
+
                         'public/app/core/module.js',
-                        'public/app/documents/documentList/documentListController.js',
-                        'public/app/documents/documentList/documentListServices.js',
-                        'public/app/documents/services/starServices.js',
-                        'public/app/documents/services/iconServices.js',
-                        'public/app/profile/adminDashboard/adminDashboardService.js',
-                        'public/app/documents/filters/commonFilter.js',
-                        'public/app/documents/directives/fileDirective.js',
+                        'public/app/**/**/*.js',
+                        // 'public/app/documents/documentList/documentListController.js',
+                        // 'public/app/documents/documentList/documentListServices.js',
+                        // 'public/app/documents/services/starServices.js',
+                        // 'public/app/documents/services/iconServices.js',
+                        // 'public/app/profile/adminDashboard/adminDashboardService.js',
+                        // 'public/app/documents/filters/commonFilter.js',
+                        // 'public/app/documents/directives/fileDirective.js',
 
                         'test/client/**/*.js'
 
@@ -188,11 +210,12 @@ module.exports = function(grunt) {
                         // source files, that you wanna generate coverage for
                         // do not include tests or libraries
                         // (these files will be instrumented by Istanbul)
-                        'public/app/documents/documentList/documentListController.js': ['coverage'],
-                        'public/app/documents/services/iconServices.js': ['coverage'],
-                        'public/app/documents/services/starServices.js': ['coverage'],
-                        'public/app/documents/directives/fileDirective.js': ['coverage'],
-                        'public/app/documents/filters/commonFilter.js': ['coverage']
+                        'public/app/**/**/*.js':['coverage']
+                        // 'public/app/documents/documentList/documentListController.js': ['coverage'],
+                        // 'public/app/documents/services/iconServices.js': ['coverage'],
+                        // 'public/app/documents/services/starServices.js': ['coverage'],
+                        // 'public/app/documents/directives/fileDirective.js': ['coverage'],
+                        // 'public/app/documents/filters/commonFilter.js': ['coverage']
 
                     },
                     coverageReporter: {
@@ -228,7 +251,7 @@ module.exports = function(grunt) {
 
 
     grunt.registerTask('default',defaultTasks);
-    grunt.registerTask('test', ['jshint','mocha_istanbul']);
+    grunt.registerTask('test', ['jshint','mocha_istanbul','karma']);
 
 
 

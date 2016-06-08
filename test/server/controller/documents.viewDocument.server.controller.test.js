@@ -1,8 +1,8 @@
 /**
  * Created by Administrator on 5/30/2016.
  */
-var expect = require('chai').expect
-    , controllerToTest = require('../../../controllers/documents.viewDocument.server.controller');
+var expect = require('chai').expect;
+var controllerToTest = require('../../../controllers/documents.viewDocument.server.controller');
 
 
 describe("viewDocument controller",function () {

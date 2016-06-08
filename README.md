@@ -9,13 +9,15 @@ Step ro run project :
 
     3. Get the project directory like C:\CCSProject\CCSProject
 
-    4. npm install
+    4. npm install -g grunt-cli
 
-    5. npm install bower
+    5. npm install
 
-    6. bower install
+    6. npm install bower
 
-    7. node server or node server.js or grunt
+    7. bower install
+
+    8. node server or node server.js or grunt
 
 
 Database setup guide :

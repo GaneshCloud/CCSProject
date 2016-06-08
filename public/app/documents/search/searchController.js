@@ -75,7 +75,10 @@ myApp.controller('searchController', function($scope,documentSearchServices,icon
 
                   $scope.searchres = data;
                   console.log(data);
-                  $scope.noData = (data.length <= 0);
+                  if(data.length <= 0)
+                    $scope.noData=true;
+                  else
+                    $scope.noData=false;
                   $scope.$watch('curPage + itemspage', function() {
 
                     var begin = (($scope.curPage - 1) * $scope.itemsPage),end = begin + $scope.itemsPage;

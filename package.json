@@ -65,6 +65,7 @@
     "karma-coverage": "^1.0.0",
     "karma-jasmine": "^1.0.2",
     "matchdep": "^1.0.1",
-    "mopen": "^0.1.2"
+    "mopen": "^0.1.2",
+    "supertest": "^1.2.0"
   }
 }
