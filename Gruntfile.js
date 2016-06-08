@@ -219,18 +219,17 @@ module.exports = function(grunt) {
         'imagemin',
         'jshint',
         'htmlmin:dist',
+        'karma',
         'mocha_istanbul',
         'nodemon'
+
     ];
 
-    grunt.loadNpmTasks('grunt-mocha-test');
-    grunt.loadNpmTasks('grunt-mocha-istanbul');
-    grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-karma');
+
 
     grunt.registerTask('default',defaultTasks);
     grunt.registerTask('test', ['jshint','mocha_istanbul']);
-    grunt.registerTask('default', ['karma']);
+
 
 
 
