@@ -31,7 +31,6 @@
     "afterEach",
     "null"
     ],
-  /*jshint -W030 */
   // "strict": "global",
   "indent":1,
   "undef": true,

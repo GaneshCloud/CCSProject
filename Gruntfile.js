@@ -42,7 +42,6 @@ module.exports = function(grunt) {
 
         jshint: {
             options: {
-                /*jshint -W030 */
                 reporter: require('jshint-html-reporter'),
                 reporterOutput: 'report/jshint-report.html',
                 force:true,

@@ -6,7 +6,7 @@
   "scripts": {
     "test": "./node_modules/.bin/mocha --reporter spec"
   },
-  "author": "Crist Team",
+  "author": "Crisp Team",
   "license": "ISC",
   "dependencies": {
     "adm-zip": "^0.4.7",
