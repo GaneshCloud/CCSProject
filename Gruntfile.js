@@ -130,11 +130,15 @@ module.exports = function(grunt) {
 
         mocha_istanbul:{
             coverage: {
-                src: 'test/server', // the folder, not the files
+               // src: //'test/server', // the folder, not the files
+                src: ['test/server/controller/projectReg.server.controllerTest.js','test/server/db/documents.projectReg.test.js'],
                 options: {
                     banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n',
                     coverageFolder: 'report/coverage',
-                    mask: '**/**/*.js'
+                   // mask: '**/**/*.js'
+                    // mask:['controller/projectReg.server.controllerTest.js','db/documents.projectReg.test.js']
+
+
                 }
             }
         },
@@ -168,20 +172,25 @@ module.exports = function(grunt) {
                         "public/bower_components/ng-file-upload/ng-file-upload-shim.min.js",
                         "public/bower_components/angular-spinners/dist/angular-spinners.js",
                         "public/bower_components/ngprogress/build/ngProgress.js",
-
+                        "public/bower_components/jquery/dist/jquery.js",
+                        //
                         'public/app/core/module.js',
                         'public/app/documents/documentList/documentListController.js',
                         'public/app/documents/documentList/documentListServices.js',
-                        'public/app/documents/services/starServices.js',
-                        'public/app/documents/services/iconServices.js',
-                        'public/app/profile/adminDashboard/adminDashboardService.js',
-                        'public/app/documents/filters/commonFilter.js',
-                        'public/app/documents/directives/fileDirective.js',
+                    'public/app/documents/services/starServices.js',
+                    'public/app/documents/services/iconServices.js',
+                    'public/app/profile/adminDashboard/adminDashboardService.js',
+                    'public/app/documents/filters/commonFilter.js',
+                    'public/app/documents/directives/fileDirective.js',
+                        'public/app/project/projectReg/projectRegService.js',
+                    'public/app/project/projectReg/projectRegController.js',
 
-                        'test/client/**/*.js'
 
-                    ],
-                    concurrency: Infinity,
+                    'test/client/**/*.js'
+
+
+    ],
+    concurrency: Infinity,
                     autoWatch: true,
                     reporters: ['progress', 'coverage'],
                     preprocessors: {
@@ -192,7 +201,8 @@ module.exports = function(grunt) {
                         'public/app/documents/services/iconServices.js': ['coverage'],
                         'public/app/documents/services/starServices.js': ['coverage'],
                         'public/app/documents/directives/fileDirective.js': ['coverage'],
-                        'public/app/documents/filters/commonFilter.js': ['coverage']
+                        'public/app/documents/filters/commonFilter.js': ['coverage'],
+                        'public/app/project/projectReg/projectRegController.js':['coverage']
 
                     },
                     coverageReporter: {
@@ -215,7 +225,7 @@ module.exports = function(grunt) {
 
     var defaultTasks = [
         'less',
-        'uglify',
+         'uglify',
         'imagemin',
         'jshint',
         'htmlmin:dist',
