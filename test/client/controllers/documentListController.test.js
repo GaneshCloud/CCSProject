@@ -114,40 +114,31 @@ describe('Main Controller', function () {
 
     describe("new Document",function () {
 
-        beforeEach(function() {
-            mockServiceA = jasmine.createSpyObj('mockServiceA', ['newDocument']);
-            // $provide.value('documentListServices', mockServiceA);
-            documentListServices=mockServiceA;
-            // console.log(mockServiceA);
+        var documentListService,scope
 
-        });
+        beforeEach(inject(function ($rootScope, $controller, _documentListServices_) {
+            scope = $rootScope.$new();
+            documentListService = _documentListServices_;
+            $controller('documentListController', {
+                $scope: scope,
 
-        // beforeEach(inject(function($rootScope, $controller) {
-        //     $scope = $rootScope.$new();
-        //     $controller('ControllerB', {
-        //         $scope: $scope
-        //     });
-        // }));
+            });
+        }));
 
-        // describe('ControllerB', function() {
-        //     it('should call mock service', function() {
-        //         expect(mockServiceA.foo).not.toHaveBeenCalled();
-        //         $scope.useServiceA();
-        //         expect(mockServiceA.foo).toHaveBeenCalled();
-        //     });
-        // });
 
         it('check new document function', function () {
-            var $scope = {};
-            var controller = $controller('documentListController', {$scope: $scope});
-            spyOn($scope, "newDocument").and.callFake();
-            $scope.newDocument();
-            expect(mockServiceA.newDocument).toHaveBeenCalled();
-           // spyOn(, '').and.returnValue(true) // Jasmine
+            var fakeHttpPromise = {
+                success: function() {}
+            };
+
+            spyOn(documentListService, 'newDocument');
+            scope.newDocument();
+            expect(documentListService.newDocument).toHaveBeenCalled();
 
         });
     });
 
+       
 
 
     describe("get icon function",function () {
