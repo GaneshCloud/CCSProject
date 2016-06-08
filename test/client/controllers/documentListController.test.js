@@ -114,13 +114,11 @@ describe('Main Controller', function () {
 
     describe("new Document",function () {
 
-
         beforeEach(function() {
             mockServiceA = jasmine.createSpyObj('mockServiceA', ['newDocument']);
-            //$provide.value('documentListServices', mockServiceA);
+            // $provide.value('documentListServices', mockServiceA);
             documentListServices=mockServiceA;
-            console.log(mockServiceA);
-
+            // console.log(mockServiceA);
 
         });
 
@@ -142,47 +140,50 @@ describe('Main Controller', function () {
         it('check new document function', function () {
             var $scope = {};
             var controller = $controller('documentListController', {$scope: $scope});
-            //spyOn($scope, "newDocument").and.callFake();
+            spyOn($scope, "newDocument").and.callFake();
             $scope.newDocument();
             expect(mockServiceA.newDocument).toHaveBeenCalled();
            // spyOn(, '').and.returnValue(true) // Jasmine
 
         });
     });
-        describe("get icon function",function () {
-            it('check get Icon function', function () {
-                var $scope = {};
-                var controller = $controller('documentListController', { $scope: $scope });
-                 $result=$scope.getIcon(1);
-                 expect($result).toMatch('images/documents/pdf.png');
 
 
 
-            });
-
-            it('check get Icon function with null', function () {
-                var $scope = {};
-                var controller = $controller('documentListController', { $scope: $scope });
-                $result=$scope.getIcon(null);
-                expect($result).not.toBeTruthy();
-            });
-
-            it('check get Icon function with null', function () {
-                var $scope = {};
-                var controller = $controller('documentListController', { $scope: $scope });
-                $result=$scope.getIcon('');
-                expect($result).not.toBeTruthy();
-            });
-
-            it('check get Icon function with null', function () {
-                var $scope = {};
-                var controller = $controller('documentListController', { $scope: $scope });
-                $result=$scope.getIcon('abc');
-                expect($result).not.toBeTruthy();
-            });
+    describe("get icon function",function () {
+        it('check get Icon function', function () {
+            var $scope = {};
+            var controller = $controller('documentListController', { $scope: $scope });
+             $result=$scope.getIcon(1);
+             expect($result).toMatch('images/documents/pdf.png');
 
 
-    });
+
+        });
+
+        it('check get Icon function with null', function () {
+            var $scope = {};
+            var controller = $controller('documentListController', { $scope: $scope });
+            $result=$scope.getIcon(null);
+            expect($result).not.toBeTruthy();
+        });
+
+        it('check get Icon function with null', function () {
+            var $scope = {};
+            var controller = $controller('documentListController', { $scope: $scope });
+            $result=$scope.getIcon('');
+            expect($result).not.toBeTruthy();
+        });
+
+        it('check get Icon function with null', function () {
+            var $scope = {};
+            var controller = $controller('documentListController', { $scope: $scope });
+            $result=$scope.getIcon('abc');
+            expect($result).not.toBeTruthy();
+        });
+
+
+});
 
 
 
