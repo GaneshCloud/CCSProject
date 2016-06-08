@@ -43,7 +43,28 @@ module.exports = function(grunt) {
         jshint: {
             options: {
                 reporter: require('jshint-html-reporter'),
-                reporterOutput: 'report/jshint-report.html'
+                reporterOutput: 'report/jshint-report.html',
+                force:true,
+                globals: {
+                    jQuery: true,
+                    angular: true,
+                    require:true,
+                    process:true,
+                    module:true,
+                    exports:true,
+                    console:true,
+                    myApp:true,
+                    __dirname:true,
+                    $:true,
+                    $timeout:true,
+                    alert:true,
+                    Buffer:true,
+                    it:true,
+                    describe:true,
+                    beforeEach:true,
+                    afterEach:true
+                },
+                eqeqeq: true
             },
 
             build: {
@@ -109,11 +130,11 @@ module.exports = function(grunt) {
 
         mocha_istanbul:{
             coverage: {
-                src: 'test', // the folder, not the files
+                src: 'test/server', // the folder, not the files
                 options: {
                     banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n',
                     coverageFolder: 'report/coverage',
-                    mask: '**/**/**/*.js'
+                    mask: '**/**/*.js'
                 }
             }
         },
@@ -198,18 +219,17 @@ module.exports = function(grunt) {
         'imagemin',
         'jshint',
         'htmlmin:dist',
+        'karma',
         'mocha_istanbul',
         'nodemon'
+
     ];
 
-    grunt.loadNpmTasks('grunt-mocha-test');
-    grunt.loadNpmTasks('grunt-mocha-istanbul');
-    grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-karma');
+
 
     grunt.registerTask('default',defaultTasks);
     grunt.registerTask('test', ['jshint','mocha_istanbul']);
-    grunt.registerTask('default', ['karma']);
+
 
 
 
