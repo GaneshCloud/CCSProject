@@ -1,87 +1,96 @@
 /**
  * Created by CSS on 25-05-2016.
  */
-angular.module('myApp')
-    .factory('userProfileService', function($http, $window, $q, Upload) {
-      var httpPromise;
-      return {
-        changePassword: function() {
-          $window.location.href = '/profile/changePassword';
-        },
+(function() {
+  angular.module('myApp')
+      .factory('userProfileService', userProfileService);
 
-        pageReload: function() {
-          $window.location.reload();
-        },
+  userProfileService.$inject=[
+    '$http',
+    '$window',
+    '$q'
+  ];
+  function userProfileService($http, $window, $q, Upload) {
+    var httpPromise;
+    return {
+      changePassword: function () {
+        $window.location.href = '/profile/changePassword';
+      },
 
-        goToDashboard: function() {
-          $window.location.href = '/profile/userDashboard';
-        },
+      pageReload: function () {
+        $window.location.reload();
+      },
 
-        addFacebookAccount: function() {
-          $window.location.href = '/connect/facebook';
-        },
+      goToDashboard: function () {
+        $window.location.href = '/profile/userDashboard';
+      },
 
-        addGoogleAccount: function() {
-          $window.location.href = '/connect/google';
-        },
+      addFacebookAccount: function () {
+        $window.location.href = '/connect/facebook';
+      },
 
-        logout: function() {
-          $window.location.href = '/logout';
-        },
+      addGoogleAccount: function () {
+        $window.location.href = '/connect/google';
+      },
 
-        getPersonalData: function() {
-          var deferred = $q.defer();
+      logout: function () {
+        $window.location.href = '/logout';
+      },
 
-          httpPromise = $http.get('/connect/getPersonalData');
+      getPersonalData: function () {
+        var deferred = $q.defer();
 
-          httpPromise.then(function(response) {
-            deferred.resolve(response);
-          }, function(error) {
-            console.error(error);
+        httpPromise = $http.get('/connect/getPersonalData');
 
-            $window.location.href = '/error';
-          });
+        httpPromise.then(function (response) {
+          deferred.resolve(response);
+        }, function (error) {
+          console.error(error);
 
-          return deferred.promise;
-        },
+          $window.location.href = '/error';
+        });
 
-        uploadImage: function(file) {
-          var dfr = $q.defer();
+        return deferred.promise;
+      },
 
-          httpPromise = Upload.upload({
-            url: '/uploadImage',
+      uploadImage: function (file) {
+        var dfr = $q.defer();
 
-            data: {file: file}
+        httpPromise = Upload.upload({
+          url: '/uploadImage',
 
-          });
+          data: {file: file}
 
-          httpPromise.then(function(response) {
-            dfr.resolve(response);
-          }, function(error) {
-            console.error(error);
-          });
-          return dfr.promise;
-        },
+        });
 
-        updatePersonalData: function(personalData) {
+        httpPromise.then(function (response) {
+          dfr.resolve(response);
+        }, function (error) {
+          console.error(error);
+        });
+        return dfr.promise;
+      },
 
-          var dfr = $q.defer();
+      updatePersonalData: function (personalData) {
 
-          httpPromise = $http({
-            method: 'post',
+        var dfr = $q.defer();
 
-            url: '/connect/updatePersonalData',
+        httpPromise = $http({
+          method: 'post',
 
-            data: personalData
+          url: '/connect/updatePersonalData',
 
-          });
-          httpPromise.then(function(response) {
-            dfr.resolve(response);
-          }, function(error) {
-            console.error(error);
-          });
-          return dfr.promise;
-        }
+          data: personalData
 
-      };
-    });
+        });
+        httpPromise.then(function (response) {
+          dfr.resolve(response);
+        }, function (error) {
+          console.error(error);
+        });
+        return dfr.promise;
+      }
+
+    };
+  }
+})();

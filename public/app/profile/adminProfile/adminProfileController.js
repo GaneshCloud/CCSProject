@@ -3,6 +3,19 @@
  */
 
 (function() {
+  angular
+      .module('myApp')
+      .controller('adminProfileController', adminProfileController);
+
+  adminProfileController.$inject=[
+    '$scope',
+    '$window',
+    'adminProfileService',
+    'ngProgressFactory',
+    'spinnerService',
+    'filterFilter',
+    'adminDashboardService'
+  ];
 
   function adminProfileController($scope,$window,adminProfileService,
                                   ngProgressFactory,spinnerService,filterFilter,adminDashboardService) {
@@ -39,31 +52,31 @@
 
       adminProfileService.getUserDetails()
 
-                .then(function(response) {
+          .then(function(response) {
 
-                  $scope.userDetails = response.data;
+            $scope.userDetails = response.data;
 
-                  if ($scope.userDetails.length > 0) {
-                    $scope.noData = false;
+            if ($scope.userDetails.length > 0) {
+              $scope.noData = false;
 
-                    $scope.totalLength = $scope.userDetails.length;
+              $scope.totalLength = $scope.userDetails.length;
 
-                    $scope.max_size = Math.ceil($scope.totalLength / $scope.items_per_page);
+              $scope.max_size = Math.ceil($scope.totalLength / $scope.items_per_page);
 
-                    $scope.$watch('cur_page + items_per_page', function() {
+              $scope.$watch('cur_page + items_per_page', function() {
 
-                      var begin = (($scope.cur_page - 1) * $scope.items_per_page), end = begin + $scope.items_per_page;
-                      console.log(begin + ' ' + end);
-                      $scope.userDetailsFilter = $scope.userDetails.slice(begin, end);
-                      // Alert("data"+$scope.searchres);
-                    });
-                  }
+                var begin = (($scope.cur_page - 1) * $scope.items_per_page), end = begin + $scope.items_per_page;
+                console.log(begin + ' ' + end);
+                $scope.userDetailsFilter = $scope.userDetails.slice(begin, end);
+                // Alert("data"+$scope.searchres);
+              });
+            }
 
-                }, function(error) {
+          }, function(error) {
 
-                  console.error(error);
+            console.error(error);
 
-                }) ;
+          }) ;
 
     };
 
@@ -138,10 +151,5 @@
     }, true);
 
     getUserDetails();
-
-
   }
-
-  myApp.controller('adminProfileController',adminProfileController);
-
 })();

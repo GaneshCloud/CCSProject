@@ -1,32 +1,43 @@
 /**
  * Created by CSS on 25-05-2016.
  */
-angular.module('myApp')
-    .factory('adminProfileService', function($http, $window, $q) {
-      var httpPromise;
-      return {
+(function() {
+    angular
+        .module('myApp')
+        .factory('adminProfileService', adminProfileService);
 
-        logout: function() {
-          $window.location.href = '/logout';
-        },
+    adminProfileService.$inject=[
+        '$http',
+        '$window',
+        '$q'
+    ];
 
-        getUserDetails: function() {
-          var deferred = $q.defer();
+    function adminProfileService($http, $window, $q) {
+        var httpPromise;
+        return {
 
-          httpPromise = $http.get('/getUserDetails');
+            logout: function () {
+                $window.location.href = '/logout';
+            },
 
-          httpPromise.then(function(response) {
-            deferred.resolve(response);
-          }, function(error) {
-            console.error(error);
-          });
+            getUserDetails: function () {
+                var deferred = $q.defer();
 
-          return deferred.promise;
-        },
+                httpPromise = $http.get('/getUserDetails');
 
-        goToAdminDashboard: function() {
-          $window.location.href = '/profile/adminDashboard';
-        }
+                httpPromise.then(function (response) {
+                    deferred.resolve(response);
+                }, function (error) {
+                    console.error(error);
+                });
 
-      };
-    });
+                return deferred.promise;
+            },
+
+            goToAdminDashboard: function () {
+                $window.location.href = '/profile/adminDashboard';
+            }
+
+        };
+    }
+})();
