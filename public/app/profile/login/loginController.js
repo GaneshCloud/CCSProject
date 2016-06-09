@@ -9,7 +9,6 @@
   loginController.$inject=[
     '$scope',
     'loginService',
-    'ngProgressFactory',
     'spinnerService'
   ];
 
