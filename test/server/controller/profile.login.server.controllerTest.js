@@ -10,8 +10,6 @@ var should = chai.should();
 
 var expect = chai.expect;
 
-var controller = require("../../../controllers/profile.login.server.controller.js");
-
 describe("#Verify User",function () {
 
     var server;
@@ -27,9 +25,16 @@ describe("#Verify User",function () {
         };
 
         supertest(server)
-            .get('/auth/verifyUser')
+            .post('/auth/verifyUser')
             .send(data)
-            .expect(200, done);
+            .expect(200).then(function (results,err) {
+                console.log("err"+err);
+                console.log("results"+JSON.stringify(results));
+                should.not.exist(err);
+                should.exist(results);
+                done();
+
+        });
         
     });
 
