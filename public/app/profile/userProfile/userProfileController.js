@@ -4,6 +4,18 @@
 
 
 (function() {
+  angular
+      .module('myApp')
+      .controller('userProfileController', userProfileController);
+
+  userProfileController.$inject=[
+    '$scope',
+    '$window',
+    'userProfileService',
+    'ngProgressFactory',
+    'spinnerService',
+    'userDashboardService'
+  ];
 
   function userProfileController($scope,$window,userProfileService,ngProgressFactory,spinnerService,userDashboardService) {
 
@@ -55,8 +67,8 @@
     $scope.getView = function(value) {
 
       return ((value === 'local' && localStorage.getItem('localView') === 'true') ||
-           (value === 'facebook' && localStorage.getItem('facebookView') === 'true') ||
-           (value === 'google' && localStorage.getItem('googleView') === 'true'));
+      (value === 'facebook' && localStorage.getItem('facebookView') === 'true') ||
+      (value === 'google' && localStorage.getItem('googleView') === 'true'));
 
     };
 
@@ -291,35 +303,35 @@
 
       userProfileService.getPersonalData()
 
-                .then(function(response) {
+          .then(function(response) {
 
-                  $scope.personalData = response.data;
+            $scope.personalData = response.data;
 
-                  if ($scope.personalData.userType === 'admin') {
-                    $scope.userCredentials = false;
-                  }
+            if ($scope.personalData.userType === 'admin') {
+              $scope.userCredentials = false;
+            }
 
-                  if ($scope.personalData.profile_pic !== null) {
+            if ($scope.personalData.profile_pic !== null) {
 
-                    $scope.file = '../../../uploads/profile/' + $scope.personalData.profile_pic;
+              $scope.file = '../../../uploads/profile/' + $scope.personalData.profile_pic;
 
-                    console.log('User Profile Pic --->' + $scope.file);
+              console.log('User Profile Pic --->' + $scope.file);
 
-                  }
+            }
 
-                  if ($scope.personalData.facebook_img !== null) {
-                    $scope.fb_link = false;
-                    open();
-                  }
-                  if ($scope.personalData.google_img !== null) {
-                    $scope.google_link = false;
-                  }
+            if ($scope.personalData.facebook_img !== null) {
+              $scope.fb_link = false;
+              open();
+            }
+            if ($scope.personalData.google_img !== null) {
+              $scope.google_link = false;
+            }
 
-                }, function(error) {
+          }, function(error) {
 
-                  console.error(error);
+            console.error(error);
 
-                });
+          });
 
     };
 
@@ -351,9 +363,6 @@
     };
 
   }
-
-  myApp.controller('userProfileController',userProfileController);
-
 })();
 
 

@@ -1,8 +1,17 @@
 /**
  * Created by CSS on 25-05-2016.
  */
-
 (function() {
+  angular
+      .module('myApp')
+      .controller('loginController', loginController);
+
+  loginController.$inject=[
+    '$scope',
+    'loginService',
+    'ngProgressFactory',
+    'spinnerService'
+  ];
 
   function loginController($scope,loginService,ngProgressFactory,
                            spinnerService) {
@@ -59,24 +68,21 @@
       spinnerService.show('html5spinner');
       console.log('username --->' + user);
       loginService.verifyUser(user.$viewValue, password.$modelValue)
-                .then(function(result) {
-                  if (result !== '') {
-                    loginService.profilePage().then(function() {
-                      // $scope.progressbar.complete();
-                      spinnerService.hide('html5spinner');
-                    });
-                  }else {
-                    loginService.loginPageWithError().then(function() {
-                      // $scope.progressbar.complete();
-                      spinnerService.hide('html5spinner');
-                    });
-                  }
-                });
+          .then(function(result) {
+            if (result !== '') {
+              loginService.profilePage().then(function() {
+                // $scope.progressbar.complete();
+                spinnerService.hide('html5spinner');
+              });
+            }else {
+              loginService.loginPageWithError().then(function() {
+                // $scope.progressbar.complete();
+                spinnerService.hide('html5spinner');
+              });
+            }
+          });
 
     };
 
   }
-
-  myApp.controller('loginController',loginController);
-
 })();
