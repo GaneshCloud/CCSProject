@@ -57,6 +57,7 @@
 
         //Function for getting the pattern details//
         $scope.getPattern = function (ptrn) {
+            if(ptrn==='' || ptrn===null || isNaN(ptrn)) return false;
             $scope.docPattern = $scope.type[ptrn - 1].ptrn;
         };
 
@@ -68,9 +69,7 @@
 
 
         $scope.singleFileUpload = function () {
-            uploadMultipleServices.singleFileUpload().then(function () {
-
-            });
+            uploadMultipleServices.singleFileUpload();
         };
 
         //Function for getting the url parameter value//
