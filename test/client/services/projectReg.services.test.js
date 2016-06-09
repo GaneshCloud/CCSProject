@@ -77,9 +77,9 @@ describe('projectReg service',function(){
         it('post data function',inject(function($httpBackend){
 
             $httpBackend
-                .when('DELETE','/deletedata/2')
+                .when('DELETE','/deletedata/16')
                 .respond(200);
-            var res=$factory.deleteData(2);
+            var res=$factory.deleteData(16);
             expect($httpBackend.flush).not.toThrow();
         })) ;
 

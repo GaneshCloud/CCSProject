@@ -161,7 +161,7 @@ describe('Main Controller', function(){
 
             $scope.deleteData();
 
-            expect($scope.id).not.toBeNull();
+            expect($scope.id).not.toBeNull();//dd
 
         });
     });
