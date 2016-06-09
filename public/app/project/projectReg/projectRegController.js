@@ -126,7 +126,7 @@
                             var begin = (($scope.cur_page - 1) * $scope.items_per_page), end = begin + $scope.items_per_page;
                             console.log(begin + ' ' + end);
                             $scope.dataFilter = $scope.datas.slice(begin, end);
-                            // Alert("data"+$scope.searchres);
+                            // Alert("data"+$scope.searches);
                         });
                     }
 
@@ -168,7 +168,8 @@
             };
 
 
-            projectRegService.postData(data).success(function(data) {
+            projectRegService.postData(data)
+                .success(function(data) {
                 alert('The Feedback Saved Successfully!!!' + data);
                 $scope.getFeedbacks();
             }).
