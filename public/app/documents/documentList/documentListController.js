@@ -1,5 +1,3 @@
-'use strict';
-
  myApp.controller('documentListController', function($scope,documentListServices,starServices,iconServices,adminDashboardService,$window) {
         
 
@@ -39,7 +37,7 @@
         $scope.orderMe=function(f){
 
             if(f===null || f==='') $scope.isReverse=$scope.isReverse;
-             if ($scope.field == f){
+             if ($scope.field === f){
                $scope.isReverse = !$scope.isReverse;
             return;
             }
@@ -54,7 +52,7 @@
         //function for getting ratingInformation of each documents//
         $scope.getRateInfo=function(id){
 
-            if(id=='' || id==null || isNaN(id)) return false;
+            if(id==='' || id===null || isNaN(id)) return false;
             starServices.getStarInfo(id)
             .success(function(data){
                 $scope.rateInfo=data;

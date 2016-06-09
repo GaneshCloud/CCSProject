@@ -1,5 +1,3 @@
-
-'use strict';
 myApp.factory('documentListServices', function($http,$window) {
         
 

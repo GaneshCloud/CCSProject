@@ -26,7 +26,7 @@
     };
 
     $scope.simpleAccordionOptions = {
-      closeOthers: true
+      closeOthers: false
     };
 
     userDashboardService.checkUser();

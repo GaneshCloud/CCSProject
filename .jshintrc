@@ -26,7 +26,10 @@
     "jQuery",
     "Buffer",
     "it",
-    "describe"
+    "describe",
+    "beforeEach",
+    "afterEach",
+    "null"
     ],
   // "strict": "global",
   "indent":1,

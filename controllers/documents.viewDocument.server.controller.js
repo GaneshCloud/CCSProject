@@ -17,7 +17,7 @@ var mysql=require('mysql'),
             var fileName="";
 
             docService.getDocById(id,function(err,data){
-                if(data.length<=0) return
+                if(data.length<=0) return;
             fileName=data[0].DOCFILE;
             var ext = fileName.substring(fileName.lastIndexOf('.') + 1);
             var zip = new admZip(__dirname+"/../public/uploads/documents/"+id+"."+ext);
@@ -43,7 +43,7 @@ var mysql=require('mysql'),
     exports.viewDocument=function(req,res){
         var id = req.query.id;
 
-        if(id=='' || id==null || isNaN(id)) return res.end("invalid");
+        if(id==='' || id===null || isNaN(id)) return res.end("invalid");
         docService.incrViews(id,function(err){
            if(err) throw err;
             res.end("valid");
@@ -58,7 +58,7 @@ var mysql=require('mysql'),
 
         var id = req.query.id;
 
-        if(id=='' || id==null || isNaN(id)) return resp.end("invalid");
+        if(id==='' || id===null || isNaN(id)) return resp.end("invalid");
         console.log(id);
         var ext="";
         var filename;
@@ -92,7 +92,7 @@ var mysql=require('mysql'),
 
     exports.nextDocument=function(req,res){
         var id=req.query.id;
-        if(id=='' || id==null || isNaN(id)) return res.end("invalid");
+        if(id==='' || id===null || isNaN(id)) return res.end("invalid");
 
       docService.getNextDocument(id,function(err,data){
         console.log(data);
@@ -105,7 +105,7 @@ var mysql=require('mysql'),
 
     exports.prevDocument=function(req,res){
       var id=req.query.id;
-        if(id=='' || id==null || isNaN(id)) return res.end("invalid");
+        if(id==='' || id===null || isNaN(id)) return res.end("invalid");
 
       docService.getPrevDocument(id,function(err,data){
       console.log(data);
@@ -118,7 +118,7 @@ var mysql=require('mysql'),
     exports.userMode=function(req,res,next){
         var userMode={mode:req.session.userMode};
         console.log(userMode);
-        if(userMode=="Admin"){
+        if(userMode==="Admin"){
             next();
         }else{
             res.send("error");
@@ -130,7 +130,7 @@ var mysql=require('mysql'),
     exports.readZip=function(req,res){
 
       var id=req.query.id;
-        if(id=='' || id==null || isNaN(id)) return res.end("invalid");
+        if(id==='' || id===null || isNaN(id)) return res.end("invalid");
 
         console.log(id);
         var data=unZipFile(id);
