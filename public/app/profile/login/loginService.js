@@ -1,71 +1,82 @@
 /**
  * Created by CSS on 25-05-2016.
  */
-angular.module('myApp')
-    .factory('loginService', function($http, $window, $q) {
-      var httpPromise;
-      return {
+(function() {
+  angular
+      .module('myApp')
+      .factory('loginService', loginService);
 
-        loginWithFacebook: function() {
-          $window.location.href = '/auth/facebook';
-        },
+  loginService.$inject=[
+    '$http',
+    '$window',
+    '$q'
+  ];
 
-        loginWithGoogle: function() {
-          $window.location.href = '/auth/google';
-        },
+  function loginService($http, $window, $q) {
+    var httpPromise;
+    return {
 
-        verifyUser: function(user, password) {
-          var dfr = $q.defer();
+      loginWithFacebook: function () {
+        $window.location.href = '/auth/facebook';
+      },
 
-          httpPromise = $http({
-            method: 'post',
+      loginWithGoogle: function () {
+        $window.location.href = '/auth/google';
+      },
 
-            url: '/auth/verifyUser',
+      verifyUser: function (user, password) {
+        var dfr = $q.defer();
 
-            data: {
-              user: user,
+        httpPromise = $http({
+          method: 'post',
 
-              password: password
+          url: '/auth/verifyUser',
 
-            }
+          data: {
+            user: user,
 
-          });
+            password: password
 
-          httpPromise.then(function(response) {
-            dfr.resolve(response.data);
-          }, function(error) {
-            console.error(error);
-          });
+          }
 
-          return dfr.promise;
-        },
+        });
 
-        profilePage: function() {
-          var dfr = $q.defer();
+        httpPromise.then(function (response) {
+          dfr.resolve(response.data);
+        }, function (error) {
+          console.error(error);
+        });
 
-          httpPromise = $http({
-            method: 'get',
+        return dfr.promise;
+      },
 
-            url: '/connect/getPersonalData'
+      profilePage: function () {
+        var dfr = $q.defer();
 
-          });
+        httpPromise = $http({
+          method: 'get',
 
-          httpPromise.then(function(response) {
-            dfr.resolve(response);
+          url: '/connect/getPersonalData'
 
-            if (response.data.userType === 'admin') {
-              $window.location.href = '/profile/adminDashboard';
-            } else if (response.data.userType === 'user') {
-              $window.location.href = '/profile/userDashboard';
-            }else {
-              $window.location.href = '/';
-            }
-          }, function(error) {
-            console.error(error);
-          });
+        });
 
-          return dfr.promise;
-        }
+        httpPromise.then(function (response) {
+          dfr.resolve(response);
 
-      };
-    });
+          if (response.data.userType === 'admin') {
+            $window.location.href = '/profile/adminDashboard';
+          } else if (response.data.userType === 'user') {
+            $window.location.href = '/profile/userDashboard';
+          } else {
+            $window.location.href = '/';
+          }
+        }, function (error) {
+          console.error(error);
+        });
+
+        return dfr.promise;
+      }
+
+    };
+  }
+})();

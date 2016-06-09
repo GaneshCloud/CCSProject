@@ -1,12 +1,19 @@
 /**
  * Created by CSS on 27-05-2016.
  */
-myApp.filter('startFrom', function() {
-  return function(input, start) {
-    if (input) {
-      start = +start;
-      return input.slice(start);
-    }
-    return [];
-  };
-});
+
+(function() {
+  angular
+      .module('myApp')
+      .filter('startFrom', startFrom);
+
+  function startFrom() {
+    return function (input, start) {
+      if (input) {
+        start = +start;
+        return input.slice(start);
+      }
+      return [];
+    };
+  }
+})();

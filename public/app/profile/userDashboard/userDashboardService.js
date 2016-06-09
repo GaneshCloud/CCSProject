@@ -4,60 +4,71 @@
 /**
  * Created by CSS on 25-05-2016.
  */
-angular.module('myApp')
-    .factory('userDashboardService', function($http, $window, $q) {
-      var httpPromise;
-      return {
+(function() {
+  angular
+      .module('myApp')
+      .factory('userDashboardService', userDashboardService);
 
-        pageReload: function() {
-          $window.location.reload();
-        },
+  userDashboardService.$inject=[
+    '$http',
+    '$window',
+    '$q'
+  ];
 
-        logout: function() {
-          $window.location.href = '/logout';
-        },
+  function userDashboardService($http, $window, $q) {
+    var httpPromise;
+    return {
 
-        userProfile: function() {
-          $window.location.href = '/profile/userProfile';
-        },
+      pageReload: function () {
+        $window.location.reload();
+      },
 
-        userDocumentation: function() {
-          $window.location.href = '/documents/documentSearch';
-        },
+      logout: function () {
+        $window.location.href = '/logout';
+      },
 
-        userProjects: function() {
-          $window.location.href = '/project/home';
-        },
+      userProfile: function () {
+        $window.location.href = '/profile/userProfile';
+      },
 
-        checkUser: function() {
-          var dfr = $q.defer();
+      userDocumentation: function () {
+        $window.location.href = '/documents/documentSearch';
+      },
 
-          httpPromise = $http({
-            method: 'get',
+      userProjects: function () {
+        $window.location.href = '/project/home';
+      },
 
-            url: '/getLoggedInUser'
+      checkUser: function () {
+        var dfr = $q.defer();
 
-          });
+        httpPromise = $http({
+          method: 'get',
 
-          httpPromise.then(function(response) {
-            dfr.resolve(response);
-            if (response.data.userType === 'admin') {
-              $window.location.href = '/profile/adminDashboard';
-            }else if (response.data.userType === 'user') {
-                // Already Screen is in User View
-            }else {
-              $window.location.href = '/';
-            }
-          }, function(error) {
-            console.error(error);
-          });
+          url: '/getLoggedInUser'
 
-          return dfr.promise;
-        },
+        });
 
-        openUserForum: function() {
-          $window.location.href = '/forum/home';
-        }
+        httpPromise.then(function (response) {
+          dfr.resolve(response);
+          if (response.data.userType === 'admin') {
+            $window.location.href = '/profile/adminDashboard';
+          } else if (response.data.userType === 'user') {
+            // Already Screen is in User View
+          } else {
+            $window.location.href = '/';
+          }
+        }, function (error) {
+          console.error(error);
+        });
 
-      };
-    });
+        return dfr.promise;
+      },
+
+      openUserForum: function () {
+        $window.location.href = '/forum/home';
+      }
+
+    };
+  }
+})();

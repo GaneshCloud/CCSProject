@@ -1,9 +1,20 @@
 /**
  * Created by CSS on 25-05-2016.
  */
-
-
 (function() {
+  angular
+      .module('myApp')
+      .controller('changePasswordController', changePasswordController);
+
+  changePasswordController.$inject=[
+    '$scope',
+    '$window',
+    'changePasswordService',
+    'ngProgressFactory',
+    'spinnerService',
+    'userDashboardService'
+  ];
+
   function changePasswordController($scope,$window,changePasswordService,ngProgressFactory,spinnerService,userDashboardService) {
 
     $scope.progressbar = ngProgressFactory.createInstance();
@@ -120,40 +131,38 @@
 
       changePasswordService.getPersonalData()
 
-                .then(function(response) {
+          .then(function(response) {
 
-                  $scope.personalData = response.data;
+            $scope.personalData = response.data;
 
-                  if ($scope.personalData.userType === 'admin') {
-                    $scope.userCredentials = false;
-                  }
+            if ($scope.personalData.userType === 'admin') {
+              $scope.userCredentials = false;
+            }
 
-                  if ($scope.personalData.facebook_img !== null) {
+            if ($scope.personalData.facebook_img !== null) {
 
-                    $scope.file = '../images/uploads/' + $scope.personalData.facebook_img;
+              $scope.file = '../images/uploads/' + $scope.personalData.facebook_img;
 
-                    console.log('User Profile Pic --->' + $scope.file);
+              console.log('User Profile Pic --->' + $scope.file);
 
-                  }
+            }
 
-                  if ($scope.personalData.facebook_img !== null) {
-                    $scope.fb_link = false;
-                  }
-                  if ($scope.personalData.google_img !== null) {
-                    $scope.google_link = false;
-                  }
+            if ($scope.personalData.facebook_img !== null) {
+              $scope.fb_link = false;
+            }
+            if ($scope.personalData.google_img !== null) {
+              $scope.google_link = false;
+            }
 
-                }, function(error) {
+          }, function(error) {
 
-                  console.error(error);
+            console.error(error);
 
-                });
+          });
 
     };
 
     getPersonalData();
 
   }
-
-  myApp.controller('changePasswordController',changePasswordController);
 })();

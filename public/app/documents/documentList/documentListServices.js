@@ -1,22 +1,29 @@
-myApp.factory('documentListServices', function($http,$window) {
-        
+(function() {
+    angular
+        .module('myApp')
+        .factory('documentListServices', documentListServices);
 
+    documentListServices.$inject = [
+        '$http',
+        '$window'
+    ];
+    function documentListServices ($http, $window) {
         return {
-           
-            delete : function(id) {
-                return $http.post('/api/docs/delete',id);
+
+            delete: function (id) {
+                return $http.post('/api/docs/delete', id);
             },
-            edit : function(id) {
-                 return $http.get('/api/docs/edit?id='+id);   
+            edit: function (id) {
+                return $http.get('/api/docs/edit?id=' + id);
             },
-            
-            search:function(data){
-                return $http.get('/api/search'+data);
+
+            search: function (data) {
+                return $http.get('/api/search' + data);
             },
-            getDepartment:function(){
+            getDepartment: function () {
                 return $http.get('/api/dep');
             },
-            newDocument:function(){
+            newDocument: function () {
                 $window.location.href = '/documents/singleFileUpload';
             },
             logout: function () {
@@ -26,6 +33,7 @@ myApp.factory('documentListServices', function($http,$window) {
                 $window.location.href = '/profile/adminDashboard';
             }
 
-                 
+
         };
-    });
+    }
+})();
