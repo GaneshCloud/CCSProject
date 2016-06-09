@@ -64,10 +64,7 @@
         $scope.visible = [true,true,true,true,true,true,true];
 
 
-        $(document).ready(function() {
-            $('[data-toggle="tooltip"]').tooltip();
-        });
-
+       
 
 
         $scope.order = function(predicate)    {
