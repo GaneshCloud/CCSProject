@@ -1,30 +1,37 @@
-myApp.service('projectRegService',function($http,$window) {
+(function() {
+  angular.module('myApp')
+      .service('projectRegService', projectRegService);
+
+  projectRegService.$inject=['$http','$window'];
+
+  function projectRegService($http, $window) {
 
 
-  this.getFeedbacks = function()  {
-    return $http.get('/getdata');
-  };
+    this.getFeedbacks = function () {
+      return $http.get('/getdata');
+    };
 
 
-  this.postData = function(data)  {
+    this.postData = function (data) {
 
-    return $http.post('/postdata',data);
-  };
+      return $http.post('/postdata', data);
+    };
 
-  this.updateData = function(data)  {
+    this.updateData = function (data) {
 
-    return $http.post('/editdata',data);
+      return $http.post('/editdata', data);
 
-  };
+    };
 
-  this.deleteData = function(id)  {
-    return $http.delete('/deletedata/' + id);
-  };
-  this.logout = function() {
-    $window.location.href = '/logout';
-  };
-  this.goToDashboard = function() {
-    $window.location.href = '/profile/adminDashboard';
-  };
+    this.deleteData = function (id) {
+      return $http.delete('/deletedata/' + id);
+    };
+    this.logout = function () {
+      $window.location.href = '/logout';
+    };
+    this.goToDashboard = function () {
+      $window.location.href = '/profile/adminDashboard';
+    };
 
-});
+  }
+})();

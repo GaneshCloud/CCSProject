@@ -7,8 +7,8 @@
  * Created by Administrator on 5/30/2016.
  */
 
-var expect = require('chai').expect
-    , controllerToTest = require('../../../controllers/documents.star.server.controller');
+var expect = require('chai').expect;
+var controllerToTest = require('../../../controllers/documents.star.server.controller');
 
 
 describe("Star controller",function () {

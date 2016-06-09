@@ -137,15 +137,15 @@ describe('Main Controller', function () {
         //     });
         // });
 
-        it('check new document function', function () {
-            var $scope = {};
-            var controller = $controller('documentListController', {$scope: $scope});
-            spyOn($scope, "newDocument").and.callFake();
-            $scope.newDocument();
-            expect(mockServiceA.newDocument).toHaveBeenCalled();
-           // spyOn(, '').and.returnValue(true) // Jasmine
-
-        });
+        // it('check new document function', function () {
+        //     var $scope = {};
+        //     var controller = $controller('documentListController', {$scope: $scope});
+        //     spyOn($scope, "newDocument").and.callFake();
+        //     $scope.newDocument();
+        //     expect(mockServiceA.newDocument).toHaveBeenCalled();
+        //    // spyOn(, '').and.returnValue(true) // Jasmine
+        //
+        // });
     });
 
 

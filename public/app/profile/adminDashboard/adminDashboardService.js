@@ -1,62 +1,73 @@
 /**
  * Created by CSS on 25-05-2016.
  */
-angular.module('myApp')
-    .factory('adminDashboardService', function($http, $window, $q) {
-      var httpPromise;
-      return {
+(function() {
+  angular
+      .module('myApp')
+      .factory('adminDashboardService', adminDashboardService);
 
-        pageReload: function() {
-          $window.location.reload();
-        },
+  adminDashboardService.$inject=[
+    '$http',
+    '$window',
+    '$q'
+  ];
 
-        logout: function() {
-          $window.location.href = '/logout';
-        },
+  function adminDashboardService($http, $window, $q) {
+    var httpPromise;
+    return {
 
-        adminProfile: function() {
-          $window.location.href = '/profile/adminProfile';
-        },
+      pageReload: function () {
+        $window.location.reload();
+      },
 
-        adminDocumentaion: function() {
-          $window.location.href = '/documents/singleFileUpload';
-        },
+      logout: function () {
+        $window.location.href = '/logout';
+      },
 
-        projectReg: function() {
+      adminProfile: function () {
+        $window.location.href = '/profile/adminProfile';
+      },
 
-          $window.location.href = '/project/projectReg';
-        },
+      adminDocumentaion: function () {
+        $window.location.href = '/documents/singleFileUpload';
+      },
 
-        goToAdminDashboard: function() {
-          $window.location.href = '/profile/adminDashboard';
-        },
+      projectReg: function () {
 
-        checkAdmin: function() {
-          var dfr = $q.defer();
+        $window.location.href = '/project/projectReg';
+      },
 
-          httpPromise = $http({
-            method: 'get',
+      goToAdminDashboard: function () {
+        $window.location.href = '/profile/adminDashboard';
+      },
 
-            url: '/getLoggedInUser'
+      checkAdmin: function () {
+        var dfr = $q.defer();
 
-          });
+        httpPromise = $http({
+          method: 'get',
 
-          httpPromise.then(function(response) {
-            dfr.resolve(response);
+          url: '/getLoggedInUser'
 
-            if (response.data.userType === 'admin') {
-                // Already it is in Admin Page
-            } else if (response.data.userType === 'user') {
-              $window.location.href = '/profile/userDashboard';
-            }else {
-              $window.location.href = '/';
-            }
-          }, function(error) {
-            console.error(error);
-          });
+        });
 
-          return dfr.promise;
-        }
+        httpPromise.then(function (response) {
+          dfr.resolve(response);
 
-      };
-    });
+          if (response.data.userType === 'admin') {
+            // Already it is in Admin Page
+          } else if (response.data.userType === 'user') {
+            $window.location.href = '/profile/userDashboard';
+          } else {
+            $window.location.href = '/';
+          }
+        }, function (error) {
+          console.error(error);
+        });
+
+        return dfr.promise;
+      }
+
+    };
+  }
+})();

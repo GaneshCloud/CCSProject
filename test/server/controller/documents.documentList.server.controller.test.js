@@ -1,9 +1,9 @@
 /**
  * Created by Administrator on 5/30/2016ss.
  */
-var expect = require('chai').expect
-    , controllerToTest = require('../../../controllers/documents.documentList.server.controller')
-    , documentService = require('../../../config/db/documents/documentdb');
+var expect = require('chai').expect;
+var controllerToTest = require('../../../controllers/documents.documentList.server.controller');
+var documentService = require('../../../config/db/documents/documentdb');
 
 describe('documentList Controller', function() {
     describe('delete Document', function() {
@@ -16,7 +16,7 @@ describe('documentList Controller', function() {
             // we provide the response object which the controller uses
             var res = {
                 end: function() {
-                    expect()
+                    expect();
                     done();
                 }
             };

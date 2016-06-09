@@ -28,7 +28,8 @@
     "it",
     "describe",
     "beforeEach",
-    "afterEach"
+    "afterEach",
+    "null"
     ],
   // "strict": "global",
   "indent":1,

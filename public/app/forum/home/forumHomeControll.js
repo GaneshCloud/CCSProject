@@ -1,4 +1,16 @@
+
 (function() {
+  angular
+      .module('myApp')
+      .controller('forumController', forumController);
+
+  forumController.$inject=[
+    '$scope',
+    '$window',
+    'forumService',
+    'filterFilter'
+  ];
+
   function forumController($scope,$window,forumService,filterFilter) {
     $scope.getForumQus = [];
     $scope.Forumanswers = [];
@@ -45,7 +57,7 @@
         $scope.totalItems = $scope.getForumQus.length;
         $scope.$watch('curpage + itemspage', function() {
           var begin = (($scope.curpage - 1) * $scope.itemspage),
-            end = begin + $scope.itemspage;
+              end = begin + $scope.itemspage;
           $scope.filteredDoc = $scope.getForumQus.slice(begin, end);
         });
       });
@@ -91,19 +103,19 @@
 
     // -------------------------POST ANSWER------------------------------------------------- //
     $scope.postAnswer = function(qusId, Comment) {
-        var data = {
-          qusId: qusId,
-          Comment: Comment
-        };
-        forumService.postAnswer(data).then(function() {
-          alert('Data Inserted Successfully');
-          $scope.Comment = '';
-          getForum($scope.forumtype);
-          //GetForum($scope.answer.Answers);
-        });
-
-
+      var data = {
+        qusId: qusId,
+        Comment: Comment
       };
+      forumService.postAnswer(data).then(function() {
+        alert('Data Inserted Successfully');
+        $scope.Comment = '';
+        getForum($scope.forumtype);
+        //GetForum($scope.answer.Answers);
+      });
+
+
+    };
 
     // -------------------------Search------------------------------------------------- //
     $scope.sort = function(keyname) {
@@ -126,6 +138,5 @@
 
     getForum($scope.forumtype);
   }
-  myApp.controller('forumController', forumController);
 })();
 // ------------------------- END-------------------------------------------------------//

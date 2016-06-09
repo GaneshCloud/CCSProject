@@ -1,10 +1,15 @@
+(function() {
+  angular
+      .module('myApp')
+      .filter('startFrom', startFrom);
 
-myApp.filter('startFrom', function() {
-  return function(input, start) {
-    if (input) {
-      start = +start;
-      return input.slice(start);
-    }
-    return [];
-  };
-});
+  function startFrom() {
+    return function (input, start) {
+      if (input) {
+        start = +start;
+        return input.slice(start);
+      }
+      return [];
+    };
+  }
+})();
