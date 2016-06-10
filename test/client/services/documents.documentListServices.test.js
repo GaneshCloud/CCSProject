@@ -6,12 +6,14 @@
  */
 describe('Document List Services', function () {
 
-    var $controller,$factory,provide;
-    beforeEach(module('myApp'));
-    module(function($provide) {
-        $provide.value('$window', $window);
-    });
+    var $controller,$factory,windowObj;
 
+    beforeEach(module(function($provide) {
+        windowObj = {location: {href: ''}};
+        $provide.value('$window', windowObj);
+    }));
+
+    beforeEach(module('myApp'));
 
     beforeEach(inject(function($injector,$httpBackend){
         $factory=$injector.get("documentListServices");
@@ -93,37 +95,28 @@ describe('Document List Services', function () {
                 .when('GET', '/api/dep2')
                 .respond(200);
             var res=$factory.getDepartment();
-            expect($httpBackend.flush).toThrow();
+            expect($httpBackend.flush).toThrow();//ssss
         }));
     });
 
     describe("new docmnwet",function () {
-        beforeEach(function() {
-            $window = {location: { href: jasmine.createSpy()} };
-        });
         it('href redirects', function() {
-            // $factory.newDocument();
-            // expect($window.location.href).toHaveBeenCalledWith('/documents/singleFileUpload');
+            $factory.newDocument();
+            expect(windowObj.location.href).toEqual('/documents/singleFileUpload');
         });
     });
 
     describe("logout docmnwet",function () {
-        beforeEach(function() {
-            $window = {location: { href: jasmine.createSpy()} };
-        });
         it('href redirects', function() {
-            // $factory.logout();
-            // expect($window.location.href).toHaveBeenCalledWith('/logout');
+            $factory.logout();
+            expect(windowObj.location.href).toEqual('/logout');
         });
     });
 
     describe("logout docmnwet",function () {
-        beforeEach(function() {
-            $window = {location: { href: jasmine.createSpy()} };
-        });
         it('href redirects', function() {
-            // $factory.goToDashboard();
-            // expect($window.location.href).toHaveBeenCalledWith('/profile/adminDashboard');
+            $factory.goToDashboard();
+            expect(windowObj.location.href).toEqual('/profile/adminDashboard');
         });
     });
 

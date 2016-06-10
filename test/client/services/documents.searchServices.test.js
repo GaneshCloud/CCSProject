@@ -4,7 +4,13 @@
 
 describe('Search Services', function () {
 
-    var $controller,$factory,provide;
+    var $controller,$factory,provide,windowObj;
+
+    beforeEach(module(function($provide) {
+        windowObj = {location: {href: ''}};
+        $provide.value('$window', windowObj);
+    }));
+
     beforeEach(module('myApp'));
     module(function($provide) {
         $provide.value('$window', $window);
@@ -78,22 +84,16 @@ describe('Search Services', function () {
     });
 
     describe("logout docmnwet",function () {
-        beforeEach(function() {
-            $window = {location: { href: jasmine.createSpy()} };
-        });
         it('href redirects', function() {
-            // $factory.logout();
-            // expect($window.location.href).toHaveBeenCalledWith('/logout');
+            $factory.logout();
+            expect(windowObj.location.href).toEqual('/logout');
         });
     });
 
     describe("logout docmnwet",function () {
-        beforeEach(function() {
-            $window = {location: { href: jasmine.createSpy()} };
-        });
         it('href redirects', function() {
-            // $factory.goToDashboard();
-            // expect($window.location.href).toHaveBeenCalledWith('/profile/adminDashboard');
+            $factory.goToDashboard();
+            expect(windowObj.location.href).toEqual('/profile/userDashboard');
         });
     });
     
