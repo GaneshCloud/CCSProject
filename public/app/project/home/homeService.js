@@ -6,7 +6,7 @@
 
   function homeService($http, $window) {
     return {
-      data: function () {
+      projectData: function () {
         return $http.get('/data');
       },
       projectHistory: function () {

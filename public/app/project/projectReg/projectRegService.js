@@ -19,7 +19,7 @@
 
     this.updateData = function (data) {
 
-      return $http.post('/editdata', data);
+      return $http.put('/editdata', data);
 
     };
 
