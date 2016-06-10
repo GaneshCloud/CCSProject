@@ -19,7 +19,7 @@
 
     $scope.credentialsInvalid = false;
 
-    loginService.profilePage();
+    loginService.checkUser();
 
 
     $scope.loginWithFacebook = function() {

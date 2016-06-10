@@ -105,23 +105,17 @@ describe('single file upload Services', function () {
         });
     });
 
-    describe("logout documet",function () {
-        beforeEach(function() {
-            $window = {location: { href: jasmine.createSpy()} };
-        });
-        it('href redirects', function() {
-            $factory.logout();
-            expect(windowObj.location.href).toEqual('/logout');
-        });
-    });
+    // describe("logout documet",function () {
+    //     it('href redirects', function() {
+    //         $factory.logout();
+    //         expect(windowObj.location.href).toEqual('/logout');
+    //     });
+    // });
 
     describe("logout docmnwet",function () {
-        beforeEach(function() {
-            $window = {location: { href: jasmine.createSpy()} };
-        });
         it('href redirects', function() {
             $factory.goToDashboard();
-            expect(windowObj.location.href).toEqual('/profile/adminDashboard');
+            expect(windowObj.location.href).toEqual('/profile/dashboard');
         });
     });
 });
