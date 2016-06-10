@@ -129,15 +129,15 @@
 //function for getting department details//
         $scope.getDepartment=function(){
             documentListServices.getDepartment()
-                .success(function(data){
+                .then(function(data){
                     $scope.dep=data;
                     $scope.dep.splice(0, 0,
                         {DEP_ID: "-1", DEP_NAME: "All Department"}
                     );
                 })
-                .error(function(err){
-                    console.log(err);
-                });
+                // .error(function(err){
+                //     console.log(err);
+                // });
         };
 
         //function for searching documents//
