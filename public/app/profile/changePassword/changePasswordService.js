@@ -52,26 +52,11 @@
       },
 
       profilePage: function () {
-        var dfr = $q.defer();
 
-        httpPromise = $http({
-          method: 'get',
-
-          url: '/getLoggedInUser'
-
-        });
-
-        httpPromise.then(function (response) {
-          dfr.resolve(response);
-
-          if (response.data.userType) {
+          if (localStorage.getItem('userType')) {
             $window.location.href = '/profile/dashboard';
           }
-        }, function (error) {
-          console.error(error);
-        });
-
-        return dfr.promise;
+        
       }
 
     };

@@ -51,6 +51,10 @@
 
           }
 
+          if(results.data.userType){
+            localStorage.setItem('userType',results.data.userType);
+          }
+
           defer.resolve(results);
 
         });
@@ -59,19 +63,11 @@
 
       },
 
-      profilePage: function () {
+      checkUser: function () {
 
-        $http({
-          method: 'get',
-
-          url: '/connect/getPersonalData'
-
-        }).then(function (response)
-        {
-          if (response.data.userType) {
+         if (localStorage.getItem('userType')) {
             $window.location.href = '/profile/dashboard';
           }
-        });
       }
 
     };
