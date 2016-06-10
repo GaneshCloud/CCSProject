@@ -5,10 +5,11 @@
     projectRegController.$inject=[
         '$scope',
         '$window',
-        'projectRegService'
+        'projectRegService',
+        'dashboardService'
     ];
 
-    function projectRegController($scope,$window,projectRegService) {
+    function projectRegController($scope,$window,projectRegService,dashboardService) {
 
         $scope.names = ['mechanical', 'mechatronics', 'ECE', 'CS', 'IT'];
         $scope.Title = ['Mechanical Projects', 'Aeronatical Projects', 'ECE Projects', 'Embaded projects', 'IT Projects'];
@@ -49,7 +50,7 @@
 
         $scope.onLogout = function() {
             if ($window.confirm('Are You Sure ! Do you need to Log Out?')) {
-                projectRegService.logout();
+                dashboardService.logout();
             }
         };
 

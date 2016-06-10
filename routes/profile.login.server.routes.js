@@ -4,7 +4,7 @@
 
 module.exports = function(app) {
   var login = require('../controllers/profile.login.server.controller');
-  // Var layout = require('../controllers/project.layout.server.controller');
+  // Var layout = require('../controllers/project.layout.server.controllers');
 
   //App.get('/', layout.layout);
   app.use('/auth',login);

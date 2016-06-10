@@ -39,9 +39,6 @@ passport.use(new facebookStrategy({
               if (results) {
                 return done(null, results);
               }
-            })
-            .fail(function(err) {
-              console.error(JSON.stringify(err));
             });
     }
 
@@ -80,14 +77,14 @@ router.post('/verifyUser',function(req,res) {
 router.get('/facebook', passport.authenticate('facebook', {scope: ['email', 'user_friends', 'manage_pages', 'user_hometown']}));
 
 router.get('/facebook/callback',
-    passport.authenticate('facebook', { successRedirect: '/profile/userDashboard',
+    passport.authenticate('facebook', { successRedirect: '/profile/dashboard',
         failureRedirect: '/' }));
 
 router.get('/google', passport.authenticate('google', {scope: ['https://www.googleapis.com/auth/plus.login',
     'https://www.googleapis.com/auth/plus.profile.emails.read'] }));
 
 router.get('/google/callback',
-    passport.authenticate('google', { successRedirect: '/profile/userDashboard',
+    passport.authenticate('google', { successRedirect: '/profile/dashboard',
         failureRedirect: '/' }));
 
 module.exports = router;

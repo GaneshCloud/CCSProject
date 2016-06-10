@@ -12,16 +12,16 @@
     'changePasswordService',
     'ngProgressFactory',
     'spinnerService',
-    'userDashboardService'
+    'dashboardService'
   ];
 
-  function changePasswordController($scope,$window,changePasswordService,ngProgressFactory,spinnerService,userDashboardService) {
+  function changePasswordController($scope,$window,changePasswordService,ngProgressFactory,spinnerService,dashboardService) {
 
     $scope.progressbar = ngProgressFactory.createInstance();
 
     $scope.userCredentials = false;
 
-    userDashboardService.checkUser();
+    dashboardService.checkAdmin();
 
     $scope.isOldPasswordValid = function(oldPassword) {
 

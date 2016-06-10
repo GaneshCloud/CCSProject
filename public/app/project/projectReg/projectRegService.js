@@ -26,11 +26,8 @@
     this.deleteData = function (id) {
       return $http.delete('/deletedata/' + id);
     };
-    this.logout = function () {
-      $window.location.href = '/logout';
-    };
     this.goToDashboard = function () {
-      $window.location.href = '/profile/adminDashboard';
+      $window.location.href = '/profile/dashboard';
     };
 
   }

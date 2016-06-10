@@ -8,10 +8,11 @@
     '$scope',
     '$window',
     'forumService',
+    'dashboardService',
     'filterFilter'
   ];
 
-  function forumController($scope,$window,forumService,filterFilter) {
+  function forumController($scope,$window,forumService,dashboardService,filterFilter) {
     $scope.getForumQus = [];
     $scope.Forumanswers = [];
     $scope.Question = '';
@@ -31,7 +32,7 @@
 
       if ($window.confirm('Are You Sure ! Do you need to Log Out?')) {
 
-        forumService.logout();
+        dashboardService.logout();
 
       }
 

@@ -8,11 +8,11 @@
         'documentListServices',
         'starServices',
         'iconServices',
-        'adminDashboardService',
+        'dashboardService',
         '$window'
     ];
 
-    function documentListController($scope,documentListServices,starServices,iconServices,adminDashboardService,$window) {
+    function documentListController($scope,documentListServices,starServices,iconServices,dashboardService,$window) {
         $scope.formData = [];               //model for storing the inputting data
         $scope.filteredRes=[];              //model for store filtered result
         $scope.searchres=[];                //model for store the search result
@@ -69,7 +69,7 @@
 
         ];//array for store document type
 
-        adminDashboardService.checkAdmin();
+        dashboardService.checkAdmin();
 
         //  order function based on a order field//
         $scope.orderMe=function(f){
@@ -200,7 +200,7 @@
 
             if ($window.confirm("Are You Sure ! Do you need to Log Out?")) {
 
-                documentListServices.logout();
+                dashboardService.logout();
 
             }
 

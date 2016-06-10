@@ -17,6 +17,8 @@
 
     $scope.userCredentials = false;
 
+    $scope.credentialsInvalid = false;
+
     loginService.profilePage();
 
 
@@ -57,22 +59,31 @@
     };
 
     $scope.submit = function(user, password) {
+      $scope.credentialsInvalid = false;
       spinnerService.show('html5spinner');
       console.log('username --->' + user);
-      loginService.verifyUser(user.$viewValue, password.$modelValue)
-          .then(function(result) {
-            if (result !== '') {
-              loginService.profilePage().then(function() {
-                spinnerService.hide('html5spinner');
-              });
+      loginService.verifyUser(user.$viewValue, password.$modelValue).then(function(result) {
+            if (result.data !== '') {
+              loginService.dashboard();
             }else {
-              loginService.loginPageWithError().then(function() {
-                spinnerService.hide('html5spinner');
-              });
+              loginPageWithError();
             }
           });
 
     };
+
+    $scope.showCredentialsError = function () {
+      return $scope.credentialsInvalid;
+    };
+
+    function loginPageWithError(){
+
+        $scope.user = '';
+        $scope.password = '';
+        $scope.credentialsInvalid = true;
+        spinnerService.hide('html5spinner');
+        
+    }
 
   }
 })();
