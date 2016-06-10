@@ -35,7 +35,6 @@ myApp.controller('multipleFileUploadController', function($scope,uploadMultipleS
   //Function for inceremeenting rows//
 
   $scope.addRow = function() {
-
     $scope.rows.push($scope.rows.length + 1);
   };
 
@@ -48,7 +47,8 @@ myApp.controller('multipleFileUploadController', function($scope,uploadMultipleS
 
   //Function for getting the pattern details//
   $scope.getPattern = function(ptrn) {
-    $scope.docPattern = $scope.type[ptrn - 1].ptrn;
+      if(ptrn===null || ptrn ==='' || isNaN(ptrn)) return false;
+        $scope.docPattern = $scope.type[ptrn - 1].ptrn;
   };
 
   //Function for submitting the form data
@@ -59,9 +59,8 @@ myApp.controller('multipleFileUploadController', function($scope,uploadMultipleS
 
 
   $scope.singleFileUpload = function() {
-    uploadMultipleServices.singleFileUpload().then(function() {
-
-    });
+    uploadMultipleServices.singleFileUpload();
+    
   };
 
   //Function for getting the url parameter value//

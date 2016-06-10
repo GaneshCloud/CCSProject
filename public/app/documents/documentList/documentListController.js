@@ -71,38 +71,38 @@
 
 
         //function for getting data from database//
-        $scope.getData = function() {
-               
-                documentListServices.get()
-
-                .success(function(data) {
-                    
-                    $scope.docs = data; 
-
-                    $scope.$watch("cur_page + items_page", function() {
-
-                        var begin = (($scope.curPage - 1) * $scope.itemsPage), end = begin + $scope.itemsPage;
-
-                        $scope.filteredDoc = $scope.docs.slice(begin, end);
-                       
-                    });
-
-                });
-        };
+        // $scope.getData = function() {
+        //
+        //         documentListServices.get()
+        //
+        //         .success(function(data) {
+        //
+        //             $scope.docs = data;
+        //
+        //             $scope.$watch("cur_page + items_page", function() {
+        //
+        //                 var begin = (($scope.curPage - 1) * $scope.itemsPage), end = begin + $scope.itemsPage;
+        //
+        //                 $scope.filteredDoc = $scope.docs.slice(begin, end);
+        //
+        //             });
+        //
+        //         });
+        // };
 
 
 //function for getting department details//
         $scope.getDepartment=function(){
             documentListServices.getDepartment()
-            .success(function(data){
+            .then(function(data){
                 $scope.dep=data;
                 $scope.dep.splice(0, 0,
                 {DEP_ID: "-1", DEP_NAME: "All Department"}
                 );
             })
-            .error(function(err){
-                console.log(err);
-            });
+            //     .catch(function(){
+            //     console.log('error');
+            // });
         };
 
         //function for searching documents//

@@ -80,14 +80,13 @@ myApp.controller('viewDocumentController', function($scope,viewDocumentServices,
   $scope.Download = function() {
     var id = $scope.getParameterByName('id');
     viewDocumentServices.Download({ID: +id})
-              .success(function(data) {
+              .then(function(data) {
                 console.log(data);
-
-
+                  
               })
-              .error(function() {
-
-              });
+              // .error(function() {
+              //
+              // });
 
   };
 

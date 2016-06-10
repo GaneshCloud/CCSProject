@@ -92,6 +92,7 @@ myApp.controller('searchController', function($scope,documentSearchServices,icon
 
   //Function for change the document searching criteria
   $scope.changeDocument = function(id) {
+    if(id===null || id==='' || isNaN(id))  return false;
     $scope.searchkey.docType = id;
   };
 

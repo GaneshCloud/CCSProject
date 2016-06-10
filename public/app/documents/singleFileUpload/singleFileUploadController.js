@@ -30,7 +30,8 @@ myApp.controller('singleFileUploadController', function($scope,uploadSingleServi
   adminDashboardService.checkAdmin();
   //Function for get the pattern details
   $scope.getPattern = function(ptrn) {
-    $scope.docPattern = $scope.type[ptrn - 1].ptrn;
+        if(ptrn===null || ptrn ==='' || isNaN(ptrn)) return false;
+        $scope.docPattern = $scope.type[ptrn - 1].ptrn;
   };
 
   //Function for save the document
