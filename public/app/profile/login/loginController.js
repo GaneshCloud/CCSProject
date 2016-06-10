@@ -9,18 +9,17 @@
   loginController.$inject=[
     '$scope',
     'loginService',
-    'dashboardService',
     'spinnerService'
   ];
 
-  function loginController($scope,loginService,dashboardService,
+  function loginController($scope,loginService,
                            spinnerService) {
 
     $scope.userCredentials = false;
 
     $scope.credentialsInvalid = false;
 
-    dashboardService.checkAdmin();
+    loginService.profilePage();
 
 
     $scope.loginWithFacebook = function() {

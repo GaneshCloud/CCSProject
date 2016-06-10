@@ -64,10 +64,8 @@
         httpPromise.then(function (response) {
           dfr.resolve(response);
 
-          if (response.data.userType === 'admin') {
+          if (response.data.userType) {
             $window.location.href = '/profile/dashboard';
-          } else {
-            $window.location.href = '/profile/userProfile';
           }
         }, function (error) {
           console.error(error);

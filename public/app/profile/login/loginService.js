@@ -57,6 +57,21 @@
 
         return defer.promise;
 
+      },
+
+      profilePage: function () {
+
+        $http({
+          method: 'get',
+
+          url: '/connect/getPersonalData'
+
+        }).then(function (response)
+        {
+          if (response.data.userType) {
+            $window.location.href = '/profile/dashboard';
+          }
+        });
       }
 
     };
