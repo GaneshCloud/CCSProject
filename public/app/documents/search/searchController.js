@@ -7,11 +7,11 @@
     '$scope',
     'documentSearchServices',
     'iconServices',
-    'userDashboardService',
+    'dashboardService',
     '$window'
   ];
 
-  function searchController($scope, documentSearchServices, iconServices, userDashboardService, $window) {
+  function searchController($scope, documentSearchServices, iconServices, dashboardService, $window) {
 
     $scope.searchkey = {};              //Model for search key object
     $scope.searchkey.docType = -1;        //DocType property of search key object
@@ -30,7 +30,7 @@
     $scope.isReverse = false;             //Model for check asc/ desc
     $scope.srcViews = 'app/documents/search/searchTileView.html';//Model for store the path of the html template
 
-    userDashboardService.checkUser();
+    dashboardService.checkAdmin();
 
     //Function for get the css class
     $scope.getClass = function (id) {
@@ -107,7 +107,7 @@
     // Lodout
     $scope.onLogout = function () {
       if ($window.confirm('Are You Sure ! Do you need to Log Out?')) {
-        documentSearchServices.logout();
+        dashboardService.logout();
       }
     };
     //Dashboard

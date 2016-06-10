@@ -7,12 +7,12 @@
     'Upload',
     '$window',
     '$scope',
-    'userDashboardService'
+    'dashboardService'
   ];
 
-  function uploadController(Upload,$window,$scope,userDashboardService) {
+  function uploadController(Upload,$window,$scope,dashboardService) {
 
-    userDashboardService.checkUser();
+    dashboardService.checkAdmin();
     //Var vm = this;
     $scope.submit = function() { //Function to call on form submit
       if ($scope.uploadForm.file.$valid && $scope.file) { //Check if from is valid
@@ -24,7 +24,7 @@
 
       if ($window.confirm('Are You Sure ! Do you need to Log Out?')) {
 
-        $window.location.href = '/logout';
+        dashboardService.logout();
 
       }
     };

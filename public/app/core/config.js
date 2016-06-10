@@ -13,12 +13,9 @@
             }).when('/profile/userProfile', {
                 controller: 'userProfileController',
                 templateUrl: '../app/profile/userProfile/userProfile.html'
-            }).when('/profile/userDashboard', {
-                templateUrl: '../app/profile/userDashboard/userDashboard.html',
-                controller: 'userDashboardController'
-            }).when('/profile/adminDashboard', {
-                templateUrl: '../app/profile/adminDashboard/adminDashboard.html',
-                controller: 'adminDashboardController'
+            }).when('/profile/dashboard', {
+                templateUrl: '../app/profile/dashboard/dashboard.html',
+                controller: 'dashboardController'
             }).when('/profile/adminProfile', {
                 templateUrl: '../app/profile/adminProfile/adminProfile.html',
                 controller: 'adminProfileController'

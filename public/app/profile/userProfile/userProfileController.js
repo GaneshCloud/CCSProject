@@ -12,16 +12,13 @@
     '$scope',
     '$window',
     'userProfileService',
-    'ngProgressFactory',
     'spinnerService',
-    'userDashboardService'
+    'dashboardService'
   ];
 
-  function userProfileController($scope,$window,userProfileService,ngProgressFactory,spinnerService,userDashboardService) {
+  function userProfileController($scope,$window,userProfileService,spinnerService,dashboardService) {
 
-    userDashboardService.checkUser();
-
-    $scope.progressbar = ngProgressFactory.createInstance();
+    dashboardService.checkAdmin();
 
     $scope.personalData = [];
 
@@ -353,7 +350,7 @@
       if ($window.confirm('Are You Sure ! Do you need to Log Out?')) {
         // $scope.progressbar.start();
         spinnerService.show('html5spinner');
-        userProfileService.logout().then(function() {
+        dashboardService.logout().then(function() {
           // $scope.progressbar.complete();
           spinnerService.hide('html5spinner');
         });

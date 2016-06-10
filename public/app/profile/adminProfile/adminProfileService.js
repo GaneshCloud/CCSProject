@@ -16,10 +16,6 @@
         var httpPromise;
         return {
 
-            logout: function () {
-                $window.location.href = '/logout';
-            },
-
             getUserDetails: function () {
                 var deferred = $q.defer();
 
@@ -35,7 +31,7 @@
             },
 
             goToAdminDashboard: function () {
-                $window.location.href = '/profile/adminDashboard';
+                $window.location.href = '/profile/dashboard';
             }
 
         };

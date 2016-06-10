@@ -6,10 +6,10 @@
     multipleFileUploadController.$inject = [
         '$scope',
         'uploadMultipleServices',
-        'adminDashboardService',
+        'dashboardService',
         '$window'
     ];
-    function multipleFileUploadController($scope, uploadMultipleServices, adminDashboardService, $window) {
+    function multipleFileUploadController($scope, uploadMultipleServices, dashboardService, $window) {
 
         $scope.formData = [{
             ID: '',
@@ -40,7 +40,7 @@
 
         ];            //Model for type of the document
 
-        adminDashboardService.checkAdmin();
+        dashboardService.checkAdmin();
         //Function for inceremeenting rows//
 
         $scope.addRow = function () {
@@ -101,7 +101,7 @@
 
             if ($window.confirm('Are You Sure ! Do you need to Log Out?')) {
 
-                uploadMultipleServices.logout();
+                dashboardService.logout();
 
             }
 

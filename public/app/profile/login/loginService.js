@@ -9,11 +9,10 @@
   loginService.$inject=[
     '$http',
     '$window',
-    '$q'
+      '$q'
   ];
 
-  function loginService($http, $window, $q) {
-    var httpPromise;
+  function loginService($http, $window,$q) {
     return {
 
       loginWithFacebook: function () {
@@ -24,10 +23,15 @@
         $window.location.href = '/auth/google';
       },
 
-      verifyUser: function (user, password) {
-        var dfr = $q.defer();
+      dashboard: function () {
+        $window.location.href = '/profile/dashboard';
+      },
 
-        httpPromise = $http({
+      verifyUser: function (user, password) {
+
+        var defer = $q.defer();
+
+        $http({
           method: 'post',
 
           url: '/auth/verifyUser',
@@ -39,30 +43,31 @@
 
           }
 
+        }).then(function (results,error) {
+
+          if(error){
+
+              defer.reject(error);
+
+          }
+
+          defer.resolve(results);
+
         });
 
-        httpPromise.then(function (response) {
-          dfr.resolve(response.data);
-        }, function (error) {
-          console.error(error);
-        });
+        return defer.promise;
 
-        return dfr.promise;
       },
 
       profilePage: function () {
-        var dfr = $q.defer();
 
-        httpPromise = $http({
+        $http({
           method: 'get',
 
           url: '/connect/getPersonalData'
 
-        });
-
-        httpPromise.then(function (response) {
-          dfr.resolve(response);
-
+        }).then(function (response)
+        {
           if (response.data.userType === 'admin') {
             $window.location.href = '/profile/adminDashboard';
           } else if (response.data.userType === 'user') {
@@ -70,11 +75,7 @@
           } else {
             $window.location.href = '/';
           }
-        }, function (error) {
-          console.error(error);
         });
-
-        return dfr.promise;
       }
 
     };

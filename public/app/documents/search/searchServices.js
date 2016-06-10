@@ -18,11 +18,8 @@
       getDepartment: function() {
         return $http.get('/api/dep');
       },
-      logout: function() {
-        $window.location.href = '/logout';
-      },
       goToDashboard: function() {
-        $window.location.href = '/profile/userDashboard';
+        $window.location.href = '/profile/dashboard';
       }
     };
   }
