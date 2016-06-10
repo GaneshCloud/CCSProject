@@ -3,6 +3,10 @@
  */
 
 (function() {
+    angular.module('myApp')
+        .controller('profileViewModalController', profileViewModalController);
+
+    profileViewModalController.$inject=['$scope'];
 
     function profileViewModalController($scope) {
 
@@ -33,9 +37,5 @@
             this.$parent.$close();
 
         };
-
     }
-
-    myApp.controller('profileViewModalController',profileViewModalController);
-
 })();

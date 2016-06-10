@@ -1,13 +1,19 @@
 /**
  * Created by CSS on 25-05-2016.
  */
-
 (function() {
+  angular
+      .module('myApp')
+      .controller('loginController', loginController);
 
-  function loginController($scope,loginService,ngProgressFactory,
+  loginController.$inject=[
+    '$scope',
+    'loginService',
+    'spinnerService'
+  ];
+
+  function loginController($scope,loginService,
                            spinnerService) {
-
-    $scope.progressbar = ngProgressFactory.createInstance();
 
     $scope.userCredentials = false;
 
@@ -26,13 +32,9 @@
     };
 
     $scope.loginWithGoogle = function() {
-
-      // $scope.progressbar.start();
       spinnerService.show('html5spinner');
 
       loginService.loginWithGoogle().then(function() {
-        // $rootScope.isLogin=true;
-        // $scope.progressbar.complete();
         spinnerService.hide('html5spinner');
       });
 
@@ -55,28 +57,22 @@
     };
 
     $scope.submit = function(user, password) {
-      // $scope.progressbar.start();
       spinnerService.show('html5spinner');
       console.log('username --->' + user);
       loginService.verifyUser(user.$viewValue, password.$modelValue)
-                .then(function(result) {
-                  if (result !== '') {
-                    loginService.profilePage().then(function() {
-                      // $scope.progressbar.complete();
-                      spinnerService.hide('html5spinner');
-                    });
-                  }else {
-                    loginService.loginPageWithError().then(function() {
-                      // $scope.progressbar.complete();
-                      spinnerService.hide('html5spinner');
-                    });
-                  }
-                });
+          .then(function(result) {
+            if (result !== '') {
+              loginService.profilePage().then(function() {
+                spinnerService.hide('html5spinner');
+              });
+            }else {
+              loginService.loginPageWithError().then(function() {
+                spinnerService.hide('html5spinner');
+              });
+            }
+          });
 
     };
 
   }
-
-  myApp.controller('loginController',loginController);
-
 })();

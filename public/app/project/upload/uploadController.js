@@ -1,5 +1,14 @@
 
 (function() {
+  angular.module('myApp')
+      .controller('uploadController', uploadController);
+
+  uploadController.$inject=[
+    'Upload',
+    '$window',
+    '$scope',
+    'userDashboardService'
+  ];
 
   function uploadController(Upload,$window,$scope,userDashboardService) {
 
@@ -18,7 +27,6 @@
         $window.location.href = '/logout';
 
       }
-
     };
 
     $scope.upload = function(file) {
@@ -42,6 +50,4 @@
       });
     };
   }
-
-  myApp.controller('uploadController',uploadController);
 })();

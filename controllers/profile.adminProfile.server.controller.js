@@ -4,16 +4,14 @@
 var personaldataManager = require('../config/db/personaldataManager');
 
 exports.getUserDetails = function(req,res) {
+    console.log("req.session.data"+JSON.stringify(req.session.data));
   if (req.session.data) {
     personaldataManager.getUserDetails('user')
             .then(function(results) {
               if (results) {
                 req.session.userDetails = results;
-                res.send(results);
+                res.end(JSON.stringify(results));
               }
-            })
-            .fail(function(err) {
-              console.error(JSON.stringify(err));
             });
   } else {
     return;

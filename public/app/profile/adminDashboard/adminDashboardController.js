@@ -3,6 +3,17 @@
  */
 
 (function() {
+  angular
+      .module('myApp')
+      .controller('adminDashboardController', adminDashboardController);
+
+  adminDashboardController.$inject=[
+    '$scope',
+    '$window',
+    'adminDashboardService',
+    'ngProgressFactory',
+    'spinnerService'
+  ];
 
   function adminDashboardController($scope,$window,adminDashboardService,ngProgressFactory,spinnerService) {
 
@@ -59,7 +70,4 @@
     };
 
   }
-
-  myApp.controller('adminDashboardController',adminDashboardController);
-
 })();

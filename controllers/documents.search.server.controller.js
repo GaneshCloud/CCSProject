@@ -17,7 +17,7 @@ var mysql=require('mysql'),
 
             console.log("type:"+type+"dep="+dep);
 
-            if(type===-1 && dep===-1)
+            if(type==='-1' && dep==='-1')
             {
               docService.getAllDoc(serStr,function(err,data){
                 result=data;
@@ -25,12 +25,12 @@ var mysql=require('mysql'),
                 res.end(JSON.stringify(result));
               });
             }
-            else if(type===-1)
+            else if(type==='-1')
                 docService.getDocByDep(serStr,dep,function(err,data){
                 result=data;
                 res.end(JSON.stringify(result));
               });
-            else if(dep===-1)
+            else if(dep==='-1')
               docService.getDocByType(serStr,type,function(err,data){
                 result=data;
                 res.end(JSON.stringify(result));
