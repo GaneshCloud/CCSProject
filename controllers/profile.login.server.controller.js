@@ -66,7 +66,7 @@ passport.use(new googleStrategy({
 router.post('/verifyUser',function(req,res) {
   loginManager.getUserValidity(req.body.user, req.body.password)
         .then(function(results) {
-          if (results) {
+          if (results && (results.length > 0)) {
             req.session.data = results[0];
               console.log("req.session.data"+JSON.stringify(req.session.data));
             res.send(results[0]);
