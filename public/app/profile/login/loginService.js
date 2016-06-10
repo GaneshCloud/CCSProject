@@ -50,11 +50,6 @@
               defer.reject(error);
 
           }
-
-          if(results.data.userType){
-            localStorage.setItem('userType',results.data.userType);
-          }
-
           defer.resolve(results);
 
         });

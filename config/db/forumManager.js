@@ -4,8 +4,10 @@
 
 
 var q = require('q');
+var mysql = require('mysql');
 var data = '';
-var ConfigManager = require('./connectionManager');
+var db = require('./../db');
+var con = mysql.createConnection(db);
 
 function getForum(type) {
 
@@ -19,9 +21,8 @@ function getForum(type) {
   } else {
     getQus = 'select * from question where Type=\'' + type + '\' order by qusId DESC ';
   }
-  ConfigManager.getConnection()
-        .then(function(connection) {
-          connection.query(getQus, function(err, result) {
+
+          con.query(getQus, function(err, result) {
 
             if (err) {
               deferred.reject(err);
@@ -42,7 +43,7 @@ function getForum(type) {
 
                 console.log('get answer query' + get);
 
-                connection.query(get, function(err, results) {
+                con.query(get, function(err, results) {
                   if (err) {
                     deferred.reject(err);
                     throw err;
@@ -65,17 +66,14 @@ function getForum(type) {
               });
             }
           });
-        });
   return deferred.promise;
 
 }
 
 function postForumquestion(forumData,userid) {
   var deferred = q.defer();
-  ConfigManager.getConnection()
-        .then(function(connection) {
 
-          connection.query('INSERT INTO question(Question,Dates,Type,Explation,userid) values(\'' + forumData.question + '\',now(),\'' + forumData.Type + '\',\'' + forumData.explation + '\',\'' + userid + '\')', function(err, result) {
+          con.query('INSERT INTO question(Question,Dates,Type,Explation,userid) values(\'' + forumData.question + '\',now(),\'' + forumData.Type + '\',\'' + forumData.explation + '\',\'' + userid + '\')', function(err, result) {
             if (err) {
               console.log(err);
               deferred.reject(err);
@@ -84,21 +82,18 @@ function postForumquestion(forumData,userid) {
               deferred.resolve(result);
             }
           });
-        });
 
   return deferred.promise;
 }
 
 function postForumAnswer(forumData) {
   var deferred = q.defer();
-  ConfigManager.getConnection()
-        .then(function(connection) {
 
           var qry = 'INSERT INTO answer(qusId,Date,Answers)values(' + forumData.qusId + ',now(),\'' + forumData.Comment + '\')';
 
           console.log('Post Answer Query --->' + qry);
 
-          connection.query(qry, function(err, result) {
+          con.query(qry, function(err, result) {
             if (err) {
               console.log('Error when get postAnswer data : ' + err);
               deferred.reject(err);
@@ -108,20 +103,13 @@ function postForumAnswer(forumData) {
               deferred.resolve(result);
             }
           });
-        })
-        .fail(function(err) {
-          console.error(JSON.stringify(err));
-          deferred.reject(err);
-        });
   return deferred.promise;
 }
 
 function postForumRating(ratingArr) {
   var deferred = q.defer();
-  ConfigManager.getConnection()
-        .then(function(connection) {
 
-          connection.query('insert into Rating(qusId,rating) values(' + ratingArr[0] + ',' + ratingArr[1] + ')', function(err, result) {
+          con.query('insert into Rating(qusId,rating) values(' + ratingArr[0] + ',' + ratingArr[1] + ')', function(err, result) {
             console.log('insert into Rating(qusId,rating) values(' + ratingArr[0] + ',' + ratingArr[1] + ')');
             if (err) {
               console.log(err);
@@ -131,11 +119,6 @@ function postForumRating(ratingArr) {
               deferred.resolve({affectedRows: result.affectedRows});
             }
           });
-        })
-        .fail(function(err) {
-          console.error(JSON.stringify(err));
-          deferred.reject(err);
-        });
   return deferred.promise;
 }
 
