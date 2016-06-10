@@ -6,10 +6,10 @@
     multipleFileUploadController.$inject = [
         '$scope',
         'uploadMultipleServices',
-        'adminDashboardService',
+        'dashboardService',
         '$window'
     ];
-    function multipleFileUploadController($scope, uploadMultipleServices, adminDashboardService, $window) {
+    function multipleFileUploadController($scope, uploadMultipleServices, dashboardService, $window) {
 
         $scope.formData = [{
             ID: '',
@@ -40,7 +40,7 @@
 
         ];            //Model for type of the document
 
-        adminDashboardService.checkAdmin();
+        dashboardService.checkAdmin();
         //Function for inceremeenting rows//
 
         $scope.addRow = function () {
@@ -57,6 +57,7 @@
 
         //Function for getting the pattern details//
         $scope.getPattern = function (ptrn) {
+            if(ptrn==='' || ptrn===null || isNaN(ptrn)) return false;
             $scope.docPattern = $scope.type[ptrn - 1].ptrn;
         };
 
@@ -68,9 +69,7 @@
 
 
         $scope.singleFileUpload = function () {
-            uploadMultipleServices.singleFileUpload().then(function () {
-
-            });
+            uploadMultipleServices.singleFileUpload();
         };
 
         //Function for getting the url parameter value//
@@ -102,7 +101,7 @@
 
             if ($window.confirm('Are You Sure ! Do you need to Log Out?')) {
 
-                uploadMultipleServices.logout();
+                dashboardService.logout();
 
             }
 

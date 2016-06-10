@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en" ng-app="myApp">
 <head>
   <title>Crisp Cloud Solutions</title>
@@ -13,7 +13,7 @@
   <link rel="stylesheet" type="text/css" href="../../bower_components/angular-timeline/dist/angular-timeline-bootstrap.css"/>
 
   <link rel="stylesheet" type="text/css" href="../../css/style.css">
-  <link rel="stylesheet" type="text/css" href="../../css/star.css">
+  <link rel="stylesheet" type="text/css" href="../../css/Star.css">
   <link rel="stylesheet" type="text/css" href="../../css/modalscroll.css">
   <link rel="stylesheet" type="text/css" href="../../css/popup.css">
   <link rel="stylesheet" type="text/css" href="../../css/starDisable.css">
@@ -21,55 +21,6 @@
   <link rel="stylesheet" type="text/css" href="../../css/commonStyle.css">
   <link rel="stylesheet" type="text/css" ng-href="../../css/{{css}}">
 
-  <style>
-
-    .tab-content {
-      padding: 10px;
-    }
-
-    .btn.nohover:hover {
-      /* here copy default .btn class styles */
-      cursor:default !important;
-      /* or something like that */
-    }
-
-    .label-align{
-      text-align: right;
-    }
-
-    .divclass{
-      display: inline-block;
-      vertical-align: middle;
-      width: 40%;
-    }
-
-    .align-middle{
-      margin-top: 10%;
-      margin-bottom: 10%;
-    }
-
-    .vcenter {
-      display: inline-block;
-      vertical-align: middle;
-      float: none;
-    }
-
-    .navbar{
-      color: black;
-      background-color: #837E7C;
-    }
-
-    @media only screen and (max-width : 480px)   {
-
-      #heading span,a{
-        display: inline-block;
-        width: 100%;
-        margin-top: 10px;
-      }
-
-    }
-
-  </style>
 <!-- BASE URL -->
   <base href="/">
 </head>
@@ -120,13 +71,9 @@
   <script src="app/profile/userProfile/userProfileController.js"></script>
   <script src="app/profile/userProfile/modal/profileViewModalController.js"></script>
 
-  <!--User Dashboard-->
-  <script src="app/profile/userDashboard/userDashboardService.js"></script>
-  <script src="app/profile/userDashboard/userDashboardController.js"></script>
-
-  <!--Admin Dashboard-->
-  <script src="app/profile/adminDashboard/adminDashboardService.js"></script>
-  <script src="app/profile/adminDashboard/adminDashboardController.js"></script>
+  <!--Dashboard-->
+  <script src="app/profile/dashboard/dashboardService.js"></script>
+  <script src="app/profile/dashboard/dashboardController.js"></script>
 
   <!--Admin Profile-->
   <script src="app/profile/adminProfile/adminProfileFilter.js"></script>

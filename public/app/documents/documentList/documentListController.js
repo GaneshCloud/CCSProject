@@ -8,11 +8,11 @@
         'documentListServices',
         'starServices',
         'iconServices',
-        'adminDashboardService',
+        'dashboardService',
         '$window'
     ];
 
-    function documentListController($scope,documentListServices,starServices,iconServices,adminDashboardService,$window) {
+    function documentListController($scope,documentListServices,starServices,iconServices,dashboardService,$window) {
         $scope.formData = [];               //model for storing the inputting data
         $scope.filteredRes=[];              //model for store filtered result
         $scope.searchres=[];                //model for store the search result
@@ -69,7 +69,7 @@
 
         ];//array for store document type
 
-        adminDashboardService.checkAdmin();
+        dashboardService.checkAdmin();
 
         //  order function based on a order field//
         $scope.orderMe=function(f){
@@ -129,15 +129,15 @@
 //function for getting department details//
         $scope.getDepartment=function(){
             documentListServices.getDepartment()
-                .success(function(data){
+                .then(function(data){
                     $scope.dep=data;
                     $scope.dep.splice(0, 0,
                         {DEP_ID: "-1", DEP_NAME: "All Department"}
                     );
                 })
-                .error(function(err){
-                    console.log(err);
-                });
+                // .error(function(err){
+                //     console.log(err);
+                // });
         };
 
         //function for searching documents//
@@ -200,7 +200,7 @@
 
             if ($window.confirm("Are You Sure ! Do you need to Log Out?")) {
 
-                documentListServices.logout();
+                dashboardService.logout();
 
             }
 

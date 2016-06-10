@@ -9,16 +9,15 @@
   loginController.$inject=[
     '$scope',
     'loginService',
-    'ngProgressFactory',
     'spinnerService'
   ];
 
-  function loginController($scope,loginService,ngProgressFactory,
+  function loginController($scope,loginService,
                            spinnerService) {
 
-    $scope.progressbar = ngProgressFactory.createInstance();
-
     $scope.userCredentials = false;
+
+    $scope.credentialsInvalid = false;
 
     loginService.profilePage();
 
@@ -35,13 +34,9 @@
     };
 
     $scope.loginWithGoogle = function() {
-
-      // $scope.progressbar.start();
       spinnerService.show('html5spinner');
 
       loginService.loginWithGoogle().then(function() {
-        // $rootScope.isLogin=true;
-        // $scope.progressbar.complete();
         spinnerService.hide('html5spinner');
       });
 
@@ -64,25 +59,31 @@
     };
 
     $scope.submit = function(user, password) {
-      // $scope.progressbar.start();
+      $scope.credentialsInvalid = false;
       spinnerService.show('html5spinner');
       console.log('username --->' + user);
-      loginService.verifyUser(user.$viewValue, password.$modelValue)
-          .then(function(result) {
-            if (result !== '') {
-              loginService.profilePage().then(function() {
-                // $scope.progressbar.complete();
-                spinnerService.hide('html5spinner');
-              });
+      loginService.verifyUser(user.$viewValue, password.$modelValue).then(function(result) {
+            if (result.data !== '') {
+              loginService.dashboard();
             }else {
-              loginService.loginPageWithError().then(function() {
-                // $scope.progressbar.complete();
-                spinnerService.hide('html5spinner');
-              });
+              loginPageWithError();
             }
           });
 
     };
+
+    $scope.showCredentialsError = function () {
+      return $scope.credentialsInvalid;
+    };
+
+    function loginPageWithError(){
+
+        $scope.user = '';
+        $scope.password = '';
+        $scope.credentialsInvalid = true;
+        spinnerService.hide('html5spinner');
+        
+    }
 
   }
 })();

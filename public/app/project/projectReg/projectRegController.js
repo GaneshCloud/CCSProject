@@ -5,10 +5,11 @@
     projectRegController.$inject=[
         '$scope',
         '$window',
-        'projectRegService'
+        'projectRegService',
+        'dashboardService'
     ];
 
-    function projectRegController($scope,$window,projectRegService) {
+    function projectRegController($scope,$window,projectRegService,dashboardService) {
 
         $scope.names = ['mechanical', 'mechatronics', 'ECE', 'CS', 'IT'];
         $scope.Title = ['Mechanical Projects', 'Aeronatical Projects', 'ECE Projects', 'Embaded projects', 'IT Projects'];
@@ -49,7 +50,7 @@
 
         $scope.onLogout = function() {
             if ($window.confirm('Are You Sure ! Do you need to Log Out?')) {
-                projectRegService.logout();
+                dashboardService.logout();
             }
         };
 
@@ -64,10 +65,7 @@
         $scope.visible = [true,true,true,true,true,true,true];
 
 
-        $(document).ready(function() {
-            $('[data-toggle="tooltip"]').tooltip();
-        });
-
+       
 
 
         $scope.order = function(predicate)    {
@@ -126,7 +124,7 @@
                             var begin = (($scope.cur_page - 1) * $scope.items_per_page), end = begin + $scope.items_per_page;
                             console.log(begin + ' ' + end);
                             $scope.dataFilter = $scope.datas.slice(begin, end);
-                            // Alert("data"+$scope.searchres);
+                            // Alert("data"+$scope.searches);
                         });
                     }
 
@@ -168,7 +166,8 @@
             };
 
 
-            projectRegService.postData(data).success(function(data) {
+            projectRegService.postData(data)
+                .success(function(data) {
                 alert('The Feedback Saved Successfully!!!' + data);
                 $scope.getFeedbacks();
             }).

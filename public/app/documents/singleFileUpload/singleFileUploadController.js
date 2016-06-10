@@ -6,10 +6,10 @@
     singleFileUploadController.$inject=[
         '$scope',
         'uploadSingleServices',
-        'adminDashboardService',
+        'dashboardService',
         '$window'
     ];
-    function singleFileUploadController($scope, uploadSingleServices, adminDashboardService, $window) {
+    function singleFileUploadController($scope, uploadSingleServices, dashboardService, $window) {
 
         //Document.getElementById("docCaption").focus();
         $scope.formData = {
@@ -37,7 +37,7 @@
             {id: 6, type: 'Video Document', ptrn: '.mp4'}
 
         ];          //Model for document type
-        adminDashboardService.checkAdmin();
+        dashboardService.checkAdmin();
         //Function for get the pattern details
         $scope.getPattern = function (ptrn) {
             $scope.docPattern = $scope.type[ptrn - 1].ptrn;
@@ -116,7 +116,7 @@
 
             if ($window.confirm('Are You Sure ! Do you need to Log Out?')) {
 
-                uploadSingleServices.logout();
+                dashboardService.logout();
 
             }
 

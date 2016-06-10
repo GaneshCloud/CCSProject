@@ -65,7 +65,7 @@
           dfr.resolve(response);
 
           if (response.data.userType === 'admin') {
-            $window.location.href = '/profile/adminDashboard';
+            $window.location.href = '/profile/dashboard';
           } else {
             $window.location.href = '/profile/userProfile';
           }

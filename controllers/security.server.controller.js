@@ -4,6 +4,7 @@
 exports.getLoggedInUser = function(req,res) {
   if (req.session && req.session.data) {
     res.send(req.session.data);
+  }else {
+    res.send(null);
   }
-  return;
 };

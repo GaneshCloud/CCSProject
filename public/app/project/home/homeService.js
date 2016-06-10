@@ -12,11 +12,8 @@
       projectHistory: function () {
         return $http.get('/projectHistory');
       },
-      logout: function () {
-        $window.location.href = '/logout';
-      },
       goToDashboard: function () {
-        $window.location.href = '/profile/userDashboard';
+        $window.location.href = '/profile/dashboard';
       },
       chartData: function () {
         return $http.get('/chartData');

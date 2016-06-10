@@ -7,10 +7,10 @@
     '$scope',
     'homeService',
     '$window',
-    'userDashboardService'
+    'dashboardService'
   ];
 
-  function homeController($scope,homeService,$window,userDashboardService) {
+  function homeController($scope,homeService,$window,dashboardService) {
     $scope.datas = [];
     $scope.events = [];
     $scope.myDataSource = {};
@@ -39,7 +39,7 @@
       closeOthers: false
     };
 
-    userDashboardService.checkUser();
+    dashboardService.checkAdmin();
     // $scope.projectData();
     // $scope.projectHistory();
     // $scope.chartData();
@@ -47,7 +47,7 @@
 
     $scope.onLogout = function() {
       if ($window.confirm('Are You Sure ! Do you need to Log Out?')) {
-        homeService.logout();
+        dashboardService.logout();
       }
     };
 

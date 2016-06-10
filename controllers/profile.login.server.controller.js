@@ -39,9 +39,6 @@ passport.use(new facebookStrategy({
               if (results) {
                 return done(null, results);
               }
-            })
-            .fail(function(err) {
-              console.error(JSON.stringify(err));
             });
     }
 
@@ -61,10 +58,6 @@ passport.use(new googleStrategy({
               } else {
                 return done(null);
               }
-            })
-            .fail(function(err) {
-              console.error(JSON.stringify(err));
-              return done(null);
             });
     }
 
@@ -75,25 +68,23 @@ router.post('/verifyUser',function(req,res) {
         .then(function(results) {
           if (results) {
             req.session.data = results[0];
+              console.log("req.session.data"+JSON.stringify(req.session.data));
             res.send(results[0]);
           }
-        })
-        .fail(function(err) {
-          console.error(JSON.stringify(err));
         });
 });
 
 router.get('/facebook', passport.authenticate('facebook', {scope: ['email', 'user_friends', 'manage_pages', 'user_hometown']}));
 
 router.get('/facebook/callback',
-    passport.authenticate('facebook', { successRedirect: '/profile/userDashboard',
+    passport.authenticate('facebook', { successRedirect: '/profile/dashboard',
         failureRedirect: '/' }));
 
 router.get('/google', passport.authenticate('google', {scope: ['https://www.googleapis.com/auth/plus.login',
     'https://www.googleapis.com/auth/plus.profile.emails.read'] }));
 
 router.get('/google/callback',
-    passport.authenticate('google', { successRedirect: '/profile/userDashboard',
+    passport.authenticate('google', { successRedirect: '/profile/dashboard',
         failureRedirect: '/' }));
 
 module.exports = router;

@@ -14,13 +14,13 @@
     'ngProgressFactory',
     'spinnerService',
     'filterFilter',
-    'adminDashboardService'
+    'dashboardService'
   ];
 
   function adminProfileController($scope,$window,adminProfileService,
-                                  ngProgressFactory,spinnerService,filterFilter,adminDashboardService) {
+                                  ngProgressFactory,spinnerService,filterFilter,dashboardService) {
 
-    adminDashboardService.checkAdmin();
+    dashboardService.checkAdmin();
 
     $scope.progressbar = ngProgressFactory.createInstance();
 
@@ -124,7 +124,7 @@
       if ($window.confirm('Are You Sure ! Do you need to Log Out?')) {
         // $scope.progressbar.start();
         spinnerService.show('html5spinner');
-        adminProfileService.logout().then(function() {
+        dashboardService.logout().then(function() {
           // $scope.progressbar.complete();
           spinnerService.hide('html5spinner');
         });

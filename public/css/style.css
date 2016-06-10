@@ -5,6 +5,52 @@
 	License URL: http://creativecommons.org/licenses/by/3.0/
 --*/
 
+.tab-content {
+	padding: 10px;
+}
+
+.btn.nohover:hover {
+	/* here copy default .btn class styles */
+	cursor:default !important;
+	/* or something like that */
+}
+
+.label-align{
+	text-align: right;
+}
+
+.divclass{
+	display: inline-block;
+	vertical-align: middle;
+	width: 40%;
+}
+
+.align-middle{
+	margin-top: 10%;
+	margin-bottom: 10%;
+}
+
+.vcenter {
+	display: inline-block;
+	vertical-align: middle;
+	float: none;
+}
+
+.navbar{
+	color: black;
+	background-color: #837E7C;
+}
+
+@media only screen and (max-width : 480px)   {
+
+	#heading span,a{
+		display: inline-block;
+		width: 100%;
+		margin-top: 10px;
+	}
+
+}
+
 /*-- Reset Code --*/
 
 body {

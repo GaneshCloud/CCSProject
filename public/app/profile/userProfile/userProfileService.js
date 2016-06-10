@@ -22,7 +22,7 @@
       },
 
       goToDashboard: function () {
-        $window.location.href = '/profile/userDashboard';
+        $window.location.href = '/profile/dashboard';
       },
 
       addFacebookAccount: function () {
@@ -31,10 +31,6 @@
 
       addGoogleAccount: function () {
         $window.location.href = '/connect/google';
-      },
-
-      logout: function () {
-        $window.location.href = '/logout';
       },
 
       getPersonalData: function () {
