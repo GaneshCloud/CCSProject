@@ -166,31 +166,6 @@ describe('Search Services', function () {
 
         }));
     });
-
-    describe('view document', function () {
-
-
-
-
-
-        it('get department function', function () {
-
-            $factory.getDepartment();
-
-        });
-
-
-
-
-        it('get usert', function () {
-
-            $factory.getUser();
-
-        });
-
-
-    });
-
-
+    
 
 });

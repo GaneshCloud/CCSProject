@@ -3,7 +3,13 @@
  */
 
 describe('single file upload Services', function () {
-    var $controller,$factory,provide;
+    var $controller,$factory,provide,windowObj;
+
+    beforeEach(module(function($provide) {
+        windowObj = {location: {href: ''}};
+        $provide.value('$window', windowObj);
+    }));
+
     beforeEach(module('myApp'));
     module(function($provide) {
         $provide.value('$window', $window);
@@ -84,8 +90,8 @@ describe('single file upload Services', function () {
             $window = {location: { href: jasmine.createSpy()} };
         });
         it('href redirects', function() {
-            // $factory.multipleFileUpload();
-            // expect($window.location.href).toHaveBeenCalledWith(/documents/multipleFileUpload');
+            $factory.multipleFileUpload();
+            expect(windowObj.location.href).toEqual('/documents/multipleFileUpload');
         });
     });
 
@@ -94,28 +100,22 @@ describe('single file upload Services', function () {
             $window = {location: { href: jasmine.createSpy()} };
         });
         it('href redirects', function() {
-            // $factory.documentList();
-            // expect($window.location.href).toHaveBeenCalledWith('/documents/documentList');
+            $factory.documentList();
+            expect(windowObj.location.href).toEqual('/documents/documentList');
         });
     });
 
-    describe("logout documet",function () {
-        beforeEach(function() {
-            $window = {location: { href: jasmine.createSpy()} };
-        });
-        it('href redirects', function() {
-            // $factory.logout();
-            // expect($window.location.href).toHaveBeenCalledWith('/logout');
-        });
-    });
+    // describe("logout documet",function () {
+    //     it('href redirects', function() {
+    //         $factory.logout();
+    //         expect(windowObj.location.href).toEqual('/logout');
+    //     });
+    // });
 
     describe("logout docmnwet",function () {
-        beforeEach(function() {
-            $window = {location: { href: jasmine.createSpy()} };
-        });
         it('href redirects', function() {
-            // $factory.goToDashboard();
-            // expect($window.location.href).toHaveBeenCalledWith('/profile/adminDashboard');
+            $factory.goToDashboard();
+            expect(windowObj.location.href).toEqual('/profile/dashboard');
         });
     });
 });
