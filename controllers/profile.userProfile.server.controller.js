@@ -33,7 +33,7 @@ passport.use(new facebookStrategy({
     function(req, accessToken, refreshToken, profile, done) {
       personaldataManager.updateFacebookPersonalData(req, profile, accessToken)
             .then(function(results) {
-              if (results) {
+              if (results && results.length > 0) {
                 req.session.data = results[0];
                 return done(null, results);
               }
@@ -54,7 +54,8 @@ passport.use(new googleStrategy({
     function(req,accessToken, refreshToken, profile, done) {
       personaldataManager.updateGooglePersonalData(req, profile, accessToken)
             .then(function(results) {
-              if (results) {
+              if (results && results.length > 0) {
+                  req.session.data = results[0];
                 return done(null, results);
               } else {
                 return done(null);
@@ -78,7 +79,7 @@ router.get('/getPersonalData', function(req,res) {
 
     personaldataManager.getPersonalData(req.session.data.id)
             .then(function(results) {
-              if (results) {
+              if (results && results.length > 0) {
                 req.session.data = results[0];
                 res.send(results[0]);
               }
@@ -111,13 +112,13 @@ router.get('/google', passport.authenticate('google', {scope: ['https://www.goog
     'https://www.googleapis.com/auth/plus.profile.emails.read']}));
 
 router.get('/google/callback',
-    passport.authenticate('google', { successRedirect: '/profile',
+    passport.authenticate('google', { successRedirect: '/profile/dashboard',
         failureRedirect: '/' }));
 
 router.get('/facebook', passport.authenticate('facebook', {scope: ['email', 'user_friends', 'manage_pages', 'user_hometown']}));
 
 router.get('/facebook/callback',
-    passport.authenticate('facebook', { successRedirect: '/profile',
+    passport.authenticate('facebook', { successRedirect: '/profile/dashboard',
         failureRedirect: '/' }));
 
 module.exports = router;

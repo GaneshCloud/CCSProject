@@ -5,7 +5,6 @@ describe('Main Controller', function () {
 
   var $controller;
 
-
   beforeEach(inject(function(_$controller_){
 
         $controller = _$controller_;
@@ -16,10 +15,10 @@ describe('Main Controller', function () {
     it('check getDepartments', function () {
       var $scope = {};
       var controller = $controller('documentListController', { $scope: $scope });
-     
+
       $scope.getDepartment();
       expect($scope.dep).not.toBeNull();
-    }); 
+    });
 
   describe("Rating info function",function () {
       it('check rating info with integer value', function () {
@@ -59,7 +58,6 @@ describe('Main Controller', function () {
       });
 
   });
-
 
     describe("Oreder Function",function () {
         it('check order with field value', function () {
@@ -172,7 +170,7 @@ describe('Main Controller', function () {
                 scope = $rootScope.$new();
                 documentListService = _documentListServices_;
                 $controller('documentListController', {
-                    $scope: scope,
+                    $scope: scope
                 });
             }));
 
@@ -317,3 +315,66 @@ describe('Main Controller', function () {
 
 
 });
+
+// describe('get Rating info',function(){
+//     var $scope;
+//     var $q;
+//     var deferred,starServices;
+//
+//     beforeEach(module('myApp'));
+//
+//     beforeEach(inject(function($controller, _$rootScope_, _$q_, _starServices_) {
+//         $q = _$q_;
+//         $scope = _$rootScope_.$new();
+//         deferred = _$q_.defer();
+//         starServices= _starServices_;
+//
+//         $controller('documentListController', {
+//             $scope: $scope
+//
+//         });
+//         spyOn(starServices, 'getStarInfo').and.returnValue(deferred.promise);
+//     }));
+//     it('should resolve promise', inject(function ($httpBackend) {
+//         $scope.getRateInfo(5);
+//         deferred.resolve();
+//         $scope.$digest();
+//     }));
+//     it('should resolve promise', inject(function ($httpBackend) {
+//         $scope.getRateInfo(5);
+//         deferred.reject();
+//         $scope.$digest();
+//     }));
+// })
+
+// describe('get department',function(){
+//     var $scope;
+//     var $q;
+//     var deferred,starServices;
+//
+//     beforeEach(module('myApp'));
+//
+//     beforeEach(inject(function($controller, _$rootScope_, _$q_, _starServices_) {
+//         $q = _$q_;
+//         $scope = _$rootScope_.$new();
+//         deferred = _$q_.defer();
+//         starServices= _starServices_;
+//
+//         $controller('documentListController', {
+//             $scope: $scope
+//
+//         });
+//         spyOn(starServices, 'getStarInfo').and.returnValue(deferred.promise);
+//     }));
+//     it('should resolve promise', inject(function ($httpBackend) {
+//         $scope.getRateInfo(5);
+//         deferred.resolve();
+//         $scope.$digest();
+//     }));
+//     it('should resolve promise', inject(function ($httpBackend) {
+//         $scope.getRateInfo(5);
+//         deferred.reject();
+//         $scope.$digest();
+//     }));
+// })
+

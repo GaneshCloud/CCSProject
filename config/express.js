@@ -59,9 +59,7 @@ module.exports = function() {
   require('../routes/project.upload.server.routes.js')(app);
   require('../routes/profile.login.server.routes.js')(app);
   require('../routes/profile.userProfile.server.routes.js')(app);
-  require('../routes/profile.adminDashboard.server.routes.js')(app);
   require('../routes/profile.adminProfile.server.routes.js')(app);
-  require('../routes/profile.changePassword.server.routes')(app);
   require('../routes/profile.logout.server.routes')(app);
   require('../routes/forum.home.server.routes.js')(app);
   require('../routes/documents.documentList.server.routes')(app);

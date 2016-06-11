@@ -4,7 +4,6 @@
 var mysql = require('mysql');
 var q = require('q');
 var db = require('./../db');
-var connectionManager = require('./connectionManager');
 var con = mysql.createConnection(db);
 
 function getUserValidity(userid, password) {

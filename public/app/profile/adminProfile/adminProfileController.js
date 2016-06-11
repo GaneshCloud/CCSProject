@@ -11,18 +11,14 @@
     '$scope',
     '$window',
     'adminProfileService',
-    'ngProgressFactory',
     'spinnerService',
     'filterFilter',
     'dashboardService'
   ];
 
-  function adminProfileController($scope,$window,adminProfileService,
-                                  ngProgressFactory,spinnerService,filterFilter,dashboardService) {
+  function adminProfileController($scope,$window,adminProfileService,spinnerService,filterFilter,dashboardService) {
 
     dashboardService.checkAdmin();
-
-    $scope.progressbar = ngProgressFactory.createInstance();
 
     $scope.userCredentials = false;
 
@@ -42,7 +38,7 @@
 
     $scope.max_size = Math.ceil($scope.userDetails / $scope.items_per_page);
 
-    $scope.search = [];
+    $scope.search = '';
 
     $scope.showPagination = function() {
       return $scope.noData;
@@ -65,10 +61,13 @@
 
               $scope.$watch('cur_page + items_per_page', function() {
 
-                var begin = (($scope.cur_page - 1) * $scope.items_per_page), end = begin + $scope.items_per_page;
-                console.log(begin + ' ' + end);
-                $scope.userDetailsFilter = $scope.userDetails.slice(begin, end);
-                // Alert("data"+$scope.searchres);
+                if($scope.search === '') {
+
+                  var begin = (($scope.cur_page - 1) * $scope.items_per_page), end = begin + $scope.items_per_page;
+                  console.log(begin + ' ' + end);
+                  $scope.userDetailsFilter = $scope.userDetails.slice(begin, end);
+                  // Alert("data"+$scope.searchres);
+                }
               });
             }
 
@@ -81,10 +80,8 @@
     };
 
     $scope.goToDashboard = function() {
-      // $scope.progressbar.start();
       spinnerService.show('html5spinner');
       adminProfileService.goToAdminDashboard().then(function() {
-        // $scope.progressbar.complete();
         spinnerService.hide('html5spinner');
       });
     };
@@ -122,10 +119,8 @@
     $scope.onLogout = function() {
 
       if ($window.confirm('Are You Sure ! Do you need to Log Out?')) {
-        // $scope.progressbar.start();
         spinnerService.show('html5spinner');
         dashboardService.logout().then(function() {
-          // $scope.progressbar.complete();
           spinnerService.hide('html5spinner');
         });
 

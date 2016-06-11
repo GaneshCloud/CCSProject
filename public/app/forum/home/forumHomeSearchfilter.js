@@ -4,7 +4,8 @@
       .filter('startFrom', startFrom);
 
   function startFrom() {
-    return function (input, start) {
+    return (input, start)
+    {
       if (input) {
         start = +start;
         return input.slice(start);

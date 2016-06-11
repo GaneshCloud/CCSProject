@@ -11,8 +11,7 @@
 
   function forumService($http, $q, $window) {
     return {
-      search: function () {
-      },
+      
       goToDashboard: function () {
         $window.location.href = '/profile/dashboard';
       },
@@ -38,7 +37,7 @@
         });
         httpPromise.then(function (data) {
           defer.resolve(data);
-        }, function (error) {
+        },function (error) {
 
           defer.reject(error);
           throw error;

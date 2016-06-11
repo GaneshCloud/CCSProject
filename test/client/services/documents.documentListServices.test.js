@@ -106,12 +106,12 @@ describe('Document List Services', function () {
         });
     });
 
-    describe("logout docmnwet",function () {
-        it('href redirects', function() {
-            $factory.logout();
-            expect(windowObj.location.href).toEqual('/logout');
-        });
-    });
+    // describe("logout docmnwet",function () {
+    //     it('href redirects', function() {
+    //         $factory.logout();
+    //         expect(windowObj.location.href).toEqual('/logout');
+    //     });
+    // });
 
     describe("logout docmnwet",function () {
         it('href redirects', function() {
