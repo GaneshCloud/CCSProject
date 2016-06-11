@@ -7,12 +7,13 @@
   forumController.$inject=[
     '$scope',
     '$window',
+    '$rootScope',
     'forumService',
     'dashboardService',
     'filterFilter'
   ];
 
-  function forumController($scope,$window,forumService,dashboardService,filterFilter) {
+  function forumController($scope,$window,$rootScope,forumService,dashboardService,filterFilter) {
     $scope.getForumQus = [];
     $scope.Forumanswers = [];
     $scope.Question = '';
@@ -115,7 +116,6 @@
         //GetForum($scope.answer.Answers);
       });
 
-
     };
 
     // -------------------------Search------------------------------------------------- //
@@ -131,9 +131,17 @@
       $scope.filteredDocs = filterFilter($scope.getForumQus, newVal);
       $scope.totalItems = $scope.filteredDocs.length;
       $scope.curpage = 1;
-      var begin = (($scope.curpage - 1) * $scope.itemspage),
-          end = begin + $scope.itemspage;
-      $scope.filteredDoc = $scope.filteredDocs.slice(begin, end);
+      if($scope.search=='')
+      {
+        var begin = (($scope.curpage - 1) * $scope.itemspage),
+            end = begin + $scope.itemspage;
+        $scope.filteredDoc = $scope.getForumQus.slice(begin, end);
+      }else {
+        var begin = (($scope.curpage - 1) * $scope.itemspage),
+            end = begin + $scope.itemspage;
+        $scope.filteredDoc = $scope.filteredDocs.slice(begin, end);
+
+      }
     }, true);
 
 
