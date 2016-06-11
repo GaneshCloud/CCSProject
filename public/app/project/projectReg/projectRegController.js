@@ -107,7 +107,7 @@
         $scope.getFeedbacks = function() {
             projectRegService.getFeedbacks()
 
-                .success(function(data) {
+                .then(function(data) {
 
                     $scope.datas = data;
 
@@ -143,7 +143,7 @@
 
                 })
 
-                .error(function(error) {
+                .catch(function(error) {
                     //Showing error message
                     $scope.status = 'Unable to retrieve Feedbacks' + error;
 
@@ -167,11 +167,11 @@
 
 
             projectRegService.postData(data)
-                .success(function(data) {
+                .then(function(data) {
                 alert('The Feedback Saved Successfully!!!' + data);
                 $scope.getFeedbacks();
             }).
-            error(function(error) {
+            catch(function(error) {
                 alert('unable to save the feedback :' + error);
             });
 
@@ -215,19 +215,19 @@
                 Hardware: x.Hardware,
                 catlogCode: x.catlogCode,
                 Domain: x.Domain,
-                id: $scope.dataFilter[$scope.rowEdit].id
+                //id: $scope.dataFilter[$scope.rowEdit].id
             };
 
             projectRegService.updateData(data)
 
-                .success(function(data) {
+                .then(function(data) {
 
 
                     alert('The Feedback Updated Successfully!!!' + data);
 
                     //$window.location.href='/';
                     $scope.rowEdit = -1;
-                    $scope.getFeedbacks();
+                    //$scope.getFeedbacks();
 
                     /*$scope.updatedata = false;
                      $scope.editdata = true;*/
@@ -235,7 +235,7 @@
 
 
                 })
-                .error(function(error) {
+                .catch(function(error) {
 
                     alert('Unable to update a Feedback: ' + error);
                 });
@@ -249,14 +249,14 @@
             projectRegService.deleteData(id)
 
 
-                .success(function(data) {
+                .then(function(data) {
 
                     alert('the data deleted successfully' + data);
                     $scope.getFeedbacks();
 
 
                 }).
-            error(function(error) {
+            catch(function(error) {
                 alert('unable to delete a feedback' + error);
             });
         };
