@@ -1,6 +1,11 @@
 describe('projectReg service',function(){
 
-    var $controller,$factory;
+    var $controller,$factory,windowObj;
+    beforeEach(module(function($provide) {
+        windowObj = {location: {href: ''}};
+        $provide.value('$window', windowObj);
+    }));
+
     beforeEach(module('myApp'));
     module(function($provide){
         $provide.value('$window',$window);
@@ -93,6 +98,26 @@ describe('projectReg service',function(){
         })) ;
 
     });
+
+
+    describe("logout service",function () {
+
+        it('href redirects', function() {
+           $factory.logout();
+            expect($window.location.href).toEqual('/logout');
+        });
+    });
+
+    describe("dashboard service",function () {
+
+        it('href redirects', function() {
+            $factory.goToDashboard();
+            expect($window.location.href).toEqual('/profile/adminDashboard');
+        });
+    });
+
+
+    
 
 
 

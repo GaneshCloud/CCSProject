@@ -26,6 +26,9 @@
     this.deleteData = function (id) {
       return $http.delete('/deletedata/' + id);
     };
+
+    
+
     this.goToDashboard = function () {
       $window.location.href = '/profile/dashboard';
     };
