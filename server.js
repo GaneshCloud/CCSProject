@@ -9,4 +9,7 @@ var server = app.listen(3000, function () {
     console.log('Server running at %s', port);
 });
 
-module.exports = app;
+module.exports = {
+    app : app,
+    server : server
+};

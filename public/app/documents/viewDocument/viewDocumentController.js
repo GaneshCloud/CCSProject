@@ -37,7 +37,7 @@
 
         $scope.getUser = function () {
             viewDocumentServices.getUser()
-                .success(function (data) {
+                .then(function (data) {
                     console.log(data);
                     if (data.mode === 'Admin') {
                         $scope.isAdmin = true;
@@ -47,7 +47,7 @@
                         $scope.css = 'star.css';
                     }
                 })
-                .error(function () {
+                .catch(function () {
 
                 });
         };
@@ -57,7 +57,7 @@
         $scope.getDocument = function () {
 
             viewDocumentServices.edit($scope.getParameterByName('id'))
-                .success(function (data) {
+                .then(function (data) {
 
 
                     $scope.doc = data[0];
@@ -66,18 +66,18 @@
 
                     $scope.getStar($scope.getParameterByName('id'));
                 })
-                .error(function () {
+                .catch(function () {
 
                 });
 
-            if ($scope.getParameterByName('type') === 5) {
+            if ($scope.getParameterByName('type') === '5') {
                 viewDocumentServices.getArchieve($scope.getParameterByName('id'))
-                    .success(function (data) {
+                    .then(function (data) {
                         console.log(data);
                         //Alert(data);
                         $scope.files = data;
                     })
-                    .error(function () {
+                    .catch(function () {
 
                     });
             }
@@ -89,13 +89,11 @@
         $scope.Download = function () {
             var id = $scope.getParameterByName('id');
             viewDocumentServices.Download({ID: +id})
-                .success(function (data) {
+                .then(function (data) {
                     console.log(data);
-
-
                 })
-                .error(function () {
-
+                .catch(function () {
+                    console.log('error');
                 });
 
         };
@@ -105,12 +103,10 @@
 
         $scope.getDepartment = function () {
             viewDocumentServices.getDepartment()
-                .success(function (data) {
+                .then(function (data) {
                     $scope.dep = data;
-
-
                 })
-                .error(function (err) {
+                .catch(function (err) {
                     console.log(err);
                 });
         };
@@ -121,10 +117,10 @@
 
             alert('Thanks for your rating' + stars);
             starServices.setStar({DOC_ID: +$scope.getParameterByName('id'), STARS: +stars, STAR_DATE: new Date()})
-                .success(function (data) {
+                .then(function (data) {
                     console.log(data);
                 })
-                .error(function (err) {
+                .catch(function (err) {
                     console.log(err);
                 });
         };
@@ -134,12 +130,11 @@
         $scope.getStar = function (id) {
 
             starServices.getStar('?DOC_ID=' + id)
-                .success(function (data) {
-
+                .then(function (data) {
                     $scope.star = data[0].STR;
 
                 })
-                .error(function (err) {
+                .catch(function (err) {
                     console.log(err);
                 });
 
@@ -151,7 +146,7 @@
 
             if ($scope.doc.ID === 'undefined') return;
             viewDocumentServices.getNextDoc(id)
-                .success(function (data) {
+                .then(function (data) {
                     if (data.length > 0) {
                         $scope.doc = data[0];
                         $scope.getStar($scope.doc.ID);
@@ -162,11 +157,11 @@
                         if ($scope.doc.DOCTYPE === 5) {
 
                             viewDocumentServices.getArchieve($scope.doc.ID)
-                                .success(function (data) {
+                                .then(function (data) {
                                     console.log(data);
                                     $scope.files = data;
                                 })
-                                .error(function () {
+                                .catch(function () {
 
                                 });
                         }
@@ -174,7 +169,7 @@
                     }
 
                 })
-                .error(function (err) {
+                .catch(function (err) {
                     console.log(err);
                 });
 
@@ -186,7 +181,7 @@
 
             if ($scope.doc.ID === 'undefined') return;
             viewDocumentServices.getPrevDoc(id)
-                .success(function (data) {
+                .then(function (data) {
                     if (data.length > 0) {
                         $scope.doc = data[0];
                         $scope.getStar($scope.doc.ID);
@@ -195,11 +190,11 @@
 
                         if ($scope.doc.DOCTYPE === 5) {
                             viewDocumentServices.getArchieve($scope.doc.ID)
-                                .success(function (data) {
+                                .then(function (data) {
                                     console.log(data);
                                     $scope.files = data;
                                 })
-                                .error(function () {
+                                .catch(function () {
 
                                 });
                         }
@@ -207,7 +202,7 @@
 
                     }
                 })
-                .error(function (err) {
+                .catch(function (err) {
                     console.log(err);
                 });
 

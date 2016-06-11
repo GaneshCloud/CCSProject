@@ -26,8 +26,11 @@
             newDocument: function () {
                 $window.location.href = '/documents/singleFileUpload';
             },
+            logout: function () {
+                $window.location.href = '/logout';
+            },
             goToDashboard: function () {
-                $window.location.href = '/profile/dashboard';
+                $window.location.href='/profile/adminDashboard';
             }
 
 

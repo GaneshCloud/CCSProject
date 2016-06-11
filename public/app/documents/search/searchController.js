@@ -34,6 +34,7 @@
 
     //Function for get the css class
     $scope.getClass = function (id) {
+      if(id===null || id==='' || isNaN(id)) return false;
       return ($scope.searchkey.docType === id ? 'active' : '');
     };
 
@@ -56,14 +57,14 @@
     //Function for department Details
     $scope.getDepartment = function () {
       documentSearchServices.getDepartment()
-          .success(function (data) {
-            $scope.dep = data;
+          .then(function (response) {
+            $scope.dep = response.data;
             $scope.dep.splice(0, 0,
                 {DEP_ID: '-1', DEP_NAME: 'All Department'}
             );
 
           })
-          .error(function (err) {
+          .catch(function (err) {
             console.log(err);
           });
     };
@@ -72,10 +73,10 @@
     $scope.searchData = function (page) {
       console.log(page);
       documentSearchServices.search('?docType=' + $scope.searchkey.docType + '&dep=' + $scope.searchkey.dep + '&page=' + $scope.page + '&serStr=' + $scope.search)
-          .success(function (data) {
-            $scope.searchres = data;
-            console.log(data);
-            if (data.length <= 0)
+          .then(function (response) {
+            $scope.searchres = response.data;
+            console.log(response.data);
+            if (response.data.length <= 0)
               $scope.noData = true;
             else
               $scope.noData = false;
@@ -86,7 +87,11 @@
               $scope.filteredRes = $scope.searchres.slice(begin, end);
 
             });
+          })
+          .catch(function(){
+
           });
+
     };
 
     //Function for change the document searching criteria
@@ -105,11 +110,11 @@
     };
 
     // Lodout
-    $scope.onLogout = function () {
-      if ($window.confirm('Are You Sure ! Do you need to Log Out?')) {
-        dashboardService.logout();
-      }
-    };
+    // $scope.onLogout = function () {
+    //   if ($window.confirm('Are You Sure ! Do you need to Log Out?')) {
+    //     dashboardService.logout();
+    //   }
+    // };
     //Dashboard
     $scope.goToDashboard = function () {
       documentSearchServices.goToDashboard();

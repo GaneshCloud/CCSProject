@@ -40,6 +40,8 @@
         dashboardService.checkAdmin();
         //Function for get the pattern details
         $scope.getPattern = function (ptrn) {
+
+            if(ptrn===null || ptrn=='' || isNaN(ptrn)) return false
             $scope.docPattern = $scope.type[ptrn - 1].ptrn;
         };
 
@@ -63,12 +65,12 @@
 
 
             uploadSingleServices.edit($scope.getParameterByName('id'))
-                .success(function (data) {
+                .then(function (data) {
 
                     $scope.formData = data[0];
                     $scope.getPattern(data[0].DOCTYPE);
                 })
-                .error(function (err) {
+                .catch(function (err) {
                     console.log(err);
                 });
 
@@ -89,10 +91,10 @@
         //Function for get the department details
         $scope.getDepartment = function () {
             uploadSingleServices.getDepartment()
-                .success(function (data) {
+                .then(function (data) {
                     $scope.dep = data;
                 })
-                .error(function (err) {
+                .catch(function (err) {
                     console.log(err);
                 });
         };
@@ -105,22 +107,22 @@
         if (window.location.pathname === '/documents/editDoc')
             $scope.editForm();
 
-        $scope.$on('fileSelected', function (event, args) {
-            $scope.$apply(function () {
-                $scope.files.push(args.file);
-            });
-        });
+        // $scope.$on('fileSelected', function (event, args) {
+        //     $scope.$apply(function () {
+        //         $scope.files.push(args.file);
+        //     });
+        // });
 
         // Lodout
-        $scope.onLogout = function () {
-
-            if ($window.confirm('Are You Sure ! Do you need to Log Out?')) {
-
-                dashboardService.logout();
-
-            }
-
-        };
+        // $scope.onLogout = function () {
+        //
+        //     if ($window.confirm('Are You Sure ! Do you need to Log Out?')) {
+        //
+        //         dashboardService.logout();
+        //
+        //     }
+        //
+        // };
         //Dashboard
         $scope.goToDashboard = function () {
 

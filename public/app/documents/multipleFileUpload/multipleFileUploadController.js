@@ -74,38 +74,38 @@
 
         //Function for getting the url parameter value//
 
-        $scope.getParameterByName = function (name, url) {
-            if (!url) url = window.location.href;
-            name = name.replace(/[\[\]]/g, '\\$&');
-            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)', 'i'),
-                results = regex.exec(url);
-            if (!results) return null;
-            if (!results[2]) return '';
-            return decodeURIComponent(results[2].replace(/\+/g, ' '));
-        };
+        // $scope.getParameterByName = function (name, url) {
+        //     if (!url) url = window.location.href;
+        //     name = name.replace(/[\[\]]/g, '\\$&');
+        //     var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)', 'i'),
+        //         results = regex.exec(url);
+        //     if (!results) return null;
+        //     if (!results[2]) return '';
+        //     return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        // };
 
 
         //Function for get the department
         $scope.getDepartment = function () {
             uploadMultipleServices.getDepartment()
-                .success(function (data) {
+                .then(function (data) {
                     $scope.dep = data;
                 })
-                .error(function (err) {
+                .catch(function (err) {
                     console.log(err);
                 });
         };
 
         // Logout
-        $scope.onLogout = function () {
-
-            if ($window.confirm('Are You Sure ! Do you need to Log Out?')) {
-
-                dashboardService.logout();
-
-            }
-
-        };
+        // $scope.onLogout = function () {
+        //
+        //     if ($window.confirm('Are You Sure ! Do you need to Log Out?')) {
+        //
+        //         dashboardService.logout();
+        //
+        //     }
+        //
+        // };
         //Dashboard
         $scope.goToDashboard = function () {
 
@@ -113,7 +113,7 @@
 
         };
         //Initially calling the function
-        $scope.getDepartment();
+       $scope.getDepartment();
 
     }
 })();
