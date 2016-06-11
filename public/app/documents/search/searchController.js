@@ -72,8 +72,8 @@
     $scope.searchData = function (page) {
       console.log(page);
       documentSearchServices.search('?docType=' + $scope.searchkey.docType + '&dep=' + $scope.searchkey.dep + '&page=' + $scope.page + '&serStr=' + $scope.search)
-          .success(function (data) {
-            $scope.searchres = data;
+          .then(function (data) {
+            $scope.searchres = data.data;
             console.log(data);
             if (data.length <= 0)
               $scope.noData = true;
@@ -86,6 +86,8 @@
               $scope.filteredRes = $scope.searchres.slice(begin, end);
 
             });
+          },function (error) {
+
           });
     };
 

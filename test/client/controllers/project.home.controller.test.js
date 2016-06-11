@@ -3,9 +3,11 @@ describe('#Project Home Controller', function () {
 
     beforeEach(module('myApp'));
 
-    beforeEach(inject(function ($rootScope, $controller) {
+    beforeEach(inject(function ($rootScope, $controller,_homeService_,_$q_) {
         //$location = _$location_;
         scope = $rootScope.$new();
+        homeService=_homeService_;
+        $q=_$q_;
 
         homeController = function() {
             return $controller('homeController', {
@@ -20,8 +22,74 @@ describe('#Project Home Controller', function () {
             expect(controller).toBeDefined();
         });
     });
-    
-    describe('#data when project page load', function () {
+
+
+
+    describe('#Function definition in homeService', function () {
+        it("should check projectData() to be defined", function () {
+            var controller = homeController();
+            var fakeHttpPromise = {
+                then: function (data) {
+                }
+            };
+            spyOn(homeService, "projectData");
+            expect(homeService.projectData).toBeDefined();  //Verifies this was called
+        });
+
+        it("should check projectHistory() to be defined", function () {
+            var controller = homeController();
+            var fakeHttpPromise = {
+                then: function (data) {
+                }
+            };
+            spyOn(homeService, "projectHistory");
+            expect(homeService.projectHistory).toBeDefined();  //Verifies this was called
+        });
+
+        it("should check chartData() to be defined", function () {
+            var controller = homeController();
+            var fakeHttpPromise = {
+                then: function (data) {
+                }
+            };
+            spyOn(homeService, "chartData");
+            expect(homeService.chartData).toBeDefined();  //Verifies this was called
+        });
+
+        it("should check imageData() to be defined", function () {
+            var controller = homeController();
+            var fakeHttpPromise = {
+                then: function (data) {
+                }
+            };
+            spyOn(homeService, "imageData");
+            expect(homeService.imageData).toBeDefined();  //Verifies this was called
+        });
+        it("should check postQuestion() to be defined", function () {
+            var controller = homeController();
+            var fakeHttpPromise = {
+                then: function (data) {
+                }
+            };
+            spyOn(homeService, "postQuestion");
+            expect(homeService.postQuestion).toBeDefined();  //Verifies this was called
+        });
+    });
+    describe('#Function definition in homeService', function () {
+        it("should receive a successful response", function() {
+            var controller = homeController();
+            var fakeHttpPromise = {
+                then: function(data) {
+                }
+            };
+            spyOn(homeService, "projectData").and.callFake(function() {
+                return  fakeHttpPromise
+            });
+            scope.projectData();
+            expect(homeService.projectData).toHaveBeenCalled();  //Verifies this was called
+            expect(scope.datas).not.toBeNull();
+        });
+
         it('check get project data', function () {
             var controller = homeController();
             scope.projectData();
@@ -95,13 +163,5 @@ describe('#Project Home Controller', function () {
             expect(scope.question).toBeFalsy();
         });
     });
-
-    // describe("logout project",function () {
-    //     it('logout', function() {
-    //         var controller = homeController();
-    //         var confirm= scope.goToDashboard();
-    //         expect(confirm).toHaveBeenCalled();
-    //     });
-    // });
 
 });

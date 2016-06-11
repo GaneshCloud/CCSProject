@@ -134,7 +134,7 @@
                     $scope.dep.splice(0, 0,
                         {DEP_ID: "-1", DEP_NAME: "All Department"}
                     );
-                })
+                });
                 // .error(function(err){
                 //     console.log(err);
                 // });
@@ -159,7 +159,6 @@
                         $scope.filteredRes = $scope.searchres.slice(begin, end);
                     });
                 });
-
         };
 
 

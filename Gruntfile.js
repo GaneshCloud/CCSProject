@@ -173,7 +173,7 @@ module.exports = function(grunt) {
             unit: {
                 options: {
                     frameworks: ['jasmine'],
-                    singleRun: true,
+                    singleRun: false,
                     browsers: ['Chrome'],
                     files: [
 
@@ -193,6 +193,7 @@ module.exports = function(grunt) {
 
 
                         'public/app/core/module.js',
+                        'public/app/core/config.js',
                         'public/app/**/**/*.js',
                         // 'public/app/documents/documentList/documentListController.js',
                         // 'public/app/documents/documentList/documentListServices.js',
@@ -202,7 +203,10 @@ module.exports = function(grunt) {
                         // 'public/app/documents/filters/commonFilter.js',
                         // 'public/app/documents/directives/fileDirective.js',
 
-                        'test/client/**/*.js'
+                        //'test/client/**/*.js'
+
+                        'test/client/controllers/project.home.controller.test.js',
+                        'test/client/services/project.home.services.test.js'
 
                     ],
                     concurrency: Infinity,
@@ -254,7 +258,7 @@ module.exports = function(grunt) {
 
 
     grunt.registerTask('default',defaultTasks);
-    grunt.registerTask('test', ['jshint','mocha_istanbul','karma']);
+    grunt.registerTask('test', ['jshint','karma','mocha_istanbul']);
 
 
 
