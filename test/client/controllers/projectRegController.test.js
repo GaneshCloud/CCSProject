@@ -34,11 +34,18 @@ describe('get data',function() {
         expect(projectRegService.goToDashboard).toHaveBeenCalled();  //Verifies this was calle
     });
 
-    it("should receive a successful response", function () {
+    it('check logout', function () {
 
-        spyOn(projectRegService, "logout");
-        $scope.onLogout();
-        expect(projectRegService.logout).not.toHaveBeenCalled();  //Verifies this was calle
+        var $scope = {};
+
+        var controller = $controller('projectRegController', {$scope: $scope});
+
+        $scope.logout();
+
+        console.log(controller);
+
+        expect().toBeTruthy();
+
     });
 
     it('check order', function () {
@@ -132,7 +139,7 @@ describe('get data',function() {
     it('should get the data', function () {
 
         $scope.getFeedbacks();
-        deferred.resolve({id: 16});
+        deferred.resolve([{id: 16},{id:18}]);
         $scope.$apply();
     });
     it('should getdata', function () {
@@ -190,11 +197,36 @@ describe('get data',function() {
         deferred.resolve();
         $scope.$apply();
     });
+    it('should resolve promise', function () {
+
+        var y={projectCode:'1',
+            Title:'7777',
+            Department:'dsg',
+            subHeads:'sdf',
+            Software:'152',
+            Hardware:'2362',
+            catlogCode:'sdf',
+            Domain:'sdfg',
+            id:0
+        };
+
+        $scope.dataFilter=[y]
+        $scope.updateData(y,0);
+
+        deferred.reject();
+        $scope.$apply();
+    });
 
     it('should get the data', function () {
 
         $scope.deleteData(16);
         deferred.resolve({id: 16});
+        $scope.$apply();
+    });
+    it('should get the data', function () {
+
+        $scope.deleteData(16);
+        deferred.reject({id: 16});
         $scope.$apply();
     });
 
