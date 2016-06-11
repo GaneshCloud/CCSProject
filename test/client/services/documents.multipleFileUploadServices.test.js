@@ -86,7 +86,7 @@ describe('Search Services', function () {
     //     });
     // });
 
-    describe("logout docmnwet",function () {
+   describe("logout docmnwe t",function () {
         it('href redirects', function() {
             $factory.goToDashboard();
             expect(windowObj.location.href).toEqual('/profile/dashboard');

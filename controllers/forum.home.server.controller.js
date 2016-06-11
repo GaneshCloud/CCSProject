@@ -16,26 +16,16 @@ router.get('/getForum', function(req, res) {
       .then(function(results,error) {
         if (results) {
           res.send(results);
-        } else {
-          console.error(error);
         }
-      })
-      .fail(function(err) {
-        console.error(JSON.stringify(err));
       });
   });
 
 router.post('/postForumquestion', function(req, res) {
-    forumConfig.postForumquestion(req.body,req.session.data.userid)
+    forumConfig.postForumquestion(req.body,req.body.userid)
       .then(function(results,error) {
         if (results) {
           res.send(results);
-        } else {
-          console.error(error);
         }
-      })
-      .fail(function(err) {
-        console.error(JSON.stringify(err));
       });
   });
 
@@ -44,13 +34,9 @@ router.post('/postAnswer', function(req, res) {
       .then(function(results,error) {
         if (results) {
           res.send(results);
-        } else {
-          console.error(error);
         }
-      })
-      .fail(function(err) {
-        console.error(JSON.stringify(err));
       });
+
   });
 
 router.post('/rating', function(req, res) {
@@ -58,12 +44,7 @@ router.post('/rating', function(req, res) {
       .then(function(results,error) {
         if (results) {
           res.send(results);
-        } else {
-          console.error(error);
         }
-      })
-      .fail(function(err) {
-        console.error(JSON.stringify(err));
       });
   });
 

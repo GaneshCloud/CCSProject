@@ -5,7 +5,6 @@ describe('Main Controller', function () {
 
   var $controller;
 
-
   beforeEach(inject(function(_$controller_){
 
         $controller = _$controller_;
@@ -59,7 +58,6 @@ describe('Main Controller', function () {
       });
 
   });
-
 
     describe("Oreder Function",function () {
         it('check order with field value', function () {
@@ -172,7 +170,7 @@ describe('Main Controller', function () {
                 scope = $rootScope.$new();
                 documentListService = _documentListServices_;
                 $controller('documentListController', {
-                    $scope: scope,
+                    $scope: scope
                 });
             }));
 
