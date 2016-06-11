@@ -112,7 +112,8 @@ module.exports = function(grunt) {
             dist: {                                      // Target
                 options: {                                 // Target options
                     removeComments: true,
-                    collapseWhitespace: true
+                    collapseWhitespace: true,
+                    force:true
                 },
                 files: {                                   // Dictionary of files
                     'public/dist/index.html': 'public/app/core/layout.html',   // 'destination': 'source'
@@ -151,7 +152,8 @@ module.exports = function(grunt) {
                 options: {
                     banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n',
                     coverageFolder: 'report/coverage',
-                    mask: '**/**/*.js'
+                    force:true,
+                    mask: '**/**/**.js'
                 }
             }
         },
@@ -205,6 +207,7 @@ module.exports = function(grunt) {
                     ],
                     concurrency: Infinity,
                     autoWatch: true,
+                    force:true,
                     reporters: ['progress', 'coverage'],
                     preprocessors: {
                         // source files, that you wanna generate coverage for

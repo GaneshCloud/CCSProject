@@ -26,11 +26,11 @@
       },
 
       addFacebookAccount: function () {
-        $window.location.href = '/connect/facebook';
+        $window.location.href = '/auth/facebook';
       },
 
       addGoogleAccount: function () {
-        $window.location.href = '/connect/google';
+        $window.location.href = '/auth/google';
       },
 
       getPersonalData: function () {
