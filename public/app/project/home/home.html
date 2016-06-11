@@ -47,40 +47,43 @@
 
 <div class="panel panel-success">
   		<div class="panel-heading">
-  			<label>Project Title : {{Title}}</label>
+  			<label>Project Title : {{datas.Title}}</label>
   			<span class="pull-right">
-  				<label>Project Code : {{PCode}}</label>
+  				<label>Project Code : {{datas.PCode}}</label>
   			</span>
   		</div>
 </div>
 
 <div class="container">
 	 <div class="panel-group" ng-accordion options="simpleAccordionOptions">
-		<div class="row">
-			<div class="col-md-3">				
+			<div class="col-md-3">
+
 				<div class="panel panel-info" ng-accordion-group options="accordionGroupOptions1">
+
 					<div class="panel-heading" ng-accordion-heading>
 						<label>Payment Status</label>
+						<b><span class="pull-right" style="color:#1719dd"> <i class="fa fa-rupee"></i>{{datas.Amount-datas.Paid}}</span></b>
 					</div>
 				 <div class="panel-collapse collapse in" ng-accordion-body>
 					<div class="panel-body">
-					
-						<label>Total Amount :  <i class="fa fa-rupee"></i>{{Total}} </label>
+						<label>Total Amount :  <i class="fa fa-rupee"></i>{{datas.Amount}} </label>
 						<br><br>
-						<p>Paid :  <i class="fa fa-rupee"></i>{{Paid}} </p>
-						<p class="text-danger">Pending :  <i class="fa fa-rupee"></i>{{Total-Paid}}</p>
+						<p>Paid :  <i class="fa fa-rupee"></i>{{datas.Paid}} </p>
+						<p class="text-danger">Pending :  <i class="fa fa-rupee"></i>{{datas.Amount-datas.Paid}}</p>
 					</div>
 				 </div>
 				</div>
 
+
 				<div class="panel panel-info" ng-accordion-group options="accordionGroupOptions2">
 					<div class="panel-heading" ng-accordion-heading>
 						<label>Project Handled By</label>
+						<b><span class="pull-right" style="color:#1719dd"><a href="#"><u>view...</u></a></span></b>
 					</div>
 				 <div class="panel-collapse collapse in" ng-accordion-body>
 					<div class="panel-body">			
-						<p><label>Employee Name : </label><br/> {{HandledBy}}</p><br>
-						<p><label>Contact Number : </label><br/> (+91) {{EmpContact}}</p>
+						<p><label>Employee Name : </label><br/> {{datas.HandledBy}}</p><br>
+						<p><label>Contact Number : </label><br/> (+91) {{datas.EmpContact}}</p>
 					</div>
 				 </div>
 				</div>
@@ -90,6 +93,7 @@
 				<div class="panel panel-info" ng-accordion-group options="accordionGroupOptions4">
 					<div class="panel-heading" ng-accordion-heading>
 						<label>About Project</label>
+						<b><span class="pull-right" style="color:#1719dd"><a href="#"><u>view...</u></a></span></b>
 					</div>
 				 <div class="panel-collapse collapse in" ng-accordion-body>
 					<div class="panel-body">
@@ -112,6 +116,7 @@
 				<div class="panel panel-info" ng-accordion-group options="accordionGroupOptions5">
 					<div class="panel-heading" ng-accordion-heading>
 						<label>Project Status</label>
+						<b><span class="pull-right" style="color:#1719dd">{{totalPercentage}}%</span></b>
 					</div>
 				 <div class="panel-collapse collapse in" ng-accordion-body>	
 					<div class="panel-body" >
@@ -127,10 +132,11 @@
 				<div class="panel panel-info" ng-accordion-group options="accordionGroupOptions6">
 					<div class="panel-heading" ng-accordion-heading>
 						<label>Delivery Date</label>
+						<b><span class="pull-right" style="color:#1719dd">{{datas.DeliveryDate}}</span></b>
 					</div>
 					 <div class="panel-collapse collapse in" ng-accordion-body>	
 						<div class="panel-body">
-							<p>{{DeliveryDate}}</p>
+							<p>{{datas.DeliveryDate}}</p>
 						</div>
 			 		</div>
 				</div>
@@ -138,11 +144,12 @@
 				<div class="panel panel-info" ng-accordion-group options="accordionGroupOptions3">
 					<div class="panel-heading" ng-accordion-heading>
 						<label>Project Manager</label>
+						<b><span class="pull-right" style="color:#1719dd"><a href="#"><u>view...</u></a></span></b>
 					</div>
 				 <div class="panel-collapse collapse in" ng-accordion-body>
 					<div class="panel-body">
-						<p><label>Name : </label><br/>{{Manager}}</p><br>
-						<p><label>Contact Number : </label><br/> (+91) {{ManagerContact}}</p>
+						<p><label>Name : </label><br/>{{datas.Manager}}</p><br>
+						<p><label>Contact Number : </label><br/> (+91) {{datas.ManagerContact}}</p>
 					</div>
 				 </div>
 				</div>
@@ -154,6 +161,7 @@
 		    	<div class="panel panel-info" ng-accordion-group options="accordionGroupOptions7">
 					<div class="panel-heading" ng-accordion-heading>
 						<label>Project Images</label>
+						<b><span class="pull-right" style="color:#1719dd"><a href="#"><u>view...</u></a></span></b>
 					</div>
 					 <div class="panel-collapse collapse in" ng-accordion-body>	
 						<div class="panel-body">
@@ -170,10 +178,10 @@
 				<div class="panel panel-info" ng-accordion-group options="accordionGroupOptions8">
 					<div class="panel-heading" ng-accordion-heading>
 						<label>Project History</label>
+						<b><span class="pull-right" style="color:#1719dd"><a href="#"><u>view...</u></a></span></b>
 					</div>
 				 <div class="panel-collapse collapse in" ng-accordion-body>	
 					<div class="panel-body">
-
 						<timeline>
 						  <timeline-event ng-repeat="event in events" side="alternate">
 						    <timeline-badge class="{{event.badgeClass}}">
@@ -187,7 +195,6 @@
 						    </timeline-panel>
 						  </timeline-event>
 						</timeline>
-
 					</div>
 				 </div>
 				</div>

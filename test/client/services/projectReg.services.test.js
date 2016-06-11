@@ -93,7 +93,7 @@ describe('projectReg service',function(){
         })) ;
 
     });
-    
+
 
 
 });

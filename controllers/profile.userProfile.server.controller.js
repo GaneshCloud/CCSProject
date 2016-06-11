@@ -33,7 +33,7 @@ passport.use(new facebookStrategy({
     function(req, accessToken, refreshToken, profile, done) {
       personaldataManager.updateFacebookPersonalData(req, profile, accessToken)
             .then(function(results) {
-              if (results) {
+              if (results && results.length > 0) {
                 req.session.data = results[0];
                 return done(null, results);
               }
@@ -54,7 +54,8 @@ passport.use(new googleStrategy({
     function(req,accessToken, refreshToken, profile, done) {
       personaldataManager.updateGooglePersonalData(req, profile, accessToken)
             .then(function(results) {
-              if (results) {
+              if (results && results.length > 0) {
+                  req.session.data = results[0];
                 return done(null, results);
               } else {
                 return done(null);
@@ -78,7 +79,7 @@ router.get('/getPersonalData', function(req,res) {
 
     personaldataManager.getPersonalData(req.session.data.id)
             .then(function(results) {
-              if (results) {
+              if (results && results.length > 0) {
                 req.session.data = results[0];
                 res.send(results[0]);
               }

@@ -59,11 +59,28 @@
       },
 
       checkUser: function () {
+          var dfr = $q.defer();
 
-         if (localStorage.getItem('userType')) {
-            $window.location.href = '/profile/dashboard';
-          }
-      }
+          var httpPromise = $http({
+            method: 'get',
+
+            url: '/getLoggedInUser'
+
+          });
+
+          httpPromise.then(function (response) {
+            dfr.resolve(response);
+
+            if(response.data.userType){
+              localStorage.setItem('userType',response.data.userType);
+              $window.location.href = '/profile/dashboard';
+            }
+          }, function (error) {
+            console.error(error);
+          });
+
+          return dfr.promise;
+        }
 
     };
   }

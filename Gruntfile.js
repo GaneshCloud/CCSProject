@@ -187,6 +187,7 @@ module.exports = function(grunt) {
                         "public/bower_components/ng-file-upload/ng-file-upload-shim.min.js",
                         "public/bower_components/angular-spinners/dist/angular-spinners.js",
                         "public/bower_components/ngprogress/build/ngProgress.js",
+                        "public/bower_components/jquery/dist/jquery.js",
 
 
                         'public/app/core/module.js',

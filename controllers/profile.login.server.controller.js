@@ -36,7 +36,8 @@ passport.use(new facebookStrategy({
     function(req,accessToken, refreshToken, profile, done) {
       personalDataManager.updateFacebookPersonalData(req, profile, accessToken)
             .then(function(results) {
-              if (results) {
+              if (results && results.length > 0) {
+                req.session.data = results[0];
                 return done(null, results);
               }
             });
@@ -53,7 +54,8 @@ passport.use(new googleStrategy({
     function(req,accessToken, refreshToken, profile, done) {
       personalDataManager.updateGooglePersonalData(req, profile, accessToken)
             .then(function(results) {
-              if (results) {
+              if (results && results.length) {
+                req.session.data = results[0];
                 return done(null, results);
               } else {
                 return done(null);
@@ -71,6 +73,8 @@ router.post('/verifyUser',function(req,res) {
               console.log("req.session.data"+JSON.stringify(req.session.data));
             res.send(results[0]);
           }
+        },function (error) {
+            res.send(error);
         });
 });
 
