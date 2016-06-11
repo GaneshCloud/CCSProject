@@ -6,12 +6,27 @@ describe('Main Controller', function () {
 
     beforeEach(module('myApp'));
 
-    var $controller,controller,$scope={};
+    var $controller,uploadMultipleServices,dashboardService;
+    var $q;
+    var deferred;
 
-    beforeEach(inject(function(_$controller_){
+    beforeEach(inject(function(_$controller_,_$rootScope_, _$q_, _uploadMultipleServices_,_dashboardService_,$httpBackend){
 
+        $q = _$q_;
+        $scope = _$rootScope_.$new();
+        deferred = _$q_.defer();
         $controller = _$controller_;
-        controller = $controller('multipleFileUploadController', { $scope: $scope });
+        uploadMultipleServices= _uploadMultipleServices_;
+        dashboardService=_dashboardService_;
+
+        $controller('multipleFileUploadController', {
+            $scope: $scope
+        });
+
+        spyOn(uploadMultipleServices, 'getDepartment').and.returnValue(deferred.promise);
+        spyOn(uploadMultipleServices, "goToDashboard");
+        $httpBackend.when("GET","/getLoggedInUser").respond("sample");
+
 
     }));
 
@@ -22,6 +37,28 @@ describe('Main Controller', function () {
             $scope.addRow();
             expect($scope.rows.length).toBeGreaterThan(length);
         });
+//x
+        describe('get department',function(){
+
+            it('should resolve promise',inject(function ($httpBackend) {
+                $httpBackend.when("GET","/api/dep").respond("sample");
+                $scope.getDepartment();
+                deferred.resolve([{id:1,DEP_NAME:'ABC'},{id:2,DEP_NAME:'xds'}]);
+
+                expect($scope.dep).toBeObject;
+                $scope.$digest();
+
+            }));
+            it('should resolve promise',inject(function ($httpBackend) {
+                $httpBackend.when("GET","/api/dep").respond("sample");
+
+                $scope.getDepartment();
+                deferred.reject();
+                expect($scope.dep).toBeArray;
+                $scope.$apply();
+            }));
+        });
+
 
 
         describe("removing row",function(){
@@ -64,11 +101,12 @@ describe('Main Controller', function () {
 
         });
         describe("save document",function(){
+
             it('save document', function () {
-                //$scope.saveDoc();
+                // $scope.saveDoc();
             });
         });
-
+        //
         describe("save document",function(){
 
             beforeEach(inject(function ($rootScope, $controller, _uploadMultipleServices_) {
@@ -85,31 +123,12 @@ describe('Main Controller', function () {
             });
 
         });
+        describe("goto dashbord function",function () {
 
-        describe("get department function",function () {
-
-
-
-            beforeEach(inject(function ($rootScope, $controller, _uploadMultipleServices_) {
-                scope = $rootScope.$new();
-                multipleUploadService = _uploadMultipleServices_;
-            }));
-
-
-            // it("should receive a successful response", function() {
-            //     var fakeHttpPromise = {
-            //         success: function(data) {
-            //         },
-            //         error:function(){
-            //
-            //         }
-            //     }
-            //     spyOn(multipleUploadService, "getDepartment").and.callFake(function() {
-            //         return  fakeHttpPromise
-            //     });
-            //     $scope.getDepartment();
-            //     expect(multipleUploadService.getDepartment).toHaveBeenCalled();  //Verifies this was called
-            // });
+            it("should receive a successful response", function() {
+                $scope.goToDashboard();
+                expect(uploadMultipleServices.goToDashboard).toHaveBeenCalled();  //Verifies this was calle
+            });
         });
 
 

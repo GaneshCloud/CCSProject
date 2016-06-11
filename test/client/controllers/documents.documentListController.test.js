@@ -3,61 +3,188 @@ describe('Main Controller', function () {
 
   beforeEach(module('myApp'));
 
-  var $controller;
+  var $controller,starServices,documentListServices;
+    var $q;
+    var deferred;
 
-  beforeEach(inject(function(_$controller_){
 
+  // beforeEach(inject(function(_$controller_){
+  //
+  //       $controller = _$controller_;
+  //
+  // }));
+    beforeEach(inject(function(_$controller_,_$rootScope_,_$q_,_starServices_,_documentListServices_,$httpBackend) {
+        $q = _$q_;
+        $scope = _$rootScope_.$new();
+        deferred = _$q_.defer();
         $controller = _$controller_;
+        starServices= _starServices_;
+        documentListServices=_documentListServices_;
 
-  }));
+        $controller('documentListController', {
+            $scope: $scope
+        });
+        spyOn(starServices, 'getStarInfo').and.returnValue(deferred.promise);
+        spyOn(documentListServices, 'getDepartment').and.returnValue(deferred.promise);
+        spyOn(documentListServices, 'search').and.returnValue(deferred.promise);
+        spyOn(documentListServices, 'edit').and.returnValue(deferred.promise);
+        spyOn(documentListServices, 'delete').and.returnValue(deferred.promise);
+
+        $httpBackend.when("GET","/getLoggedInUser").respond("sample");
+        $httpBackend.when("GET","/api/search?docType=-1&dep=-1&page=undefined&serStr=").respond("sample");
+        $httpBackend.when("GET","/api/dep").respond("sample");
+
+    }));
 
     describe('main Controller', function () {
-    it('check getDepartments', function () {
-      var $scope = {};
-      var controller = $controller('documentListController', { $scope: $scope });
-
-      $scope.getDepartment();
-      expect($scope.dep).not.toBeNull();
-    });
-
-  describe("Rating info function",function () {
-      it('check rating info with integer value', function () {
+        it('check getDepartments', function () {
           var $scope = {};
-          var id=508;
           var controller = $controller('documentListController', { $scope: $scope });
 
-          $scope.getRateInfo(id);
-          console.log($scope.rateInfo);
-          expect($scope.rateInfo).not.toBeNull();
-      });
+          $scope.getDepartment();
+          expect($scope.dep).not.toBeNull();
+        });
 
-      it('check rating info with null string', function () {
-          var $scope = {};
-          var id='';
-          var controller = $controller('documentListController', { $scope: $scope });
+        describe('get department',function(){
 
-          var res=$scope.getRateInfo(id);
-          expect(res).toBe(false);
-      });
+            it('should resolve promise', function () {
 
-      it('check rating info with null value', function () {
-          var $scope = {};
-          var id=null;
-          var controller = $controller('documentListController', { $scope: $scope });
+                $scope.getDepartment();
+                deferred.resolve({data:[{id:1,DEP_NAME:'ABC'},{id:2,DEP_NAME:'xds'}]});
+                expect($scope.dep).toBeObject;
+                $scope.$digest();
+            });
+            it('should resolve promise',function () {
+                $scope.getDepartment();
+                deferred.reject();
+                expect($scope.dep).toBeArray;
+                $scope.$digest();
+            });
+        });
 
-          var res=$scope.getRateInfo(id);
-          expect(res).toBe(false);
-      });
-      it('check rating info with string value', function () {
-          var $scope = {};
-          var id='abc';
-          var controller = $controller('documentListController', { $scope: $scope });
+        describe('search data',function(){
 
-          var res=$scope.getRateInfo(id);
-          expect(res).toBe(false);
-      });
+            it('should resolve promise', function () {
 
-  });
+                $scope.searchData ();
+                deferred.resolve({data:[{id:1,DOCCAPTION:'ABC'},{id:2,DOCCAPTION:'xds'}]});
+                expect($scope.dep).toBeObject;
+                $scope.$digest();
+            });
+            it('should resolve promise', function () {
+
+                $scope.searchData ();
+                deferred.resolve({data:[{id:1,DOCCAPTION:'ABC'},{id:2,DOCCAPTION:'xds'}]});
+                expect($scope.dep).toBeObject;
+                $scope.$digest();
+            });
+            it('should resolve promise',function () {
+                $scope.searchData ();
+                deferred.reject();
+                expect($scope.dep).toBeArray;
+                $scope.$digest();
+            });
+        });
+
+        describe('edit data',function(){
+
+
+            it('should resolve promise', function () {
+                $scope.docs=[{ID:100,DOCCAPTION:'TESTCAP1',DOCDEP:1},
+                    {ID:101,DOCCAPTION:'TESTCAP2',DOCDEP:1},
+                    {ID:102,DOCCAPTION:'TESTCAP3',DOCDEP:1}];
+
+                $scope.editDoc(1);
+                deferred.resolve([{id:1,DOCCAPTION:'ABC'},{id:2,DOCCAPTION:'xds'}]);
+                expect($scope.dep).toBeObject;
+                $scope.$digest();
+            });
+            it('should resolve promise',function () {
+                $scope.docs=[{ID:100,DOCCAPTION:'TESTCAP1',DOCDEP:1},
+                    {ID:101,DOCCAPTION:'TESTCAP2',DOCDEP:1},
+                    {ID:102,DOCCAPTION:'TESTCAP3',DOCDEP:1}];
+
+                $scope.editDoc (1);
+                deferred.reject();
+                expect($scope.dep).toBeArray;
+                $scope.$digest();
+            });
+        });
+
+        describe('delete data',function(){
+
+
+            it('should resolve promise', function () {
+
+                $scope.deleteDoc (1);
+                deferred.resolve({data:[{id:1,DOCCAPTION:'ABC'},{id:2,DOCCAPTION:'xds'}]});
+                expect($scope.dep).toBeObject;
+                $scope.$digest();
+            });
+            it('should resolve promise',function () {
+
+                $scope.deleteDoc  (1);
+                deferred.reject();
+                expect($scope.dep).toBeArray;
+                $scope.$digest();
+            });
+        });
+
+        describe("Rating info function",function () {
+          it('check rating info with integer value', function () {
+              var $scope = {};
+              var id=508;
+              var controller = $controller('documentListController', { $scope: $scope });
+
+              $scope.getRateInfo(id);
+              console.log($scope.rateInfo);
+              expect($scope.rateInfo).not.toBeNull();
+          });
+
+          it('check rating info with null string', function () {
+              var $scope = {};
+              var id='';
+              var controller = $controller('documentListController', { $scope: $scope });
+
+              var res=$scope.getRateInfo(id);
+              expect(res).toBe(false);
+          });
+
+          it('check rating info with null value', function () {
+              var $scope = {};
+              var id=null;
+              var controller = $controller('documentListController', { $scope: $scope });
+
+              var res=$scope.getRateInfo(id);
+              expect(res).toBe(false);
+          });
+          it('check rating info with string value', function () {
+              var $scope = {};
+              var id='abc';
+              var controller = $controller('documentListController', { $scope: $scope });
+
+              var res=$scope.getRateInfo(id);
+              expect(res).toBe(false);
+          });
+
+        });
+
+        describe('get Rating info',function(){
+
+            it('should resolve promise', function () {
+
+                $scope.getRateInfo(5);
+                deferred.resolve({id:20});
+                expect($scope.rateInfo).toBeObject;
+                $scope.$digest();
+            });
+            it('should resolve promise',function () {
+                $scope.getRateInfo(5);
+                deferred.reject();
+                expect($scope.rateInfo).toBeArray;
+                $scope.$digest();
+            });
+        });
 
     describe("Oreder Function",function () {
         it('check order with field value', function () {
@@ -137,59 +264,59 @@ describe('Main Controller', function () {
         });
     });
 
-        describe("get Data function",function () {
+        // describe("get Data function",function () {
+        //
+        //     var documentListService,scope;
+        //
+        //     beforeEach(inject(function ($rootScope, $controller, _documentListServices_) {
+        //         scope = $rootScope.$new();
+        //         documentListService = _documentListServices_;
+        //         $controller('documentListController', {
+        //             $scope: scope,
+        //         });
+        //     }));
+        //
+        //
+        //     it("should receive a successful response", function() {
+        //         var fakeHttpPromise = {
+        //             then: function(data) {
+        //             }
+        //         }
+        //         spyOn(documentListService, "getDepartment").and.callFake(function() {
+        //             return  fakeHttpPromise
+        //         });
+        //         scope.getDepartment();
+        //         expect(documentListService.getDepartment).toHaveBeenCalled();  //Verifies this was called
+        //     });
+        // });
 
-            var documentListService,scope;
-
-            beforeEach(inject(function ($rootScope, $controller, _documentListServices_) {
-                scope = $rootScope.$new();
-                documentListService = _documentListServices_;
-                $controller('documentListController', {
-                    $scope: scope,
-                });
-            }));
-
-
-            it("should receive a successful response", function() {
-                var fakeHttpPromise = {
-                    then: function(data) {
-                    }
-                }
-                spyOn(documentListService, "getDepartment").and.callFake(function() {
-                    return  fakeHttpPromise
-                });
-                scope.getDepartment();
-                expect(documentListService.getDepartment).toHaveBeenCalled();  //Verifies this was called
-            });
-        });
-
-        describe("edit doc function",function () {
-
-            var documentListService,scope;
-            beforeEach(inject(function ($rootScope, $controller, _documentListServices_) {
-                scope = $rootScope.$new();
-                documentListService = _documentListServices_;
-                $controller('documentListController', {
-                    $scope: scope
-                });
-            }));
-
-
-            it("should receive a successful response", function() {
-                var fakeHttpPromise = {
-                    success: function(data) {
-                    }
-                }
-                spyOn(documentListService, "edit").and.callFake(function() {
-                    return  fakeHttpPromise
-                });
-                scope.docs=[{ID:100,DOCCAPTION:'TESTCAP1',DOCDEP:1},
-                            {ID:101,DOCCAPTION:'TESTCAP2',DOCDEP:1},
-                            {ID:102,DOCCAPTION:'TESTCAP3',DOCDEP:1}];
-                scope.editDoc(1);
-                expect(documentListService.edit).toHaveBeenCalled();  //Verifies this was called
-            });
-        });
+        // describe("edit doc function",function () {
+        //
+        //     var documentListService,scope;
+        //     beforeEach(inject(function ($rootScope, $controller, _documentListServices_) {
+        //         scope = $rootScope.$new();
+        //         documentListService = _documentListServices_;
+        //         $controller('documentListController', {
+        //             $scope: scope,
+        //         });
+        //     }));
+        //
+        //
+        //     it("should receive a successful response", function() {
+        //         var fakeHttpPromise = {
+        //             success: function(data) {
+        //             }
+        //         }
+        //         spyOn(documentListService, "edit").and.callFake(function() {
+        //             return  fakeHttpPromise
+        //         });
+        //         scope.docs=[{ID:100,DOCCAPTION:'TESTCAP1',DOCDEP:1},
+        //                     {ID:101,DOCCAPTION:'TESTCAP2',DOCDEP:1},
+        //                     {ID:102,DOCCAPTION:'TESTCAP3',DOCDEP:1}];
+        //         scope.editDoc(1);
+        //         expect(documentListService.edit).toHaveBeenCalled();  //Verifies this was called
+        //     });
+        // });
 
 
 
@@ -316,36 +443,7 @@ describe('Main Controller', function () {
 
 });
 
-// describe('get Rating info',function(){
-//     var $scope;
-//     var $q;
-//     var deferred,starServices;
-//
-//     beforeEach(module('myApp'));
-//
-//     beforeEach(inject(function($controller, _$rootScope_, _$q_, _starServices_) {
-//         $q = _$q_;
-//         $scope = _$rootScope_.$new();
-//         deferred = _$q_.defer();
-//         starServices= _starServices_;
-//
-//         $controller('documentListController', {
-//             $scope: $scope
-//
-//         });
-//         spyOn(starServices, 'getStarInfo').and.returnValue(deferred.promise);
-//     }));
-//     it('should resolve promise', inject(function ($httpBackend) {
-//         $scope.getRateInfo(5);
-//         deferred.resolve();
-//         $scope.$digest();
-//     }));
-//     it('should resolve promise', inject(function ($httpBackend) {
-//         $scope.getRateInfo(5);
-//         deferred.reject();
-//         $scope.$digest();
-//     }));
-// })
+
 
 // describe('get department',function(){
 //     var $scope;
