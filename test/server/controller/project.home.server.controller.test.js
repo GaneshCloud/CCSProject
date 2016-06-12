@@ -14,10 +14,10 @@ describe("#Get Project Data",function () {
 
     var server;
     beforeEach(function () {
-        server = require('../../../server');
+        server = require('../../../server').server;
     });
 
-    it.only("should get project data",function (done) {
+    it("should get project data",function (done) {
 
         supertest(server)
             .get('/data')
@@ -33,7 +33,7 @@ describe("#Get Project Data",function () {
 
     });
 
-    it.only("should get project History",function (done) {
+    it("should get project History",function (done) {
 
         supertest(server)
             .get('/projectHistory')
@@ -49,7 +49,7 @@ describe("#Get Project Data",function () {
 
     });
 
-    it.only("should get chart Data",function (done) {
+    it("should get chart Data",function (done) {
 
         supertest(server)
             .get('/chartData')
@@ -65,7 +65,7 @@ describe("#Get Project Data",function () {
 
     });
 
-    it.only("should get image Data",function (done) {
+    it("should get image Data",function (done) {
 
         supertest(server)
             .get('/imageData')

@@ -29,7 +29,8 @@
     "describe",
     "beforeEach",
     "afterEach",
-    "null"
+    "null",
+    "inject"
     ],
   // "strict": "global",
   "indent":1,

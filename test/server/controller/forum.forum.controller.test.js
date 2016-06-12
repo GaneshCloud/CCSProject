@@ -1,18 +1,12 @@
 var chai = require('chai');
 
-var mysql = require('mysql');
-
 var request = require('supertest');
 
 var assert = chai.assert;
 
-var should = chai.should();
-
 var expect = chai.expect;
 
-var appNodeObj = require('../../../controllers/forum.home.server.controller');
-
-var server = require('../../../server');
+var server = require('../../../server').server;
 
 describe('#Post Question', function() {
 
