@@ -6,14 +6,104 @@ describe('Search Controller', function () {
 
     beforeEach(module('myApp'));
 
-    var $controller, controller, $scope = {};
+    var $controller,documentSearchServices,dashboardService,iconServices;
+    var $q;
+    var deferred;
 
-    beforeEach(inject(function (_$controller_) {
+    beforeEach(inject(function(_$controller_,_$rootScope_, _$q_, _documentSearchServices_,_iconServices_,_dashboardService_,$httpBackend){
 
+        $q = _$q_;
+        $scope = _$rootScope_.$new();
+        deferred = _$q_.defer();
         $controller = _$controller_;
-        controller = $controller('searchController', {$scope: $scope});
+        documentSearchServices= _documentSearchServices_;
+        dashboardService=_dashboardService_;
+        iconServices=_iconServices_;
+
+        $controller('searchController', {
+            $scope: $scope
+        });
+
+        spyOn(documentSearchServices, 'getDepartment').and.returnValue(deferred.promise);
+        spyOn(documentSearchServices, "goToDashboard");
+        spyOn(documentSearchServices, "search").and.returnValue(deferred.promise);
+        $httpBackend.when("GET","/getLoggedInUser").respond("sample");
+        $httpBackend.when("GET","/api/search?docType=-1&dep=-1&page=undefined&serStr=").respond("sample");
+        $httpBackend.when("GET","/api/dep").respond("sample");
+
 
     }));
+
+    describe("getClass function",function(){
+       it("#get class defualt ",function(){
+           $scope.searchkey.docType=2
+            var res=$scope.getClass(2);
+           expect(res).toEqual('active');
+       }) ;
+        it("#get class new ",function(){
+            $scope.searchkey.docType=2
+            var res=$scope.getClass(1);
+            expect(res).toEqual('');
+        }) ;
+        it("#get class new ",function(){
+            $scope.searchkey.docType=2
+            var res=$scope.getClass('');
+            expect(res).not.toBeTruthy;
+        }) ;
+        it("#get class new ",function(){
+            $scope.searchkey.docType=2
+            var res=$scope.getClass(null);
+            expect(res).not.toBeTruthy;
+        }) ;
+        it("#get class new ",function(){
+            $scope.searchkey.docType=2
+            var res=$scope.getClass('abc');
+            expect(res).not.toBeTruthy;
+        }) ;
+
+    });
+    describe('get department',function(){
+
+        it('should resolve promise',function () {
+
+            $scope.getDepartment();
+            deferred.resolve({data:[{id:1,DEP_NAME:'ABC'},{id:2,DEP_NAME:'xds'}]});
+            expect($scope.dep).toBeObject;
+            $scope.$digest();
+
+        });
+        it('should resolve promise',function () {
+            $scope.getDepartment();
+            deferred.reject();
+            expect($scope.dep).toBeArray;
+            $scope.$apply();
+        });
+
+    });
+
+    describe('get search data',function(){
+
+        it('should resolve promise',inject(function ($httpBackend) {
+            $scope.searchData();
+            deferred.resolve({data:[{id:1,DEP_NAME:'ABC'},{id:2,DEP_NAME:'xds'}]});
+            expect($scope.dep).toBeObject;
+            $scope.$digest();
+
+        }));
+        it('should resolve promise',inject(function ($httpBackend) {
+            $scope.searchData();
+            deferred.resolve({data:[{id:1,DEP_NAME:'ABC'},{id:2,DEP_NAME:'xds'}]});
+            expect($scope.dep).toBeObject;
+            $scope.$digest();
+
+        }));
+        it('should resolve promise',inject(function ($httpBackend) {
+            $scope.searchData();
+            deferred.reject();
+            expect($scope.dep).toBeArray;
+            $scope.$digest();
+        }));
+    });
 
     describe('#search Controller', function () {
 
@@ -117,21 +207,6 @@ describe('Search Controller', function () {
 
     });
 
-    describe("goto dashbord function",function () {
-
-        var documentListService,scope;
-        beforeEach(inject(function ($rootScope, $controller, _documentSearchServices_) {
-            documentsearchService = _documentSearchServices_;
-        }));
-
-        it("should receive a successful response", function() {
-
-            spyOn(documentsearchService, "goToDashboard");
-            $scope.goToDashboard();
-            expect(documentsearchService.goToDashboard).toHaveBeenCalled();  //Verifies this was calle
-        });
-    });
-
     describe("logout function",function () {
 
         var documentListService,scope;
@@ -147,5 +222,14 @@ describe('Search Controller', function () {
         //     expect(documentListService.logout).toHaveBeenCalled();  //Verifies this was called
         // });
     });
+
+    describe("goto dashbord function",function () {
+        it("should receive a successful response", function() {
+            $scope.goToDashboard();
+            expect(documentSearchServices.goToDashboard).toHaveBeenCalled();  //Verifies this was calle
+        });
+    });
+
+
 
 });
