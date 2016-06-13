@@ -89,12 +89,13 @@
 
             if(id==='' || id===null || isNaN(id)) return false;
             starServices.getStarInfo(id)
-                .success(function(data){
+                .then(function(data){
                     $scope.rateInfo=data;
+                    console.log(data);
                     $scope.popup={'visibility': 'visible','opacity': 1};
 
                     console.log($scope.rateInfo);
-                }).error(function(){
+                }).catch(function(){
 
             });
 
@@ -106,48 +107,48 @@
 
 
         //function for getting data from database//
-        $scope.getData = function() {
-
-            documentListServices.get()
-
-                .success(function(data) {
-
-                    $scope.docs = data;
-
-                    $scope.$watch("cur_page + items_page", function() {
-
-                        var begin = (($scope.curPage - 1) * $scope.itemsPage), end = begin + $scope.itemsPage;
-
-                        $scope.filteredDoc = $scope.docs.slice(begin, end);
-
-                    });
-
-                });
-        };
+        // $scope.getData = function() {
+        //
+        //     documentListServices.get()
+        //
+        //         .success(function(data) {
+        //
+        //             $scope.docs = data;
+        //
+        //             $scope.$watch("cur_page + items_page", function() {
+        //
+        //                 var begin = (($scope.curPage - 1) * $scope.itemsPage), end = begin + $scope.itemsPage;
+        //
+        //                 $scope.filteredDoc = $scope.docs.slice(begin, end);
+        //
+        //             });
+        //
+        //         });
+        // };
 
 
 //function for getting department details//
         $scope.getDepartment=function(){
             documentListServices.getDepartment()
-                .then(function(data){
-                    $scope.dep=data;
+                .then(function(response){
+                    $scope.dep=response.data;
                     $scope.dep.splice(0, 0,
                         {DEP_ID: "-1", DEP_NAME: "All Department"}
                     );
+                })
+                .catch(function(err){
+                    console.log(err);
                 });
-                // .error(function(err){
-                //     console.log(err);
-                // });
         };
 
         //function for searching documents//
         $scope.searchData = function() {
 
             documentListServices.search("?docType="+$scope.searchkey.docType+"&dep="+$scope.searchkey.dep+"&page="+$scope.page+"&serStr="+$scope.search)
-                .success(function(data) {
+                .then(function(response) {
 
-                    $scope.searchres = data;
-                    if(data.length <= 0)
+                    $scope.searchres = response.data;
+                    if(response.data.length <= 0)
                         $scope.noData=true;
                     else
                         $scope.noData=false;
@@ -158,7 +159,12 @@
 
                         $scope.filteredRes = $scope.searchres.slice(begin, end);
                     });
+                })
+                .catch(function(){
+
                 });
+
+
         };
 
 
@@ -170,8 +176,11 @@
         $scope.editDoc=function(id) {
             $scope.selId=$scope.docs[id].ID;
             documentListServices.edit()
-                .success(function(data) {
+                .then(function(data) {
                     console.log(data);
+                })
+                .catch(function(){
+
                 });
         };
 
@@ -179,13 +188,13 @@
         $scope.deleteDoc = function(id) {
             $scope.selId=id;
             documentListServices.delete({ID:+$scope.selId})
-                .success(function(data) {
+                .then(function(data) {
                     console.log(data);
                     console.log("deleted");
                     $scope.searchData();
 
                 })
-                .error(function(){
+                .catch(function(){
 
                     $scope.searchData();
                 });
@@ -195,15 +204,15 @@
         };
 
         // logout
-        $scope.onLogout = function(){
-
-            if ($window.confirm("Are You Sure ! Do you need to Log Out?")) {
-
-                dashboardService.logout();
-
-            }
-
-        };
+        // $scope.onLogout = function(){
+        //
+        //     if ($window.confirm("Are You Sure ! Do you need to Log Out?")) {
+        //
+        //         dashboardService.logout();
+        //
+        //     }
+        //
+        // };
         //Dashboard
         $scope.goToDashboard = function(){
 
@@ -211,7 +220,7 @@
 
         };
 
-        //call the functions when the page is loading//
+        // call the functions when the page is loading//
         $scope.getDepartment();
         $scope.searchData();
 
