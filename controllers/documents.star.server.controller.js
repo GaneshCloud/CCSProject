@@ -13,7 +13,6 @@ var serReatingObj=new serRating(con);
 
         sendData.USER_ID=req.session.data.id;
         serReatingObj.setStar(sendData,function(err,insId){
-            console.log(err);
           if (err) throw err;
           console.log(res.status);
           console.log(insId);
