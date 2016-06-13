@@ -40,7 +40,6 @@
         dashboardService.checkAdmin();
         //Function for get the pattern details
         $scope.getPattern = function (ptrn) {
-
             if(ptrn===null || ptrn=='' || isNaN(ptrn)) return false
             $scope.docPattern = $scope.type[ptrn - 1].ptrn;
         };
@@ -63,12 +62,11 @@
         //Function for setting the data for editting
         $scope.editForm = function () {
 
-
             uploadSingleServices.edit($scope.getParameterByName('id'))
-                .then(function (data) {
+                .then(function (response) {
 
-                    $scope.formData = data[0];
-                    $scope.getPattern(data[0].DOCTYPE);
+                    $scope.formData = response.data[0];
+                    $scope.getPattern(response.data[0].DOCTYPE);
                 })
                 .catch(function (err) {
                     console.log(err);
@@ -91,8 +89,8 @@
         //Function for get the department details
         $scope.getDepartment = function () {
             uploadSingleServices.getDepartment()
-                .then(function (data) {
-                    $scope.dep = data;
+                .then(function (response) {
+                    $scope.dep = response.data;
                 })
                 .catch(function (err) {
                     console.log(err);
@@ -106,23 +104,7 @@
 
         if (window.location.pathname === '/documents/editDoc')
             $scope.editForm();
-
-        // $scope.$on('fileSelected', function (event, args) {
-        //     $scope.$apply(function () {
-        //         $scope.files.push(args.file);
-        //     });
-        // });
-
-        // Lodout
-        // $scope.onLogout = function () {
-        //
-        //     if ($window.confirm('Are You Sure ! Do you need to Log Out?')) {
-        //
-        //         dashboardService.logout();
-        //
-        //     }
-        //
-        // };
+        
         //Dashboard
         $scope.goToDashboard = function () {
 
