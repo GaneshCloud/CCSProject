@@ -52,7 +52,6 @@ module.exports = function() {
     next();
   });
 
-
   app.use(express.static('./public'));
 
   require('../routes/project.home.server.routes.js')(app);
@@ -74,6 +73,14 @@ module.exports = function() {
 
   require('../routes/security.server.routes.js')(app);
   require('../routes/layout.server.routes.js')(app);	//Layout page route
+
+  app.use(function(err, req, res) {
+    res.status(err.status || 500);
+    res.render('error', {
+      message: err.message,
+      error: err
+    });
+  });
 
   return app;
 };
