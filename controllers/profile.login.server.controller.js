@@ -74,7 +74,8 @@ router.post('/verifyUser',function(req,res) {
             res.send(results[0]);
           }
         },function (error) {
-            res.send(error);
+            res.status(500);
+            res.send('error', { error: error });
         });
 });
 
