@@ -43,15 +43,11 @@
 
           }
 
-        }).then(function (results,error) {
-
-          if(error){
-
-              defer.reject(error);
-
-          }
+        }).then(function (results) {
           defer.resolve(results);
-
+        },function (error) {
+          defer.reject(error);
+          $window.location.href = '/error';
         });
 
         return defer.promise;
