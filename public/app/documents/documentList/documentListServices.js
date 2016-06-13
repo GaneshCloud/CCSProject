@@ -30,7 +30,7 @@
                 $window.location.href = '/logout';
             },
             goToDashboard: function () {
-                $window.location.href='/profile/adminDashboard';
+                $window.location.href='/profile/dashboard';
             }
 
 
