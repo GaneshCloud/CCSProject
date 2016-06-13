@@ -57,17 +57,17 @@
     };
 
     $scope.projectData = function(){
-      homeService.projectData().then(
-          function (results) {	//Success function
+      homeService.projectData()
+          .then(function (results) {	//Success function
             $scope.datas = results.data[0];
-          },function (error) {
+          }).catch(function (error) {
             console.log('Error');
           });
     };
 
     $scope.projectHistory = function(){
-      homeService.projectHistory().then(
-          function (results) {	//Success function
+      homeService.projectHistory()
+          .then(function (results) {	//Success function
               var data=[];
               data=results.data;
               for (var i = 0;i < data.length;i++) {
@@ -77,15 +77,15 @@
                   $scope.events.push({badgeClass: 'warning', badgeIconClass: 'glyphicon-credit-card', title: data[i].Date, content: data[i].History});
                 }
               }
-          },function (error) {
+          }).catch(function (error) {
                 console.log('Error');
           });
     };
 
 
     $scope.chartData = function(){
-      homeService.chartData().then(
-          function (results) {	//Success function
+      homeService.chartData()
+          .then(function (results) {	//Success function
               $scope.totalPercentage = results.data[3].y;
               $scope.myDataSource = {
                 chart: {
@@ -107,28 +107,28 @@
                   value: results.data[3].y
                 }]
               };
-          },function failed(error) {
+          }).catch(function(error) {
             console.log('Error');
           });
     };
 
     $scope.imageData = function(){
-      homeService.imageData().then(
-          function (results) {
+      homeService.imageData()
+          .then(function (results) {
             $scope.images = results.data;
-          },function (error) {
+          }).catch(function (error) {
             console.log('Error');
           });
     };
 
     $scope.postData = function() {	//Function to call on question submit
      // if ($scope.question.length > 0) {	//Success funtion
-        homeService.postQuestion($scope.question).then(
-            function() {
+        homeService.postQuestion($scope.question)
+            .then(function() {
               console.log('Data Inserted Successfully');
               $window.alert('Data Inserted Successfully');
               $scope.question = '';
-            },function (error) {
+            }).catch(function (error) {
               console.log('Error');
             });
     };

@@ -173,7 +173,7 @@ module.exports = function(grunt) {
             unit: {
                 options: {
                     frameworks: ['jasmine'],
-                    singleRun: false,
+                    singleRun: true,
                     browsers: ['Chrome'],
                     files: [
 
@@ -203,10 +203,10 @@ module.exports = function(grunt) {
                         // 'public/app/documents/filters/commonFilter.js',
                         // 'public/app/documents/directives/fileDirective.js',
 
-                        //'test/client/**/*.js'
+                        'test/client/**/*.js'
 
-                        'test/client/controllers/project.home.controller.test.js',
-                        'test/client/services/project.home.services.test.js'
+                        // 'test/client/controllers/project.home.controller.test.js',
+                        // 'test/client/services/project.home.services.test.js'
 
                     ],
                     concurrency: Infinity,
