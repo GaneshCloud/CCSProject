@@ -46,14 +46,14 @@ describe('single File Upload Controller', function () {
 
         it('should resolve promise', function () {
             $scope.getUser();
-            deferred.resolve({id: 1, STNAME: 'ABC',mode:'Admin'});
+            deferred.resolve({data:[{id: 1, STNAME: 'ABC',mode:'Admin'}]});
             expect($scope.isAdmin).toBetruthy;
             $scope.$digest();
 
         });
         it('should resolve promise', function () {
             $scope.getUser();
-            deferred.resolve({id: 1, STNAME: 'ABC',mode:'user'});
+            deferred.resolve({data:[{id: 1, STNAME: 'ABC',mode:'user'}]});
             expect($scope.isAdmin).toBetruthy;
             $scope.$digest();
 
@@ -71,7 +71,7 @@ describe('single File Upload Controller', function () {
 
         it('should resolve promise', function () {
             $scope.getDocument ();
-            deferred.resolve([{id: 1, DOCCAPTION:'ABC',DOCDEP:2,DOCFILE:'C:/SAMPLE.PNG'}]);
+            deferred.resolve({data:[{id: 1, DOCCAPTION:'ABC',DOCDEP:2,DOCFILE:'C:/SAMPLE.PNG'}]});
             expect($scope.isAdmin).toBetruthy;
             $scope.$digest();
 
@@ -89,7 +89,7 @@ describe('single File Upload Controller', function () {
         it('should resolve promise', function () {
             // window.location.href="sample/type=5"
             $scope.getDocument ();
-            deferred.resolve([{id: 1, DOCCAPTION:'ABC',DOCDEP:2,DOCFILE:'C:/SAMPLE.PNG'}]);
+            deferred.resolve({data:[{id: 1, DOCCAPTION:'ABC',DOCDEP:2,DOCFILE:'C:/SAMPLE.PNG'}]});
             expect($scope.isAdmin).toBetruthy;
             $scope.$digest();
 
@@ -116,7 +116,7 @@ describe('single File Upload Controller', function () {
 
         it('should resolve promise',function () {
             $scope.getDepartment();
-            deferred.resolve([{id:1,DEP_NAME:'ABC'},{id:2,DEP_NAME:'xds'}]);
+            deferred.resolve({data:[{id:1,DEP_NAME:'ABC'},{id:2,DEP_NAME:'xds'}]});
             expect($scope.dep).toBeObject;
             $scope.$digest();
 
@@ -133,7 +133,7 @@ describe('single File Upload Controller', function () {
 
         it('should resolve promise',function () {
             $scope.staring();
-            deferred.resolve([{id:1,DEP_NAME:'ABC'},{id:2,DEP_NAME:'xds'}]);
+            deferred.resolve({data:[{id:1,DEP_NAME:'ABC'},{id:2,DEP_NAME:'xds'}]});
             $scope.$digest();
 
         });
@@ -148,7 +148,7 @@ describe('single File Upload Controller', function () {
 
         it('should resolve promise',function () {
             $scope.getStar ();
-            deferred.resolve([{id:1,DEP_NAME:'ABC'},{id:2,DEP_NAME:'xds'}]);
+            deferred.resolve({data:[{id:1,DEP_NAME:'ABC'},{id:2,DEP_NAME:'xds'}]});
             $scope.$digest();
 
         });
@@ -163,14 +163,14 @@ describe('single File Upload Controller', function () {
 
         it('should resolve promise',function () {
             $scope.getNext  (5);
-            deferred.resolve([{id:1,DOCCAPTION:'ABC',DOCTYPE:5,DOCFILE:"C:/ABC.PNG"}]);
+            deferred.resolve({data:[{id:1,DOCCAPTION:'ABC',DOCTYPE:5,DOCFILE:"C:/ABC.PNG"}]});
             $scope.$digest();
 
         });
         it('should resolve promise',function () {
             $scope.doc.ID='undefined'
             $scope.getNext(5);
-            deferred.resolve([{id:1,DOCCAPTION:'ABC',DOCTYPE:5,DOCFILE:"C:/ABC.PNG"}]);
+            deferred.resolve({data:[{id:1,DOCCAPTION:'ABC',DOCTYPE:5,DOCFILE:"C:/ABC.PNG"}]});
             $scope.$digest();
 
         });
@@ -185,14 +185,14 @@ describe('single File Upload Controller', function () {
 
         it('should resolve promise',function () {
             $scope.getPrevios   (5);
-            deferred.resolve([{id:1,DOCCAPTION:'ABC',DOCTYPE:5,DOCFILE:"C:/ABC.PNG"}]);
+            deferred.resolve({data:[{id:1,DOCCAPTION:'ABC',DOCTYPE:5,DOCFILE:"C:/ABC.PNG"}]});
             $scope.$digest();
 
         });
         it('should resolve promise',function () {
             $scope.doc.ID='undefined'
             $scope.getPrevios (5);
-            deferred.resolve([{id:1,DOCCAPTION:'ABC',DOCTYPE:5,DOCFILE:"C:/ABC.PNG"}]);
+            deferred.resolve({data:[{id:1,DOCCAPTION:'ABC',DOCTYPE:5,DOCFILE:"C:/ABC.PNG"}]});
             $scope.$digest();
 
         });

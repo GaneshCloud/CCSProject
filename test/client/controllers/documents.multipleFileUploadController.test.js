@@ -43,7 +43,7 @@ describe('Main Controller', function () {
             it('should resolve promise',inject(function ($httpBackend) {
                 $httpBackend.when("GET","/api/dep").respond("sample");
                 $scope.getDepartment();
-                deferred.resolve([{id:1,DEP_NAME:'ABC'},{id:2,DEP_NAME:'xds'}]);
+                deferred.resolve({data:[{id:1,DEP_NAME:'ABC'},{id:2,DEP_NAME:'xds'}]});
 
                 expect($scope.dep).toBeObject;
                 $scope.$digest();
