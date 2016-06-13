@@ -89,12 +89,9 @@
 
             if(id==='' || id===null || isNaN(id)) return false;
             starServices.getStarInfo(id)
-                .then(function(data){
-                    $scope.rateInfo=data;
-                    console.log(data);
+                .then(function(response){
+                    $scope.rateInfo=response.data;
                     $scope.popup={'visibility': 'visible','opacity': 1};
-
-                    console.log($scope.rateInfo);
                 }).catch(function(){
 
             });
@@ -104,27 +101,6 @@
         $scope.newDocument=function(){
             documentListServices.newDocument();
         };
-
-
-        //function for getting data from database//
-        // $scope.getData = function() {
-        //
-        //     documentListServices.get()
-        //
-        //         .success(function(data) {
-        //
-        //             $scope.docs = data;
-        //
-        //             $scope.$watch("cur_page + items_page", function() {
-        //
-        //                 var begin = (($scope.curPage - 1) * $scope.itemsPage), end = begin + $scope.itemsPage;
-        //
-        //                 $scope.filteredDoc = $scope.docs.slice(begin, end);
-        //
-        //             });
-        //
-        //         });
-        // };
 
 
 //function for getting department details//
@@ -176,8 +152,7 @@
         $scope.editDoc=function(id) {
             $scope.selId=$scope.docs[id].ID;
             documentListServices.edit()
-                .then(function(data) {
-                    console.log(data);
+                .then(function(response) {
                 })
                 .catch(function(){
 
@@ -188,8 +163,7 @@
         $scope.deleteDoc = function(id) {
             $scope.selId=id;
             documentListServices.delete({ID:+$scope.selId})
-                .then(function(data) {
-                    console.log(data);
+                .then(function(response) {
                     console.log("deleted");
                     $scope.searchData();
 
@@ -202,18 +176,7 @@
 
 
         };
-
-        // logout
-        // $scope.onLogout = function(){
-        //
-        //     if ($window.confirm("Are You Sure ! Do you need to Log Out?")) {
-        //
-        //         dashboardService.logout();
-        //
-        //     }
-        //
-        // };
-        //Dashboard
+        
         $scope.goToDashboard = function(){
 
             documentListServices.goToDashboard();

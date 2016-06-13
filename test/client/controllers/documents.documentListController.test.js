@@ -95,7 +95,7 @@ describe('Main Controller', function () {
                     {ID:102,DOCCAPTION:'TESTCAP3',DOCDEP:1}];
 
                 $scope.editDoc(1);
-                deferred.resolve([{id:1,DOCCAPTION:'ABC'},{id:2,DOCCAPTION:'xds'}]);
+                deferred.resolve({data:[{id:1,DOCCAPTION:'ABC'},{id:2,DOCCAPTION:'xds'}]});
                 expect($scope.dep).toBeObject;
                 $scope.$digest();
             });

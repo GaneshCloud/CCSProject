@@ -50,7 +50,7 @@
 
         $scope.onLogout = function() {
             if ($window.confirm('Are You Sure ! Do you need to Log Out?')) {
-                dashboardService.logout();
+               
             }
         };
 
@@ -171,7 +171,7 @@
 
             projectRegService.postData(data)
                 .then(function(data) {
-                alert('The Feedback Saved Successfully!!!' + data);
+                alert('The Feedback Saved Successfully!!!');
                 $scope.getFeedbacks();
             }).
             catch(function(error) {
@@ -226,11 +226,11 @@
                 .then(function(data) {
 
 
-                    alert('The Feedback Updated Successfully!!!' + data);
+                    alert('The Feedback Updated Successfully!!!');
 
                     //$window.location.href='/';
                     $scope.rowEdit = -1;
-                    //$scope.getFeedbacks();
+                    $scope.getFeedbacks();
 
                     /*$scope.updatedata = false;
                      $scope.editdata = true;*/
