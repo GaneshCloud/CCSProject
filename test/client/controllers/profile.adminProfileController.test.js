@@ -61,6 +61,10 @@ describe('#Admin Profile Controller', function () {
 
             deferred.promise.then(function () {
                 expect(adminProfileService.getUserDetails).toHaveBeenCalled();
+
+                deferred.resolve([{id: 1, STNAME: 'ABC',mode:'Admin'},{id: 1, STNAME: 'ABC',mode:'Admin'}]);
+                expect(scope.userDetails).toBeObject;
+                $scope.$apply();
             });
 
         });
