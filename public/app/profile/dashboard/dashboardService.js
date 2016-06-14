@@ -83,6 +83,8 @@
                         $window.location.href = '/';
                     }
                 }, function (error) {
+
+                    $window.location.href = '/error';
                     console.error(error);
                 });
 

@@ -23,9 +23,7 @@
 
         $scope.openProfilePage = function() {
             spinnerService.show('html5spinner');
-            dashboardService.profile().then(function() {
-                spinnerService.hide('html5spinner');
-            });
+            dashboardService.profile();
 
         };
 
@@ -33,9 +31,7 @@
 
             if ($window.confirm('Are You Sure ! Do you need to Log Out?')) {
                 spinnerService.show('html5spinner');
-                dashboardService.logout().then(function() {
-                    spinnerService.hide('html5spinner');
-                });
+                dashboardService.logout();
 
             }
 
@@ -43,24 +39,18 @@
 
         $scope.openDocumentation = function() {
             spinnerService.show('html5spinner');
-            dashboardService.documentation().then(function() {
-                spinnerService.hide('html5spinner');
-            });
+            dashboardService.documentation();
 
         };
 
         $scope.openProject = function() {
             spinnerService.show('html5spinner');
-            dashboardService.project().then(function() {
-                spinnerService.hide('html5spinner');
-            });
+            dashboardService.project();
         };
 
         $scope.openForum = function() {
             spinnerService.show('html5spinner');
-            dashboardService.forum().then(function() {
-                spinnerService.hide('html5spinner');
-            });
+            dashboardService.forum();
         };
 
         $scope.showOnlyForUser = function () {
