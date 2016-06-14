@@ -44,7 +44,7 @@ exports.EditData=function(req,res){
   objDocument.EDIT_DATA(data.id,req.body,function(err,result){
     console.log(result);
     if(err){
-
+      //console.log(err);
       res.send(err);
       //throw err;
     }
