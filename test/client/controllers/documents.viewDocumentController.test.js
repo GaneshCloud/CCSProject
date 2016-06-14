@@ -46,15 +46,15 @@ describe('single File Upload Controller', function () {
 
         it('should resolve promise', function () {
             $scope.getUser();
-            deferred.resolve({data:[{id: 1, STNAME: 'ABC',mode:'Admin'}]});
-            expect($scope.isAdmin).toBetruthy;
+            deferred.resolve({data:{id: 1, STNAME: 'ABC',mode:'Admin'}});
+            expect($scope.isAdmin).toBeTruthy;
             $scope.$digest();
 
         });
         it('should resolve promise', function () {
             $scope.getUser();
-            deferred.resolve({data:[{id: 1, STNAME: 'ABC',mode:'user'}]});
-            expect($scope.isAdmin).toBetruthy;
+            deferred.resolve({data:{id: 1, STNAME: 'ABC',mode:'user'}});
+            expect($scope.isAdmin).toBeTruthy;
             $scope.$digest();
 
         });
