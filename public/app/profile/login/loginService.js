@@ -29,8 +29,6 @@
 
       verifyUser: function (user, password) {
 
-        var defer = $q.defer();
-
         $http({
           method: 'post',
 
@@ -43,15 +41,7 @@
 
           }
 
-        }).then(function (results) {
-          defer.resolve(results);
-        },function (error) {
-          defer.reject(error);
-          $window.location.href = '/error';
         });
-
-        return defer.promise;
-
       },
 
       checkUser: function () {
