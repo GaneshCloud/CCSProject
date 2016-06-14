@@ -98,7 +98,7 @@ this.getDocById=function(id,cb){
 
       var myErr=null,data=null;
       var qry="SELECT  * FROM TBL_DOCUMENTS WHERE ID="+id;
-      if( id==null || id=='') return cb("error",data);
+      if( id===null || id==='') return cb("error",data);
       con.query(qry,function(err,res){
   		
       if(err)
