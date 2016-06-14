@@ -62,13 +62,12 @@
       $scope.credentialsInvalid = false;
       spinnerService.show('html5spinner');
       console.log('username --->' + user);
-      loginService.verifyUser(user.$viewValue, password.$modelValue).then(function(result) {
-            if (result.data !== '') {
-              loginService.dashboard();
-            }else {
-              loginPageWithError();
-            }
-          });
+      // console.log("data"+loginService.verifyUser(user.$viewValue, password.$modelValue) );
+      if(loginService.verifyUser(user.$viewValue, password.$modelValue) !== ''){
+        loginService.dashboard();
+      }else {
+        $scope.loginPageWithError();
+      }
 
     };
 
@@ -76,14 +75,14 @@
       return $scope.credentialsInvalid;
     };
 
-    function loginPageWithError(){
+    $scope.loginPageWithError = function () {
 
         $scope.user = '';
         $scope.password = '';
         $scope.credentialsInvalid = true;
         spinnerService.hide('html5spinner');
         
-    }
+    };
 
   }
 })();
