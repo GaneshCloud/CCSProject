@@ -191,13 +191,23 @@ describe('#Project Home Controller', function () {
 
         // it('post question with empty data', function () {
         //     var controller = homeController();
-        //     scope.question='';
+        //     //scope.question='';
         //     scope.postData();
         //     deferred.resolve();
         //     scope.$apply();
-        //      expect(scope.question.length).toBe(0);
-        //      expect(scope.question).toBeFalsy();
+        //     //expect(scope.question.length).toBe(0);
+        //     //expect(scope.question).toBeFalsy();
         // });
+
+        it('post question with empty data', function () {
+            var controller = homeController();
+            //scope.question='';
+            scope.postData();
+            deferred.reject();
+            scope.$apply();
+             //expect(scope.question.length).toBe(0);
+             //expect(scope.question).toBeFalsy();
+        });
         //
         // it('post question with valid', function () {
         //     var controller = homeController();

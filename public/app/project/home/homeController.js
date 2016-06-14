@@ -11,13 +11,14 @@
   ];
 
   function homeController($scope,homeService,$window,dashboardService) {
-    $scope.datas = [];
-    $scope.events = [];
-    $scope.myDataSource = {};
-    $scope.images = [];
+      $scope.datas = [];
+      $scope.events = [];
+      $scope.myDataSource = {};
+      $scope.images = [];
+      $scope.data=[];
 
     $scope.accordionGroupOptions1={
-      open:true          // (Default: false) - Whether accordion group is open or closed.
+      open:true
     };
     $scope.accordionGroupOptions2={
       open:true
@@ -68,13 +69,13 @@
     $scope.projectHistory = function(){
       homeService.projectHistory()
           .then(function (results) {	//Success function
-              var data=[];
-              data=results.data;
-              for (var i = 0;i < data.length;i++) {
+
+              $scope.data=results.data;
+              for (var i = 0;i < $scope.data.length;i++) {
                 if (i % 2 === 0) {	//Even badge
-                  $scope.events.push({badgeClass: 'info', badgeIconClass: 'glyphicon-check', title: data[i].Date, content:data[i].History});
+                  $scope.events.push({badgeClass: 'info', badgeIconClass: 'glyphicon-check', title: $scope.data[i].Date, content: $scope.data[i].History});
                 }else {	//Odd badge
-                  $scope.events.push({badgeClass: 'warning', badgeIconClass: 'glyphicon-credit-card', title: data[i].Date, content: data[i].History});
+                  $scope.events.push({badgeClass: 'warning', badgeIconClass: 'glyphicon-credit-card', title: $scope.data[i].Date, content: $scope.data[i].History});
                 }
               }
           }).catch(function (error) {
