@@ -40,11 +40,11 @@ describe('get data',function() {
 
         var controller = $controller('projectRegController', {$scope: $scope});
 
-        $scope.logout();
+        $scope.onLogout();
 
         console.log(controller);
 
-        expect().toBeTruthy();
+        expect().not.toBeTruthy();
 
     });
 

@@ -50,7 +50,6 @@ var   docService=new serDocument(con);
       var id=req.query.id;
       if(id==='' || id===null || isNaN(id)) return res.end("invalid");
       docService.getDocById(id,function(err,data){
-              if(err) throw err;
               res.end(JSON.stringify(data));
 
           });

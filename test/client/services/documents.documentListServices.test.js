@@ -87,7 +87,6 @@ describe('Document List Services', function () {
                 .respond(200);
             var res=$factory.getDepartment();
             expect($httpBackend.flush).not.toThrow();
-
         }));
 
         it('department function invalid url', inject(function ($httpBackend) {
@@ -116,7 +115,7 @@ describe('Document List Services', function () {
     describe("logout docmnwet",function () {
         it('href redirects', function() {
             $factory.goToDashboard();
-            expect(windowObj.location.href).toEqual('/profile/adminDashboard');
+            expect(windowObj.location.href).toEqual('/profile/dashboard');
         });
     });
 

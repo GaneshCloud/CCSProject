@@ -35,7 +35,7 @@ describe('Icon Services', function () {
         it('checking ppt image', function () {
 
             var res=$factory.getIcon(3);
-            expect(res).toEqual('images/documents/text.png');
+            expect(res).toEqual('images/documents/ppt.png');
 
         });
 

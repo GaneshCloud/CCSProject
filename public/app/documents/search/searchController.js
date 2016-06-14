@@ -75,7 +75,6 @@
       documentSearchServices.search('?docType=' + $scope.searchkey.docType + '&dep=' + $scope.searchkey.dep + '&page=' + $scope.page + '&serStr=' + $scope.search)
           .then(function (response) {
             $scope.searchres = response.data;
-            console.log(response.data);
             if (response.data.length <= 0)
               $scope.noData = true;
             else
@@ -83,7 +82,6 @@
             $scope.$watch('curPage + itemspage', function () {
 
               var begin = (($scope.curPage - 1) * $scope.itemsPage), end = begin + $scope.itemsPage;
-              console.log(begin + ' ' + end);
               $scope.filteredRes = $scope.searchres.slice(begin, end);
 
             });
@@ -108,13 +106,7 @@
       $scope.field = f;
       $scope.isReverse = false;
     };
-
-    // Lodout
-    // $scope.onLogout = function () {
-    //   if ($window.confirm('Are You Sure ! Do you need to Log Out?')) {
-    //     dashboardService.logout();
-    //   }
-    // };
+    
     //Dashboard
     $scope.goToDashboard = function () {
       documentSearchServices.goToDashboard();

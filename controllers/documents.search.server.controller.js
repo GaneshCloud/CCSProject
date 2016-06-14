@@ -21,7 +21,6 @@ var mysql=require('mysql'),
             {
               docService.getAllDoc(serStr,function(err,data){
                 result=data;
-                console.log(data);
                 res.end(JSON.stringify(result));
               });
             }

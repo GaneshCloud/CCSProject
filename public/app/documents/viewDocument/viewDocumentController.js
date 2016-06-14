@@ -37,9 +37,8 @@
 
         $scope.getUser = function () {
             viewDocumentServices.getUser()
-                .then(function (data) {
-                    console.log(data);
-                    if (data.mode === 'Admin') {
+                .then(function (response) {
+                    if (response.data.mode === 'Admin') {
                         $scope.isAdmin = true;
                         $scope.css = 'starDisable.css';
                     } else {
@@ -57,13 +56,12 @@
         $scope.getDocument = function () {
 
             viewDocumentServices.edit($scope.getParameterByName('id'))
-                .then(function (data) {
+                .then(function (response) {
 
 
-                    $scope.doc = data[0];
+                    $scope.doc = response.data[0];
                     var filename = $scope.doc.DOCFILE;
-                    $scope.thisFile = 'uploads/documents/' + data[0].ID + '.' + filename.split('.').pop();
-
+                    $scope.thisFile = 'uploads/documents/' + response.data[0].ID + '.' + filename.split('.').pop();
                     $scope.getStar($scope.getParameterByName('id'));
                 })
                 .catch(function () {
@@ -72,13 +70,11 @@
 
             if ($scope.getParameterByName('type') === '5') {
                 viewDocumentServices.getArchieve($scope.getParameterByName('id'))
-                    .then(function (data) {
-                        console.log(data);
-                        //Alert(data);
-                        $scope.files = data;
+                    .then(function (response) {
+                        $scope.files = response.data;
                     })
-                    .catch(function () {
-
+                    .catch(function (err) {
+                        console.log(err);
                     });
             }
 
@@ -89,8 +85,8 @@
         $scope.Download = function () {
             var id = $scope.getParameterByName('id');
             viewDocumentServices.Download({ID: +id})
-                .then(function (data) {
-                    console.log(data);
+                .then(function (response) {
+                    console.log(response.data);
                 })
                 .catch(function () {
                     console.log('error');
@@ -103,8 +99,8 @@
 
         $scope.getDepartment = function () {
             viewDocumentServices.getDepartment()
-                .then(function (data) {
-                    $scope.dep = data;
+                .then(function (response) {
+                    $scope.dep =response.data;
                 })
                 .catch(function (err) {
                     console.log(err);
@@ -117,8 +113,8 @@
 
             alert('Thanks for your rating' + stars);
             starServices.setStar({DOC_ID: +$scope.getParameterByName('id'), STARS: +stars, STAR_DATE: new Date()})
-                .then(function (data) {
-                    console.log(data);
+                .then(function (response) {
+                    console.log(response.data);
                 })
                 .catch(function (err) {
                     console.log(err);
@@ -130,8 +126,8 @@
         $scope.getStar = function (id) {
 
             starServices.getStar('?DOC_ID=' + id)
-                .then(function (data) {
-                    $scope.star = data[0].STR;
+                .then(function (response) {
+                    $scope.star = response.data[0].STR;
 
                 })
                 .catch(function (err) {
@@ -146,23 +142,22 @@
 
             if ($scope.doc.ID === 'undefined') return;
             viewDocumentServices.getNextDoc(id)
-                .then(function (data) {
-                    if (data.length > 0) {
-                        $scope.doc = data[0];
+                .then(function (response) {
+                    if (response.data.length > 0) {
+                        $scope.doc = response.data[0];
                         $scope.getStar($scope.doc.ID);
                         var filename = $scope.doc.DOCFILE;
-                        $scope.thisFile = 'uploads/documents/' + data[0].ID + '.' + filename.split('.').pop();
+                        $scope.thisFile = 'uploads/documents/' + response.data[0].ID + '.' + filename.split('.').pop();
 
 
                         if ($scope.doc.DOCTYPE === 5) {
 
                             viewDocumentServices.getArchieve($scope.doc.ID)
-                                .then(function (data) {
-                                    console.log(data);
-                                    $scope.files = data;
+                                .then(function (response) {
+                                    $scope.files = response.data;
                                 })
-                                .catch(function () {
-
+                                .catch(function (err) {
+                                    console.log(err);
                                 });
                         }
 
@@ -181,21 +176,20 @@
 
             if ($scope.doc.ID === 'undefined') return;
             viewDocumentServices.getPrevDoc(id)
-                .then(function (data) {
-                    if (data.length > 0) {
-                        $scope.doc = data[0];
+                .then(function (response) {
+                    if (response.data.length > 0) {
+                        $scope.doc = response.data[0];
                         $scope.getStar($scope.doc.ID);
                         var filename = $scope.doc.DOCFILE;
-                        $scope.thisFile = 'uploads/documents/' + data[0].ID + '.' + filename.split('.').pop();
+                        $scope.thisFile = 'uploads/documents/' + response.data[0].ID + '.' + filename.split('.').pop();
 
                         if ($scope.doc.DOCTYPE === 5) {
                             viewDocumentServices.getArchieve($scope.doc.ID)
-                                .then(function (data) {
-                                    console.log(data);
-                                    $scope.files = data;
+                                .then(function (response) {
+                                    $scope.files = response.data;
                                 })
-                                .catch(function () {
-
+                                .catch(function (err) {
+                                    console.log(err);
                                 });
                         }
 
