@@ -36,27 +36,27 @@ describe('Search Controller', function () {
 
     describe("getClass function",function(){
        it("#get class defualt ",function(){
-           $scope.searchkey.docType=2
+           $scope.searchkey.docType=2;
             var res=$scope.getClass(2);
            expect(res).toEqual('active');
        }) ;
         it("#get class new ",function(){
-            $scope.searchkey.docType=2
+            $scope.searchkey.docType=2;
             var res=$scope.getClass(1);
             expect(res).toEqual('');
         }) ;
         it("#get class new ",function(){
-            $scope.searchkey.docType=2
+            $scope.searchkey.docType=2;
             var res=$scope.getClass('');
             expect(res).not.toBeTruthy;
         }) ;
         it("#get class new ",function(){
-            $scope.searchkey.docType=2
+            $scope.searchkey.docType=2;
             var res=$scope.getClass(null);
             expect(res).not.toBeTruthy;
         }) ;
         it("#get class new ",function(){
-            $scope.searchkey.docType=2
+            $scope.searchkey.docType=2;
             var res=$scope.getClass('abc');
             expect(res).not.toBeTruthy;
         }) ;
