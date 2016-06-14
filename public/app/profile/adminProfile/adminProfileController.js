@@ -44,7 +44,7 @@
       return $scope.noData;
     };
 
-    var getUserDetails = function() {
+    $scope.getUserDetails = function() {
 
       adminProfileService.getUserDetails()
 
@@ -81,9 +81,7 @@
 
     $scope.goToDashboard = function() {
       spinnerService.show('html5spinner');
-      adminProfileService.goToAdminDashboard().then(function() {
-        spinnerService.hide('html5spinner');
-      });
+      adminProfileService.goToAdminDashboard();
     };
 
     $scope.getImageSrcProfile = function(user) {
@@ -120,18 +118,16 @@
 
       if ($window.confirm('Are You Sure ! Do you need to Log Out?')) {
         spinnerService.show('html5spinner');
-        dashboardService.logout().then(function() {
-          spinnerService.hide('html5spinner');
-        });
+        dashboardService.logout();
 
       }
 
     };
 
-    $scope.resetFilters = function() {
-      // Needs to be a function or it won't trigger a $watch
-      $scope.search = [];
-    };
+    // $scope.resetFilters = function() {
+    //   // Needs to be a function or it won't trigger a $watch
+    //   $scope.search = [];
+    // };
 
     // $watch search to update pagination
     $scope.$watch('search', function(newVal, oldVal) {
@@ -145,6 +141,6 @@
       $scope.userDetailsFilter = $scope.userDetailsFilters.slice(begin, end);
     }, true);
 
-    getUserDetails();
+    $scope.getUserDetails();
   }
 })();
