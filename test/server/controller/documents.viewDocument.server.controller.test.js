@@ -253,8 +253,8 @@ describe("viewDocument controller",function () {
             var res = {
                 end: function (data) {
                     expect(data).to.be.a("string");
-                    setTimeout(3500);
-                    done();
+                    setTimeout(done(),3500);
+
                 }
             };
             controllerToTest.readZip(req, res); // call the function to be tested
