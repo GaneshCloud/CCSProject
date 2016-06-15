@@ -124,7 +124,7 @@
         //Function for getting the star rating of a document//
 
         $scope.getStar = function (id) {
-
+console.log(id);
             starServices.getStar('?DOC_ID=' + id)
                 .then(function (response) {
                     $scope.star = response.data[0].STR;
@@ -135,7 +135,6 @@
                 });
 
         };
-
         //Function for get the next document details//
 
         $scope.getNext = function (id) {
