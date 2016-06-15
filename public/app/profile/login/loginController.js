@@ -23,22 +23,15 @@
 
 
     $scope.loginWithFacebook = function() {
-      // $scope.progressbar.start();
       spinnerService.show('html5spinner');
-      loginService.loginWithFacebook().then(function() {
-        // $rootScope.isLogin=true;
-        // $scope.progressbar.complete();
-        spinnerService.hide('html5spinner');
-      });
+      loginService.loginWithFacebook();
 
     };
 
     $scope.loginWithGoogle = function() {
       spinnerService.show('html5spinner');
 
-      loginService.loginWithGoogle().then(function() {
-        spinnerService.hide('html5spinner');
-      });
+      loginService.loginWithGoogle();
 
     };
 
@@ -62,13 +55,12 @@
       $scope.credentialsInvalid = false;
       spinnerService.show('html5spinner');
       console.log('username --->' + user);
-      loginService.verifyUser(user.$viewValue, password.$modelValue).then(function(result) {
-            if (result.data !== '') {
-              loginService.dashboard();
-            }else {
-              loginPageWithError();
-            }
-          });
+      // console.log("data"+loginService.verifyUser(user.$viewValue, password.$modelValue) );
+      if(loginService.verifyUser(user.$viewValue, password.$modelValue) !== ''){
+        loginService.dashboard();
+      }else {
+        $scope.loginPageWithError();
+      }
 
     };
 
@@ -76,14 +68,14 @@
       return $scope.credentialsInvalid;
     };
 
-    function loginPageWithError(){
+    $scope.loginPageWithError = function () {
 
         $scope.user = '';
         $scope.password = '';
         $scope.credentialsInvalid = true;
         spinnerService.hide('html5spinner');
         
-    }
+    };
 
   }
 })();

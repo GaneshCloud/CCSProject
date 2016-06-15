@@ -83,6 +83,22 @@ describe("#Get Project Data",function () {
 
     });
 
+    it("should post question Data",function (done) {
+
+        supertest(server)
+            .post('/postQuestion')
+            .send()
+            .expect(200).then(function (results,err) {
+            console.log("err"+err);
+            console.log("results"+JSON.stringify(results));
+            should.not.exist(err);
+            should.exist(results);
+            done();
+
+        });
+
+    });
+
     // afterEach(function () {
     //     server.close();
     // });

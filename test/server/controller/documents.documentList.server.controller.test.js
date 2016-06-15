@@ -138,6 +138,7 @@ describe('documentList Controller', function() {
             };
             controllerToTest.editDocument(req,res); // call the function to be tested
         });
+        
     });
 
     describe('search Document', function() {                                              //search document

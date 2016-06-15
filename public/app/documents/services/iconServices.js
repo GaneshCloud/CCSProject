@@ -17,7 +17,7 @@
             ico = 'images/documents/word.png';
             break;
           case 3:
-            ico = 'images/documents/text.png';
+            ico = 'images/documents/ppt.png';
             break;
           case 4:
             ico = 'images/documents/image.PNG';

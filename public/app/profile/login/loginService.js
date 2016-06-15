@@ -51,7 +51,6 @@
         });
 
         return defer.promise;
-
       },
 
       checkUser: function () {
@@ -72,6 +71,7 @@
               $window.location.href = '/profile/dashboard';
             }
           }, function (error) {
+            $window.location.href = '/error';
             console.error(error);
           });
 

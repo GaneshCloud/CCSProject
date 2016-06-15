@@ -87,7 +87,6 @@ describe('Document List Services', function () {
                 .respond(200);
             var res=$factory.getDepartment();
             expect($httpBackend.flush).not.toThrow();
-
         }));
 
         it('department function invalid url', inject(function ($httpBackend) {

@@ -11,13 +11,14 @@
   ];
 
   function homeController($scope,homeService,$window,dashboardService) {
-    $scope.datas = [];
-    $scope.events = [];
-    $scope.myDataSource = {};
-    $scope.images = [];
+      $scope.datas = [];
+      $scope.events = [];
+      $scope.myDataSource = {};
+      $scope.images = [];
+      $scope.data=[];
 
     $scope.accordionGroupOptions1={
-      open:true          // (Default: false) - Whether accordion group is open or closed.
+      open:true
     };
     $scope.accordionGroupOptions2={
       open:true
@@ -57,98 +58,80 @@
     };
 
     $scope.projectData = function(){
-      homeService.projectData().then(function(results) {	//Success function
-       // if (results.length > 0) {
-          $scope.datas=results[0];
-        // }else {
-        //   console.log('No data found whe get /data');
-        // }
-      });
-      //     .error(function(err) {	//Error function
-      //   console.log('Error When get /data : ' + err);
-      // });
+      homeService.projectData()
+          .then(function (results) {	//Success function
+            $scope.datas = results.data[0];
+          }).catch(function (error) {
+            console.log('Error');
+          });
     };
 
     $scope.projectHistory = function(){
-      homeService.projectHistory().then(function(results) {	//Success function
-       // if (results.length > 0) {
-          for (var i = 0;i < results.length;i++) {
-            if (i % 2 === 0) {	//Even badge
-              $scope.events.push({badgeClass: 'info', badgeIconClass: 'glyphicon-check', title: results[i].Date, content: results[i].History});
-            }else {	//Odd badge
-              $scope.events.push({badgeClass: 'warning', badgeIconClass: 'glyphicon-credit-card', title: results[i].Date, content: results[i].History});
-            }
-          }
-        // }else {
-        //   console.log('No data found whe get /projectHistory');
-        // }
-      });
-      //     .error(function(err) {	//Error function
-      //   console.log('Error when get /projectHistory' + err);
-      // });
+      homeService.projectHistory()
+          .then(function (results) {	//Success function
+
+              $scope.data=results.data;
+              for (var i = 0;i < $scope.data.length;i++) {
+                if (i % 2 === 0) {	//Even badge
+                  $scope.events.push({badgeClass: 'info', badgeIconClass: 'glyphicon-check', title: $scope.data[i].Date, content: $scope.data[i].History});
+                }else {	//Odd badge
+                  $scope.events.push({badgeClass: 'warning', badgeIconClass: 'glyphicon-credit-card', title: $scope.data[i].Date, content: $scope.data[i].History});
+                }
+              }
+          }).catch(function (error) {
+                console.log('Error');
+          });
     };
 
 
     $scope.chartData = function(){
-      homeService.chartData().then(function(results) {	//Success function
-       // if (results.length > 0) {
-          $scope.totalPercentage = results[3].y;
-          $scope.myDataSource = {
-            chart: {
-              caption: 'Last 4 Days',
-              numberSuffix: '%',
-              theme: 'ocean'
-            },
-            data: [{
-              label: results[0].x,
-              value: results[0].y
-            },{
-              label: results[1].x,
-              value: results[1].y
-            },{
-              label: results[2].x,
-              value: results[2].y
-            },{
-              label: results[3].x,
-              value: results[3].y
-            }]
-          };
-        // }else {
-        //   console.log('No data found whe get /chartData');
-        // }
-      });
-          // .error(function(err) {	//Error function
-          //   console.log('Error When get /chartData : ' + err);
-          // });
+      homeService.chartData()
+          .then(function (results) {	//Success function
+              $scope.totalPercentage = results.data[3].y;
+              $scope.myDataSource = {
+                chart: {
+                  caption: 'Last 4 Days',
+                  numberSuffix: '%',
+                  theme: 'ocean'
+                },
+                data: [{
+                  label: results.data[0].x,
+                  value: results.data[0].y
+                },{
+                  label: results.data[1].x,
+                  value: results.data[1].y
+                },{
+                  label: results.data[2].x,
+                  value: results.data[2].y
+                },{
+                  label: results.data[3].x,
+                  value: results.data[3].y
+                }]
+              };
+          }).catch(function(error) {
+            console.log('Error');
+          });
     };
 
     $scope.imageData = function(){
-      homeService.imageData().then(function(results) {	//Success function
-       // if (results.length > 0) {
-          $scope.images = results;
-        // }else {
-        //   console.log('No Project Image Found');
-        // }
-      });
-      //     .error(function(err) {	//Error function
-      //   console.log('Error when get /imageData : ' + err);
-      // });
+      homeService.imageData()
+          .then(function (results) {
+            $scope.images = results.data;
+          }).catch(function (error) {
+            console.log('Error');
+          });
     };
 
     $scope.postData = function() {	//Function to call on question submit
      // if ($scope.question.length > 0) {	//Success funtion
-        homeService.postQuestion($scope.question).then(function() {
-          console.log('Data Inserted Successfully');
-          $window.alert('Data Inserted Successfully');
-          $scope.question = '';
-        });
-        //     .error(function(err) {	//Error function
-        //   console.log('Error when /postQuestion : ' + err);
-        //   $window.alert('Data save Failed');
-        // });
-     // }else {
-     //   console.log('question length is zero');
-    //  }
+        homeService.postQuestion($scope.question)
+            .then(function() {
+              console.log('Data Inserted Successfully');
+              $window.alert('Data Inserted Successfully');
+              $scope.question = '';
+            }).catch(function (error) {
+              console.log('Error');
+            });
     };
 
     $scope.projectData();
