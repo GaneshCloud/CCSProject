@@ -1,73 +1,50 @@
 /**
  * Created by CSS on 25-05-2016.
  */
-// var passport = require('passport');
-//
-// var configAuth = require('../config/auth');
-//
-// var facebookStrategy = require('passport-facebook').Strategy;
-//
-// var googleStrategy = require('passport-google-oauth2').Strategy;
 
 var personaldataManager = require('../config/db/personaldataManager');
 
 var express = require('express');
 
+var multer = require('multer');
+
 var router = express.Router();
 
-// passport.serializeUser(function(user, done) {
-//   done(null, user);
-// });
-//
-// passport.deserializeUser(function(user, done) {
-//   done(null, user);
-// });
-//
-// passport.use(new facebookStrategy({
-//   clientID: configAuth.facebookAuth.clientID,
-//   clientSecret: configAuth.facebookAuth.clientSecret,
-//   callbackURL: configAuth.facebookAuth.callbackURL,
-//   profileFields: ['id', 'displayName', 'photos', 'email'],
-//   passReqToCallback: true
-// },
-//     function(req, accessToken, refreshToken, profile, done) {
-//       personaldataManager.updateFacebookPersonalData(req, profile, accessToken)
-//             .then(function(results) {
-//               if (results && results.length > 0) {
-//                 req.session.data = results[0];
-//                 return done(null, results);
-//               }
-//             })
-//             .fail(function(err) {
-//               console.error(JSON.stringify(err));
-//             });
-//     }
-//
-// ));
-//
-// passport.use(new googleStrategy({
-//   clientID: configAuth.googleAuth.clientID,
-//   clientSecret: configAuth.googleAuth.clientSecret,
-//   callbackURL: configAuth.googleAuth.callbackURL,
-//   passReqToCallback: true
-// },
-//     function(req,accessToken, refreshToken, profile, done) {
-//       personaldataManager.updateGooglePersonalData(req, profile, accessToken)
-//             .then(function(results) {
-//               if (results && results.length > 0) {
-//                   req.session.data = results[0];
-//                 return done(null, results);
-//               } else {
-//                 return done(null);
-//               }
-//             })
-//             .fail(function(err) {
-//               console.error(JSON.stringify(err));
-//               return done(null);
-//             });
-//     }
-//
-// ));
+
+var storage = multer.diskStorage({ //multers disk storage settings
+    destination: function (req, file, cb) {
+        cb(null, 'public/uploads/profile');
+    },
+    filename: function (req, file, cb) {
+        var datetimestamp = Date.now();
+        console.log("req.body"+req.body.file);
+        cb(null, file.fieldname + '-' + file.originalname);
+
+        var data = {
+            file_name : file.fieldname + '-' + file.originalname,
+            id : req.session.data.id
+        };
+
+        var userData = [];
+        personaldataManager.getPersonalData(data.id).then(function (results) {
+            if(results && results.length > 0){
+                userData = results[0];
+                userData.profile_pic = data.file_name;
+                personaldataManager.updateImage(userData).then(function (result) {
+                   if(result && result.length > 0){
+                       userData = result[0];
+                       req.session.data = userData;
+                   }
+                });
+            }
+        });
+    }
+});
+
+var upload = multer({ //multer settings
+    storage: storage
+}).single('file');
+
 
 router.get('/getPersonalData', function(req,res) {
     if (req.session.passport) {
@@ -101,17 +78,19 @@ router.post('/updatePersonalData', function(req,res) {
             });
 });
 
-// router.get('/google', passport.authenticate('google', {scope: ['https://www.googleapis.com/auth/plus.login',
-//     'https://www.googleapis.com/auth/plus.profile.emails.read']}));
-//
-// router.get('/google/callback',
-//     passport.authenticate('google', { successRedirect: '/profile/dashboard',
-//         failureRedirect: '/' }));
-//
-// router.get('/facebook', passport.authenticate('facebook', {scope: ['email', 'user_friends', 'manage_pages', 'user_hometown']}));
-//
-// router.get('/facebook/callback',
-//     passport.authenticate('facebook', { successRedirect: '/profile/dashboard',
-//         failureRedirect: '/' }));
+router.post('/uploadImage',function (req,res) {
+    upload(req,res,function(results,error){
+        if(error){
+            res.json({error_code:1,err_desc:error});
+            return;
+        }
+        req.session.data = results;
+        res.json({error_code:0,err_desc:null});
+    });
+
+    console.log("req--->"+req);
+});
+
+
 
 module.exports = router;
