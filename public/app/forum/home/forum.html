@@ -139,8 +139,8 @@
             <div class="panel-heading">
               <h4><small>LEAVE YOUR COMMENT</small></h4>
         </div>
-            <div class="panel-body"> 
-
+            <div class="panel-body">
+                <form name="question">
                   <div class="form-group">
 
                         <label for="sel1">Select Catagory:</label>
@@ -151,15 +151,15 @@
                             <option value="news List">News List</option>
                         </select>
                     </div>
-                <form name="question">
+
 
                     <label>Topic:</label> 
 
-                    <textarea class="form-control" rows="2" ng-model="post.question" placeholder="Enter Topic here..." required></textarea><br>
+                    <textarea class="form-control" rows="2" ng-model="post.question" placeholder="Enter Topic here..." ng-blur="change()" required></textarea><br>
 
                     <label>Explanation:</label> 
 
-                    <textarea class="form-control" rows="4" ng-model="post.Explation" placeholder="Explat here..." required></textarea><br>
+                    <textarea class="form-control" rows="4" ng-model="post.Explation" placeholder="Explat here..." ng-blur="change()" required></textarea><br>
                 </form>
                 <br>
                 <br>
