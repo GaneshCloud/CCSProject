@@ -19,9 +19,9 @@
         var httpPromise;
         return {
 
-            pageReload: function () {
-                $window.location.reload();
-            },
+            // pageReload: function () {
+            //     $window.location.reload();
+            // },
 
             logout: function () {
                 localStorage.clear();
