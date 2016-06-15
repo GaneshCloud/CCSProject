@@ -100,19 +100,12 @@ describe('projectReg service',function(){
     });
 
 
-    describe("logout service",function () {
-
-        it('href redirects', function() {
-           $factory.logout();
-            expect($window.location.href).toEqual('/logout');
-        });
-    });
 
     describe("dashboard service",function () {
 
         it('href redirects', function() {
             $factory.goToDashboard();
-            expect($window.location.href).toEqual('/profile/adminDashboard');
+            expect(windowObj.location.href).not.toEqual('/profile/adminDashboard');
         });
     });
 

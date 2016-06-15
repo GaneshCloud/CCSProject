@@ -110,9 +110,9 @@
         $scope.getFeedbacks = function() {
             projectRegService.getFeedbacks()
 
-                .then(function(data) {
+                .then(function(response) {
 
-                    $scope.datas = data;
+                    $scope.datas = response.data;
 
                     if ($scope.datas.length > 0) {
 
@@ -217,14 +217,14 @@
                 Software: x.Software,
                 Hardware: x.Hardware,
                 catlogCode: x.catlogCode,
-                Domain: x.Domain,
+                Domain: x.Domain
                 //id: $scope.dataFilter[$scope.rowEdit].id
             };
 
             projectRegService.updateData(data)
 
-                .then(function(data) {
-
+                .then(function(response) {
+            
 
                     alert('The Feedback Updated Successfully!!!');
 
