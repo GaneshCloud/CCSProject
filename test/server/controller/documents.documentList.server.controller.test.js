@@ -145,8 +145,8 @@ describe('documentList Controller', function() {
         it('returns the result', function(done) {
             var req = {
                 query:{
-                    docType: 2,
-                    dep:4,
+                    docType: '2',
+                    dep:'4',
                     serStr:"a"
                 }
             };
@@ -166,8 +166,8 @@ describe('documentList Controller', function() {
         it('returns the result', function(done) {
             var req = {
                 query:{
-                    docType: -1,
-                    dep:-1,
+                    docType: '-1',
+                    dep:'-1',
                     serStr:"a"
                 }
             };
@@ -187,8 +187,8 @@ describe('documentList Controller', function() {
         it('returns the result', function(done) {
             var req = {
                 query:{
-                    docType: 2,
-                    dep:-1,
+                    docType: '2',
+                    dep:'-1',
                     serStr:"a"
                 }
             };
@@ -208,8 +208,8 @@ describe('documentList Controller', function() {
         it('returns the result', function(done) {
             var req = {
                 query:{
-                    docType: -1,
-                    dep:1,
+                    docType: '-1',
+                    dep:'1',
                     serStr:"a"
                 }
             };
@@ -230,7 +230,7 @@ describe('documentList Controller', function() {
             var req = {
                 query:{
                     docType: null,
-                    dep: 6,
+                    dep: '6',
                     serStr:"a"
                 }
             };
@@ -252,7 +252,7 @@ describe('documentList Controller', function() {
         it('returns the result', function(done) {
             var req = {
                 query:{
-                    docType: 2,
+                    docType: '2',
                     dep:'',
                     serStr:""
                 }
@@ -274,7 +274,7 @@ describe('documentList Controller', function() {
             var req = {
                 query:{
                     docType: 'abc',
-                    dep:4,
+                    dep:'4',
                     serStr:"a"
                 }
             };

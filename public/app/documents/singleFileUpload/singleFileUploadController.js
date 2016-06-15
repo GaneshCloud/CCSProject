@@ -40,7 +40,7 @@
         dashboardService.checkAdmin();
         //Function for get the pattern details
         $scope.getPattern = function (ptrn) {
-            if(ptrn===null || ptrn=='' || isNaN(ptrn)) return false
+            if(ptrn===null || ptrn==='' || isNaN(ptrn)) return false;
             $scope.docPattern = $scope.type[ptrn - 1].ptrn;
         };
 
