@@ -23,22 +23,15 @@
 
 
     $scope.loginWithFacebook = function() {
-      // $scope.progressbar.start();
       spinnerService.show('html5spinner');
-      loginService.loginWithFacebook().then(function() {
-        // $rootScope.isLogin=true;
-        // $scope.progressbar.complete();
-        spinnerService.hide('html5spinner');
-      });
+      loginService.loginWithFacebook();
 
     };
 
     $scope.loginWithGoogle = function() {
       spinnerService.show('html5spinner');
 
-      loginService.loginWithGoogle().then(function() {
-        spinnerService.hide('html5spinner');
-      });
+      loginService.loginWithGoogle();
 
     };
 
