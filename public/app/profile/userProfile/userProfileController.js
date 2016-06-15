@@ -272,7 +272,7 @@
 
         $scope.editPersonalData = false;
 
-        getPersonalData();
+        $scope.getPersonalData();
       }
 
     };
@@ -281,22 +281,18 @@
       if (($scope.personalData.userType !== 'admin') && $scope.personalData.password) {
         // $scope.progressbar.start();
         spinnerService.show('html5spinner');
-        userProfileService.changePassword().then(function() {
-          // $scope.progressbar.complete();
-          spinnerService.hide('html5spinner');
-        });
+        userProfileService.changePassword();
       }else {
-        // $scope.progressbar.start();
-        spinnerService.show('NoPassword');
+       $scope.okOnCantChangePassword();
       }
     };
 
     $scope.okOnCantChangePassword = function() {
       // $scope.progressbar.complete();
-      spinnerService.hide('NoPassword');
+      spinnerService.hide('html5spinner');
     };
 
-    var getPersonalData = function() {
+    $scope.getPersonalData = function() {
 
       userProfileService.getPersonalData()
 
@@ -343,17 +339,14 @@
 
     }
 
-    getPersonalData();
+    $scope.getPersonalData();
 
     $scope.onLogout = function() {
 
       if ($window.confirm('Are You Sure ! Do you need to Log Out?')) {
         // $scope.progressbar.start();
         spinnerService.show('html5spinner');
-        dashboardService.logout().then(function() {
-          // $scope.progressbar.complete();
-          spinnerService.hide('html5spinner');
-        });
+        dashboardService.logout();
 
       }
 
