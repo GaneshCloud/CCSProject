@@ -76,7 +76,7 @@ describe('get data',function() {
 
     });
 
-    it('check order', function () {
+    it('check searchBox', function () {
 
         var $scope = {};
 
@@ -89,7 +89,7 @@ describe('get data',function() {
         expect($scope.reverse).not.toBeTruthy();
 
     });
-    it('check order', function () {
+    it('check search1Box', function () {
 
         var $scope = {};
 
@@ -139,10 +139,10 @@ describe('get data',function() {
     it('should get the data', function () {
 
         $scope.getFeedbacks();
-        deferred.resolve([{id: 16},{id:18}]);
+        deferred.resolve({data:[{id: 16},{id:18}]});
         $scope.$apply();
     });
-    it('should getdata', function () {
+    it('should getdata undefined', function () {
 
         $scope.getFeedbacks();
         deferred.reject();
@@ -160,10 +160,10 @@ describe('get data',function() {
                     Domain:'sdfg'
                 };
         $scope.postData();
-        deferred.resolve(x);
+        deferred.resolve({data:[x]});
         $scope.$apply();
     });
-    it('should resolve promise',function () {
+    it('should post the data undefined',function () {
         var x={projectCode:'1',
             Title:'7777',
             Department:'dsg',
@@ -178,7 +178,7 @@ describe('get data',function() {
         $scope.$apply();
     });
 
-    it('should resolve promise', function () {
+    it('Update the data', function () {
 
         var y={projectCode:'1',
             Title:'7777',
@@ -194,10 +194,10 @@ describe('get data',function() {
         $scope.dataFilter=[y]
         $scope.updateData(y,0);
 
-        deferred.resolve();
+        deferred.resolve({data:[y]});
         $scope.$apply();
     });
-    it('should resolve promise', function () {
+    it('update the data undefined', function () {
 
         var y={projectCode:'1',
             Title:'7777',
@@ -217,13 +217,13 @@ describe('get data',function() {
         $scope.$apply();
     });
 
-    it('should get the data', function () {
+    it('Delete the data', function () {
 
         $scope.deleteData(16);
-        deferred.resolve({id: 16});
+        deferred.resolve({data:[{id: 16}]});
         $scope.$apply();
     });
-    it('should get the data', function () {
+    it('Delete the data undefined', function () {
 
         $scope.deleteData(16);
         deferred.reject({id: 16});

@@ -15,9 +15,6 @@ module.exports=function(connection){
                 cb(err,results);
 
                 console.log('Error when get questions data : '+err);
-
-
-
             }
 
             else{
