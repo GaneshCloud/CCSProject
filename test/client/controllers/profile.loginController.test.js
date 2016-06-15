@@ -45,10 +45,22 @@ describe('#Login Controller', function () {
 
         spyOn(loginService, 'verifyUser').and.returnValue();
         spyOn(loginService, 'dashboard').and.returnValue();
+        spyOn(loginService, 'loginWithGoogle').and.returnValue();
+        spyOn(loginService, 'loginWithFacebook').and.returnValue();
         
     }));
 
     describe('#form validation',function () {
+
+        it("should return user credentials",function () {
+
+            scope.credentialsInvalid = false;
+
+            var value = scope.showCredentialsError();
+
+            expect(value).toBeDefined();
+
+        });
 
     });
 
@@ -68,6 +80,23 @@ describe('#Login Controller', function () {
             expect(scope.user).toBe('');
             expect(scope.password).toBe('');
             expect(scope.credentialsInvalid).toBe(true);
+
+        });
+    });
+
+    describe('#should login with social sites', function () {
+        it('Facebook login', function () {
+
+            // var controller = loginController();
+
+            scope.loginWithFacebook();
+            expect(loginService.loginWithFacebook).toHaveBeenCalled();
+
+        });
+
+        it('Google Login', function () {
+            scope.loginWithGoogle();
+            expect(loginService.loginWithGoogle).toHaveBeenCalled();
 
         });
     });
