@@ -28,7 +28,7 @@ this.insertDoc=function(data,cb){
 this.getAllDoc=function(ser,cb){
 
       var myErr=null,data=null;
-      var qry="SELECT A.*,B.*,COALESCE(FLOOR(AVG(C.STARS)),0) as star FROM TBL_DOCUMENTS A LEFT OUTER join TBL_DEPARTMENT B on (A.DOCDEP=B.DEP_ID) LEFT OUTER JOIN  TBL_DOC_STARS C  on  A.ID=C.DOC_ID WHERE A.DOCCAPTION LIKE '" + ser+ "%' GROUP BY A.id";
+      var qry="SELECT A.ID,A.DOCCAPTION,A.DOCTYPE,A.DOCDEP,A.DOCKEY,A.DOCDESC,A.DOCDATE,A.DOCFILE,A.DOCNOVIEWS,A.DOCNODOWN,B.DEP_ID,B.DEP_NAME,COALESCE(FLOOR(AVG(C.STARS)),0) as star FROM TBL_DOCUMENTS A LEFT OUTER join TBL_DEPARTMENT B on (A.DOCDEP=B.DEP_ID) LEFT OUTER JOIN  TBL_DOC_STARS C  on  A.ID=C.DOC_ID WHERE A.DOCCAPTION LIKE '" + ser+ "%' GROUP BY A.id";
       console.log(qry);
       con.query(qry,function(err,res){
 
@@ -97,7 +97,7 @@ this.deleteDoc=function(id,cb){
 this.getDocById=function(id,cb){
 
       var myErr=null,data=null;
-      var qry="SELECT  * FROM TBL_DOCUMENTS WHERE ID="+id;
+      var qry="SELECT  A.ID,A.DOCCAPTION,A.DOCTYPE,A.DOCDEP,A.DOCKEY,A.DOCDESC,A.DOCDATE,A.DOCFILE,A.DOCNOVIEWS,A.DOCNODOWN FROM TBL_DOCUMENTS A WHERE A.ID="+id;
       if( id===null || id==='') return cb("error",data);
       con.query(qry,function(err,res){
   		
@@ -120,7 +120,7 @@ this.getDocByDep=function(ser,depId,cb){
       var myErr=null,data=null;
 
       if(depId==null || depId=='') return cb("error",data);
-      var qry="SELECT A.*,B.*,COALESCE(FLOOR(AVG(C.STARS)),0) as star FROM TBL_DOCUMENTS A LEFT OUTER join TBL_DEPARTMENT B on (A.DOCDEP=B.DEP_ID) LEFT OUTER JOIN  TBL_DOC_STARS C  on  A.ID=C.DOC_ID WHERE A.DOCDEP="+depId+" AND A.DOCCAPTION LIKE '" + ser+ "%' GROUP BY C.doc_id,A.ID";
+      var qry="SELECT A.ID,A.DOCCAPTION,A.DOCTYPE,A.DOCDEP,A.DOCKEY,A.DOCDESC,A.DOCDATE,A.DOCFILE,A.DOCNOVIEWS,A.DOCNODOWN,B.DEP_ID,B.DEP_NAME,COALESCE(FLOOR(AVG(C.STARS)),0) as star FROM TBL_DOCUMENTS A LEFT OUTER join TBL_DEPARTMENT B on (A.DOCDEP=B.DEP_ID) LEFT OUTER JOIN  TBL_DOC_STARS C  on  A.ID=C.DOC_ID WHERE A.DOCDEP="+depId+" AND A.DOCCAPTION LIKE '" + ser+ "%' GROUP BY C.doc_id,A.ID";
       con.query(qry,depId,function(err,res){
   		
       if(err)
@@ -142,7 +142,7 @@ this.getDocByType=function(ser,typeId,cb){
       var myErr=null,data=null;
 
      if(typeId==null || typeId=='') return cb("error",data);
-      var qry="SELECT A.*,B.*,COALESCE(FLOOR(AVG(C.STARS)),0) as star FROM TBL_DOCUMENTS A LEFT OUTER join TBL_DEPARTMENT B on (A.DOCDEP=B.DEP_ID) LEFT OUTER JOIN  TBL_DOC_STARS C  on  A.ID=C.DOC_ID WHERE A.DOCTYPE="+ typeId+" AND A.DOCCAPTION LIKE '" + ser+ "%' GROUP BY C.doc_id,A.ID";
+      var qry="SELECT A.ID,A.DOCCAPTION,A.DOCTYPE,A.DOCDEP,A.DOCKEY,A.DOCDESC,A.DOCDATE,A.DOCFILE,A.DOCNOVIEWS,A.DOCNODOWN,B.DEP_ID,B.DEP_NAME,COALESCE(FLOOR(AVG(C.STARS)),0) as star FROM TBL_DOCUMENTS A LEFT OUTER join TBL_DEPARTMENT B on (A.DOCDEP=B.DEP_ID) LEFT OUTER JOIN  TBL_DOC_STARS C  on  A.ID=C.DOC_ID WHERE A.DOCTYPE="+ typeId+" AND A.DOCCAPTION LIKE '" + ser+ "%' GROUP BY C.doc_id,A.ID";
       con.query(qry,typeId,function(err,res){
   		
       if(err)
@@ -163,7 +163,7 @@ this.getDocByTypeDep=function(ser,typeId,depId,cb){
 
       var myErr=null,data=null;
       if(typeId==null || typeId=='' || depId==null || depId=='' ) return cb("error",data);
-      var qry="SELECT A.*,B.*,COALESCE(FLOOR(AVG(C.STARS)),0) as star FROM TBL_DOCUMENTS A LEFT OUTER join TBL_DEPARTMENT B on (A.DOCDEP=B.DEP_ID) LEFT OUTER JOIN  TBL_DOC_STARS C  on  A.ID=C.DOC_ID WHERE A.DOCTYPE="+typeId+ " AND A.DOCDEP="+depId+" AND A.DOCCAPTION LIKE '" + ser+ "%' GROUP BY C.doc_id,A.ID";
+      var qry="SELECT A.ID,A.DOCCAPTION,A.DOCTYPE,A.DOCDEP,A.DOCKEY,A.DOCDESC,A.DOCDATE,A.DOCFILE,A.DOCNOVIEWS,A.DOCNODOWN,B.DEP_ID,B.DEP_NAME,COALESCE(FLOOR(AVG(C.STARS)),0) as star FROM TBL_DOCUMENTS A LEFT OUTER join TBL_DEPARTMENT B on (A.DOCDEP=B.DEP_ID) LEFT OUTER JOIN  TBL_DOC_STARS C  on  A.ID=C.DOC_ID WHERE A.DOCTYPE="+typeId+ " AND A.DOCDEP="+depId+" AND A.DOCCAPTION LIKE '" + ser+ "%' GROUP BY C.doc_id,A.ID";
       console.log(qry);
       con.query(qry,typeId,function(err,res){
   		
@@ -294,7 +294,7 @@ this.getNextDocument=function(id,cb){
       var myErr=null,result=null;
       var myErr=null,data=null;
       if(id==null || id=='') return cb("error",data);
-      var qry='select * from TBL_DOCUMENTS where id = (select min(id) from TBL_DOCUMENTS where id > '+ id+' )';
+      var qry='select A.ID,A.DOCCAPTION,A.DOCTYPE,A.DOCDEP,A.DOCKEY,A.DOCDESC,A.DOCDATE,A.DOCFILE,A.DOCNOVIEWS,A.DOCNODOWN from TBL_DOCUMENTS A where A.ID = (select min(id) from TBL_DOCUMENTS where id > '+ id+' )';
 
       // con.query(qry,function(err,res){
       //
@@ -322,11 +322,9 @@ this.getNextDocument=function(id,cb){
 
 
 this.getPrevDocument=function(id,cb){
-
       var myErr=null,result=null;
-      var myErr=null,data=null;
-      if(id==null || id=='') return cb("error",data);
-      var qry='select * from TBL_DOCUMENTS where id = (select max(id) from TBL_DOCUMENTS where id < '+ id+' )';
+      if(id===null || id==='') return cb("error",result);
+      var qry='select A.ID,A.DOCCAPTION,A.DOCTYPE,A.DOCDEP,A.DOCKEY,A.DOCDESC,A.DOCDATE,A.DOCFILE,A.DOCNOVIEWS,A.DOCNODOWN from TBL_DOCUMENTS A where A.ID = (select max(id) from TBL_DOCUMENTS where id < '+ id+' )';
 
     //   con.query(qry,function(err,res){
     //
@@ -337,7 +335,7 @@ this.getPrevDocument=function(id,cb){
     // });
 
       con.query(qry,function(err,res){
-      
+
       if(err)
       {
           myErr=err;
