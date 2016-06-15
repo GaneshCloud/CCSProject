@@ -11,7 +11,7 @@ describe('#Admin Profile Controller', function () {
     var $q;
     var deferred;
 
-    beforeEach(inject(function ($compile,_$controller_,_$rootScope_,_$window_,_adminProfileService_,_dashboardService_,_spinnerService_,_filterFilter_,_$q_) {
+    beforeEach(inject(function ($compile,_$controller_,_$rootScope_,_$window_,_adminProfileService_,_dashboardService_,_spinnerService_,_filterFilter_,_$q_,$httpBackend) {
         //$location = _$location_;
         scope = _$rootScope_.$new();
 
@@ -45,7 +45,8 @@ describe('#Admin Profile Controller', function () {
             '</spinner>');
 
         $compile(element)(scope);
-
+        $httpBackend.when("GET","/getLoggedInUser").respond("sample");
+        $httpBackend.when("GET","/getUserDetails").respond({data:[{id: 1},{id: 1},{id: 1},{id: 1}],length:4});
         spyOn(adminProfileService, 'getUserDetails').and.returnValue(deferred.promise);
         spyOn(adminProfileService, 'goToAdminDashboard').and.returnValue();
         spyOn(dashboardService, 'logout').and.returnValue();
@@ -59,13 +60,8 @@ describe('#Admin Profile Controller', function () {
 
             scope.getUserDetails();
 
-            deferred.promise.then(function () {
-                expect(adminProfileService.getUserDetails).toHaveBeenCalled();
-
-                deferred.resolve([{id: 1, STNAME: 'ABC',mode:'Admin'},{id: 1, STNAME: 'ABC',mode:'Admin'}]);
-                expect(scope.userDetails).toBeObject;
-                $scope.$apply();
-            });
+            deferred.resolve({data:[{id: 1, STNAME: 'ABC',mode:'Admin'},{id: 1, STNAME: 'ABC',mode:'Admin'}],length:2});
+            scope.$apply();
 
         });
 
