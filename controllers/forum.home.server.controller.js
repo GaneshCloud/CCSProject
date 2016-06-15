@@ -4,13 +4,6 @@ var forumConfig = require('../config/db/forumManager');
 
 var router = express.Router();
 
-//
-// Router.get('/home', function(req, res) {
-//   {
-//     res.sendfile('./public/forum/home/forum.html');
-//   }
-// });
-
 router.get('/getForum', function(req, res) {
     forumConfig.getForum(req.query.type)
       .then(function(results,error) {

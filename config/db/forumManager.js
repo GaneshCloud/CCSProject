@@ -72,8 +72,7 @@ function getForum(type) {
 
 function postForumquestion(forumData,userid) {
   var deferred = q.defer();
-
-          con.query('INSERT INTO question(Question,Dates,Type,Explation,userid) values(\'' + forumData.question + '\',now(),\'' + forumData.Type + '\',\'' + forumData.explation + '\',\'' + userid + '\')', function(err, result) {
+          con.query('INSERT INTO question(Question,Dates,Type,Explation) values(\'' + forumData.question + '\',now(),\'' + forumData.Type + '\',\'' + forumData.explation + '\')', function(err, result) {
             if (err) {
               console.log(err);
               deferred.reject(err);
@@ -89,7 +88,7 @@ function postForumquestion(forumData,userid) {
 function postForumAnswer(forumData) {
   var deferred = q.defer();
 
-          var qry = 'INSERT INTO answer(qusId,Date,Answers)values(' + forumData.qusId + ',now(),\'' + forumData.Comment + '\')';
+          var qry = 'INSERT INTO answer(qusId,Date,Answers)values(' + forumData.qusId + ',now(),\'' + forumData.comment + '\')';
 
           console.log('Post Answer Query --->' + qry);
 
@@ -97,7 +96,6 @@ function postForumAnswer(forumData) {
             if (err) {
               console.log('Error when get postAnswer data : ' + err);
               deferred.reject(err);
-              return;
             } else {
               console.log(result);
               deferred.resolve(result);
@@ -106,11 +104,11 @@ function postForumAnswer(forumData) {
   return deferred.promise;
 }
 
-function postForumRating(ratingArr) {
+function postForumRating(rating) {
   var deferred = q.defer();
 
-          con.query('insert into Rating(qusId,rating) values(' + ratingArr[0] + ',' + ratingArr[1] + ')', function(err, result) {
-            console.log('insert into Rating(qusId,rating) values(' + ratingArr[0] + ',' + ratingArr[1] + ')');
+          con.query('insert into Rating(qusId,rating) values(' + rating.qusId + ',' + rating.star + ')', function(err, result) {
+            console.log('insert into Rating(qusId,rating) values(' + rating.qusId + ',' + rating.star + ')');
             if (err) {
               console.log(err);
               deferred.reject(err);

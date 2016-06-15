@@ -17,16 +17,16 @@ describe('forumService',function(){
             $httpBackend
                 .when('GET','/forum/getForum?type=All')
                 .respond(200);
-            var res=$factory.get('All');
+            var res=$factory.getForumData('All');
             expect($httpBackend.flush).not.toThrow();
 
         }));
 
         it('get data invalid url function',inject(function($httpBackend){
             $httpBackend
-                .when('R','/forum/getForum?type=All')
+                .when('R','/forum/getForum?type=All1')
                 .respond(200);
-            var res=$factory.get('All');
+            var res=$factory.getForumData('All');
             expect($httpBackend.flush).toThrow();
 
         }));
@@ -39,7 +39,7 @@ describe('forumService',function(){
             $httpBackend
                 .when('POST','/forum/postForumquestion')
                 .respond(200);
-            var res=$factory.postForumquestion();
+            var res=$factory.postForumQuestion();
             expect($httpBackend.flush).not.toThrow();
         })) ;
 
@@ -48,7 +48,7 @@ describe('forumService',function(){
             $httpBackend
                 .when('g','/forum/postForumquestion1')
                 .respond(500);
-            var res=$factory.postForumquestion();
+            var res=$factory.postForumQuestion();
             expect($httpBackend.flush).toThrow();
         })) ;
 
@@ -60,7 +60,7 @@ describe('forumService',function(){
             $httpBackend
                 .when('POST','/forum/rating')
                 .respond(200);
-            var res=$factory.getStar();
+            var res=$factory.postStar();
             expect($httpBackend.flush).not.toThrow();
         })) ;
 
@@ -69,7 +69,7 @@ describe('forumService',function(){
             $httpBackend
                 .when('g','/forum/rating1')
                 .respond(500);
-            var res=$factory.getStar();
+            var res=$factory.postStar();
             expect($httpBackend.flush).toThrow();
         })) ;
 

@@ -74,10 +74,6 @@ describe('#Insert Answer',function() {
             assert.isOk('everything', 'everything is ok');
             done();
 
-        },function(err) {
-            console.log(err);
-            expect(err).to.be.null;
-            done();
         }).done();
 
     });
@@ -86,23 +82,18 @@ describe('#Insert Answer',function() {
 
         var data =
         {
-            qusId: 'hi',
+            'qusId': '1',
 
-            Date: '2016-05-02 00:00:00',
+            'Date': '2016-05-02 00:00:00',
 
-            Comment: 'helo'
+            'Comment': 'helo'
         };
 
-        appNodeObj.postForumAnswer(data).then(function(result) {
+        appNodeObj.postForumAnswer(data).then(function(err) {
 
-            console.log(result);
-            expect(result).to.be.null;
-            assert.isOk('everything', 'everything is ok');
-            done();
-
-        },function(err) {
             console.log(err);
             expect(err).to.be.not.null;
+            assert.isOk('everything', 'everything is ok');
             done();
         }).done();
 
@@ -161,7 +152,7 @@ describe('#Post Rating', function() {
     });
 });
 
-
+// //--------------------Get Question,Answer-------------------------------------------------//
 describe('#select Queston and answer',function() {
     it('Expecet Question and answer', function (done) {
         appNodeObj.getForum('All').then(function (result) {

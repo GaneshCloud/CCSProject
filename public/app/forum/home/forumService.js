@@ -9,14 +9,14 @@
     '$window'
   ];
 
-  function forumService($http, $q, $window) {
+  function forumService($http,$q,$window) {
     return {
       
       goToDashboard: function () {
         $window.location.href = '/profile/dashboard';
       },
 
-      get: function (type) {
+      getForumData: function (type) {
         var defer = $q.defer();
         var httpPromise = $http.get('/forum/getForum?type=' + type);
         httpPromise.then(function (response) {
@@ -27,8 +27,8 @@
         });
         return defer.promise;
       },
-
-      postForumquestion: function (data) {
+      
+      postForumQuestion: function (data) {
         var defer = $q.defer();
         var httpPromise = $http({
           method: 'post',
@@ -38,14 +38,13 @@
         httpPromise.then(function (data) {
           defer.resolve(data);
         },function (error) {
-
           defer.reject(error);
           throw error;
         });
         return defer.promise;
       },
 
-      getStar: function (data) {
+      postStar: function (data) {
         var defer = $q.defer();
         var httpPromise = $http({
           method: 'post',
