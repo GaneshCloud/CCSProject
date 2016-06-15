@@ -8,18 +8,19 @@
   userProfileService.$inject=[
     '$http',
     '$window',
-    '$q'
+    '$q',
+      'Upload'
   ];
-  function userProfileService($http, $window, $q, Upload) {
+  function userProfileService($http, $window, $q,Upload) {
     var httpPromise;
     return {
       changePassword: function () {
         $window.location.href = '/profile/changePassword';
       },
 
-      pageReload: function () {
-        $window.location.reload();
-      },
+      // pageReload: function () {
+      //   $window.location.reload();
+      // },
 
       goToDashboard: function () {
         $window.location.href = '/profile/dashboard';
@@ -53,7 +54,7 @@
         var dfr = $q.defer();
 
         httpPromise = Upload.upload({
-          url: '/uploadImage',
+          url: '/connect/uploadImage',
 
           data: {file: file}
 
