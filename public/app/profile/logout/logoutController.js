@@ -8,12 +8,10 @@
       .controller('logoutController', logoutController);
 
   logoutController.$inject=[
-    '$scope',
-    'ngProgressFactory'
+    '$scope'
   ];
 
-  function logoutController($scope,ngProgressFactory) {
-    $scope.progressbar = ngProgressFactory.createInstance();
+  function logoutController($scope) {
     $scope.userCredentials = false;
   }
 })();
