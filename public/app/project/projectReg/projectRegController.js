@@ -217,8 +217,8 @@
                 Software: x.Software,
                 Hardware: x.Hardware,
                 catlogCode: x.catlogCode,
-                Domain: x.Domain
-                //id: $scope.dataFilter[$scope.rowEdit].id
+                Domain: x.Domain,
+                id: $scope.dataFilter[$scope.rowEdit].id
             };
 
             projectRegService.updateData(data)
