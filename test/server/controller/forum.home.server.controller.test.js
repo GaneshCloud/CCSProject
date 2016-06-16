@@ -67,7 +67,10 @@ describe('#Insert Answer',function() {
 describe('#Post Rating', function() {
 
   it('should post Rating', function(done) {
-    var data = [11,1];
+    var data = {
+        'qusId':1,
+        'star':2
+    };
     request(server)
     .post('/forum/rating')
     .send(data)

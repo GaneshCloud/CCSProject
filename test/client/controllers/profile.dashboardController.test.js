@@ -84,6 +84,10 @@ describe('#Login Controller', function () {
 
             expect(scope.showOnlyForUser()).toBeFalsy();
 
+            localStorage.setItem('userType','user');
+            expect(scope.showOnlyForUser()).toBeTruthy();
+
+
         });
     });
 });
