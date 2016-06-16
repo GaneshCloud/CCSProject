@@ -38,7 +38,7 @@ exports.postData=function(req,res){
 };
 
 exports.EditData=function(req,res){
-  var data=req.params;
+  var data=req.body;
 
   // console.log(req.params.id);
   objDocument.EDIT_DATA(data.id,req.body,function(err,result){
@@ -55,7 +55,7 @@ exports.EditData=function(req,res){
 };
 
 exports.DeleteData=function(req,res){
-  var data=req.params;
+  var data=req.body.id;
   objDocument.DELETE_DATA(data,function(err,result){
     if(err){
       res.send(err);
