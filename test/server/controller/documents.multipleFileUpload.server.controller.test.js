@@ -5,13 +5,10 @@
  * Created by Administrator on 6/13/2016.
  */
 var expect = require('chai').expect;
-var sinon   = require("sinon");
 var supertest = require('supertest');
 var controllerToTest = require('../../../controllers/documents.multipleFileUpload.server.controller');
-
-
 var server;
-// form.append('my_file', fs.createReadStream('/foo/bar.jpg'));
+
 
 
 describe("multiple FileUpload controller",function () {
