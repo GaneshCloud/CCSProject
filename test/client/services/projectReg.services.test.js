@@ -61,7 +61,7 @@ describe('projectReg service',function(){
         it('post data function',inject(function($httpBackend){
 
             $httpBackend
-                .when('PUT','/editdata')
+                .when('POST','/editdata')
                 .respond(200);
             var res=$factory.updateData();
             expect($httpBackend.flush).not.toThrow();
@@ -70,7 +70,7 @@ describe('projectReg service',function(){
         it('update data invalid url function',inject(function($httpBackend){
 
             $httpBackend
-                .when('PUT','/editdata45')
+                .when('POST','/editdata45')
                 .respond(200);
             var res=$factory.updateData();
             expect($httpBackend.flush).toThrow();
@@ -82,7 +82,7 @@ describe('projectReg service',function(){
         it('post data function',inject(function($httpBackend){
 
             $httpBackend
-                .when('DELETE','/deletedata/16')
+                .when('POST','/deletedata')
                 .respond(200);
             var res=$factory.deleteData(16);
             expect($httpBackend.flush).not.toThrow();
@@ -91,7 +91,7 @@ describe('projectReg service',function(){
         it('delete data invalid url function',inject(function($httpBackend){
 
             $httpBackend
-                .when('DELETE','/deletedata12/100')
+                .when('POST','/deletedata12/100')
                 .respond(200);
             var res=$factory.deleteData(100);
             expect($httpBackend.flush).toThrow();

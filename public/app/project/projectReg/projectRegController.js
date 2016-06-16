@@ -218,7 +218,7 @@
                 Hardware: x.Hardware,
                 catlogCode: x.catlogCode,
                 Domain: x.Domain,
-                id: $scope.dataFilter[$scope.rowEdit].id
+                //id: $scope.dataFilter[$scope.rowEdit].id
             };
 
             projectRegService.updateData(data)
@@ -254,7 +254,7 @@
 
                 .then(function(data) {
 
-                    alert('the data deleted successfully' + data);
+                    alert('the data deleted successfully');
                     $scope.getFeedbacks();
 
 
@@ -263,6 +263,8 @@
                 alert('unable to delete a feedback' + error);
             });
         };
+
+
 
         $scope.getFeedbacks();
     }
