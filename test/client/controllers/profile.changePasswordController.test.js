@@ -11,9 +11,9 @@ describe('#Change Password Controller', function () {
 
     var $controller,dashboardService,spinnerService,window;
     var changePasswordService;
-    var $q,deferred;
+    var $q,deferred,scope,element;
 
-    beforeEach(inject(function ($compile,_$controller_,_$rootScope_,_$window_,_changePasswordService_,_dashboardService_,_spinnerService_,_$q_) {
+    beforeEach(inject(function ($compile,_$controller_,_$rootScope_,_$window_,_changePasswordService_,_dashboardService_,_spinnerService_,_$q_,$httpBackend) {
         //$location = _$location_;
         scope = _$rootScope_.$new();
 
@@ -45,7 +45,9 @@ describe('#Change Password Controller', function () {
             '</spinner>');
 
         $compile(element)(scope);
-
+        $compile(angular.element('<div style="width: 300px; height: 10px;" id="result"></div>'))(scope);
+        $httpBackend.when("GET","/getLoggedInUser").respond("sample");
+        $httpBackend.when("GET","/connect/getPersonalData").respond({id: 1});
         spyOn(changePasswordService, 'updatePersonalData').and.returnValue(deferred.promise);
         spyOn(changePasswordService, 'getPersonalData').and.returnValue(deferred.promise);
         spyOn(changePasswordService, 'profilePage').and.returnValue();
@@ -68,10 +70,8 @@ describe('#Change Password Controller', function () {
 
             scope.updatePassword(data);
 
-            deferred.promise.then(function () {
-                expect(changePasswordService.updatePersonalData).toHaveBeenCalled();
-
-            });
+            deferred.resolve();
+            scope.$apply();
 
         });
 
@@ -79,11 +79,8 @@ describe('#Change Password Controller', function () {
 
             scope.getPersonalData();
 
-            deferred.promise.then(function () {
-                expect(changePasswordService.getPersonalData).toHaveBeenCalled();
-
-            });
-
+            deferred.resolve({data:{id: 1,userType:'admin',facebook_img:''}});
+            scope.$apply();
         });
 
         it('Cancel Change Password', function () {

@@ -11,7 +11,7 @@ describe('#User Profile Controller', function () {
     var $q;
     var deferred;
 
-    var spy;
+    var spy,scope;
 
     var resultStatusElement;
 
