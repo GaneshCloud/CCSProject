@@ -81,6 +81,6 @@ exports.uploadMultiple = function(req,res) {
   });
   form.parse(req);
 
-  res.redirect('/multiUpload');
+  res.redirect('/documents/multipleFileUpload');
 };
 

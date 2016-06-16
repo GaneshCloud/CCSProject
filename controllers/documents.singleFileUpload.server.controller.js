@@ -13,12 +13,12 @@ exports.upload = function(req,res) {
 
   var document = {};
   var datetime = new Date();
-  console.log(req.path);
+  console.log("path:"+req.path);
 
   var formidable = require('formidable');
   var form = new formidable.IncomingForm();
 
-
+  console.log(req);
 
   form.parse(req, function(err, fields, files) {
 
@@ -53,7 +53,7 @@ exports.upload = function(req,res) {
                       console.log(err);
                     });
                   });
-    res.redirect('/adminHome');
+    res.redirect('/documents/singleFileUpload');
 
   });
 };
