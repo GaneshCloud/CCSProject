@@ -9,12 +9,13 @@
   changePasswordController.$inject=[
     '$scope',
     '$window',
+      '$timeout',
     'changePasswordService',
     'spinnerService',
     'dashboardService'
   ];
 
-  function changePasswordController($scope,$window,changePasswordService,spinnerService,dashboardService) {
+  function changePasswordController($scope,$window,$timeout,changePasswordService,spinnerService,dashboardService) {
 
     $scope.userCredentials = false;
 
@@ -80,7 +81,7 @@
         spinnerService.show('html5spinner');
 
         changePasswordService.updatePersonalData($scope.personalData).then(function() {
-          $scope.progressbar.complete();
+
           spinnerService.hide('html5spinner');
           angular.element('#result').html('<div class="alert alert-success"><button type="button" class="close">×</button>Password Changed!</div>');
           $window.setTimeout(function() {

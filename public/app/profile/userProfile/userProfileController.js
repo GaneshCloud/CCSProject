@@ -245,7 +245,6 @@
         // $scope.progressbar.start();
         spinnerService.show('html5spinner');
         userProfileService.updatePersonalData($scope.personalData).then(function() {
-          $scope.progressbar.complete();
           spinnerService.hide('html5spinner');
         });
 
