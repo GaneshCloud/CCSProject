@@ -101,7 +101,7 @@ module.exports=function(connection){
 
 
 
-        var qry="DELETE from erp_database where id="+data.id;
+        var qry="DELETE from erp_database where id="+data;
 
         var err=null,results=null;
         if(data=='null') return cb('error',results);

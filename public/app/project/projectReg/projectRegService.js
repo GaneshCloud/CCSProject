@@ -19,12 +19,15 @@
 
     this.updateData = function (data) {
 
-      return $http.put('/editdata', data);
+      return $http.post('/editdata', data);
 
     };
 
     this.deleteData = function (id) {
-      return $http.delete('/deletedata/' + id);
+      var data = {
+        id : id
+      };
+      return $http.post('/deletedata', data);
     };
 
     
