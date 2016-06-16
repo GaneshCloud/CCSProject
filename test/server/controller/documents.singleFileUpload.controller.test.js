@@ -2,15 +2,10 @@
  * Created by Administrator on 6/13/2016.
  */
 var expect = require('chai').expect;
-var sinon   = require("sinon");
 var supertest = require('supertest');
 var controllerToTest = require('../../../controllers/documents.singleFileUpload.server.controller');
-// var serDepartment = require('../config/db/documents/departmentdb'),
-// docService = new serDocument(con), depServiceObj = new serDepartment(con);
-
-
 var server;
-// form.append('my_file', fs.createReadStream('/foo/bar.jpg'));
+
 
 
 describe("single FileUpload controller",function () {
