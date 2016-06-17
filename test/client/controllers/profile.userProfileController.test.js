@@ -260,6 +260,45 @@ describe('#User Profile Controller', function () {
             scope.$apply();
 
         });
+
+        it('Email valid and invalid',function () {
+
+            var data = {
+                $valid : true
+            }
+
+            var value = scope.isEmailValid(data);
+
+            expect(value).toEqual(true);
+
+            data = {
+                $invalid : true,
+                $dirty:true
+            }
+
+            value = scope.isEmailInvalid(data);
+
+            expect(value).toEqual(true);
+
+            data = {
+                $invalid : true,
+                $dirty:true
+            }
+
+            value = scope.isContactInvalid(data);
+
+            expect(value).toEqual(true);
+
+
+        });
+
+        // it('old password valid',function () {
+        //
+        //     var data = {
+        //         $dirty:
+        //     }
+        //
+        // });
     });
 
 });
