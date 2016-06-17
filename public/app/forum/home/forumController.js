@@ -18,7 +18,7 @@
     $scope.qusId = 0;
     $scope.forumtype = 'All';
     $scope.comment = [];
-    $scope.colspan = 3;
+    $scope.colspan = 4;
     $scope.curpage = 1;
     $scope.itemspage = 5;
     $scope.filteredDoc = [];
@@ -141,12 +141,10 @@
     // -------------------------alert------------------------------------------------- //
     $scope.change=function(){
       if(!$scope.selectedName.length){
-        console.log('Category did not select');
         $window.alert('Please Select Category');
       }
 
       else if(!$scope.post.question){
-        console.log('Question length is zero.');
         $window.alert('Please Enter Question');
       }
     };

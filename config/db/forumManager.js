@@ -16,9 +16,9 @@ function getForum(type) {
   var getQus = '';
 
   if (type === 'All') {
-    getQus = 'select q.*, (select round(AVG(rating)) from rating where qusId=q.qusId) as rating from question as q order by qusId DESC';
+    getQus = 'select q.qusId,q.Question,q.Dates,q.Explation,q.Type,q.userid,personaldata.userid,personaldata.fname,personaldata.mname,personaldata.lname,personaldata.fb_fname,personaldata.fb_mname,personaldata.fb_lname,personaldata.g_fname,personaldata.g_mname,personaldata.lname,(select round(AVG(rating)) from rating where qusId=q.qusId) as rating from question as q INNER JOIN personaldata ON q.userid=personaldata.userid and personaldata.status="active" order by qusId DESC';
   } else {
-    getQus='select q.*, (select round(AVG(rating)) from rating where qusId=q.qusId) as rating from question as q where Type=\'' + type + '\' order by qusId DESC';
+    getQus='select q.*,(select round(AVG(rating)) from rating where qusId=q.qusId) as rating from question as q where Type=\'' + type + '\' order by qusId DESC';
   }
           con.query(getQus, function(err, result) {
             if (err) {
@@ -34,10 +34,11 @@ function getForum(type) {
 
               data.forEach(function(value, index) {
                 //console.log(value);
+                var get = 'SELECT answer.id,answer.qusId,answer.Date,answer.Answers,answer.userid,personaldata.userid,personaldata.fname,personaldata.mname,personaldata.lname,personaldata.fb_fname,personaldata.fb_mname,personaldata.fb_lname,personaldata.g_fname,personaldata.g_mname,personaldata.lname FROM answer INNER JOIN personaldata ON answer.userid=personaldata.userid and qusId=' + value.qusId + ' and personaldata.status="active" order by answer.id DESC';
 
-                var get = 'select * from answer where qusId=' + value.qusId + ' order by id DESC';
+                //var get = 'select * from answer where qusId=' + value.qusId + ' order by id DESC';
 
-                //console.log('get answer query' + get);
+                console.log('get answer query' + get);
 
                 con.query(get, function(err, results) {
                   if (err) {
@@ -82,7 +83,7 @@ function postForumquestion(forumData,userid) {
 function postForumAnswer(forumData,userid) {
   var deferred = q.defer();
 
-          var qry = 'INSERT INTO answer(qusId,Date,Answers,userid)values(' + forumData.qusId + ',now(),\'' + forumData.comment + '\',\'' + userid + '\')';
+          var qry = 'INSERT INTO answer(qusId,Date,Answers,userid)values(' + forumData.qusId + ',now(),\'' + forumData.comment + '\',\''+ userid +'\')';
 
           //console.log('Post Answer Query --->' + qry);
 

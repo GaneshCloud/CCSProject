@@ -3,7 +3,7 @@ describe('myApp', function () {
         module('myApp');
     });
     it('filter Data', inject(function($filter) {
-        expect($filter('myDate')).not.toBeNull();
+        expect().not.toBeNull();
 
     }));
     // it("should return true if the input is not equal some date", inject(function ($filter) {

@@ -5,6 +5,12 @@
 	License URL: http://creativecommons.org/licenses/by/3.0/
 --*/
 
+
+.test {
+	width: 50em;
+	word-wrap: break-word;
+}
+
 .tab-content {
 	padding: 10px;
 }
@@ -40,6 +46,17 @@
 	color: black;
 	background-color: #837E7C;
 }
+
+.textinput {
+	float:left;
+	margin-left:20px;
+	width: 600px;
+	min-height: 35px;
+	outline: none;
+	resize: none;
+	border: 1px solid #c4c4c4;
+}
+
 
 @media only screen and (max-width : 480px)   {
 

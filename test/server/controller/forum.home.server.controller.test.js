@@ -23,16 +23,10 @@ describe('#Post Question', function() {
             .send(data)
             .then(function (error,result) {
                 expect(result).to.be.not.null;
-                //this.timeout(15000);
-                //setTimeout(done,15000);
                 done();
-                //expect(201, done);
             });
     });
 });
-
-
-
 // --------------------End------------------------------------------------------------ //
 
 
@@ -57,33 +51,26 @@ describe('#Insert Answer',function() {
     });
 
 });
-
 // // //--------------------End---------------------------------------------------------//
 
 
 
 // // //--------------------Get Rating-------------------------------------------------//
-
 describe('#Post Rating', function() {
 
   it('should post Rating', function(done) {
-    var data = {
-        'qusId':1,
-        'star':2
-    };
+    var data = {qusId:10,star:2};
     request(server)
     .post('/forum/rating')
     .send(data)
     .end(function(error,results) {
         expect(results).to.be.not.null;
-        assert.isOk('everything', 'everything is ok');
         done();
       });
 
   });
 
 });
-
 // //--------------------end--------------------------------------------------------//
 
 // // //--------------------Get Question,Answer-------------------------------------//
@@ -122,5 +109,4 @@ describe('#GET CATEGORY', function() {
     });
     
 });
-
 // //--------------------end--------------------------------------------------------//
