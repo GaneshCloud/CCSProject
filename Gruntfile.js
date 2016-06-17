@@ -152,9 +152,9 @@ module.exports = function(grunt) {
                 options: {
                     banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n',
                     coverageFolder: 'report/coverage',
-                    force:true,
                     mask: '**/**/**.js'
-                }
+                },
+                force:true
             }
         },
 
@@ -172,12 +172,15 @@ module.exports = function(grunt) {
         karma: {
             unit: {
                 options: {
+                    force:true,
                     frameworks: ['jasmine'],
-                    singleRun: true,
+                    // singleRun: true,
                     browsers: ['Chrome'],
                     files: [
 
                         //'public/bower_components/**/**/*.js',
+
+                        "public/bower_components/jquery/dist/jquery.js",
                         'public/bower_components/angular/angular.js',
                         'public/bower_components/angular-mocks/angular-mocks.js',
                         'public/bower_components/angular-resource/angular-resource.js',
@@ -203,15 +206,14 @@ module.exports = function(grunt) {
                         // 'public/app/documents/filters/commonFilter.js',
                         // 'public/app/documents/directives/fileDirective.js',
 
-                        'test/client/**/*.js'
-
+                        // 'test/client/controllers/profile.changePasswordController.test.js'
+                        'test/client/**/**.js'
                         // 'test/client/controllers/project.home.controller.test.js',
                         // 'test/client/services/project.home.services.test.js'
 
                     ],
                     concurrency: Infinity,
                     autoWatch: true,
-                    force:true,
                     reporters: ['progress', 'coverage'],
                     preprocessors: {
                         // source files, that you wanna generate coverage for
