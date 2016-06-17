@@ -209,6 +209,8 @@
             $scope.dataFilter[rowedit].catlogCode = x.catlogCode;
             $scope.dataFilter[rowedit].Domain = x.Domain;
             $scope.dataFilter[rowedit].editData = false;
+            console.log($scope.dataFilter);
+            console.log($scope.rowEdit);
             var data = {
                 projectCode: x.projectCode,
                 Title: x.Title,
@@ -218,7 +220,7 @@
                 Hardware: x.Hardware,
                 catlogCode: x.catlogCode,
                 Domain: x.Domain,
-                //id: $scope.dataFilter[$scope.rowEdit].id
+                id: $scope.dataFilter[rowedit].id
             };
 
             projectRegService.updateData(data)

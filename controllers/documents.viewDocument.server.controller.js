@@ -59,7 +59,7 @@ var mysql=require('mysql'),
         var id = req.query.id;
 
         if(id==='' || id===null || isNaN(id)) return resp.end("invalid");
-        console.log(id);
+        // console.log(id);
         var ext="";
         var filename;
 

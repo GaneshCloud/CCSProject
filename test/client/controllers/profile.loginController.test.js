@@ -43,11 +43,18 @@ describe('#Login Controller', function () {
 
         $compile(element)(scope);
 
+
+        $httpBackend.when("GET","/getLoggedInUser").respond("sample");
         spyOn(loginService, 'verifyUser').and.returnValue();
         spyOn(loginService, 'dashboard').and.returnValue();
         spyOn(loginService, 'loginWithGoogle').and.returnValue();
         spyOn(loginService, 'loginWithFacebook').and.returnValue();
-        
+        spyOn(loginService,'checkUser').and.returnValue(deferred.promise);
+
+        deferred.resolve({data:{id: 1,userType:'admin',facebook_img:''}});
+        scope.$apply();
+
+
     }));
 
     describe('#form validation',function () {
@@ -100,4 +107,14 @@ describe('#Login Controller', function () {
 
         });
     });
+
+    describe('#should check admin',function () {
+
+        it('Check Admin',function () {
+
+
+        });
+
+    });
+
 });

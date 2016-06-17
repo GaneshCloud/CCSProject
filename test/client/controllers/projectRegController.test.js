@@ -110,6 +110,7 @@ describe('get data',function() {
         var controller = $controller('projectRegController', {$scope: $scope});
 
         // $scope.getFeedbacks();
+        $scope.rowEdit = 0;
 
         console.log(controller);
 

@@ -45,6 +45,7 @@ describe('#Change Password Controller', function () {
             '</spinner>');
 
         $compile(element)(scope);
+        
         $compile(angular.element('<div style="width: 300px; height: 10px;" id="result"></div>'))(scope);
         $httpBackend.when("GET","/getLoggedInUser").respond("sample");
         $httpBackend.when("GET","/connect/getPersonalData").respond({id: 1});
@@ -91,6 +92,94 @@ describe('#Change Password Controller', function () {
                 expect(changePasswordService.profilePage).toHaveBeenCalled();
 
             });
+
+        });
+
+    });
+
+    describe('#validation', function () {
+
+        it('Old password Validation',function () {
+
+            var data = {
+                $dirty:true,
+                $viewValue:'hi'
+            };
+
+            scope.personalData={
+                password:'hi'
+            }
+
+            var value = scope.isOldPasswordValid(data);
+
+            expect(value).toEqual(false);
+
+            data = {
+                $dirty:true,
+                $viewValue:'hi'
+            };
+
+            scope.personalData={
+                password:'hello'
+            }
+
+            var value = scope.isOldPasswordValid(data);
+
+            expect(value).toEqual(true);
+
+
+        });
+
+        it('Reenter password Validation',function () {
+
+            var data = {
+                $viewValue:'hi'
+            };
+            var data1 = {
+                $dirty:true,
+                $viewValue:'hi'
+            };
+
+            var value = scope.isRePasswordValid(data,data1);
+
+            expect(value).toEqual(false);
+
+            data = {
+                $viewValue:'hi'
+            };
+            data1 = {
+                $dirty:true,
+                $viewValue:'hello'
+            };
+
+            var value = scope.isRePasswordValid(data,data1);
+
+            expect(value).toEqual(true);
+
+        });
+
+        it('Password validator',function () {
+
+            var data = {
+                $valid : true,
+            }
+
+            var value = scope.isPasswordValid(data);
+
+            expect(value).toEqual(true);
+
+        });
+
+        it('Password Invalidator',function () {
+
+            var data = {
+                $dirty:true,
+                $invalid : true,
+            }
+
+            var value = scope.isPasswordInvalid(data);
+
+            expect(value).toEqual(true);
 
         });
 
