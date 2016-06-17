@@ -6,7 +6,7 @@ var mysql=require('mysql'),
  
 
     exports.searchDocument=function(req,res){
-              var type=req.query.docType;
+            var type=req.query.docType;
             var dep=req.query.dep;
             var serStr=req.query.serStr;
             var result;
