@@ -104,7 +104,7 @@
 
 
 //function for getting department details//
-        $scope.getDepartment=function(){
+        getDepartment=function(){
             documentListServices.getDepartment()
                 .then(function(response){
                     $scope.dep=response.data;
@@ -151,7 +151,7 @@
 
         $scope.editDoc=function(id) {
             $scope.selId=$scope.docs[id].ID;
-            documentListServices.edit()
+            documentListServices.getDocument()
                 .then(function(response) {
                 })
                 .catch(function(){
@@ -169,7 +169,6 @@
 
                 })
                 .catch(function(){
-
                     $scope.searchData();
                 });
 
@@ -184,7 +183,7 @@
         };
 
         // call the functions when the page is loading//
-        $scope.getDepartment();
+        getDepartment();
         $scope.searchData();
 
     }

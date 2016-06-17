@@ -4,12 +4,13 @@
         .controller('singleFileUploadController', singleFileUploadController);
 
     singleFileUploadController.$inject=[
+        '$location',
         '$scope',
         'uploadSingleServices',
         'dashboardService',
         '$window'
     ];
-    function singleFileUploadController($scope, uploadSingleServices, dashboardService, $window) {
+    function singleFileUploadController($location,$scope, uploadSingleServices, dashboardService, $window) {
 
         //Document.getElementById("docCaption").focus();
         $scope.formData = {
@@ -38,6 +39,7 @@
 
         ];          //Model for document type
         dashboardService.checkAdmin();
+
         //Function for get the pattern details
         $scope.getPattern = function (ptrn) {
             if(ptrn===null || ptrn==='' || isNaN(ptrn)) return false;
@@ -62,7 +64,7 @@
         //Function for setting the data for editting
         $scope.editForm = function () {
 
-            uploadSingleServices.edit($scope.getParameterByName('id'))
+            uploadSingleServices.getDocument(getParameterByName('id'))
                 .then(function (response) {
 
                     $scope.formData = response.data[0];
@@ -75,19 +77,15 @@
         };
 
         //Function for getting the parameter value by url
-        $scope.getParameterByName = function (name, url) {
-            if (!url) url = window.location.href;
-            name = name.replace(/[\[\]]/g, '\\$&');
-            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)', 'i'),
-                results = regex.exec(url);
-            if (!results) return null;
-            if (!results[2]) return '';
-            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        getParameterByName = function (params) {
+            if ( $location.search().hasOwnProperty( params ) ) {
+                return $location.search()[params];
+            }
         };
 
 
         //Function for get the department details
-        $scope.getDepartment = function () {
+        getDepartment = function () {
             uploadSingleServices.getDepartment()
                 .then(function (response) {
                     $scope.dep = response.data;
@@ -99,7 +97,7 @@
 
 
         //Initially calling the functions for page loading
-        $scope.getDepartment();
+        getDepartment();
 
 
         if (window.location.pathname === '/documents/editDoc')

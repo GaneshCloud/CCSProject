@@ -1,6 +1,6 @@
 
 describe('Main Controller', function () {
-
+    /*jshint expr:true */
   beforeEach(module('myApp'));
 
   var $controller,starServices,documentListServices;
@@ -27,7 +27,7 @@ describe('Main Controller', function () {
         spyOn(starServices, 'getStarInfo').and.returnValue(deferred.promise);
         spyOn(documentListServices, 'getDepartment').and.returnValue(deferred.promise);
         spyOn(documentListServices, 'search').and.returnValue(deferred.promise);
-        spyOn(documentListServices, 'edit').and.returnValue(deferred.promise);
+        spyOn(documentListServices, 'getDocument').and.returnValue(deferred.promise);
         spyOn(documentListServices, 'delete').and.returnValue(deferred.promise);
 
         $httpBackend.when("GET","/getLoggedInUser").respond("sample");
@@ -41,7 +41,7 @@ describe('Main Controller', function () {
           var $scope = {};
           var controller = $controller('documentListController', { $scope: $scope });
 
-          $scope.getDepartment();
+          getDepartment();
           expect($scope.dep).not.toBeNull();
         });
 
@@ -49,13 +49,13 @@ describe('Main Controller', function () {
 
             it('should resolve promise', function () {
 
-                $scope.getDepartment();
+                getDepartment();
                 deferred.resolve({data:[{id:1,DEP_NAME:'ABC'},{id:2,DEP_NAME:'xds'}]});
                 expect($scope.dep).toBeObject;
                 $scope.$digest();
             });
             it('should resolve promise',function () {
-                $scope.getDepartment();
+                getDepartment();
                 deferred.reject();
                 expect($scope.dep).toBeArray;
                 $scope.$digest();
@@ -241,7 +241,7 @@ describe('Main Controller', function () {
 
     describe("new Document",function () {
 
-        var documentListService,scope
+        var documentListService,scope;
         beforeEach(inject(function ($rootScope, $controller, _documentListServices_) {
             scope = $rootScope.$new();
             documentListService = _documentListServices_;

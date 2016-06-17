@@ -2,7 +2,7 @@
  * Created by Administrator on 6/9/2016.
  */
 describe('single File Upload Controller', function () {
-
+    /*jshint expr:true */
     beforeEach(module('myApp'));
 
     var $controller,uploadSingleServices,dashboardService;
@@ -23,7 +23,7 @@ describe('single File Upload Controller', function () {
         });
 
         spyOn(uploadSingleServices, 'getDepartment').and.returnValue(deferred.promise);
-        spyOn(uploadSingleServices, 'edit').and.returnValue(deferred.promise);
+        spyOn(uploadSingleServices, 'getDocument').and.returnValue(deferred.promise);
         spyOn(uploadSingleServices, "goToDashboard");
         $httpBackend.when("GET","/getLoggedInUser").respond("sample");
         $httpBackend.when("GET","/api/dep").respond("sample");
@@ -96,14 +96,14 @@ describe('single File Upload Controller', function () {
         describe('get department',function(){
 
             it('should resolve promise',function () {
-                $scope.getDepartment();
+                getDepartment();
                 deferred.resolve({data:[{id:1,DEP_NAME:'ABC'},{id:2,DEP_NAME:'xds'}]});
                 expect($scope.dep).toBeObject;
                 $scope.$digest();
 
             });
             it('should resolve promise',function () {
-                $scope.getDepartment();
+                getDepartment();
                 deferred.reject();
                 expect($scope.dep).toBeArray;
                 $scope.$apply();

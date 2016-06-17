@@ -292,8 +292,8 @@ this.getLatestArchives=function(id,cb){
 this.getNextDocument=function(id,cb){
 
       var myErr=null,result=null;
-      var myErr=null,data=null;
-      if(id==null || id=='') return cb("error",data);
+
+      if(id==null || id=='') return cb("error",result);
       var qry='select A.ID,A.DOCCAPTION,A.DOCTYPE,A.DOCDEP,A.DOCKEY,A.DOCDESC,A.DOCDATE,A.DOCFILE,A.DOCNOVIEWS,A.DOCNODOWN from TBL_DOCUMENTS A where A.ID = (select min(id) from TBL_DOCUMENTS where id > '+ id+' )';
    
    con.query(qry,function(err,res){

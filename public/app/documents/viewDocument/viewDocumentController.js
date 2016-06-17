@@ -4,11 +4,13 @@
         .controller('viewDocumentController', viewDocumentController);
 
     viewDocumentController.$inject=[
+
+        '$location',
         '$scope',
         'viewDocumentServices',
         'starServices'
     ];
-    function viewDocumentController($scope, viewDocumentServices, starServices) {
+    function viewDocumentController($location,$scope, viewDocumentServices, starServices) {
 
 
         $scope.doc = [];
@@ -22,20 +24,16 @@
         //$scope.isExist=true;
 
 
-        //Function for getting the parameter from url//
-        $scope.getParameterByName = function (name, url) {
-            if (!url) url = window.location.href;
-            name = name.replace(/[\[\]]/g, '\\$&');
-            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)', 'i'),
-                results = regex.exec(url);
-            if (!results) return null;
-            if (!results[2]) return '';
-            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        // //Function for getting the parameter from url//
+        getParameterByName = function (params) {
+            if ( $location.search().hasOwnProperty( params ) ) {
+                return $location.search()[params];
+            }
         };
 
         //Function for getting the user info//
 
-        $scope.getUser = function () {
+        getUser = function () {
             viewDocumentServices.getUser()
                 .then(function (response) {
                     if (response.data.mode === 'Admin') {
@@ -53,23 +51,16 @@
 
         //Function for getting the selected document info//
 
-        $scope.getDocument = function () {
+        getDocument = function () {
 
-            viewDocumentServices.edit($scope.getParameterByName('id'))
-                .then(function (response) {
-
-
-                    $scope.doc = response.data[0];
-                    var filename = $scope.doc.DOCFILE;
-                    $scope.thisFile = 'uploads/documents/' + response.data[0].ID + '.' + filename.split('.').pop();
-                    $scope.getStar($scope.getParameterByName('id'));
-                })
+            viewDocumentServices.getDocument(getParameterByName('id'))
+                .then(loadDocument)
                 .catch(function () {
 
                 });
 
-            if ($scope.getParameterByName('type') === '5') {
-                viewDocumentServices.getArchieve($scope.getParameterByName('id'))
+            if (getParameterByName('type') === '5') {
+                viewDocumentServices.getArchieve(getParameterByName('id'))
                     .then(function (response) {
                         $scope.files = response.data;
                     })
@@ -82,9 +73,9 @@
         };
 
         //Function for download the selected document//
-        $scope.Download = function () {
-            var id = $scope.getParameterByName('id');
-            viewDocumentServices.Download({ID: +id})
+        $scope.download = function () {
+            var id = getParameterByName('id');
+            viewDocumentServices.download({ID: +id})
                 .then(function (response) {
                     console.log(response.data);
                 })
@@ -97,7 +88,7 @@
 
         //Function for getting department info//
 
-        $scope.getDepartment = function () {
+        getDepartment = function () {
             viewDocumentServices.getDepartment()
                 .then(function (response) {
                     $scope.dep =response.data;
@@ -111,20 +102,21 @@
 
         $scope.staring = function (stars) {
 
-            alert('Thanks for your rating' + stars);
-            starServices.setStar({DOC_ID: +$scope.getParameterByName('id'), STARS: +stars, STAR_DATE: new Date()})
+
+            starServices.setStar({DOC_ID: +getParameterByName('id'), STARS: +stars, STAR_DATE: new Date()})
                 .then(function (response) {
-                    console.log(response.data);
+                    alert('Thanks for your rating :' + stars);
                 })
                 .catch(function (err) {
                     console.log(err);
+                    alert('Some error occured');
                 });
         };
 
         //Function for getting the star rating of a document//
 
-        $scope.getStar = function (id) {
-console.log(id);
+        getStar = function (id) {
+
             starServices.getStar('?DOC_ID=' + id)
                 .then(function (response) {
                     $scope.star = response.data[0].STR;
@@ -141,28 +133,7 @@ console.log(id);
 
             if ($scope.doc.ID === 'undefined') return;
             viewDocumentServices.getNextDoc(id)
-                .then(function (response) {
-                    if (response.data.length > 0) {
-                        $scope.doc = response.data[0];
-                        $scope.getStar($scope.doc.ID);
-                        var filename = $scope.doc.DOCFILE;
-                        $scope.thisFile = 'uploads/documents/' + response.data[0].ID + '.' + filename.split('.').pop();
-
-
-                        if ($scope.doc.DOCTYPE === 5) {
-
-                            viewDocumentServices.getArchieve($scope.doc.ID)
-                                .then(function (response) {
-                                    $scope.files = response.data;
-                                })
-                                .catch(function (err) {
-                                    console.log(err);
-                                });
-                        }
-
-                    }
-
-                })
+                .then(loadDocument)
                 .catch(function (err) {
                     console.log(err);
                 });
@@ -175,37 +146,40 @@ console.log(id);
 
             if ($scope.doc.ID === 'undefined') return;
             viewDocumentServices.getPrevDoc(id)
-                .then(function (response) {
-                    if (response.data.length > 0) {
-                        $scope.doc = response.data[0];
-                        $scope.getStar($scope.doc.ID);
-                        var filename = $scope.doc.DOCFILE;
-                        $scope.thisFile = 'uploads/documents/' + response.data[0].ID + '.' + filename.split('.').pop();
-
-                        if ($scope.doc.DOCTYPE === 5) {
-                            viewDocumentServices.getArchieve($scope.doc.ID)
-                                .then(function (response) {
-                                    $scope.files = response.data;
-                                })
-                                .catch(function (err) {
-                                    console.log(err);
-                                });
-                        }
-
-
-                    }
-                })
+                .then(loadDocument)
                 .catch(function (err) {
                     console.log(err);
                 });
 
         };
 
+        loadDocument=function (response) {
+            if (response.data.length > 0) {
+                $scope.doc = response.data[0];
+                getStar($scope.doc.ID);
+                var filename = $scope.doc.DOCFILE;
+                $scope.thisFile = 'uploads/documents/' + response.data[0].ID + '.' + filename.split('.').pop();
+
+            if ($scope.doc.DOCTYPE === 5) {
+                viewDocumentServices.getArchieve($scope.doc.ID)
+                    .then(function (response) {
+                        $scope.files = response.data;
+                    })
+                    .catch(function (err) {
+                        console.log(err);
+                    });
+            }
+
+
+            }
+            else
+                return;
+        }
 
         //Call the function for page loading//
-        $scope.getUser();
-        $scope.getDocument();
-        $scope.getDepartment();
+        getUser();
+        getDocument();
+        getDepartment();
     }
 })();
 
