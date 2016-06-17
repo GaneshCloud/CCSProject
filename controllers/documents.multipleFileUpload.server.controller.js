@@ -12,10 +12,10 @@ exports.uploadMultiple = function(req,res) {
   var document = {};
   var datetime = new Date();
 
-  console.log(req.path);
+  // console.log(req.path);
 
   var formidable = require('formidable');
-  console.log(req.body);
+  // console.log(req.body);
   var sync = false;
   var insertCallback = function () {
   };
@@ -24,7 +24,7 @@ exports.uploadMultiple = function(req,res) {
   var ext;
   insertCallback = function (err, insId) {
     insertId = insId;
-    console.log('i: ' + i);
+    // console.log('i: ' + i);
     fs.createReadStream(files1['docFile' + i].path).pipe(fs.createWriteStream(__dirname + '/../public/uploads/documents/' + files1['docFile' + i].name));
     fs.rename(__dirname + '/../public/uploads/documents/' + files1['docFile' + i].name, __dirname + '/../public/uploads/documents/' + insertId + ext, function (err) {
       if (err) throw err;
@@ -47,7 +47,7 @@ exports.uploadMultiple = function(req,res) {
       files1=files;
       sync = false;
       ext = path.extname(files['docFile' + i].name);
-      console.log(fields["docCaption"+i]);
+      // console.log(fields["docCaption"+i]);
       document.docDate = datetime;
       document.docCaption = fields['docCaption'+i];
       document.docType = fields['docType' + i];
@@ -57,7 +57,7 @@ exports.uploadMultiple = function(req,res) {
       document.docFile = files['docFile' + i].name;
 
 
-      console.log(document);
+      // console.log(document);
 
       docService.insertDoc(document, insertCallback);
       while (!sync) {

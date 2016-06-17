@@ -14,8 +14,8 @@ var serReatingObj=new serRating(con);
         sendData.USER_ID=req.session.data.id;
         serReatingObj.setStar(sendData,function(err,insId){
           if (err) throw err;
-          console.log(res.status);
-          console.log(insId);
+          // console.log(res.status);
+          // console.log(insId);
             res.end("valid");
       });
     };
@@ -37,7 +37,7 @@ var serReatingObj=new serRating(con);
         if(id==='' || id===null || isNaN(id)) return res.end("invalid");
 
         serReatingObj.getStarInfo(id,function(err,rows){
-        console.log(rows);
+        // console.log(rows);
           res.end(JSON.stringify(rows));
 
         });

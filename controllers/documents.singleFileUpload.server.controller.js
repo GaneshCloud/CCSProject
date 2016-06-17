@@ -13,16 +13,16 @@ exports.upload = function(req,res) {
 
   var document = {};
   var datetime = new Date();
-  console.log("path:"+req.path);
+  // console.log("path:"+req.path);
 
   var formidable = require('formidable');
   var form = new formidable.IncomingForm();
 
-  console.log(req);
+  // console.log(req);
 
   form.parse(req, function(err, fields, files) {
 
-    console.log(files.docFile.name);
+    // console.log(files.docFile.name);
     var ext = path.extname(files.docFile.name);
     document.docDate = datetime;
     document.docCaption = fields.docCaption;
@@ -62,7 +62,7 @@ exports.getDepartment = function(req,res) {
 
   depServiceObj.getAllDep(function(err,data) {
             if (err) throw err;
-            console.log(data);
+            // console.log(data);
             res.end(JSON.stringify(data));
 
           });
