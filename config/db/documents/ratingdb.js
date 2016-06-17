@@ -32,7 +32,7 @@ this.setStar=function(data,cb){
             if(data.constructor!==objectConstructor)
             {
                 console.log("error");
-              return cb("error",insertId);
+                return cb("error",insertId);
             }
 
             con.query(qry,data, function(err,res){

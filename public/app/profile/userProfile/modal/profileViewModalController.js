@@ -34,7 +34,7 @@
 
             }
 
-            this.$parent.$close();
+            // this.$parent.$close();
 
         };
     }
