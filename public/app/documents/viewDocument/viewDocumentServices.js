@@ -7,16 +7,13 @@
 
   function viewDocumentServices($http) {
     return {
-      get: function () {
-        return $http.get('/api/docs');
-      },
-      edit: function (id) {
-        return $http.get('/api/docs/edit?id=' + id);
+      getDocument: function (id) {
+        return $http.get('/api/docs/getDoc?id=' + id);
       },
       getDepartment: function () {
         return $http.get('/api/dep');
       },
-      Download: function (id) {
+      download: function (id) {
         alert(id);
         return $http.post('/api/download', id);
       },

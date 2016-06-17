@@ -13,8 +13,8 @@
       create: function (docData) {
         return $http.post('/upload', docData);
       },
-      edit: function (id) {
-        return $http.get('/api/docs/edit?id=' + id);
+      getDocument: function (id) {
+        return $http.get('/api/docs/getDoc?id=' + id);
       },
       getDepartment: function () {
         return $http.get('/api/dep');

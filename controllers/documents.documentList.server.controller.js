@@ -45,7 +45,7 @@ var   docService=new serDocument(con);
 
   
 
-    exports.editDocument=function(req,res){
+    exports.getDocument=function(req,res){
 
       var id=req.query.id;
       if(id==='' || id===null || isNaN(id)) return res.end("invalid");

@@ -9,9 +9,6 @@
   ];
   function documentSearchServices($http,$window) {
     return {
-      get: function() {
-        return $http.get('/api/docs');
-      },
       search: function(data) {
         return $http.get('/api/search' + data);
       },

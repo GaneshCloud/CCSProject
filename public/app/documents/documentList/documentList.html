@@ -61,12 +61,12 @@
              <div class="form-group">
               <label class="control-label">Search</label>
               
-                  <input type="text" class="form-control" ng-change="searchData()" ng-model="search"/>
+                  <input type="text" class="form-control" ng-change="searchData()" ng-model="search" placeholder="search caption"/>
               
               </div>
               <div class="form-group">
                 <label class="control-label">Department</label>
-                <select class="form-control" ng-model="searchkey.dep" ng-change="searchData()" placeholder="search title">
+                <select class="form-control" ng-model="searchkey.dep" ng-change="searchData()">
                       
                        <option ng-repeat="d in dep" ng-value="{{d.DEP_ID}}">{{d.DEP_NAME}}</option>
                      

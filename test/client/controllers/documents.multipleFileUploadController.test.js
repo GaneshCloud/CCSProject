@@ -3,7 +3,7 @@
  */
 
 describe('Main Controller', function () {
-
+    /*jshint expr:true */
     beforeEach(module('myApp'));
 
     var $controller,uploadMultipleServices,dashboardService;
@@ -42,7 +42,7 @@ describe('Main Controller', function () {
 
             it('should resolve promise',inject(function ($httpBackend) {
                 $httpBackend.when("GET","/api/dep").respond("sample");
-                $scope.getDepartment();
+                getDepartment();
                 deferred.resolve({data:[{id:1,DEP_NAME:'ABC'},{id:2,DEP_NAME:'xds'}]});
 
                 expect($scope.dep).toBeObject;
@@ -52,7 +52,7 @@ describe('Main Controller', function () {
             it('should resolve promise',inject(function ($httpBackend) {
                 $httpBackend.when("GET","/api/dep").respond("sample");
 
-                $scope.getDepartment();
+                getDepartment();
                 deferred.reject();
                 expect($scope.dep).toBeArray;
                 $scope.$apply();
