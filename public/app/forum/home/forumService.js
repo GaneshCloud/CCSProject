@@ -71,7 +71,6 @@
         httpPromise.then(function (res) {
           defer.resolve(res);
         }, function (error) {
-
           defer.reject(error);
           throw error;
         });

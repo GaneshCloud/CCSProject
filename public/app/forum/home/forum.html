@@ -80,43 +80,6 @@
 
                 </div>
             </div>
-
-
-            <div class="panel panel-info">
-                <div class="panel-heading">
-
-                    <h3>Social Network</h3>
-
-                </div>
-
-                <div class="panel-body">
-
-                    <a class="btn btn-block btn-social btn-twitter">
-                        <span class="fa fa-twitter  fa-3x"></span>
-                        Sign in with Twitter
-                    </a>
-
-                    <br>
-
-                    <a class="btn btn-block btn-social btn-facebook">
-                        <span class="fa fa-facebook  fa-3x"></span>
-                        Sign in with facebook
-                    </a>
-
-
-                    <a class="btn btn-block btn-social btn-google">
-                        <span class="fa fa-google  fa-3x"></span>
-                        Sign in with google
-                    </a>
-
-
-                    <a class="btn btn-block btn-social btn-yahoo">
-                        <span class="fa fa-yahoo fa-3x"></span>
-                        Sign in with yahoo
-                    </a>
-
-                </div>
-            </div>
         </div>
 
 
@@ -197,7 +160,7 @@
                         <select ng-model="selectedNames" ng-change="getType()">
                        <option value=''>---Select---</option>
                             <option>All</option>
-                            <option act ive="true">General</option>
+                            <option active="true">General</option>
                             <option>News List</option>
                         </select>
                     </div>
@@ -214,15 +177,16 @@
            <h4> <font color="gray"> <span class="glyphicon glyphicon-folder-open"></span>
            THREDS/TOPIC</font></h4>
         </div>
-        <div class="panel-body"> 
-           <div class="table">
-              <table class="table">
+        <div class="panel-body">
+           <div class="">
+              <table class="table table-responsive">
               <thead bgcolor="#52A1B1">
                   <tr>
                       <th ng-click="sort(question.Question)"><font color="white">Topic &nbsp;
                       <span class="glyphicon sort-icon" ng-show="sortKey==question.Question" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                       </font>
                       </th>
+                      <th><font color="white">Author</font></th>
                       <th><font color="white">DATE</font></th>
                       <th><font color="white">Rating</font></th>
                     
@@ -232,18 +196,20 @@
                   <tr ng-repeat-start="question in filteredDoc | orderBy:sortKey:reverse">
                   
                         <td>
-                          <font color="blue"><h4>{{question.Question}}</h4></font>
+                          <font color="blue"><h3>{{question.Question}}</h3></font>
                           <button ng-if="question.expanded" 
                           ng-click="question.expanded = false">-</button>
                           <button ng-if="!question.expanded" ng-click="question.expanded = true">+</button>   
-                          <font color="black">{{question.Explation}} </font>      
+                          <font color="black">{{question.Explation}}</font>
                         </td>
-                        <td>{{question.Dates |  date:'yyyy-MM-dd - h:mma'}}</td>
+                      <td><br><font color="#6495ed">{{question.fname}}</font></td>
+                        <td><br>{{question.Dates |  date:'yyyy-MM-dd - h:mma'}}</td>
                         <td>
                            <div class="cont">
                             <div class="stars">
                               <form>
-                                <input class="star star-5" id="star-5-2{{$index}}" type="radio" ng-click="postStar(question.qusId,5)" value="5" ng-checked="toCheck(question.rating,5)" name="star"/>
+                                <input class="star star-5" id="star-5-2{{$index}}" type="radio" ng-click="postStar(question.qusId,5)" value="5" ng-checked="toCheck(question.rating,
+                                5)" name="star"/>
                                 <label class="star star-5" for="star-5-2{{$index}}" ></label>
 
                                 <input class="star star-4" id="star-4-2{{$index}}" ng-checked="toCheck(question.rating,4)" type="radio" ng-click="postStar(question.qusId,4)"
@@ -272,11 +238,12 @@
                                     <h4><span class="glyphicon glyphicon-pencil"></span>
                                         <label for="exampleTextarea">Leave a Comment:</label></h4>
                                     <form class="form form-horizontal" name="myform" role="form">
-                                        <div class="form-group"> 
-                                            <!-- <textarea class="form-control" class="col-xs-4" name="text" rows="3" ng-model="Comment" placeholder="comment here..." required>
-                                            </textarea> -->
-                                            <textarea name="text" rows="5" ng-model="comment" placeholder="comment here..." required="" style="margin-left: 0px; margin-right: 0px; width: 838px;" class="col-xs-4"></textarea>
-                                        </div> 
+                                        <div class="form-group">
+                                          <!--<textarea class="form-control" class="col-xs-4" name="text" rows="3" ng-model="Comment" placeholder="comment here..." required>-->
+                                            <!--</textarea>-->
+                                         <textarea name="text" rows="5" class="textinput" ng-model="comment" placeholder="comment here..." required=""></textarea>
+                                        </div>
+                                        <br>
                                         <div class="form-group">
                                           <button ng-init="qusId=question.qusId" ng-disabled="myform.$invalid" data-ng-click="postAnswer(qusId,comment)" class="btn btn-success">SUBMIT</button>
                                         </div>
@@ -288,18 +255,22 @@
                               </tr>
                               <tr ng-repeat='answer in question.answers | limitTo:5'>
                                   <td>
-                                       <hr> {{answer.Answers}}
-                                     <br><br>
+                                      <hr> <label class="test">{{answer.Answers}}</label>
+                                      <br>
+                                         <font color="#00008b"><span class="glyphicon glyphicon-user">&nbsp;PostBy:</span></font><font color="#daa520">{{answer.fname}}</font>
+                                      <br>
                                          <font color="green"><span class="glyphicon glyphicon-calendar"></span>{{answer.Date | date:'yyyy-MM-dd - h:mma'}}</font>
+                                      <br>
                                   </td>
+
+
                               </tr>
                           </table>
                       </div>
                     </td>
                 </tr>
-
                 <tr ng-if="question.expanded" ng-repeat-end="">
-                    <td colspan="3">
+                    <td colspan="4">
                           <br>                          
                           Inbox <span class="badge"> {{ question.answers.length }}</span></a> 
                                    <!-- Button trigger modal -->
@@ -315,7 +286,8 @@
                                         <h4 class="modal-title">All Post</h4>
                                       </div>
                                       <div class="modal-body">
-                                           <p ng-repeat="answer in question.answers | limitTo:500000:0">{{ answer.Answers }}
+                                           <p class="test" ng-repeat="answer in question.answers | limitTo:500000:0">{{ answer.Answers }}
+                                               <br> <font color="#00008b"><span class="glyphicon glyphicon-user">&nbsp;PostBy:</span></font><font color="#daa520">{{answer.fname}}</font>
                                              <br><font color="red" ng-model="feedback.Date"> {{ answer.Date  |  date:'yyyy-MM-dd - h:mma' }}</font>
                                              <hr>
                                           </p>

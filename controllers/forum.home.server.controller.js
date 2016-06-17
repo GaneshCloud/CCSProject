@@ -14,7 +14,7 @@ router.get('/getForum', function(req, res) {
   });
 
 router.post('/postForumquestion', function(req, res) {
-    forumConfig.postForumquestion(req.body,req.body.userid)
+    forumConfig.postForumquestion(req.body,req.session.data.userid)
       .then(function(results,error) {
         if (results) {
           res.send(results);
@@ -23,7 +23,7 @@ router.post('/postForumquestion', function(req, res) {
   });
 
 router.post('/postAnswer', function(req, res) {
-    forumConfig.postForumAnswer(req.body)
+    forumConfig.postForumAnswer(req.body,req.session.data.userid)
       .then(function(results,error) {
         if (results) {
           res.send(results);
