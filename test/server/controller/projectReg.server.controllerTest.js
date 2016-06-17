@@ -131,12 +131,12 @@ describe('edit the data2',function(){
 
 
         var req={
-            body:{projectCode:'dfgdf',Title:'Mechanical Projects',Department:'mechatronics2',subHeads:'CEA-ATMEL',Software:2000,Hardware:2000,catlogCode:'CDB BIO MEDICAL PROJECTS',Domain:'ROBOTICS'},
-            params:{id:38}
+            body:{id:28,projectCode:'32125',Title:'Aeronatical Projects',Department:'mechatronics',subHeads:'CEA-OTHERS',Software:1800,Hardware:1500,catlogCode:'CIS-C# NET PROJECTS',Domain:'BIOMEDICAL PROJECTS'},
+            //params:{id:28}
         };
         var res={
             send:function(data){
-                expect(data).to.be.error;
+                expect(data).not.to.be.error;
                 done();
             }
         };
@@ -177,12 +177,12 @@ describe('delete the data2',function(){
 
 
         var req={
-            body:{projectCode:'dfgdf',Title:'Mechanical Projects',Department:'mechatronics',subHeads:'CEA-ATMEL',Software:2000,Hardware:2000,catlogCode:'CDB BIO MEDICAL PROJECTS',Domain:'ROBOTICS'},
-            params:{id:38}
+            body:{id:28,projectCode:'32125',Title:'Aeronatical Projects',Department:'mechatronics',subHeads:'CEA-OTHERS',Software:1800,Hardware:1500,catlogCode:'CIS-C# NET PROJECTS',Domain:'BIOMEDICAL PROJECTS'},
+            //params:{}
         };
         var res={
             send:function(data){
-                expect(data).to.be.error;
+                expect(data).not.to.be.error;
                 done();
             }
         };
