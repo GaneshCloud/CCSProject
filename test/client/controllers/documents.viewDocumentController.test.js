@@ -30,11 +30,11 @@ describe('single File Upload Controller', function () {
         spyOn(viewDocumentServices, 'getNextDoc').and.returnValue(deferred.promise);
         spyOn(viewDocumentServices, 'getPrevDoc').and.returnValue(deferred.promise);
         spyOn(viewDocumentServices, 'getDocument').and.returnValue(deferred.promise);
-        spyOn(viewDocumentServices, 'Download').and.returnValue(deferred.promise);
+        spyOn(viewDocumentServices, 'download').and.returnValue(deferred.promise);
         spyOn(starServices, 'setStar').and.returnValue(deferred.promise);
         spyOn(starServices, 'getStar').and.returnValue(deferred.promise);
         // spyOn(uploadSingleServices, "goToDashboard");
-        $httpBackend.when("GET","/api/docs/edit?id=null").respond("sample");
+        $httpBackend.when("GET","/api/docs/getDoc?id=undefined").respond("sample");
         $httpBackend.when("GET","/mode").respond("sample");
         $httpBackend.when("GET","/api/dep").respond("sample");
         $httpBackend.when("GET","/api/getStar?DOC_ID=null").respond("sample");
@@ -99,14 +99,14 @@ describe('single File Upload Controller', function () {
     describe('download',function() {
 
         it('should resolve promise', function () {
-            $scope.Download (101);
+            $scope.download (101);
             deferred.resolve("success");
             $scope.$digest();
 
         });
         it('should resolve promise', function () {
 
-            $scope.Download (101);
+            $scope.download (101);
             deferred.reject("errorss");
             $scope.$digest();
         });
@@ -147,13 +147,13 @@ describe('single File Upload Controller', function () {
     describe('get star rating',function(){
 
         it('should resolve promise',function () {
-            $scope.getStar ();
+            getStar ();
             deferred.resolve({data:[{id:1,DEP_NAME:'ABC'},{id:2,DEP_NAME:'xds'}]});
             $scope.$digest();
 
         });
         it('should resolve promise',function () {
-            $scope.getStar ();
+            getStar ();
             deferred.reject();
             $scope.$apply();
         });

@@ -149,15 +149,15 @@
             return iconServices.getIcon(id);
         };
 
-        $scope.editDoc=function(id) {
-            $scope.selId=$scope.docs[id].ID;
-            documentListServices.getDocument()
-                .then(function(response) {
-                })
-                .catch(function(){
-
-                });
-        };
+        // $scope.editDoc=function(id) {
+        //     $scope.selId=$scope.docs[id].ID;
+        //     documentListServices.getDocument()
+        //         .then(function(response) {
+        //         })
+        //         .catch(function(){
+        //
+        //         });
+        // };
 
         //function for delete a document//
         $scope.deleteDoc = function(id) {

@@ -27,7 +27,7 @@ describe('Main Controller', function () {
         spyOn(starServices, 'getStarInfo').and.returnValue(deferred.promise);
         spyOn(documentListServices, 'getDepartment').and.returnValue(deferred.promise);
         spyOn(documentListServices, 'search').and.returnValue(deferred.promise);
-        spyOn(documentListServices, 'getDocument').and.returnValue(deferred.promise);
+        // spyOn(documentListServices, 'getDocument').and.returnValue(deferred.promise);
         spyOn(documentListServices, 'delete').and.returnValue(deferred.promise);
 
         $httpBackend.when("GET","/getLoggedInUser").respond("sample");
@@ -86,30 +86,30 @@ describe('Main Controller', function () {
             });
         });
 
-        describe('edit data',function(){
-
-
-            it('should resolve promise', function () {
-                $scope.docs=[{ID:100,DOCCAPTION:'TESTCAP1',DOCDEP:1},
-                    {ID:101,DOCCAPTION:'TESTCAP2',DOCDEP:1},
-                    {ID:102,DOCCAPTION:'TESTCAP3',DOCDEP:1}];
-
-                $scope.editDoc(1);
-                deferred.resolve({data:[{id:1,DOCCAPTION:'ABC'},{id:2,DOCCAPTION:'xds'}]});
-                expect($scope.dep).toBeObject;
-                $scope.$digest();
-            });
-            it('should resolve promise',function () {
-                $scope.docs=[{ID:100,DOCCAPTION:'TESTCAP1',DOCDEP:1},
-                    {ID:101,DOCCAPTION:'TESTCAP2',DOCDEP:1},
-                    {ID:102,DOCCAPTION:'TESTCAP3',DOCDEP:1}];
-
-                $scope.editDoc (1);
-                deferred.reject();
-                expect($scope.dep).toBeArray;
-                $scope.$digest();
-            });
-        });
+        // describe('edit data',function(){
+        //
+        //
+        //     it('should resolve promise', function () {
+        //         $scope.docs=[{ID:100,DOCCAPTION:'TESTCAP1',DOCDEP:1},
+        //             {ID:101,DOCCAPTION:'TESTCAP2',DOCDEP:1},
+        //             {ID:102,DOCCAPTION:'TESTCAP3',DOCDEP:1}];
+        //
+        //         $scope.editDoc(1);
+        //         deferred.resolve({data:[{id:1,DOCCAPTION:'ABC'},{id:2,DOCCAPTION:'xds'}]});
+        //         expect($scope.dep).toBeObject;
+        //         $scope.$digest();
+        //     });
+        //     it('should resolve promise',function () {
+        //         $scope.docs=[{ID:100,DOCCAPTION:'TESTCAP1',DOCDEP:1},
+        //             {ID:101,DOCCAPTION:'TESTCAP2',DOCDEP:1},
+        //             {ID:102,DOCCAPTION:'TESTCAP3',DOCDEP:1}];
+        //
+        //         $scope.editDoc (1);
+        //         deferred.reject();
+        //         expect($scope.dep).toBeArray;
+        //         $scope.$digest();
+        //     });
+        // });
 
         describe('delete data',function(){
 

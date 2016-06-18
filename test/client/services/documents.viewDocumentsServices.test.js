@@ -13,35 +13,35 @@ describe('Search Services', function () {
         $factory=$injector.get("viewDocumentServices");
     }));
 
-    describe('get view documentService', function () {
-        it('get function', inject(function ($httpBackend) {
-
-            $httpBackend
-                .when('GET', '/api/docs')
-                .respond(200);
-            var res = $factory.get();
-            expect($httpBackend.flush).not.toThrow();
-
-        }));
-
-        it('get function invalid url', inject(function ($httpBackend) {
-
-            $httpBackend
-                .when('GET', '/api/docs22')
-                .respond(200);
-            var res = $factory.get();
-            expect($httpBackend.flush).toThrow();
-
-        }));
-    });
+    // describe('get view documentService', function () {
+    //     it('get function', inject(function ($httpBackend) {
+    //
+    //         $httpBackend
+    //             .when('GET', '/api/docs')
+    //             .respond(200);
+    //         var res = $factory.get();
+    //         expect($httpBackend.flush).not.toThrow();
+    //
+    //     }));
+    //
+    //     it('get function invalid url', inject(function ($httpBackend) {
+    //
+    //         $httpBackend
+    //             .when('GET', '/api/docs22')
+    //             .respond(200);
+    //         var res = $factory.get();
+    //         expect($httpBackend.flush).toThrow();
+    //
+    //     }));
+    // });
 
     describe('get view documentService', function () {
         it('edit function', inject(function ($httpBackend) {
 
             $httpBackend
-                .when('GET', '/api/docs/edit?id=2')
+                .when('GET', '/api/docs/getDoc?id=2')
                 .respond(200);
-            var res = $factory.edit(2);
+            var res = $factory.getDocument(2);
             expect($httpBackend.flush).not.toThrow();
 
         }));
@@ -49,9 +49,9 @@ describe('Search Services', function () {
         it('edit function invalid url', inject(function ($httpBackend) {
 
             $httpBackend
-                .when('GET', '/api/docs/edidt?id=2')
+                .when('GET', '/api/docs/getDocdd?id=2')
                 .respond(200);
-            var res = $factory.edit();
+            var res = $factory.getDocument();
             expect($httpBackend.flush).toThrow();
 
         }));
@@ -63,7 +63,7 @@ describe('Search Services', function () {
             $httpBackend
                 .when('POST', '/api/download')
                 .respond(200);
-            var res = $factory.Download(2);
+            var res = $factory.download(2);
             expect($httpBackend.flush).not.toThrow();
 
         }));
@@ -73,7 +73,7 @@ describe('Search Services', function () {
             $httpBackend
                 .when('POST', '/api/downloads')
                 .respond(200);
-            var res = $factory.Download(3);
+            var res = $factory.download(3);
             expect($httpBackend.flush).toThrow();
 
         }));

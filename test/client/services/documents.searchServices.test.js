@@ -20,27 +20,27 @@ describe('Search Services', function () {
         $factory=$injector.get("documentSearchServices");
     }));
 
-    describe('get search Service', function () {
-        it('get function', inject(function ($httpBackend) {
-
-            $httpBackend
-                .when('GET', '/api/docs')
-                .respond(200);
-            var res = $factory.get();
-            expect($httpBackend.flush).not.toThrow();
-
-        }));
-
-        it('get function invalid url', inject(function ($httpBackend) {
-
-            $httpBackend
-                .when('GET', '/api/docs22')
-                .respond(200);
-            var res = $factory.get();
-            expect($httpBackend.flush).toThrow();
-
-        }));
-    });
+    // describe('get search Service', function () {
+    //     it('get function', inject(function ($httpBackend) {
+    //
+    //         $httpBackend
+    //             .when('GET', '/api/docs')
+    //             .respond(200);
+    //         var res = $factory.get();
+    //         expect($httpBackend.flush).not.toThrow();
+    //
+    //     }));
+    //
+    //     it('get function invalid url', inject(function ($httpBackend) {
+    //
+    //         $httpBackend
+    //             .when('GET', '/api/docs22')
+    //             .respond(200);
+    //         var res = $factory.get();
+    //         expect($httpBackend.flush).toThrow();
+    //
+    //     }));
+    // });
 
     describe('search Service', function () {
         it('search function', inject(function ($httpBackend) {
