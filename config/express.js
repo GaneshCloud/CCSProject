@@ -14,8 +14,6 @@ module.exports = function() {
 
   if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));
-  } else if (process.env.NODE_ENV === 'production') {
-    app.use(compress());
   }
 
   app.use(bodyParser.urlencoded({
@@ -72,14 +70,6 @@ module.exports = function() {
 
   require('../routes/security.server.routes.js')(app);
   require('../routes/layout.server.routes.js')(app);	//Layout page route
-
-  app.use(function(err, req, res) {
-    res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: err
-    });
-  });
 
   return app;
 };
