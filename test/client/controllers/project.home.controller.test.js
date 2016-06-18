@@ -17,6 +17,10 @@ describe('#Project Home Controller', function () {
         };
 
         $httpBackend.when('GET', '/data').respond("sample");
+        $httpBackend.when('GET', '/projectHistory').respond("sample");
+        $httpBackend.when('GET', '/chartData').respond("sample");
+        $httpBackend.when('GET', '/imageData').respond("sample");
+
         spyOn(dashboardService, 'checkAdmin').and.returnValue(deferred.promise);
         spyOn(homeService, 'projectData').and.returnValue(deferred.promise);
         spyOn(homeService, 'projectHistory').and.returnValue(deferred.promise);
@@ -139,14 +143,14 @@ describe('#Project Home Controller', function () {
 
     describe('#Get Data when project page load', function(){
 
-        // it('#Should check get project data', function () {
-        //     var controller = homeController();
-        //     scope.projectData();
-        //     //expect(scope.datas).not.toBeNull();
-        //     // scope.projectData();
-        //     deferred.resolve();
-        //     scope.$apply();
-        // });
+        it('#Should check get project data', function () {
+            var controller = homeController();
+            scope.projectData();
+            //expect(scope.datas).not.toBeNull();
+            // scope.projectData();
+            deferred.resolve({data:[{id:2,name:'abc'},{id:3,name:'abc'}]});
+            scope.$apply();
+        });
         it('#Should check get project data', function () {
             var controller = homeController();
              scope.projectData();
@@ -154,6 +158,14 @@ describe('#Project Home Controller', function () {
             // scope.projectData();
             deferred.reject();
             scope.$apply();
+        });
+
+        it('#Should check get project history', function () {
+            var controller = homeController();
+            scope.projectHistory();
+            deferred.resolve({data:[{id:2,name:'abc'},{id:3,name:'abc'}]});
+            scope.$apply();
+            // expect(scope.events).not.toBeNull();
         });
 
         it('#Should check get project history', function () {
@@ -167,9 +179,26 @@ describe('#Project Home Controller', function () {
         it('#Should check get image data', function () {
             var controller = homeController();
             scope.imageData();
+            deferred.resolve({data:[{id:2,name:'abc'},{id:3,name:'abc'}]});
+            scope.$apply();
+            expect(scope.images).not.toBeNull();
+        });
+
+        it('#Should check get image data', function () {
+            var controller = homeController();
+            scope.imageData();
             deferred.reject();
             scope.$apply();
-            //expect(scope.images).not.toBeNull();
+            expect(scope.images).not.toBeNull();
+        });
+
+        it('#Should check get chart data', function () {
+            var controller = homeController();
+            scope.chartData();
+            deferred.resolve({data:[{id:2,name:'abc'},{id:3,name:'abc'}]});
+            scope.$apply();
+            //expect(scope.myDataSource).not.toBeNull();
+            // expect(scope.totalPercentage ).not.toBeNull();
         });
 
         it('#Should check get chart data', function () {
@@ -183,23 +212,18 @@ describe('#Project Home Controller', function () {
     });
 
     describe('#Post data when post queries or changes in project', function () {
-        // it('post question with empty data', function () {
-        //     var controller = homeController();
-        //     scope.postData();
-        //     expect(scope.question).not.toBeNull();
-        // });
 
-        // it('post question with empty data', function () {
-        //     var controller = homeController();
-        //     //scope.question='';
-        //     scope.postData();
-        //     deferred.resolve();
-        //     scope.$apply();
-        //     //expect(scope.question.length).toBe(0);
-        //     //expect(scope.question).toBeFalsy();
-        // });
+        it('post question with success data', function () {
+            var controller = homeController();
+            scope.question='What is Angular?';
+            scope.postData();
+            deferred.resolve({data:[{id:2,name:'abc'},{id:3,name:'abc'}]});
+            scope.$apply();
+            //expect(scope.question.length).toBe(0);
+            //expect(scope.question).toBeFalsy();
+        });
 
-        it('post question with empty data', function () {
+        it('post question with failure data', function () {
             var controller = homeController();
             //scope.question='';
             scope.postData();
@@ -208,32 +232,6 @@ describe('#Project Home Controller', function () {
              //expect(scope.question.length).toBe(0);
              //expect(scope.question).toBeFalsy();
         });
-        //
-        // it('post question with valid', function () {
-        //     var controller = homeController();
-        //     scope.question='What is Angular?';
-        //     scope.postData();
-        //     deferred.reject();
-        //     scope.$digest();
-        //     // expect(scope.question.length).toBeGreaterThan(0);
-        //     // expect(scope.question).toBeTruthy();
-        // });
-
-        // it('post question with null or undefined', function () {
-        //     var controller = homeController();
-        //     scope.question=null;
-        //     scope.postData();
-        //     expect(scope.question).toBeNull();
-        //     expect(scope.question).toBeFalsy();
-        // });
-        //
-        // it('post question with null or undefined', function () {
-        //     var controller = homeController();
-        //     scope.question=undefined;
-        //     scope.postData();
-        //     expect(scope.question).not.toBeDefined();
-        //     expect(scope.question).toBeFalsy();
-        // });
     });
 
     describe('#Go to dashboard', function(){

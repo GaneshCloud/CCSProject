@@ -31,10 +31,6 @@
             }).when('/project/home', {
                 controller: 'homeController',
                 templateUrl: '../app/project/home/home.html'
-            }).when('/project/upload', {
-                controller: 'uploadController',
-                controllerAs: 'up',
-                templateUrl: '../app/project/upload/upload.html'
             }).when('/project/projectReg', {
                 controller: 'projectRegController',
                 templateUrl: '../app/project/projectReg/projectReg.html'

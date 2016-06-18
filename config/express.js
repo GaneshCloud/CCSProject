@@ -55,7 +55,6 @@ module.exports = function() {
   app.use(express.static('./public'));
 
   require('../routes/project.home.server.routes.js')(app);
-  require('../routes/project.upload.server.routes.js')(app);
   require('../routes/profile.login.server.routes.js')(app);
   require('../routes/profile.userProfile.server.routes.js')(app);
   require('../routes/profile.adminProfile.server.routes.js')(app);

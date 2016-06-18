@@ -6,7 +6,7 @@ var mysql = require('mysql'),
 var connection = mysql.createConnection(db);
 
 exports.data = function(req, res) {
-  connection.query('Select * from project',function(err,result) {
+  connection.query("Select * from project where PCode='CB2-1516-CSD0001'",function(err,result) {
 
     if (err) {
      // console.log('Error when get project data : ' + err);
@@ -31,7 +31,7 @@ exports.projectHistory = function(req, res) {
 };
 
 exports.chartData = function(req, res) {
-  connection.query('Select * from chart', function(err,result) {
+  connection.query('Select max(y) as per from chart', function(err,result) {
 
     if (err) {
       //console.log('Error when get chart data : ' + err);
