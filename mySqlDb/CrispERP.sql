@@ -17,21 +17,63 @@ USE `cloudproject`;
 
 
 # Dumping structure for table cloudproject.answer
+CREATE DATABASE IF NOT EXISTS `cloudproject` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `cloudproject`;
+
+
+-- Dumping structure for table cloudproject.answer
 CREATE TABLE IF NOT EXISTS `answer` (
-  `id` int(11) NOT NULL auto_increment,
-  `qusId` int(11) default NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `qusId` int(11) DEFAULT NULL,
   `Date` datetime NOT NULL,
-  `Answers` varchar(50) NOT NULL,
-  PRIMARY KEY  (`id`),
+  `Answers` varchar(255) NOT NULL,
+  `userid` varchar(50) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
   KEY `FK__question` (`qusId`),
   CONSTRAINT `FK__question` FOREIGN KEY (`qusId`) REFERENCES `question` (`qusId`)
-) ENGINE=InnoDB AUTO_INCREMENT=143 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=259 DEFAULT CHARSET=latin1;
 
-# Dumping data for table cloudproject.answer: 51 rows
+-- Dumping data for table cloudproject.answer: ~44 rows (approximately)
+DELETE FROM `answer`;
 /*!40000 ALTER TABLE `answer` DISABLE KEYS */;
-INSERT INTO `answer` (`id`, `qusId`, `Date`, `Answers`) VALUES (1, 1, '2016-05-03 10:29:23', 'ode.js is a platform built on Chrome\'s JavaScript '), (2, 1, '2016-05-02 14:55:36', 'In software development, Node.js is an open-source'), (3, 2, '2016-05-02 15:56:40', 'AngularJS directives are extended HTML attributes '), (4, 2, '2016-05-02 17:45:12', 'AngularJS lets you extend HTML with new attributes'), (27, 1, '2016-05-03 15:22:12', 'Node is a one of the sever side scripting language'), (28, 1, '2016-05-03 15:23:23', 'In software development, Node.js is an open-source'), (59, 11, '2016-05-05 16:44:13', 's'), (60, 2, '2016-05-05 18:05:32', 'AngularJS lets you extend HTML with new attributes'), (61, 2, '2016-05-05 18:05:39', 'AngularJS lets you extend HTML with new attributes'), (62, 2, '2016-05-05 18:05:43', 'AngularJS lets you extend HTML with new attributes'), (63, 2, '2016-05-05 18:05:48', 'AngularJS lets you extend HTML with new attributes'), (64, 2, '2016-05-05 18:05:53', 'AngularJS lets you extend HTML with new attributes'), (65, 2, '2016-05-05 18:05:57', 'AngularJS lets you extend HTML with new attributes'), (66, 2, '2016-05-05 18:06:05', 'AngularJS lets you extend HTML with new attributes'), (67, 2, '2016-05-05 18:06:11', 'AngularJS lets you extend HTML with new attributes'), (68, 2, '2016-05-05 18:06:16', 'AngularJS lets you extend HTML with new attributes'), (69, 2, '2016-05-05 18:06:35', 'AngularJS lets you extend HTML with new attributes'), (70, 2, '2016-05-05 18:06:52', 'AngularJS lets you extend HTML with new attributes'), (71, 11, '2016-05-05 18:09:32', ''), (72, 11, '2016-05-05 18:22:03', 'xcvxc'), (73, 6, '2016-05-05 18:22:14', 'cvvvvvvvvvvvvvv'), (74, 11, '2016-05-05 18:23:12', 'cvbc'), (75, 11, '2016-05-05 18:47:45', 'zxczx'), (76, 11, '2016-05-05 18:48:28', ''), (77, 11, '2016-05-06 10:51:54', 'helo'), (87, 1, '2016-05-06 15:51:24', '2016-05-02 00:00:00,hi'), (88, 1, '2016-05-06 15:52:48', 'hi'), (89, 1, '2016-05-06 15:54:21', 'hi'), (90, 1, '2016-05-06 15:56:14', 'hi'), (91, 1, '2016-05-06 15:57:01', 'hi'), (92, 1, '2016-05-06 15:58:04', 'hi'), (93, 1, '2016-05-06 16:01:02', 'hi'), (94, 1, '2016-05-06 16:01:28', 'hi'), (95, 1, '2016-05-06 16:06:59', 'hi'), (96, 1, '2016-05-06 16:08:04', 'hi'), (97, 1, '2016-05-06 16:09:12', 'hi'), (98, 1, '2016-05-06 16:12:01', 'hi'), (99, 1, '2016-05-06 16:12:19', 'hi'), (100, 1, '2016-05-06 16:13:58', 'hi'), (101, 1, '2016-05-06 16:15:14', 'hi'), (102, 1, '2016-05-06 16:16:48', 'hi'), (103, 1, '2016-05-06 16:19:46', 'hi'), (104, 1, '2016-05-06 16:23:20', 'hi'), (105, 1, '2016-05-07 11:50:34', 'hi'), (106, 1, '2016-05-07 11:50:47', 'hi'), (107, 1, '2016-05-07 12:14:16', 'hi'), (138, 4, '2016-05-26 16:29:17', 'hi..'), (139, 40, '2016-05-26 16:30:11', 'sfrds'), (140, 40, '2016-05-26 16:34:38', 'sds'), (141, 40, '2016-05-26 16:35:22', 'asa'), (142, 40, '2016-05-26 16:43:41', 'dsfs');
+INSERT INTO `answer` (`id`, `qusId`, `Date`, `Answers`, `userid`) VALUES
+	(1, 1, '2016-05-03 10:29:23', 'ode.js is a platform built on Chrome\'s JavaScript ', 'CBE01'),
+	(2, 1, '2016-05-02 14:55:36', 'In software development, Node.js is an open-source', 'CBE01'),
+	(3, 2, '2016-05-02 15:56:40', 'AngularJS directives are extended HTML attributes ', 'CBE05'),
+	(4, 2, '2016-05-02 17:45:12', 'AngularJS lets you extend HTML with new attributes', 'CBE01'),
+	(27, 1, '2016-05-03 15:22:12', 'Node is a one of the sever side scripting language', 'CBE01'),
+	(28, 1, '2016-05-03 15:23:23', 'In software development, Node.js is an open-source', 'CBE06'),
+	(60, 2, '2016-05-05 18:05:32', 'AngularJS lets you extend HTML with new attributes', 'CBE01'),
+	(61, 2, '2016-05-05 18:05:39', 'AngularJS lets you extend HTML with new attributes', 'CBE01'),
+	(62, 2, '2016-05-05 18:05:43', 'AngularJS lets you extend HTML with new attributes', 'CBE01'),
+	(63, 2, '2016-05-05 18:05:48', 'AngularJS lets you extend HTML with new attributes', 'CBE01'),
+	(64, 2, '2016-05-05 18:05:53', 'AngularJS lets you extend HTML with new attributes', 'CBE08'),
+	(65, 2, '2016-05-05 18:05:57', 'AngularJS lets you extend HTML with new attributes', 'CBE01'),
+	(66, 2, '2016-05-05 18:06:05', 'AngularJS lets you extend HTML with new attributes', 'CBE01'),
+	(67, 2, '2016-05-05 18:06:11', 'AngularJS lets you extend HTML with new attributes', 'CBE01'),
+	(68, 2, '2016-05-05 18:06:16', 'AngularJS lets you extend HTML with new attributes', 'CBE01'),
+	(69, 2, '2016-05-05 18:06:35', 'AngularJS lets you extend HTML with new attributes', 'CBE04'),
+	(225, 4, '2016-06-17 12:23:07', 'modules is collection of directives,filter,control', 'CBE004'),
+	(226, 4, '2016-06-17 12:37:32', 'modules combine to app these all(controller,direct', 'CBE004'),
+	(229, 4, '2016-06-17 12:41:36', 'modules combine to app these all(controller,direct', 'CBE004'),
+	(231, 4, '2016-06-17 13:23:15', 'modules combine to app these all(controller,directives,Filter)....', 'CBE004'),
+	(232, 172, '2016-06-17 16:49:29', 'controller is a main part of angular it,s controller the function..', 'CBE004'),
+	(233, 172, '2016-06-17 16:49:51', 'controller is a main part of angular it,s controller the function..', 'CBE004'),
+	(234, 172, '2016-06-17 16:49:55', 'controller is a main part of angular it,s controller the function..', 'CBE004'),
+	(235, 172, '2016-06-17 16:50:01', 'controller is a main part of angular it,s controller the function..', 'CBE004'),
+	(236, 172, '2016-06-17 16:50:07', 'controller is a main part of angular it,s controller the function..', 'CBE004'),
+	(237, 172, '2016-06-17 16:50:17', 'controller is a main part of angular it,s controller the function..', 'CBE004'),
+	(238, 172, '2016-06-17 16:50:32', 'controller is a main part of angular it,s controller the function..', 'CBE004'),
+	(239, 172, '2016-06-17 16:50:40', 'controller is a main part of angular it,s controller the function..', 'CBE004'),
+	(240, 172, '2016-06-17 16:50:48', 'controller is a main part of angular it,s controller the function..', 'CBE004'),
+	(241, 172, '2016-06-17 16:50:56', 'controller is a main part of angular it,s controller the function..', 'CBE004'),
+	(242, 172, '2016-06-17 16:51:07', 'controller is a main part of angular it,s controller the function..', 'CBE004'),
+	(243, 172, '2016-06-17 16:51:16', 'controller is a main part of angular it,s controller the function..', 'CBE004'),
+	(244, 172, '2016-06-17 16:51:25', 'controller is a main part of angular it,s controller the function..', 'CBE004'),
+	(246, 172, '2016-06-17 17:04:10', 'controller is a main part of angular it,s controller the function..controller is a main part of angular it,s controller the function..controller is a main part of angular it,s controller the function..', 'CBE004'),
+	(247, 172, '2016-06-17 17:04:32', 'controller is a main part of angular it,s controller the function..controller is a main part of angular it,s controller the function..controller is a main part of angular it,s controller the function..controller is a main part of angular it,s controller t', 'CBE004'),
+	(258, 183, '2016-06-18 10:44:13', 'get data to stored array variables to spilt the data one by one in array objects...', 'CBE001');
 /*!40000 ALTER TABLE `answer` ENABLE KEYS */;
-
 
 # Dumping structure for table cloudproject.chart
 CREATE TABLE IF NOT EXISTS `chart` (
@@ -157,20 +199,43 @@ INSERT INTO `projectdetails` (`S_Id`, `PCode`, `History`, `Date`) VALUES (1, 'CB
 
 
 # Dumping structure for table cloudproject.question
-CREATE TABLE IF NOT EXISTS `question` (
-  `qusId` int(11) NOT NULL auto_increment,
-  `Question` varchar(500) NOT NULL default '0',
-  `Dates` datetime NOT NULL,
-  `Explation` varchar(500) NOT NULL,
-  `Type` varchar(20) NOT NULL,
-  `userid` varchar(20) NOT NULL,
-  PRIMARY KEY  (`qusId`)
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=latin1;
+CREATE DATABASE IF NOT EXISTS `cloudproject` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `cloudproject`;
 
-# Dumping data for table cloudproject.question: 20 rows
+
+-- Dumping structure for table cloudproject.question
+CREATE TABLE IF NOT EXISTS `question` (
+  `qusId` int(11) NOT NULL AUTO_INCREMENT,
+  `Question` varchar(255) NOT NULL DEFAULT '0',
+  `Dates` datetime NOT NULL,
+  `Explation` varchar(255) NOT NULL,
+  `Type` varchar(20) NOT NULL,
+  `userid` varchar(20) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  PRIMARY KEY (`qusId`)
+) ENGINE=InnoDB AUTO_INCREMENT=184 DEFAULT CHARSET=latin1;
+
+-- Dumping data for table cloudproject.question: ~14 rows (approximately)
+DELETE FROM `question`;
 /*!40000 ALTER TABLE `question` DISABLE KEYS */;
-INSERT INTO `question` (`qusId`, `Question`, `Dates`, `Explation`, `Type`, `userid`) VALUES (1, 'What is Node js?', '2016-05-02 00:00:00', 'When viewing on anything larger than 768px wide, there is no difference', 'General', ''), (2, 'What is Directives?', '2016-05-02 00:00:00', 'When viewing on anything larger than 768px wide, there is no difference', 'General', ''), (3, 'What is Controller?', '2016-05-04 00:00:00', 'When viewing on anything larger than 768px wide, there is no difference', 'General', ''), (4, 'What is Modules?', '2016-05-04 00:00:00', 'When viewing on anything larger than 768px wide, there is no difference', 'Artical', ''), (5, 'What is Ng-repeat use?', '2016-05-04 00:00:00', 'When viewing on anything larger than 768px wide, there is no difference', 'news List', ''), (6, 'What is Array?', '2016-05-02 00:00:00', 'When viewing on anything larger than 768px wide, there is no difference', 'Artical', ''), (10, 'what is Objects?', '0000-00-00 00:00:00', 'angular main parts used in key value pair types.', 'General', ''), (11, 'what is API?', '2016-05-05 16:08:29', 'API  one of interact parts.', 'Artical', ''), (37, 'What is mocha?', '2016-05-06 16:23:20', 'Unit test used Mocha.', 'General', ''), (38, 'What is mocha?', '2016-05-07 11:50:33', 'hi', 'General', ''), (39, 'What is mocha?', '2016-05-07 11:50:47', 'hi', 'General', ''), (40, 'What is mocha?', '2016-05-07 12:14:16', 'hi', 'General', ''), (41, 'cvb', '2016-05-26 17:36:34', 'vcbcbcbcbcbcbcbcb', 'General', ''), (42, 'sda', '2016-05-26 17:40:25', 'dsads', 'General', ''), (43, 'mohan', '2016-05-26 17:41:58', 'hi', 'General', ''), (44, 'zxZ', '2016-05-26 17:45:23', 'zxxzx', 'General', ''), (45, 'mohan2', '2016-05-26 17:51:57', 'dzfxcv', 'General', '160'), (46, 'mohan2', '2016-05-26 17:51:58', 'dzfxcv', 'General', '160'), (47, 'mohan2', '2016-05-26 17:52:21', 'dzfxcv', 'General', '160'), (48, 'dsfsf', '2016-05-26 17:59:10', 'dsfffff', 'News List', 'CBE001');
+INSERT INTO `question` (`qusId`, `Question`, `Dates`, `Explation`, `Type`, `userid`) VALUES
+	(1, 'What is Node js?', '2016-05-02 00:00:00', 'When viewing on anything larger than 768px wide, there is no difference', 'General', 'CBE007'),
+	(2, 'What is Directives?', '2016-05-02 00:00:00', 'When viewing on anything larger than 768px wide, there is no difference', 'General', 'CBE003'),
+	(3, 'What is Controller?', '2016-05-04 00:00:00', 'When viewing on anything larger than 768px wide, there is no difference', 'General', 'CBE002'),
+	(4, 'What is Modules?', '2016-05-04 00:00:00', 'When viewing on anything larger than 768px wide, there is no difference', 'Artical', 'CBE005'),
+	(5, 'What is Ng-repeat use?', '2016-05-04 00:00:00', 'When viewing on anything larger than 768px wide, there is no difference', 'news List', 'CBE006'),
+	(6, 'What is Array?', '2016-05-02 00:00:00', 'When viewing on anything larger than 768px wide, there is no difference', 'Artical', 'CBE001'),
+	(10, 'what is Objects?', '0000-00-00 00:00:00', 'angular main parts used in key value pair types.', 'General', 'CBE001'),
+	(172, 'What is controller?', '2016-06-17 12:20:40', 'controller is used bind the data server to users...', 'General', 'CBE004'),
+	(173, 'What is mocha?', '2016-06-17 17:27:14', 'hi', 'General', 'undefined'),
+	(175, 'What is mocha?', '2016-06-17 18:28:14', 'hi', 'General', 'undefined'),
+	(177, 'What is mocha?', '2016-06-17 18:32:42', 'hi', 'General', 'undefined'),
+	(179, 'What is mocha?', '2016-06-17 18:35:30', 'hi', 'General', 'undefined'),
+	(181, 'What is mocha?', '2016-06-18 10:19:54', 'hi', 'General', 'undefined'),
+	(183, 'What is usage of ng-repeat?', '2016-06-18 10:41:45', 'please Explain this Questions...', 'News List', 'CBE001');
 /*!40000 ALTER TABLE `question` ENABLE KEYS */;
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 
 
 # Dumping structure for table cloudproject.questions
