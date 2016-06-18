@@ -43,8 +43,6 @@
           deferred.resolve(response);
         }, function (error) {
           console.error(error);
-
-          $window.location.href = '/error';
         });
 
         return deferred.promise;
