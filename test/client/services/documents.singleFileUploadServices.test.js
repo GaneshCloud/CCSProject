@@ -45,9 +45,9 @@ describe('single file upload Services', function () {
         it('edit function', inject(function ($httpBackend) {
 
             $httpBackend
-                .when('GET', '/api/docs/edit?id=2')
+                .when('GET', '/api/docs/getDoc?id=2')
                 .respond(200);
-            var res = $factory.edit(2);
+            var res = $factory.getDocument(2);
             expect($httpBackend.flush).not.toThrow();
 
         }));
@@ -55,9 +55,9 @@ describe('single file upload Services', function () {
         it('edit function invalid url', inject(function ($httpBackend) {
 
             $httpBackend
-                .when('GET', '/api/docs/edit2?id=2')
+                .when('GET', '/api/docs/getDoc2?id=2')
                 .respond(200);
-            var res = $factory.edit(2);
+            var res = $factory.getDocument(2);
             expect($httpBackend.flush).toThrow();
 
         }));

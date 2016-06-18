@@ -55,7 +55,7 @@
     };
 
     //Function for department Details
-    $scope.getDepartment = function () {
+    getDepartment = function () {
       documentSearchServices.getDepartment()
           .then(function (response) {
             $scope.dep = response.data;
@@ -113,7 +113,7 @@
     };
     //Initially calls the function
     $scope.searchData();
-    $scope.getDepartment();
+    getDepartment();
   }
 })();
 

@@ -3,7 +3,7 @@
  */
 
 describe('Search Controller', function () {
-
+    /*jshint expr:true */
     beforeEach(module('myApp'));
 
     var $controller,documentSearchServices,dashboardService,iconServices;
@@ -66,14 +66,14 @@ describe('Search Controller', function () {
 
         it('should resolve promise',function () {
 
-            $scope.getDepartment();
+            getDepartment();
             deferred.resolve({data:[{id:1,DEP_NAME:'ABC'},{id:2,DEP_NAME:'xds'}]});
             expect($scope.dep).toBeObject;
             $scope.$digest();
 
         });
         it('should resolve promise',function () {
-            $scope.getDepartment();
+            getDepartment();
             deferred.reject();
             expect($scope.dep).toBeArray;
             $scope.$apply();
@@ -115,7 +115,7 @@ describe('Search Controller', function () {
                 $scope.stLst = false;
                 $scope.changeView();
                 expect($scope.stLst).toBeTruthy();
-                expect($scope.srcViews).toMatch('app/documents/search/searchListView.html')
+                expect($scope.srcViews).toMatch('app/documents/search/searchListView.html');
 
             });
 
@@ -123,7 +123,7 @@ describe('Search Controller', function () {
                 $scope.stLst = true;
                 $scope.changeView();
                 expect($scope.stLst).not.toBeTruthy();
-                expect($scope.srcViews).toMatch('app/documents/search/searchTileView.html')
+                expect($scope.srcViews).toMatch('app/documents/search/searchTileView.html');
 
             });
 

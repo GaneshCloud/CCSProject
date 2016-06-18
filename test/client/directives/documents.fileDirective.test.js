@@ -11,7 +11,7 @@ describe('File Directive', function () {
         inject(function ($rootScope, $compile) {
             scope = $rootScope.$new();
             scope.doc_file = name;
-            scope.data="abc"
+            scope.data="abc";
             $compile(element)(scope);
 
         });

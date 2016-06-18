@@ -74,7 +74,7 @@
 
 
         //Function for get the department
-        $scope.getDepartment = function () {
+        getDepartment = function () {
             uploadMultipleServices.getDepartment()
                 .then(function (response) {
                     $scope.dep = response.data;
@@ -91,7 +91,7 @@
 
         };
         //Initially calling the function
-       $scope.getDepartment();
+       getDepartment();
 
     }
 })();

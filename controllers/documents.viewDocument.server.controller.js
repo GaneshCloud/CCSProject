@@ -11,13 +11,14 @@ var mysql=require('mysql'),
     unZipFile=function(){};
 
 
-    unZipFile=function(id){
+    unZipFile=function(id,cb){
+
             var sync=false;
             var files=[];
             var fileName="";
 
             docService.getDocById(id,function(err,data){
-                if(data.length<=0) return;
+                if(data.length<=0) cb("NoData",files);
             fileName=data[0].DOCFILE;
             var ext = fileName.substring(fileName.lastIndexOf('.') + 1);
             var zip = new admZip(__dirname+"/../public/uploads/documents/"+id+"."+ext);
@@ -35,7 +36,7 @@ var mysql=require('mysql'),
             });
             while(!sync) {
             require('deasync').sleep(1000);
-            return files;
+                cb("success",files);
             }
 
     };
@@ -129,13 +130,19 @@ var mysql=require('mysql'),
 
     exports.readZip=function(req,res){
 
-      var id=req.query.id;
+      var id=req.query.id,files;
         if(id==='' || id===null || isNaN(id)) return res.end("invalid");
 
         console.log(id);
-        var data=unZipFile(id);
-        console.log("inside");
+        unZipFile(id,function(err,files){
+            console.log("inside");
+            console.log("err"+err);
+            if(err==='NoData') res.end("No Data");
+            else
+                res.end(JSON.stringify(files));
+        });
 
-      res.end(JSON.stringify(data));
+
+
 
     };
