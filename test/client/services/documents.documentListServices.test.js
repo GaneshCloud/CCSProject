@@ -41,24 +41,24 @@ describe('Document List Services', function () {
         }));
     });
 
-    describe('get documentList Service', function () {
-        it('edit function', inject(function ($httpBackend) {
-            $httpBackend
-                .when('GET', '/api/docs/edit?id=2')
-                .respond(200);
-            var res=$factory.edit(2);
-            expect($httpBackend.flush).not.toThrow();
-
-        }));
-
-        it('edit function invalid url', inject(function ($httpBackend) {
-            $httpBackend
-                .when('GET', '/api/docs/editing')
-                .respond(200);
-            var res=$factory.edit(2);
-            expect($httpBackend.flush).toThrow();
-        }));
-    });
+    // describe('get documentList Service', function () {
+    //     it('edit function', inject(function ($httpBackend) {
+    //         $httpBackend
+    //             .when('GET', '/api/docs/getDoc?id=2')
+    //             .respond(200);
+    //         var res=$factory.getDocument(2);
+    //         expect($httpBackend.flush).not.toThrow();
+    //
+    //     }));
+    //
+    //     it('edit function invalid url', inject(function ($httpBackend) {
+    //         $httpBackend
+    //             .when('GET', '/api/docs/editing')
+    //             .respond(200);
+    //         var res=$factory.getDocument(2);
+    //         expect($httpBackend.flush).toThrow();
+    //     }));
+    // });
 
 
     describe('get documentList Service', function () {
