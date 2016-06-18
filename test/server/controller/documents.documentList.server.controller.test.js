@@ -71,7 +71,7 @@ describe('documentList Controller', function() {
         });
     });
 
-    describe('edit Document', function() {                                              //edit document
+    describe('get Document', function() {                                              //edit document
         it('returns the result', function(done) {
             var req = {
                 query:{
@@ -85,7 +85,7 @@ describe('documentList Controller', function() {
                     done();
                 }
             };
-            controllerToTest.editDocument(req,res); // call the function to be tested
+            controllerToTest.getDocument(req,res); // call the function to be tested
         });
 
         it('returns the result', function(done) {
@@ -103,7 +103,7 @@ describe('documentList Controller', function() {
                     done();
                 }
             };
-            controllerToTest.editDocument(req,res); // call the function to be tested
+            controllerToTest.getDocument(req,res); // call the function to be tested
         });
 
         it('returns the result', function(done) {
@@ -120,7 +120,7 @@ describe('documentList Controller', function() {
                     done();
                 }
             };
-            controllerToTest.editDocument(req,res); // call the function to be tested
+            controllerToTest.getDocument(req,res); // call the function to be tested
         });
         it('returns the result', function(done) {
             var req = {
@@ -136,9 +136,9 @@ describe('documentList Controller', function() {
                     done();
                 }
             };
-            controllerToTest.editDocument(req,res); // call the function to be tested
+            controllerToTest.getDocument(req,res); // call the function to be tested
         });
-        
+
     });
 
     describe('search Document', function() {                                              //search document

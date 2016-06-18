@@ -118,12 +118,6 @@ var mysql=require('mysql'),
 
     exports.userMode=function(req,res,next){
         var userMode={mode:req.session.userMode};
-        console.log(userMode);
-        if(userMode==="Admin"){
-            next();
-        }else{
-            res.send("error");
-        }
         res.end(JSON.stringify(userMode));
     };
 
