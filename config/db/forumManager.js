@@ -18,7 +18,7 @@ function getForum(type) {
   if (type === 'All') {
     getQus = 'select q.qusId,q.Question,q.Dates,q.Explation,q.Type,q.userid,personaldata.userid,personaldata.fname,personaldata.mname,personaldata.lname,personaldata.fb_fname,personaldata.fb_mname,personaldata.fb_lname,personaldata.g_fname,personaldata.g_mname,personaldata.lname,(select round(AVG(rating)) from rating where qusId=q.qusId) as rating from question as q INNER JOIN personaldata ON q.userid=personaldata.userid and personaldata.status="active" order by qusId DESC';
   } else {
-    getQus='select q.*,(select round(AVG(rating)) from rating where qusId=q.qusId) as rating from question as q where Type=\'' + type + '\' order by qusId DESC';
+    getQus='select q.qusId,q.Question,q.Dates,q.Explation,q.Type,q.userid,personaldata.userid,personaldata.fname,personaldata.mname,personaldata.lname,personaldata.fb_fname,personaldata.fb_mname,personaldata.fb_lname,personaldata.g_fname,personaldata.g_mname,personaldata.lname,(select round(AVG(rating)) from rating where qusId=q.qusId) as rating from question as q INNER JOIN personaldata ON q.userid=personaldata.userid and personaldata.status="active" where Type=\'' + type + '\' order by qusId DESC';
   }
           con.query(getQus, function(err, result) {
             if (err) {
