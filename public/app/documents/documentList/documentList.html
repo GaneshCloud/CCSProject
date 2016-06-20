@@ -91,18 +91,18 @@
                 <thead>
                   <tr style="cursor: pointer;">
                     <th>Sl No</th>
-                    <th style="width:200px;" ng-click="orderMe('DOC_CAPTION')">Caption</th>
+                    <th style="width:200px;" ng-click="orderMe('docCaption')">Caption</th>
                     <th ng-click="orderMe('DEP_NAME')">Department</th>
-                    <th ng-click="orderMe('DOC_DATE')">Date</th>
-                    <th ng-click="orderMe('DOC_NO_VIEWS')">Views</th>
-                    <th ng-click="orderMe('DOC_NO_DOWN')">Downloads</th>
+                    <th ng-click="orderMe('docDate')">Date</th>
+                    <th ng-click="orderMe('docNoViews')">Views</th>
+                    <th ng-click="orderMe('docNoDown')">Downloads</th>
                     <th ng-click="orderMe('star')">Rting</th>
                     <th>Edit</th>
                     <th>Delete</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr ng-repeat="doc in filteredRes |orderBy:field:isReverse ">
+                  <tr ng-repeat="doc in searchres | filter:paginate  |orderBy:field:isReverse ">
                     <td>{{$index+1}}</td>
                     <td style="overflow: hidden;"><img ng-src="{{ getIcon(doc.docType) }}">&nbsp;&nbsp;&nbsp;<a href="/documents/viewDocument?id={{doc.id}}
                   &type={{doc.docType}}">{{doc.docCaption}}</a></td>

@@ -38,7 +38,7 @@
         getUser = function () {
             viewDocumentServices.getUser()
                 .then(function (response) {
-                    if (response.data.mode === 'Admin') {
+                    if (response.data.mode === 'admin') {
                         $scope.isAdmin = true;
                         $scope.css = 'starDisable.css';
                     } else {

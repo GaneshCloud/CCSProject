@@ -53,13 +53,13 @@
         };
 
         //Function for liast the document api
-        $scope.documentList = function () {
-            uploadSingleServices.documentList();
-        };
-
-        $scope.multipleFileUpload = function () {
-            uploadSingleServices.multipleFileUpload();
-        };
+        // $scope.documentList = function () {
+        //     uploadSingleServices.documentList();
+        // };
+        //
+        // $scope.multipleFileUpload = function () {
+        //     uploadSingleServices.multipleFileUpload();
+        // };
 
         //Function for setting the data for editting
         $scope.editForm = function () {

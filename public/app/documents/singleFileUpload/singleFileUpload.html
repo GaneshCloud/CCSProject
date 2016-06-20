@@ -51,7 +51,7 @@
     <div class="col-sm-10 col-sm-offset-1" >
     
         <div class="panel panel-default">
-          <div id="heading" class="panel-heading"><span id="head">Upload the Documents</span><a ng-click="documentList()" class="col-sm-offset-5 btn btn-default">View Documents</a> <a class="btn btn-primary" ng-click="multipleFileUpload()">Multiple File Upload</a> </div>
+          <div id="heading" class="panel-heading"><span id="head">Upload the Documents</span><a href="/documents/documentList" class="col-sm-offset-5 btn btn-default">View Documents</a> <a class="btn btn-primary" href="/documents/multipleFileUpload">Multiple File Upload</a> </div>
           <div class="panel-body" >
             <form class="form-horizontal" role="form" method="post" action="/documents/upload" enctype="multipart/form-data" name="frmDoc" id="frmDoc" novalidate onsubmit="false" >
                 
@@ -71,7 +71,7 @@
                 <div class="form-group">
                    <label class="control-label col-sm-5" for="docType">Type of the Documents <span style="color: red">*</span> </label>
                    <div class="col-sm-7">          
-                     <select class="form-control" name="docType" id="docType" ng-model="formData.docType" required="" ng-change="getPattern(formData.DOCTYPE)">
+                     <select class="form-control" name="docType" id="docType" ng-model="formData.docType" required="" ng-change="getPattern(formData.docType)">
 
                      <option ng-repeat="t in type" ng-value="t.id" ng-selected="t.id==formData.docType">{{t.type}}</option>
                       

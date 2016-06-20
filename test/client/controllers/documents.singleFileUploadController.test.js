@@ -55,24 +55,24 @@ describe('single File Upload Controller', function () {
 
         });
 
-        describe("multiple file upload",function() {
-            it('check single file upload', function () {
-
-                spyOn(uploadSingleServices, 'multipleFileUpload');
-                $scope.multipleFileUpload();
-                expect(uploadSingleServices.multipleFileUpload).toHaveBeenCalled();
-
-            });
-        });
-        describe("document list",function() {
-            it('check single file upload', function () {
-
-                spyOn(uploadSingleServices, 'documentList');
-                $scope.documentList ();
-                expect(uploadSingleServices.documentList).toHaveBeenCalled();
-
-            });
-        });
+        // describe("multiple file upload",function() {
+        //     it('check single file upload', function () {
+        //
+        //         spyOn(uploadSingleServices, 'multipleFileUpload');
+        //         $scope.multipleFileUpload();
+        //         expect(uploadSingleServices.multipleFileUpload).toHaveBeenCalled();
+        //
+        //     });
+        // });
+        // describe("document list",function() {
+        //     it('check single file upload', function () {
+        //
+        //         spyOn(uploadSingleServices, 'documentList');
+        //         $scope.documentList ();
+        //         expect(uploadSingleServices.documentList).toHaveBeenCalled();
+        //
+        //     });
+        // });
 
         describe('edit document',function() {
 

@@ -9,10 +9,11 @@
         'starServices',
         'iconServices',
         'dashboardService',
-        '$window'
+        '$window',
+        '$filter'
     ];
 
-    function documentListController($scope,documentListServices,starServices,iconServices,dashboardService,$window) {
+    function documentListController($scope,documentListServices,starServices,iconServices,dashboardService,$window,$filter) {
         $scope.formData = [];               //model for storing the inputting data
         $scope.filteredRes=[];              //model for store filtered result
         $scope.searchres=[];                //model for store the search result
@@ -77,10 +78,14 @@
             if(f===null || f==='') $scope.isReverse=$scope.isReverse;
             if ($scope.field === f){
                 $scope.isReverse = !$scope.isReverse;
-                return;
+                // return;
             }
-            $scope.field = f;
-            $scope.isReverse = false;
+            else{
+                $scope.field = f;
+                $scope.isReverse = false;
+            }
+
+             $scope.searchres = $filter('orderBy')($scope.searchres, f, $scope.isReverse);
 
         };
 
@@ -117,6 +122,14 @@
                 });
         };
 
+        $scope.paginate = function (value) {
+            var begin, end, index;
+            begin = ($scope.curPage - 1) * $scope.itemsPage;
+            end = begin + $scope.itemsPage;
+            index = $scope.searchres.indexOf(value);
+            return (begin <= index && index < end);
+        };
+        
         //function for searching documents//
         $scope.searchData = function() {
 
@@ -129,12 +142,12 @@
                     else
                         $scope.noData=false;
 
-                    $scope.$watch("curPage + itemsPage", function() {
-
-                        var begin = (($scope.curPage - 1) * $scope.itemsPage), end = begin + $scope.itemsPage;
-
-                        $scope.filteredRes = $scope.searchres.slice(begin, end);
-                    });
+                    // $scope.$watch("curPage + itemsPage + searchres", function() {
+                    //
+                    //     var begin = (($scope.curPage - 1) * $scope.itemsPage), end = begin + $scope.itemsPage;
+                    //
+                    //     $scope.filteredRes = $scope.searchres.slice(begin, end);
+                    // });
                 })
                 .catch(function(){
 

@@ -110,7 +110,7 @@ var mysql=require('mysql'),
     };
 
     exports.userMode=function(req,res,next){
-        var userMode={mode:req.session.userMode};
+        var userMode={mode:req.session.data.userType};
         res.end(JSON.stringify(userMode));
     };
 

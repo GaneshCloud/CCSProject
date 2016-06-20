@@ -116,22 +116,22 @@ describe('Main Controller', function () {
             });
         });
         //
-        describe("save document",function(){
-
-            beforeEach(inject(function ($rootScope, $controller, _uploadMultipleServices_) {
-                scope = $rootScope.$new();
-                multipleUploadService = _uploadMultipleServices_;
-            }));
-
-            it('check single file upload', function () {
-
-                spyOn(multipleUploadService, 'singleFileUpload');
-                $scope.singleFileUpload();
-                expect(multipleUploadService.singleFileUpload).toHaveBeenCalled();
-
-            });
-
-        });
+        // describe("save document",function(){
+        //
+        //     beforeEach(inject(function ($rootScope, $controller, _uploadMultipleServices_) {
+        //         scope = $rootScope.$new();
+        //         multipleUploadService = _uploadMultipleServices_;
+        //     }));
+        //
+        //     it('check single file upload', function () {
+        //
+        //         spyOn(multipleUploadService, 'singleFileUpload');
+        //         $scope.singleFileUpload();
+        //         expect(multipleUploadService.singleFileUpload).toHaveBeenCalled();
+        //
+        //     });
+        //
+        // });
         describe("goto dashbord function",function () {
 
             it("should receive a successful response", function() {

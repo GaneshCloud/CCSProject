@@ -65,26 +65,7 @@ describe('Search Services', function () {
         }));
     });
 
-    describe("single file upload",function () {
-        it('href redirects', function() {
-            $factory.singleFileUpload();
-            expect(windowObj.location.href).toEqual('/documents/singleFileUpload');
-        });
-    });
-
-    describe("single file upload",function () {
-        it('href redirects', function() {
-            $factory.singleFileUpload();
-            expect(windowObj.location.href).toEqual('/documents/singleFileUpload');
-        });
-    });
-
-    // describe("logout documet",function () {
-    //     it('href redirects', function() {
-    //         $factory.logout();
-    //         expect(windowObj.location.href).toEqual('/logout');
-    //     });
-    // });
+    
 
    describe("logout docmnwe t",function () {
         it('href redirects', function() {

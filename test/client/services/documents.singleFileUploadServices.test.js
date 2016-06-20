@@ -85,32 +85,7 @@ describe('single file upload Services', function () {
         }));
     });
 
-    describe("multiple file upload",function () {
-        beforeEach(function() {
-            $window = {location: { href: jasmine.createSpy()} };
-        });
-        it('href redirects', function() {
-            $factory.multipleFileUpload();
-            expect(windowObj.location.href).toEqual('/documents/multipleFileUpload');
-        });
-    });
-
-    describe("documentList function",function () {
-        beforeEach(function() {
-            $window = {location: { href: jasmine.createSpy()} };
-        });
-        it('href redirects', function() {
-            $factory.documentList();
-            expect(windowObj.location.href).toEqual('/documents/documentList');
-        });
-    });
-
-    // describe("logout documet",function () {
-    //     it('href redirects', function() {
-    //         $factory.logout();
-    //         expect(windowObj.location.href).toEqual('/logout');
-    //     });
-    // });
+    
 
     describe("logout docmnwet",function () {
         it('href redirects', function() {
