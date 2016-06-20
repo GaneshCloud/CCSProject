@@ -25,7 +25,7 @@
         $scope.searchkey.docType=-1;        //search key doctype
         $scope.isReverse=false;             //model for ascending and descending
         $scope.filteredDoc =[];
-        $scope.field='DOCCAPTION';          //model for ordering field
+        $scope.field='docCaption';          //model for ordering field
         $scope.maxSize = 5;                 //maximum size of the page no to be show
         $scope.rateInfo=[];                 //model store the rating info
         $scope.popup='';                    //for popup window
@@ -148,16 +148,7 @@
             if(id==='' ||  id===null || isNaN(id)) return false;
             return iconServices.getIcon(id);
         };
-
-        // $scope.editDoc=function(id) {
-        //     $scope.selId=$scope.docs[id].ID;
-        //     documentListServices.getDocument()
-        //         .then(function(response) {
-        //         })
-        //         .catch(function(){
-        //
-        //         });
-        // };
+        
 
         //function for delete a document//
         $scope.deleteDoc = function(id) {

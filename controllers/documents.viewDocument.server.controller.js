@@ -17,19 +17,14 @@ var mysql=require('mysql'),
             var files=[];
             var fileName="";
 
-            docService.getDocById(id,function(err,data){
+            docService.getDocById(id,0,function(err,data){
                 if(data.length<=0) cb("NoData",files);
-            fileName=data[0].DOCFILE;
+            fileName=data[0].docFile;
             var ext = fileName.substring(fileName.lastIndexOf('.') + 1);
             var zip = new admZip(__dirname+"/../public/uploads/documents/"+id+"."+ext);
             var zipEntries = zip.getEntries();
-
-
             zipEntries.forEach(function(zipEntry) {
-
-
             files.push({file : zipEntry.entryName}) ;
-            console.log(files);
             });
             sync=true;
 
@@ -65,9 +60,9 @@ var mysql=require('mysql'),
         var filename;
 
 
-        docService.getDocById(id,function(err,data){
+        docService.getDocById(id,0,function(err,data){
             if(data.length <=0) resp.end("NO_DOCUMENT");
-        filename=data[0].DOCFILE;
+        filename=data[0].docFile;
         ext = filename.substring(filename.lastIndexOf('.') + 1);
         docService.incrDown(id,function(err,res){
         if(err) throw err;
@@ -95,8 +90,7 @@ var mysql=require('mysql'),
         var id=req.query.id;
         if(id==='' || id===null || isNaN(id)) return res.end("invalid");
 
-      docService.getNextDocument(id,function(err,data){
-        console.log(data);
+      docService.getDocById(id,1,function(err,data){
       res.end(JSON.stringify(data));
 
     });
@@ -108,8 +102,7 @@ var mysql=require('mysql'),
       var id=req.query.id;
         if(id==='' || id===null || isNaN(id)) return res.end("invalid");
 
-      docService.getPrevDocument(id,function(err,data){
-      console.log(data);
+      docService.getDocById(id,-1,function(err,data){
       res.end(JSON.stringify(data));
 
     });
@@ -126,11 +119,8 @@ var mysql=require('mysql'),
 
       var id=req.query.id,files;
         if(id==='' || id===null || isNaN(id)) return res.end("invalid");
-
-        console.log(id);
         unZipFile(id,function(err,files){
-            console.log("inside");
-            console.log("err"+err);
+            console.log(files);
             if(err==='NoData') res.end("No Data");
             else
                 res.end(JSON.stringify(files));

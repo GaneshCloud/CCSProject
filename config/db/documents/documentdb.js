@@ -28,7 +28,7 @@ this.insertDoc=function(data,cb){
 this.getAllDoc=function(ser,cb){
 
       var myErr=null,data=null;
-      var qry="SELECT A.ID,A.DOCCAPTION,A.DOCTYPE,A.DOCDEP,A.DOCKEY,A.DOCDESC,A.DOCDATE,A.DOCFILE,A.DOCNOVIEWS,A.DOCNODOWN,B.DEP_ID,B.DEP_NAME,COALESCE(FLOOR(AVG(C.STARS)),0) as star FROM TBL_DOCUMENTS A LEFT OUTER join TBL_DEPARTMENT B on (A.DOCDEP=B.DEP_ID) LEFT OUTER JOIN  TBL_DOC_STARS C  on  A.ID=C.DOC_ID WHERE A.DOCCAPTION LIKE '" + ser+ "%' GROUP BY A.id";
+      var qry="SELECT A.ID as id,A.DOCCAPTION as docCaption,A.DOCTYPE as  docType,A.DOCDEP as docDep,A.DOCKEY as docKey,A.DOCDESC as docDesc,A.DOCDATE as docDate,A.DOCFILE as docFile,A.DOCNOVIEWS as docNoViews,A.DOCNODOWN as docNoDown,B.DEP_ID,B.DEP_NAME,COALESCE(FLOOR(AVG(C.STARS)),0) as star FROM TBL_DOCUMENTS A LEFT OUTER join TBL_DEPARTMENT B on (A.DOCDEP=B.DEP_ID) LEFT OUTER JOIN  TBL_DOC_STARS C  on  A.ID=C.DOC_ID WHERE A.DOCCAPTION LIKE '" + ser+ "%' GROUP BY A.id ORDER BY A.ID DESC";
       console.log(qry);
       con.query(qry,function(err,res){
 
@@ -94,11 +94,18 @@ this.deleteDoc=function(id,cb){
    });
 };
 
-this.getDocById=function(id,cb){
+this.getDocById=function(id,nextPrev,cb){
 
-      var myErr=null,data=null;
-      var qry="SELECT  A.ID,A.DOCCAPTION,A.DOCTYPE,A.DOCDEP,A.DOCKEY,A.DOCDESC,A.DOCDATE,A.DOCFILE,A.DOCNOVIEWS,A.DOCNODOWN FROM TBL_DOCUMENTS A WHERE A.ID="+id;
-      if( id===null || id==='') return cb("error",data);
+    var myErr=null,data=null,qry;
+    if( id===null || id==='') return cb("error",data);
+
+      if(nextPrev===0)
+            qry="SELECT  A.ID as id,A.DOCCAPTION as docCaption,A.DOCTYPE as docType,A.DOCDEP as docDep,A.DOCKEY as docKey,A.DOCDESC as docDesc,A.DOCDATE as docDate,A.DOCFILE as docFile,A.DOCNOVIEWS as docNoViews,A.DOCNODOWN as docNoDown FROM TBL_DOCUMENTS A WHERE A.ID="+id;
+      else if(nextPrev===-1)
+            qry='SELECT  A.ID as id,A.DOCCAPTION as docCaption,A.DOCTYPE as docType,A.DOCDEP as docDep,A.DOCKEY as docKey,A.DOCDESC as docDesc,A.DOCDATE as docDate,A.DOCFILE as docFile,A.DOCNOVIEWS as docNoViews,A.DOCNODOWN as docNoDown from TBL_DOCUMENTS A where A.ID = (select max(id) from TBL_DOCUMENTS where id < '+ id+' )';
+      else if(nextPrev ===1)
+            qry='SELECT  A.ID as id,A.DOCCAPTION as docCaption,A.DOCTYPE as docType,A.DOCDEP as docDep,A.DOCKEY as docKey,A.DOCDESC as docDesc,A.DOCDATE as docDate,A.DOCFILE as docFile,A.DOCNOVIEWS as docNoViews,A.DOCNODOWN as docNoDown from TBL_DOCUMENTS A where A.ID = (select min(id) from TBL_DOCUMENTS where id > '+ id+' )';
+
       con.query(qry,function(err,res){
   		
       if(err)
@@ -120,7 +127,7 @@ this.getDocByDep=function(ser,depId,cb){
       var myErr=null,data=null;
 
       if(depId==null || depId=='') return cb("error",data);
-      var qry="SELECT A.ID,A.DOCCAPTION,A.DOCTYPE,A.DOCDEP,A.DOCKEY,A.DOCDESC,A.DOCDATE,A.DOCFILE,A.DOCNOVIEWS,A.DOCNODOWN,B.DEP_ID,B.DEP_NAME,COALESCE(FLOOR(AVG(C.STARS)),0) as star FROM TBL_DOCUMENTS A LEFT OUTER join TBL_DEPARTMENT B on (A.DOCDEP=B.DEP_ID) LEFT OUTER JOIN  TBL_DOC_STARS C  on  A.ID=C.DOC_ID WHERE A.DOCDEP="+depId+" AND A.DOCCAPTION LIKE '" + ser+ "%' GROUP BY C.doc_id,A.ID";
+      var qry="SELECT A.ID as id,A.DOCCAPTION as docCaption,A.DOCTYPE as docType,A.DOCDEP as docDep,A.DOCKEY as docKey,A.DOCDESC as docDesc,A.DOCDATE as docDate,A.DOCFILE as docFile,A.DOCNOVIEWS as docNoViews,A.DOCNODOWN as docNoDown,B.DEP_ID,B.DEP_NAME,COALESCE(FLOOR(AVG(C.STARS)),0) as star FROM TBL_DOCUMENTS A LEFT OUTER join TBL_DEPARTMENT B on (A.DOCDEP=B.DEP_ID) LEFT OUTER JOIN  TBL_DOC_STARS C  on  A.ID=C.DOC_ID WHERE A.DOCDEP="+depId+" AND A.DOCCAPTION LIKE '" + ser+ "%' GROUP BY C.doc_id,A.ID ORDER BY A.ID DESC";
       con.query(qry,depId,function(err,res){
   		
       if(err)
@@ -142,7 +149,7 @@ this.getDocByType=function(ser,typeId,cb){
       var myErr=null,data=null;
 
      if(typeId==null || typeId=='') return cb("error",data);
-      var qry="SELECT A.ID,A.DOCCAPTION,A.DOCTYPE,A.DOCDEP,A.DOCKEY,A.DOCDESC,A.DOCDATE,A.DOCFILE,A.DOCNOVIEWS,A.DOCNODOWN,B.DEP_ID,B.DEP_NAME,COALESCE(FLOOR(AVG(C.STARS)),0) as star FROM TBL_DOCUMENTS A LEFT OUTER join TBL_DEPARTMENT B on (A.DOCDEP=B.DEP_ID) LEFT OUTER JOIN  TBL_DOC_STARS C  on  A.ID=C.DOC_ID WHERE A.DOCTYPE="+ typeId+" AND A.DOCCAPTION LIKE '" + ser+ "%' GROUP BY C.doc_id,A.ID";
+      var qry="SELECT A.ID as id,A.DOCCAPTION as docCaption,A.DOCTYPE as docType,A.DOCDEP as docDep,A.DOCKEY as docKey,A.DOCDESC as docDesc,A.DOCDATE as docDate,A.DOCFILE as docFile,A.DOCNOVIEWS as docNoViews,A.DOCNODOWN as docNoDown,B.DEP_ID,B.DEP_NAME,COALESCE(FLOOR(AVG(C.STARS)),0) as star FROM TBL_DOCUMENTS A LEFT OUTER join TBL_DEPARTMENT B on (A.DOCDEP=B.DEP_ID) LEFT OUTER JOIN  TBL_DOC_STARS C  on  A.ID=C.DOC_ID WHERE A.DOCTYPE="+ typeId+" AND A.DOCCAPTION LIKE '" + ser+ "%' GROUP BY C.doc_id,A.ID ORDER BY A.ID DESC";
       con.query(qry,typeId,function(err,res){
   		
       if(err)
@@ -163,7 +170,7 @@ this.getDocByTypeDep=function(ser,typeId,depId,cb){
 
       var myErr=null,data=null;
       if(typeId==null || typeId=='' || depId==null || depId=='' ) return cb("error",data);
-      var qry="SELECT A.ID,A.DOCCAPTION,A.DOCTYPE,A.DOCDEP,A.DOCKEY,A.DOCDESC,A.DOCDATE,A.DOCFILE,A.DOCNOVIEWS,A.DOCNODOWN,B.DEP_ID,B.DEP_NAME,COALESCE(FLOOR(AVG(C.STARS)),0) as star FROM TBL_DOCUMENTS A LEFT OUTER join TBL_DEPARTMENT B on (A.DOCDEP=B.DEP_ID) LEFT OUTER JOIN  TBL_DOC_STARS C  on  A.ID=C.DOC_ID WHERE A.DOCTYPE="+typeId+ " AND A.DOCDEP="+depId+" AND A.DOCCAPTION LIKE '" + ser+ "%' GROUP BY C.doc_id,A.ID";
+      var qry="SELECT A.ID as id,A.DOCCAPTION as docCaption,A.DOCTYPE as docType,A.DOCDEP as docDep,A.DOCKEY as docKey,A.DOCDESC as docDesc,A.DOCDATE as docDate,A.DOCFILE as docFile,A.DOCNOVIEWS as docNoViews,A.DOCNODOWN as docNoDown,B.DEP_ID,B.DEP_NAME,COALESCE(FLOOR(AVG(C.STARS)),0) as star FROM TBL_DOCUMENTS A LEFT OUTER join TBL_DEPARTMENT B on (A.DOCDEP=B.DEP_ID) LEFT OUTER JOIN  TBL_DOC_STARS C  on  A.ID=C.DOC_ID WHERE A.DOCTYPE="+typeId+ " AND A.DOCDEP="+depId+" AND A.DOCCAPTION LIKE '" + ser+ "%' GROUP BY C.doc_id,A.ID ORDER BY A.ID DESC";
       console.log(qry);
       con.query(qry,typeId,function(err,res){
   		
@@ -289,47 +296,49 @@ this.getLatestArchives=function(id,cb){
 };
 */
 
-this.getNextDocument=function(id,cb){
+// this.getNextDocument=function(id,cb){
+//
+//       var myErr=null,result=null;
+//
+//       if(id==null || id=='') return cb("error",result);
+//       var qry='select A.ID,A.DOCCAPTION,A.DOCTYPE,A.DOCDEP,A.DOCKEY,A.DOCDESC,A.DOCDATE,A.DOCFILE,A.DOCNOVIEWS,A.DOCNODOWN from TBL_DOCUMENTS A where A.ID = (select min(id) from TBL_DOCUMENTS where id > '+ id+' )';
+//
+//    con.query(qry,function(err,res){
+//
+//       if(err)
+//       {
+//           myErr=err;
+//           cb(myErr,result);
+//       }
+//       else
+//       {
+//           result=res;
+//           cb(myErr,result);
+//        }
+//    });
+// };
 
-      var myErr=null,result=null;
-
-      if(id==null || id=='') return cb("error",result);
-      var qry='select A.ID,A.DOCCAPTION,A.DOCTYPE,A.DOCDEP,A.DOCKEY,A.DOCDESC,A.DOCDATE,A.DOCFILE,A.DOCNOVIEWS,A.DOCNODOWN from TBL_DOCUMENTS A where A.ID = (select min(id) from TBL_DOCUMENTS where id > '+ id+' )';
-   
-   con.query(qry,function(err,res){
-      
-      if(err)
-      {
-          myErr=err;
-          cb(myErr,result);
-      }
-      else
-      {
-          result=res;
-          cb(myErr,result);
-       }
-   });
-};
-
-
-this.getPrevDocument=function(id,cb){
-      var myErr=null,result=null;
-      if(id===null || id==='') return cb("error",result);
-      var qry='select A.ID,A.DOCCAPTION,A.DOCTYPE,A.DOCDEP,A.DOCKEY,A.DOCDESC,A.DOCDATE,A.DOCFILE,A.DOCNOVIEWS,A.DOCNODOWN from TBL_DOCUMENTS A where A.ID = (select max(id) from TBL_DOCUMENTS where id < '+ id+' )';
-
-      con.query(qry,function(err,res){
-
-      if(err)
-      {
-          myErr=err;
-          cb(myErr,result);
-      }
-      else
-      {
-          result=res;
-          cb(myErr,result);
-       }
-   });
-};
+// loadDocument=function(qry){
+//     con.query(qry,function(err,res){
+//
+//         if(err)
+//         {
+//             myErr=err;
+//             cb(myErr,result);
+//         }
+//         else
+//         {
+//             result=res;
+//             cb(myErr,result);
+//         }
+//     });
+// }
+// this.getPrevDocument=function(id,cb){
+//       var myErr=null,result=null;
+//       if(id===null || id==='') return cb("error",result);
+//       var qry='select A.ID,A.DOCCAPTION,A.DOCTYPE,A.DOCDEP,A.DOCKEY,A.DOCDESC,A.DOCDATE,A.DOCFILE,A.DOCNOVIEWS,A.DOCNODOWN from TBL_DOCUMENTS A where A.ID = (select max(id) from TBL_DOCUMENTS where id < '+ id+' )';
+//
+//
+// };
 
 };

@@ -85,7 +85,7 @@ console.log(con);
 
         it("check with null Id", function (done) {                                    //check the null  id
             var id=null;
-            testDocument.getDocById(id,function (err, data) {
+            testDocument.getDocById(id,0,function (err, data) {
                 expect(err).to.be.equal('error');
                 expect(data).to.be.a('null');
                 done();
@@ -94,7 +94,7 @@ console.log(con);
 
         it("check with '' Data", function (done) {                                    //check the not valid data
             var id='';
-            testDocument.getDocById(id,function (err, data) {
+            testDocument.getDocById(id,0,function (err, data) {
                 expect(err).to.be.equal('error');
                 expect(data).to.be.a('null');
                 done();
@@ -103,7 +103,7 @@ console.log(con);
 
         it("check with !existing  Data", function (done) {                            //check the not existing id
             var id=1;
-            testDocument.getDocById(id,function (err, data) {
+            testDocument.getDocById(id,0,function (err, data) {
                 expect(err).to.be.a('null');
                 expect(data).to.be.an('array');
 
@@ -113,7 +113,31 @@ console.log(con);
 
         it("check with existing  Data", function (done) {                            //check the existing id
             var id=522;
-            testDocument.getDocById(id,function (err, data) {
+            testDocument.getDocById(id,0,function (err, data) {
+                console.log(data);
+                expect(err).to.be.a('null');
+                expect(data).to.be.an('array');
+                //expect(data[0].ID).to.be.equal(522);
+
+                done();
+            });
+        });
+
+        it("check with existing  Data", function (done) {                            //check the existing id
+            var id=506;
+            testDocument.getDocById(id,1,function (err, data) {
+                console.log(data);
+                expect(err).to.be.a('null');
+                expect(data).to.be.an('array');
+                //expect(data[0].ID).to.be.equal(522);
+
+                done();
+            });
+        });
+
+        it("check with existing  Data", function (done) {                            //check the existing id
+            var id=507;
+            testDocument.getDocById(id,-1,function (err, data) {
                 console.log(data);
                 expect(err).to.be.a('null');
                 expect(data).to.be.an('array');
@@ -125,7 +149,7 @@ console.log(con);
 
         it("check with string Data", function (done) {                            //check the existing id
             var id='abc';
-            testDocument.getDocById(id,function (err, data) {
+            testDocument.getDocById(id,0,function (err, data) {
                 console.log(data);
                 expect(err).to.be.an('error');
                 expect(data).to.be.an('null');
@@ -467,117 +491,117 @@ console.log(con);
             });
         });
 
-        describe("get Next document", function () {
+        // describe("get Next document", function () {
+        //
+        //     var id;
+        //
+        //
+        //     it("check with null Id", function (done) {                                    //check the null  id
+        //         id=null;
+        //
+        //         testDocument.getNextDocument(id,function (err, data) {
+        //             expect(err).to.be.equal('error');
+        //             expect(data).to.be.a('null');
+        //             done();
+        //         });
+        //     });
+        //
+        //     it("check with '' Data", function (done) {                                    //check the not valid data
+        //         id='';
+        //         testDocument.getNextDocument(id,function (err, data) {
+        //             expect(err).to.be.equal('error');
+        //             expect(data).to.be.a('null');
+        //             done();
+        //         });
+        //     });
+        //
+        //     it("check with !existing  Data", function (done) {                            //check the not existing id
+        //         id=-1;
+        //         testDocument.getNextDocument(id,function (err, data) {
+        //             expect(err).to.be.a('null');
+        //             expect(data).to.be.an('array');
+        //
+        //             done();
+        //         });
+        //     });
+        //
+        //     it("check with existing  Data", function (done) {                            //check the existing id
+        //         var id=510;
+        //         testDocument.getNextDocument(id,function (err, data) {
+        //             console.log(data);
+        //             expect(err).to.be.a('null');
+        //             expect(data).to.be.an('array');
+        //
+        //             done();
+        //         });
+        //     });
+        //
+        //     it("check with STRING ID", function (done) {                            //check the string id
+        //         id='ABC';
+        //         testDocument.getNextDocument(id,function (err, data) {
+        //             console.log(data);
+        //             expect(err).to.be.an('error');
+        //             expect(data).to.be.a('null');
+        //
+        //             done();
+        //         });
+        //     });
+        // });
 
-            var id;
-
-
-            it("check with null Id", function (done) {                                    //check the null  id
-                id=null;
-
-                testDocument.getNextDocument(id,function (err, data) {
-                    expect(err).to.be.equal('error');
-                    expect(data).to.be.a('null');
-                    done();
-                });
-            });
-
-            it("check with '' Data", function (done) {                                    //check the not valid data
-                id='';
-                testDocument.getNextDocument(id,function (err, data) {
-                    expect(err).to.be.equal('error');
-                    expect(data).to.be.a('null');
-                    done();
-                });
-            });
-
-            it("check with !existing  Data", function (done) {                            //check the not existing id
-                id=-1;
-                testDocument.getNextDocument(id,function (err, data) {
-                    expect(err).to.be.a('null');
-                    expect(data).to.be.an('array');
-
-                    done();
-                });
-            });
-
-            it("check with existing  Data", function (done) {                            //check the existing id
-                var id=510;
-                testDocument.getNextDocument(id,function (err, data) {
-                    console.log(data);
-                    expect(err).to.be.a('null');
-                    expect(data).to.be.an('array');
-
-                    done();
-                });
-            });
-
-            it("check with STRING ID", function (done) {                            //check the string id
-                id='ABC';
-                testDocument.getNextDocument(id,function (err, data) {
-                    console.log(data);
-                    expect(err).to.be.an('error');
-                    expect(data).to.be.a('null');
-
-                    done();
-                });
-            });
-        });
-
-        describe("get previous document", function () {
-
-            var id;
-
-
-            it("check with null Id", function (done) {                                    //check the null  id
-                id=null;
-
-                testDocument.getPrevDocument(id,function (err, data) {
-                    expect(err).to.be.equal('error');
-                    expect(data).to.be.a('null');
-                    done();
-                });
-            });
-
-            it("check with '' Data", function (done) {                                    //check the not valid data
-                id='';
-                testDocument.getPrevDocument(id,function (err, data) {
-                    expect(err).to.be.equal('error');
-                    expect(data).to.be.a('null');
-                    done();
-                });
-            });
-
-            it("check with !existing  Data", function (done) {                            //check the not existing id
-                id=-1;
-                testDocument.getPrevDocument(id,function (err, data) {
-                    expect(err).to.be.a('null');
-                    expect(data).to.be.an('array');
-
-                    done();
-                });
-            });
-
-            it("check with existing  Data", function (done) {                            //check the existing id
-                id=510;
-                testDocument.getPrevDocument(id,function (err, data) {
-                    console.log(data);
-                    expect(err).to.be.a('null');
-                    expect(data).to.be.an('array');
-
-                    done();
-                });
-            });
-
-            it("check with STRING ID", function (done) {                            //check the string id
-                id='ABC';
-                testDocument.getPrevDocument(id,function (err, data) {
-                    console.log(data);
-                    expect(err).to.be.an('error');
-                    expect(data).to.be.a('null');
-
-                    done();
-                });
-            });
-        });
+        // describe("get previous document", function () {
+        //
+        //     var id;
+        //
+        //
+        //     it("check with null Id", function (done) {                                    //check the null  id
+        //         id=null;
+        //
+        //         testDocument.getPrevDocument(id,function (err, data) {
+        //             expect(err).to.be.equal('error');
+        //             expect(data).to.be.a('null');
+        //             done();
+        //         });
+        //     });
+        //
+        //     it("check with '' Data", function (done) {                                    //check the not valid data
+        //         id='';
+        //         testDocument.getPrevDocument(id,function (err, data) {
+        //             expect(err).to.be.equal('error');
+        //             expect(data).to.be.a('null');
+        //             done();
+        //         });
+        //     });
+        //
+        //     it("check with !existing  Data", function (done) {                            //check the not existing id
+        //         id=-1;
+        //         testDocument.getPrevDocument(id,function (err, data) {
+        //             expect(err).to.be.a('null');
+        //             expect(data).to.be.an('array');
+        //
+        //             done();
+        //         });
+        //     });
+        //
+        //     it("check with existing  Data", function (done) {                            //check the existing id
+        //         id=510;
+        //         testDocument.getPrevDocument(id,function (err, data) {
+        //             console.log(data);
+        //             expect(err).to.be.a('null');
+        //             expect(data).to.be.an('array');
+        //
+        //             done();
+        //         });
+        //     });
+        //
+        //     it("check with STRING ID", function (done) {                            //check the string id
+        //         id='ABC';
+        //         testDocument.getPrevDocument(id,function (err, data) {
+        //             console.log(data);
+        //             expect(err).to.be.an('error');
+        //             expect(data).to.be.a('null');
+        //
+        //             done();
+        //         });
+        //     });
+        // });
 });

@@ -189,7 +189,7 @@ describe('Main Controller', function () {
     describe("Oreder Function",function () {
         it('check order with field value', function () {
             var $scope = {};
-            var field='DOCCAPTION';
+            var field='docCaption';
             var controller = $controller('documentListController', { $scope: $scope });
             $scope.orderMe(field);
             console.log($scope.isReverse);

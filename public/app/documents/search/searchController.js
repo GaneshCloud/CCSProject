@@ -26,7 +26,7 @@
     $scope.dep = [];                      //Model for department
     $scope.loadimage = '';                //Model for loading image
     $scope.stLst = false;                 //Model for view mode settings
-    $scope.field = 'DOCCAPTION';         //Model for ordering field of data
+    $scope.field = 'docCaption';         //Model for ordering field of data
     $scope.isReverse = false;             //Model for check asc/ desc
     $scope.srcViews = 'app/documents/search/searchTileView.html';//Model for store the path of the html template
 

@@ -59,7 +59,7 @@
                 <div class="form-group">
                     <label class="control-label col-sm-5" for="docCaption">Caption of the Document <span style="color: red">*</span> </label>
                     <div class="col-sm-7">
-                      <input type="text" class="form-control" id="docCaption" name="docCaption" placeholder="" ng-model="formData.DOCCAPTION" ng-maxlength="50" ng-minlength="0" required="true" >
+                      <input type="text" class="form-control" id="docCaption" name="docCaption" placeholder="" ng-model="formData.docCaption" ng-maxlength="50" ng-minlength="0" required="true" >
                       <span style="color: red"  ng-show="isErr=(frmDoc.docCaption.$error.maxlength && frmDoc.docCaption.$dirty)">Maximum 50 Characters allowed</span>
 
                       <span style="color: red" ng-show="isErr=frmDoc.docCaption.$error.required && frmDoc.docCaption.$touched">This is Mandatory</span>
@@ -71,9 +71,9 @@
                 <div class="form-group">
                    <label class="control-label col-sm-5" for="docType">Type of the Documents <span style="color: red">*</span> </label>
                    <div class="col-sm-7">          
-                     <select class="form-control" name="docType" id="docType" ng-model="formData.DOCTYPE" required="" ng-change="getPattern(formData.DOCTYPE)">
+                     <select class="form-control" name="docType" id="docType" ng-model="formData.docType" required="" ng-change="getPattern(formData.DOCTYPE)">
 
-                     <option ng-repeat="t in type" ng-value="t.id" ng-selected="t.id==formData.DOCTYPE">{{t.type}}</option>
+                     <option ng-repeat="t in type" ng-value="t.id" ng-selected="t.id==formData.docType">{{t.type}}</option>
                       
                      </select>
                      <span style="color: red" ng-show="isErr=frmDoc.docType.$touched && frmDoc.docType.$invalid">Please select the Document Type</span>
@@ -83,9 +83,9 @@
                 <div class="form-group">
                    <label class="control-label col-sm-5" for="docDep">Department<span style="color: red">*</span></label>
                    <div class="col-sm-7">          
-                      <select class="form-control" name="docDep" id="docDep" ng-model="formData.DOCDEP" required="true">
+                      <select class="form-control" name="docDep" id="docDep" ng-model="formData.docDep" required="true">
                       
-                       <option ng-repeat="d in dep" ng-value="d.DEP_ID" ng-selected="d.DEP_ID==formData.DOCDEP">{{d.DEP_NAME}}</option>
+                       <option ng-repeat="d in dep" ng-value="d.DEP_ID" ng-selected="d.DEP_ID==formData.docDep">{{d.DEP_NAME}}</option>
                        
                      </select>
 
@@ -97,7 +97,7 @@
                 <div class="form-group">
                    <label class="control-label col-sm-5" for="docKey">Keywords</label>
                    <div class="col-sm-7">          
-                     <textarea class="form-control" placeholder="" rows="5" name="docKey" id="docKey" ng-model="formData.DOCKEY" ng-maxlength="50" ng-minlength="0">
+                     <textarea class="form-control" placeholder="" rows="5" name="docKey" id="docKey" ng-model="formData.docKey" ng-maxlength="50" ng-minlength="0">
                        
                      </textarea>
 
@@ -109,7 +109,7 @@
                 <div class="form-group">
                    <label class="control-label col-sm-5" for="docDesc">Description</label>
                    <div class="col-sm-7">          
-                     <textarea class="form-control" placeholder="" rows="5" name="docDesc" id="docDesc" ng-model="formData.DOCDESC" ng-maxlength="50" ng-minlength="0">
+                     <textarea class="form-control" placeholder="" rows="5" name="docDesc" id="docDesc" ng-model="formData.docDesc" ng-maxlength="50" ng-minlength="0">
                        
                      </textarea>
 
@@ -121,7 +121,7 @@
                 <div class="form-group">
                    <label class="control-label col-sm-5" for="docFile">Choose File<span style="color: red">*</span></label>
                    <div class="col-sm-7">          
-                     <input type="file" class="form-control" name="docFile" id="docFile" ng-model="formData.DOCFILE" accept="{{docPattern}}"  valid-file required file-upload/>
+                     <input type="file" class="form-control" name="docFile" id="docFile" ng-model="formData.docFile" accept="{{docPattern}}"  valid-file required file-upload/>
 
                      <!--<input type="file" ngf-select ng-model="file" name="doc_file" id="doc_file" ngf-pattern="{{doc_pattern}}" accept="{{doc_pattern}}" ngf-max-size="20MB"  />-->
 

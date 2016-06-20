@@ -1,5 +1,6 @@
 
 var mysql=require('mysql');
+var fs=require('fs');
 var   db= require('../config/db');
 var   serDocument= require('../config/db/documents/documentdb');
 var   con=mysql.createConnection(db);
@@ -47,10 +48,22 @@ var   docService=new serDocument(con);
 
     exports.getDocument=function(req,res){
 
-      var id=req.query.id;
-      if(id==='' || id===null || isNaN(id)) return res.end("invalid");
-      docService.getDocById(id,function(err,data){
-              res.end(JSON.stringify(data));
+      var id=req.query.id,ext,filename,myData;
+      if(id==='' || id===null || isNaN(id)) {res.end("invalid");  return};
+      docService.getDocById(id,0,function(err,data){
+              // res.end(JSON.stringify(data));
+              if(data.length <=0) {res.end("invalid"); return};
+              filename=data[0].docFile;
+              ext = filename.substring(filename.lastIndexOf('.') + 1);
+              fs.access(__dirname+"/../public/uploads/documents/"+data[0].ID+"."+ext, fs.F_OK, function(err) {
+                  if (!err) {
+                      data[0].isFileExist=true;
+                  } else {
+                      data[0].isFileExist=false;
+                  }
+                  res.json(data)
+              });
+
 
           });
     };

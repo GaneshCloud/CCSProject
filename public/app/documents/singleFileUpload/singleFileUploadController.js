@@ -14,13 +14,13 @@
 
         //Document.getElementById("docCaption").focus();
         $scope.formData = {
-            ID: '',
-            DOCCAPTION: '',
-            DOCTYPE: '',
-            DOCDEP: '',
-            DOCKEY: '',
-            DOCDESC: '',
-            DOCFILE: ''
+            id: '',
+            docCaption: '',
+            docType: '',
+            docDep: '',
+            docKey: '',
+            docDesc: '',
+            docFile: ''
         };                      //Model object for store the document input data
 
         $scope.docs = {};

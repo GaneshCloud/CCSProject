@@ -80,9 +80,12 @@ describe('documentList Controller', function() {
             };
             // we provide the response object which the controller uses
             var res = {
-                end: function(data) {
-                    expect(data).to.be.a("string");
+                json: function(data) {
+                    expect(data).to.be.an("array");
                     done();
+                },
+                end:function(data){
+
                 }
             };
             controllerToTest.getDocument(req,res); // call the function to be tested
@@ -96,8 +99,10 @@ describe('documentList Controller', function() {
             };
             // we provide the response object which the controller uses
             var res = {
-                end: function(data) {
+                json: function(data) {
 
+
+                },end:function(data){
                     expect(data).to.be.equal('invalid');
                     expect(data).to.be.a('string');
                     done();
@@ -114,7 +119,9 @@ describe('documentList Controller', function() {
             };
             // we provide the response object which the controller uses
             var res = {
-                end: function(data) {
+                json: function(data) {
+
+                },end:function(data){
                     expect(data).to.be.equal('invalid');
                     expect(data).to.be.a('string');
                     done();
@@ -130,7 +137,9 @@ describe('documentList Controller', function() {
             };
             // we provide the response object which the controller uses
             var res = {
-                end: function(data) {
+                json: function(data) {
+                    
+                },end:function(data){
                     expect(data).to.be.equal('invalid');
                     expect(data).to.be.a('string');
                     done();

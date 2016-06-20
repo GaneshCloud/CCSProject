@@ -12,13 +12,13 @@
     function multipleFileUploadController($scope, uploadMultipleServices, dashboardService, $window) {
 
         $scope.formData = [{
-            ID: '',
-            DOC_CAPTION: '',
-            DOC_TYPE: '',
-            DOC_DEP: '',
-            DOC_KEY: '',
-            DOC_DESC: '',
-            DOC_FILE: ''
+            id: '',
+            docCaption: '',
+            docType: '',
+            docDep: '',
+            docKey: '',
+            docDesc: '',
+            docFile: ''
         }];                       //Model for bind the document information
 
 
