@@ -43,6 +43,7 @@ exports.uploadMultiple = function(req,res) {
 
   form.parse(req, function (err, fields, files) {
 
+    if(err) throw err;
     for (i = 1; i <= Object.keys(files).length; i++) {
       files1=files;
       sync = false;

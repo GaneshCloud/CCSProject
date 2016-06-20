@@ -91,7 +91,8 @@ var mysql=require('mysql'),
         if(id==='' || id===null || isNaN(id)) return res.end("invalid");
 
       docService.getDocById(id,1,function(err,data){
-      res.end(JSON.stringify(data));
+          if(err) throw err;
+          res.end(JSON.stringify(data));
 
     });
 
@@ -103,7 +104,8 @@ var mysql=require('mysql'),
         if(id==='' || id===null || isNaN(id)) return res.end("invalid");
 
       docService.getDocById(id,-1,function(err,data){
-      res.end(JSON.stringify(data));
+          if(err) throw err;
+          res.end(JSON.stringify(data));
 
     });
 
@@ -120,7 +122,7 @@ var mysql=require('mysql'),
       var id=req.query.id,files;
         if(id==='' || id===null || isNaN(id)) return res.end("invalid");
         unZipFile(id,function(err,files){
-            console.log(files);
+            if(err) throw err;
             if(err==='NoData') res.end("No Data");
             else
                 res.end(JSON.stringify(files));

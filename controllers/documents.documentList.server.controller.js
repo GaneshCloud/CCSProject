@@ -17,30 +17,33 @@ var   docService=new serDocument(con);
 
             if(type===''||type===null || isNaN(type) ||dep===''||dep===null || isNaN(dep)) return res.end("invalid");
 
-            console.log("type:"+type+"dep="+dep);
+            // console.log("type:"+type+"dep="+dep);
 
             if(type==='-1' && dep==='-1')
             {
               docService.getAllDoc(serStr,function(err,data){
-                result=data;
-                console.log(data);
-                res.end(JSON.stringify(result));
+                  if(err) throw err;
+                  result=data;
+                  res.end(JSON.stringify(result));
               });
             }
             else if(type==='-1')
                 docService.getDocByDep(serStr,dep,function(err,data){
-                result=data;
-                res.end(JSON.stringify(result));
+                    if(err) throw err;
+                    result=data;
+                    res.end(JSON.stringify(result));
               });
             else if(dep==='-1')
               docService.getDocByType(serStr,type,function(err,data){
-                result=data;
-                res.end(JSON.stringify(result));
+                  if(err) throw err;
+                  result=data;
+                  res.end(JSON.stringify(result));
               });
             else
               docService.getDocByTypeDep(serStr,type,dep,function(err,data){
-                result=data;
-                res.end(JSON.stringify(result));
+                  if(err) throw err;
+                  result=data;
+                  res.end(JSON.stringify(result));
               });
     };
 
@@ -52,6 +55,7 @@ var   docService=new serDocument(con);
       if(id==='' || id===null || isNaN(id)) {res.end("invalid");  return};
       docService.getDocById(id,0,function(err,data){
               // res.end(JSON.stringify(data));
+              if(err) throw err;
               if(data.length <=0) {res.end("invalid"); return};
               filename=data[0].docFile;
               ext = filename.substring(filename.lastIndexOf('.') + 1);
