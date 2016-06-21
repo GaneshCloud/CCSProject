@@ -48,11 +48,9 @@
             return $scope.noData;
         };
 
-        $scope.onLogout = function() {
-            if ($window.confirm('Are You Sure ! Do you need to Log Out?')) {
-               
-            }
-        };
+        // $scope.onLogout = function() {
+        //     if ($window.confirm('Are You Sure ! Do you need to Log Out?'));
+        // };
 
         $scope.goToDashboard = function() {
             projectRegService.goToDashboard();
