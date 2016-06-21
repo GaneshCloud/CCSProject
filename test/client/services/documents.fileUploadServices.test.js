@@ -18,7 +18,7 @@ describe('Search Services', function () {
     });
 
     beforeEach(inject(function($injector,$httpBackend){
-        $factory=$injector.get("uploadMultipleServices");
+        $factory=$injector.get("fileUploadServices");
     }));
 
     describe('get search Service', function () {
@@ -42,24 +42,26 @@ describe('Search Services', function () {
 
         }));
     });
+    
 
-    describe('get search Service', function () {
-        it('department function', inject(function ($httpBackend) {
+
+    describe('#single fileupload  Service', function () {
+        it('edit function', inject(function ($httpBackend) {
 
             $httpBackend
-                .when('GET','/api/dep')
+                .when('GET', '/api/docs/getDoc?id=2')
                 .respond(200);
-            var res = $factory.getDepartment();
+            var res = $factory.getDocument(2);
             expect($httpBackend.flush).not.toThrow();
 
         }));
 
-        it('department function invalid url', inject(function ($httpBackend) {
+        it('edit function invalid url', inject(function ($httpBackend) {
 
             $httpBackend
-                .when('GET','/api/department')
+                .when('GET', '/api/docs/getDoc2?id=2')
                 .respond(200);
-            var res = $factory.getDepartment();
+            var res = $factory.getDocument(2);
             expect($httpBackend.flush).toThrow();
 
         }));

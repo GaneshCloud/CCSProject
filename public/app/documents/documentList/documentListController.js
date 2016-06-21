@@ -9,11 +9,13 @@
         'starServices',
         'iconServices',
         'dashboardService',
+        'departmentServices',
+        'documentTypeServices',
         '$window',
         '$filter'
     ];
 
-    function documentListController($scope,documentListServices,starServices,iconServices,dashboardService,$window,$filter) {
+    function documentListController($scope,documentListServices,starServices,iconServices,dashboardService,departmentServices,documentTypeServices,$window,$filter) {
         $scope.formData = [];               //model for storing the inputting data
         $scope.filteredRes=[];              //model for store filtered result
         $scope.searchres=[];                //model for store the search result
@@ -31,44 +33,7 @@
         $scope.rateInfo=[];                 //model store the rating info
         $scope.popup='';                    //for popup window
         $scope.dep='';                      //for department
-        $scope.type=[
-            {
-                id:-1,
-                type:'All Document',
-                ptrn:""
-            },
-            {
-                id:1,
-                type:'PDF Document',
-                ptrn:".pdf"
-            },
-            {
-                id:2,
-                type:'Word Document',
-                ptrn:".docx"
-            },
-            {
-                id:3,
-                type:'Slide Document',
-                ptrn:".ppt"
-            },
-            {
-                id:4,
-                type:'Image Document',
-                ptrn:"image/*"
-            },
-            {
-                id:5,
-                type:'Archive Document',
-                ptrn:"*.zip|*.rar"
-            },
-            {
-                id:6,
-                type:'Video Document',
-                ptrn:".mp4"
-            }
-
-        ];//array for store document type
+        $scope.type=[];//array for store document type
 
         dashboardService.checkAdmin();
 
@@ -102,15 +67,14 @@
             });
 
         };
-
-        $scope.newDocument=function(){
-            documentListServices.newDocument();
+        
+        getDocumentType=function(){
+            $scope.type=documentTypeServices.getDocumentType();
         };
-
 
 //function for getting department details//
         getDepartment=function(){
-            documentListServices.getDepartment()
+            departmentServices.getDepartment()
                 .then(function(response){
                     $scope.dep=response.data;
                     $scope.dep.splice(0, 0,
@@ -188,6 +152,7 @@
 
         // call the functions when the page is loading//
         getDepartment();
+        getDocumentType();
         $scope.searchData();
 
     }

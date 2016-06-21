@@ -26,16 +26,6 @@
 
                     </li>
 
-                    <li align='right'>
-
-                        <a ng-click='onLogout()'>
-
-                            <span class="glyphicon glyphicon-log-out"></span>Log Out
-
-                        </a>
-
-                    </li>
-
                 </ul>
 
             </li>
@@ -55,7 +45,7 @@
           <div class="panel-body" >
             <form class="form-horizontal" role="form" method="post" action="/documents/upload" enctype="multipart/form-data" name="frmDoc" id="frmDoc" novalidate onsubmit="false" >
                 
-                <input type="hidden" value="{{formData.ID}}" name="docId" id="docId" >
+                <input type="hidden" value="{{formData.id}}" name="docId" id="docId" >
                 <div class="form-group">
                     <label class="control-label col-sm-5" for="docCaption">Caption of the Document <span style="color: red">*</span> </label>
                     <div class="col-sm-7">

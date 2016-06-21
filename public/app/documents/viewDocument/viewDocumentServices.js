@@ -10,9 +10,6 @@
       getDocument: function (id) {
         return $http.get('/api/docs/getDoc?id=' + id);
       },
-      getDepartment: function () {
-        return $http.get('/api/dep');
-      },
       download: function (id) {
         alert(id);
         return $http.post('/api/download', id);

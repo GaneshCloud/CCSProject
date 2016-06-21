@@ -3,7 +3,7 @@ describe('Main Controller', function () {
     /*jshint expr:true */
   beforeEach(module('myApp'));
 
-  var $controller,starServices,documentListServices;
+  var $controller,starServices,documentListServices,departmentServices;
     var $q;
     var deferred;
 
@@ -13,21 +13,21 @@ describe('Main Controller', function () {
   //       $controller = _$controller_;
   //
   // }));
-    beforeEach(inject(function(_$controller_,_$rootScope_,_$q_,_starServices_,_documentListServices_,$httpBackend) {
+    beforeEach(inject(function(_$controller_,_$rootScope_,_$q_,_starServices_,_departmentServices_,_documentListServices_,$httpBackend) {
         $q = _$q_;
         $scope = _$rootScope_.$new();
         deferred = _$q_.defer();
         $controller = _$controller_;
         starServices= _starServices_;
         documentListServices=_documentListServices_;
+        departmentServices=_departmentServices_;
 
         $controller('documentListController', {
             $scope: $scope
         });
         spyOn(starServices, 'getStarInfo').and.returnValue(deferred.promise);
-        spyOn(documentListServices, 'getDepartment').and.returnValue(deferred.promise);
+        spyOn(departmentServices, 'getDepartment').and.returnValue(deferred.promise);
         spyOn(documentListServices, 'search').and.returnValue(deferred.promise);
-        // spyOn(documentListServices, 'getDocument').and.returnValue(deferred.promise);
         spyOn(documentListServices, 'delete').and.returnValue(deferred.promise);
 
         $httpBackend.when("GET","/getLoggedInUser").respond("sample");
@@ -239,30 +239,7 @@ describe('Main Controller', function () {
 
     });
 
-    describe("new Document",function () {
-
-        var documentListService,scope;
-        beforeEach(inject(function ($rootScope, $controller, _documentListServices_) {
-            scope = $rootScope.$new();
-            documentListService = _documentListServices_;
-            $controller('documentListController', {
-                $scope: scope,
-
-            });
-        }));
-
-
-        it('check new document function', function () {
-            var fakeHttpPromise = {
-                success: function() {}
-            };
-
-            spyOn(documentListService, 'newDocument');
-            scope.newDocument();
-            expect(documentListService.newDocument).toHaveBeenCalled();
-
-        });
-    });
+    
 
         // describe("get Data function",function () {
         //

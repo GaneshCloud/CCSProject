@@ -6,7 +6,7 @@ describe('Main Controller', function () {
     /*jshint expr:true */
     beforeEach(module('myApp'));
 
-    var $controller,uploadMultipleServices,dashboardService,documentObj;
+    var $controller,uploadMultipleServices,dashboardService,documentObj,departmentServices;
     var $q;
     var deferred;
     beforeEach(module(function($provide) {
@@ -14,23 +14,26 @@ describe('Main Controller', function () {
         $provide.value('document', documentObj);
     }));
 
-    beforeEach(inject(function(_$controller_,_$rootScope_, _$q_, _uploadMultipleServices_,_dashboardService_,$httpBackend){
+    beforeEach(inject(function(_$controller_,_$rootScope_, _$q_, _fileUploadServices_,_departmentServices_,_dashboardService_,$httpBackend){
 
         $q = _$q_;
 
         $scope = _$rootScope_.$new();
         deferred = _$q_.defer();
         $controller = _$controller_;
-        uploadMultipleServices= _uploadMultipleServices_;
+        uploadMultipleServices= _fileUploadServices_;
         dashboardService=_dashboardService_;
+        departmentServices=_departmentServices_;
 
-        $controller('multipleFileUploadController', {
+        $controller('fileUploadController', {
             $scope: $scope
         });
 
-        spyOn(uploadMultipleServices, 'getDepartment').and.returnValue(deferred.promise);
+        spyOn(departmentServices, 'getDepartment').and.returnValue(deferred.promise);
         spyOn(uploadMultipleServices, "goToDashboard");
+        spyOn(uploadMultipleServices, 'getDocument').and.returnValue(deferred.promise);
         $httpBackend.when("GET","/getLoggedInUser").respond("sample");
+        $httpBackend.when("GET","/api/dep").respond("sample");
 
 
     }));
@@ -132,6 +135,24 @@ describe('Main Controller', function () {
         //     });
         //
         // });
+            describe('edit document',function() {
+//
+            it('should resolve promise', function () {
+                $scope.editForm();
+                deferred.resolve({data:[{id: 1, DEP_NAME: 'ABC'}, {id: 2, DEP_NAME: 'xds'}]});
+
+                expect($scope.dep).toBeObject;
+                $scope.$digest();
+
+            });
+            it('should resolve promise', function () {
+
+                $scope.editForm();
+                deferred.reject();
+                expect($scope.dep).toBeArray;
+                $scope.$apply();
+            });
+        });
         describe("goto dashbord function",function () {
 
             it("should receive a successful response", function() {

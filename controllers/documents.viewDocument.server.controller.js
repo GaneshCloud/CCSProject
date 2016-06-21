@@ -122,7 +122,6 @@ var mysql=require('mysql'),
       var id=req.query.id,files;
         if(id==='' || id===null || isNaN(id)) return res.end("invalid");
         unZipFile(id,function(err,files){
-            if(err) throw err;
             if(err==='NoData') res.end("No Data");
             else
                 res.end(JSON.stringify(files));

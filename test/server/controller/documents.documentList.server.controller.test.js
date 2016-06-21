@@ -2,7 +2,7 @@
  * Created by Administrator on 5/30/2016ss.
  */
 var expect = require('chai').expect;
-var controllerToTest = require('../../../controllers/documents.documentList.server.controller');
+var controllerToTest = require('../../../controllers/documents.documentManager.server.controller.js');
 var documentService = require('../../../config/db/documents/documentdb');
 
 describe('documentList Controller', function() {

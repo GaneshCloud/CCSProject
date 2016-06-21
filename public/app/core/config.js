@@ -38,11 +38,11 @@
                 controller: 'forumController',
                 templateUrl: '../app/forum/home/forum.html'
             }).when('/documents/editDoc', {
-                templateUrl: 'app/documents/singleFileUpload/singleFileUpload.html',
-                controller: 'singleFileUploadController'
+                templateUrl: 'app/documents/documentUpload/singleFileUpload.html',
+                controller: 'fileUploadController'
             }).when('/documents/singleFileUpload', {
-                templateUrl: 'app/documents/singleFileUpload/singleFileUpload.html',
-                controller: 'singleFileUploadController'
+                templateUrl: 'app/documents/documentUpload/singleFileUpload.html',
+                controller: 'fileUploadController'
             }).when('/documents/documentSearch', {
                 templateUrl: 'app/documents/search/search.html',
                 controller: 'searchController'
@@ -50,8 +50,8 @@
                 templateUrl: 'app/documents/documentList/documentList.html',
                 controller: 'documentListController'
             }).when('/documents/multipleFileUpload', {
-                templateUrl: 'app/documents/multipleFileUpload/multipleFileUpload.html',
-                controller: 'multipleFileUploadController'
+                templateUrl: 'app/documents/documentUpload/multipleFileUpload.html',
+                controller: 'fileUploadController'
             }).when('/documents/viewDocument', {
                 templateUrl: 'app/documents/viewDocument/viewDocument.html',
                 controller: 'viewDocumentController'

@@ -1,15 +1,19 @@
 (function() {
     angular
         .module('myApp')
-        .controller('multipleFileUploadController', multipleFileUploadController);
+        .controller('fileUploadController', fileUploadController);
 
-    multipleFileUploadController.$inject = [
+    fileUploadController.$inject = [
+        '$location',
         '$scope',
-        'uploadMultipleServices',
+        'fileUploadServices',
         'dashboardService',
+        'departmentServices',
+        'documentTypeServices',
         '$window'
+
     ];
-    function multipleFileUploadController($scope, uploadMultipleServices, dashboardService, $window) {
+    function fileUploadController($location,$scope, fileUploadServices, dashboardService,departmentServices,documentTypeServices, $window) {
 
         $scope.formData = [{
             id: '',
@@ -30,15 +34,7 @@
         $scope.isNull = true;       //Model for null validation
         $scope.docPattern = '';     //Model for store the pattern of ducument
         $scope.dep = [];            //Model for store the department list
-        $scope.type = [
-            {id: 1, type: 'PDF Document', ptrn: '.pdf'},
-            {id: 2, type: 'Word Document', ptrn: '.docx'},
-            {id: 3, type: 'Slide Document', ptrn: '.ppt'},
-            {id: 4, type: 'Image Document', ptrn: 'image/*'},
-            {id: 5, type: 'Archive Document', ptrn: '*.zip|*.rar'},
-            {id: 6, type: 'Video Document', ptrn: '.mp4'}
-
-        ];            //Model for type of the document
+        $scope.type = [];
 
         dashboardService.checkAdmin();
         //Function for inceremeenting rows//
@@ -46,6 +42,10 @@
         $scope.addRow = function () {
 
             $scope.rows.push($scope.rows.length + 1);
+        };
+
+        getDocumentType=function(){
+            $scope.type=documentTypeServices.getDocumentType();
         };
 
         //Function for removing rows//
@@ -75,7 +75,7 @@
 
         //Function for get the department
         getDepartment = function () {
-            uploadMultipleServices.getDepartment()
+            departmentServices.getDepartment()
                 .then(function (response) {
                     $scope.dep = response.data;
                 })
@@ -83,15 +83,45 @@
                     console.log(err);
                 });
         };
-        
+
+        $scope.editForm = function () {
+
+            fileUploadServices.getDocument(getParameterByName('id'))
+                .then(function (response) {
+
+                    $scope.formData = response.data[0];
+                    $scope.getPattern(response.data[0].DOCTYPE);
+                })
+                .catch(function (err) {
+                    console.log(err);
+                });
+
+        };
+
+
         //Dashboard
         $scope.goToDashboard = function () {
 
-            uploadMultipleServices.goToDashboard();
+            fileUploadServices.goToDashboard();
 
         };
+
+        getParameterByName = function (params) {
+            if ( $location.search().hasOwnProperty( params ) ) {
+                return $location.search()[params];
+            }
+        };
+
         //Initially calling the function
-       getDepartment();
+        if (window.location.pathname === '/documents/editDoc'){
+            $scope.editForm();
+            $scope.getPattern($scope.formData.docType);
+        }
+
+
+        getDocumentType();
+        getDepartment();
+
 
     }
 })();

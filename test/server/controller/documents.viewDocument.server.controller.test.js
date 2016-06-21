@@ -555,14 +555,16 @@ describe("viewDocument controller",function () {
                     id: 506
                 },
                 session:{
-                    userMode:"Admin"
+                    data:{
+                        userType:"admin"
+                    }
                 }
             };
             // we provide the response object which the controller uses
             var resp = {
                 end: function (data) {
 
-                    expect(data).to.be.equal('{"mode":"Admin"}');
+                    expect(data).to.be.equal('{"mode":"admin"}');
                     done();
                 },
                 send:function(){

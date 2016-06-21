@@ -8,9 +8,10 @@
         '$location',
         '$scope',
         'viewDocumentServices',
+        'departmentServices',
         'starServices'
     ];
-    function viewDocumentController($location,$scope, viewDocumentServices, starServices) {
+    function viewDocumentController($location,$scope, viewDocumentServices,departmentServices, starServices) {
 
 
         $scope.doc = [];
@@ -81,7 +82,7 @@
         //Function for getting department info//
 
         getDepartment = function () {
-            viewDocumentServices.getDepartment()
+            departmentServices.getDepartment()
                 .then(function (response) {
                     $scope.dep =response.data;
                 })

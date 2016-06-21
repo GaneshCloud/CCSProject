@@ -18,7 +18,7 @@
                 </thead>
                 <tbody>
                 <!--filter:search |-->
-                  <tr ng-repeat="x in filteredRes |  orderBy:field:isReverse">
+                  <tr ng-repeat="x in searchres | filter:paginate | orderBy:field:isReverse">
                     <td>{{$index+1}}</td>
                     <td style="overflow: hidden;"><img ng-src="{{ getIcon(x.docType) }}">&nbsp;&nbsp;&nbsp;<a href="/documents/viewDocument?id={{x.id}}">{{x.docCaption}}</a></td>
                     <td>{{x.DEP_NAME}}</td>

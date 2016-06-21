@@ -6,11 +6,11 @@ describe('single File Upload Controller', function () {
     /*jshint expr:true */
     beforeEach(module('myApp'));
 
-    var $controller,viewDocumentServices,starServices,location;
+    var $controller,viewDocumentServices,starServices,location,departmentServices;
     var $q;
     var deferred,windowObj;
 
-    beforeEach(inject(function(_$controller_,_$rootScope_, _$q_, _viewDocumentServices_,_starServices_,$httpBackend,$location){
+    beforeEach(inject(function(_$controller_,_$rootScope_, _$q_, _viewDocumentServices_,_departmentServices_,_starServices_,$httpBackend,$location){
 
         $q = _$q_;
         $scope = _$rootScope_.$new();
@@ -18,6 +18,7 @@ describe('single File Upload Controller', function () {
         deferred_sub = _$q_.defer();
         $controller = _$controller_;
         viewDocumentServices= _viewDocumentServices_;
+        departmentServices=_departmentServices_;
         starServices=_starServices_;
         $controller('viewDocumentController', {
             $scope: $scope
@@ -25,7 +26,7 @@ describe('single File Upload Controller', function () {
         windowObj = {location: {href: '/sample?type=5'}};
 
         spyOn(viewDocumentServices, 'getUser').and.returnValue(deferred.promise);
-        spyOn(viewDocumentServices, 'getDepartment').and.returnValue(deferred.promise);
+        spyOn(departmentServices, 'getDepartment').and.returnValue(deferred.promise);
         spyOn(viewDocumentServices, 'getArchieve').and.returnValue(deferred_sub.promise);
         spyOn(viewDocumentServices, 'getNextDoc').and.returnValue(deferred.promise);
         spyOn(viewDocumentServices, 'getPrevDoc').and.returnValue(deferred.promise);
