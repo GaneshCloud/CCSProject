@@ -19,12 +19,12 @@
       getDepartment: function () {
         return $http.get('/api/dep');
       },
-      multipleFileUpload: function () {
-        $window.location.href = '/documents/multipleFileUpload';
-      },
-      documentList: function () {
-        $window.location.href = '/documents/documentList';
-      },
+      // multipleFileUpload: function () {
+      //   $window.location.href = '/documents/multipleFileUpload';
+      // },
+      // documentList: function () {
+      //   $window.location.href = '/documents/documentList';
+      // },
       goToDashboard: function () {
         $window.location.href = '/profile/dashboard';
       }

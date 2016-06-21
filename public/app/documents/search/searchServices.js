@@ -12,9 +12,6 @@
       search: function(data) {
         return $http.get('/api/search' + data);
       },
-      getDepartment: function() {
-        return $http.get('/api/dep');
-      },
       goToDashboard: function() {
         $window.location.href = '/profile/dashboard';
       }

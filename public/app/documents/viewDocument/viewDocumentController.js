@@ -8,9 +8,10 @@
         '$location',
         '$scope',
         'viewDocumentServices',
+        'departmentServices',
         'starServices'
     ];
-    function viewDocumentController($location,$scope, viewDocumentServices, starServices) {
+    function viewDocumentController($location,$scope, viewDocumentServices,departmentServices, starServices) {
 
 
         $scope.doc = [];
@@ -21,6 +22,8 @@
         $scope.next = [];                 //Model for store the next document info
         $scope.thisFile = '';             //Model for store the file location
         $scope.files = [];
+        $scope.isExist=false;                     //check for document is exist/not
+        $scope.isFileExist=false;
         //$scope.isExist=true;
 
 
@@ -36,7 +39,7 @@
         getUser = function () {
             viewDocumentServices.getUser()
                 .then(function (response) {
-                    if (response.data.mode === 'Admin') {
+                    if (response.data.mode === 'admin') {
                         $scope.isAdmin = true;
                         $scope.css = 'starDisable.css';
                     } else {
@@ -58,17 +61,7 @@
                 .catch(function () {
 
                 });
-
-            if (getParameterByName('type') === '5') {
-                viewDocumentServices.getArchieve(getParameterByName('id'))
-                    .then(function (response) {
-                        $scope.files = response.data;
-                    })
-                    .catch(function (err) {
-                        console.log(err);
-                    });
-            }
-
+            
 
         };
 
@@ -89,7 +82,7 @@
         //Function for getting department info//
 
         getDepartment = function () {
-            viewDocumentServices.getDepartment()
+            departmentServices.getDepartment()
                 .then(function (response) {
                     $scope.dep =response.data;
                 })
@@ -130,8 +123,8 @@
         //Function for get the next document details//
 
         $scope.getNext = function (id) {
-
-            if ($scope.doc.ID === 'undefined') return;
+            if( $scope.doc.length <=0) return;
+            if ($scope.doc.id === 'undefined') return;
             viewDocumentServices.getNextDoc(id)
                 .then(loadDocument)
                 .catch(function (err) {
@@ -143,8 +136,8 @@
         //Function for getting the previous document details//
 
         $scope.getPrevios = function (id) {
-
-            if ($scope.doc.ID === 'undefined') return;
+            if( $scope.doc.length <=0) return;
+            if ($scope.doc.id === 'undefined') return;
             viewDocumentServices.getPrevDoc(id)
                 .then(loadDocument)
                 .catch(function (err) {
@@ -154,14 +147,17 @@
         };
 
         loadDocument=function (response) {
-            if (response.data.length > 0) {
-                $scope.doc = response.data[0];
-                getStar($scope.doc.ID);
-                var filename = $scope.doc.DOCFILE;
-                $scope.thisFile = 'uploads/documents/' + response.data[0].ID + '.' + filename.split('.').pop();
+            if(response.data==='invalid') {$scope.isExist=false; return};
 
-            if ($scope.doc.DOCTYPE === 5) {
-                viewDocumentServices.getArchieve($scope.doc.ID)
+            if (response.data.length > 0) {
+                $scope.isExist=true;
+                $scope.doc = response.data[0];
+                getStar($scope.doc.id);
+                var filename = $scope.doc.docFile;
+                $scope.thisFile = 'uploads/documents/' + $scope.doc.id + '.' + filename.split('.').pop();
+
+            if ($scope.doc.docType === 5) {
+                viewDocumentServices.getArchieve($scope.doc.id)
                     .then(function (response) {
                         $scope.files = response.data;
                     })
@@ -174,7 +170,7 @@
             }
             else
                 return;
-        }
+        };
 
         //Call the function for page loading//
         getUser();

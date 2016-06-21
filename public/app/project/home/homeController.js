@@ -35,7 +35,6 @@
     $scope.accordionGroupOptions6={
       open:true
     };
-
     $scope.simpleAccordionOptions = {
       closeOthers: false
     };
@@ -69,7 +68,6 @@
     $scope.projectHistory = function(){
       homeService.projectHistory()
           .then(function (results) {	//Success function
-
               $scope.data=results.data;
               for (var i = 0;i < $scope.data.length;i++) {
                 if (i % 2 === 0) {	//Even badge
@@ -87,27 +85,30 @@
     $scope.chartData = function(){
       homeService.chartData()
           .then(function (results) {	//Success function
-              $scope.totalPercentage = results.data[3].y;
-              $scope.myDataSource = {
-                chart: {
-                  caption: 'Last 4 Days',
-                  numberSuffix: '%',
-                  theme: 'ocean'
-                },
-                data: [{
-                  label: results.data[0].x,
-                  value: results.data[0].y
-                },{
-                  label: results.data[1].x,
-                  value: results.data[1].y
-                },{
-                  label: results.data[2].x,
-                  value: results.data[2].y
-                },{
-                  label: results.data[3].x,
-                  value: results.data[3].y
-                }]
-              };
+              var total=[];
+              console.log("kkkkk"+results.data);
+                  total = results.data[0];
+                   $scope.totalPercentage = total.per;
+                  // $scope.myDataSource = {
+                  //     chart: {
+                  //         caption: 'Last 4 Days',
+                  //         numberSuffix: '%',
+                  //         theme: 'ocean'
+                  //     },
+                  //     data: [{
+                  //         label: total[0].x,
+                  //         value: total[0].y
+                  //     }, {
+                  //         label: total[1].x,
+                  //         value: total[1].y
+                  //     }, {
+                  //         label: total[2].x,
+                  //         value: totala[2].y
+                  //     }, {
+                  //         label: total[3].x,
+                  //         value: total[3].y
+                  //     }]
+              //}
           }).catch(function(error) {
             console.log('Error');
           });
@@ -123,9 +124,8 @@
     };
 
     $scope.postData = function() {	//Function to call on question submit
-     // if ($scope.question.length > 0) {	//Success funtion
-        homeService.postQuestion($scope.question)
-            .then(function() {
+     homeService.postQuestion($scope.question)
+            .then(function(results) {
               console.log('Data Inserted Successfully');
               $window.alert('Data Inserted Successfully');
               $scope.question = '';

@@ -8,10 +8,12 @@
     'documentSearchServices',
     'iconServices',
     'dashboardService',
-    '$window'
+    'departmentServices',
+    '$window',
+    '$filter'
   ];
 
-  function searchController($scope, documentSearchServices, iconServices, dashboardService, $window) {
+  function searchController($scope, documentSearchServices, iconServices, dashboardService,departmentServices, $window,$filter) {
 
     $scope.searchkey = {};              //Model for search key object
     $scope.searchkey.docType = -1;        //DocType property of search key object
@@ -26,7 +28,7 @@
     $scope.dep = [];                      //Model for department
     $scope.loadimage = '';                //Model for loading image
     $scope.stLst = false;                 //Model for view mode settings
-    $scope.field = 'DOCCAPTION';         //Model for ordering field of data
+    $scope.field = 'docCaption';         //Model for ordering field of data
     $scope.isReverse = false;             //Model for check asc/ desc
     $scope.srcViews = 'app/documents/search/searchTileView.html';//Model for store the path of the html template
 
@@ -56,7 +58,7 @@
 
     //Function for department Details
     getDepartment = function () {
-      documentSearchServices.getDepartment()
+      departmentServices.getDepartment()
           .then(function (response) {
             $scope.dep = response.data;
             $scope.dep.splice(0, 0,
@@ -69,9 +71,16 @@
           });
     };
 
+    $scope.paginate = function (value) {
+      var begin, end, index;
+      begin = ($scope.curPage - 1) * $scope.itemsPage;
+      end = begin + $scope.itemsPage;
+      index = $scope.searchres.indexOf(value);
+      return (begin <= index && index < end);
+    };
+
     //Function for search the document
     $scope.searchData = function (page) {
-      console.log(page);
       documentSearchServices.search('?docType=' + $scope.searchkey.docType + '&dep=' + $scope.searchkey.dep + '&page=' + $scope.page + '&serStr=' + $scope.search)
           .then(function (response) {
             $scope.searchres = response.data;
@@ -79,12 +88,6 @@
               $scope.noData = true;
             else
               $scope.noData = false;
-            $scope.$watch('curPage + itemspage', function () {
-
-              var begin = (($scope.curPage - 1) * $scope.itemsPage), end = begin + $scope.itemsPage;
-              $scope.filteredRes = $scope.searchres.slice(begin, end);
-
-            });
           })
           .catch(function(){
 
@@ -101,10 +104,13 @@
     $scope.orderMe = function (f) {
       if ($scope.field === f) {
         $scope.isReverse = !$scope.isReverse;
-        return;
+        // return;
       }
-      $scope.field = f;
-      $scope.isReverse = false;
+      else{$scope.field = f;
+        $scope.isReverse = false;
+      }
+
+      $scope.searchres = $filter('orderBy')($scope.searchres, f, $scope.isReverse);
     };
     
     //Dashboard

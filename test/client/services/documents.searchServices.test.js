@@ -64,24 +64,24 @@ describe('Search Services', function () {
         }));
     });
 
-    describe('get documentList Service', function () {
-        it('department function', inject(function ($httpBackend) {
-            $httpBackend
-                .when('GET', '/api/dep')
-                .respond(200);
-            var res=$factory.getDepartment();
-            expect($httpBackend.flush).not.toThrow();
-
-        }));
-
-        it('department function invalid url', inject(function ($httpBackend) {
-            $httpBackend
-                .when('GET', '/api/dep2')
-                .respond(200);
-            var res=$factory.getDepartment();
-            expect($httpBackend.flush).toThrow();
-        }));
-    });
+    // describe('get documentList Service', function () {
+    //     it('department function', inject(function ($httpBackend) {
+    //         $httpBackend
+    //             .when('GET', '/api/dep')
+    //             .respond(200);
+    //         var res=$factory.getDepartment();
+    //         expect($httpBackend.flush).not.toThrow();
+    //
+    //     }));
+    //
+    //     it('department function invalid url', inject(function ($httpBackend) {
+    //         $httpBackend
+    //             .when('GET', '/api/dep2')
+    //             .respond(200);
+    //         var res=$factory.getDepartment();
+    //         expect($httpBackend.flush).toThrow();
+    //     }));
+    // });
 
     // describe("logout docmnwet",function () {
     //     it('href redirects', function() {

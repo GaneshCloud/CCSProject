@@ -2,7 +2,7 @@
  * Created by Administrator on 5/30/2016ss.
  */
 var expect = require('chai').expect;
-var controllerToTest = require('../../../controllers/documents.documentList.server.controller');
+var controllerToTest = require('../../../controllers/documents.documentManager.server.controller.js');
 var documentService = require('../../../config/db/documents/documentdb');
 
 describe('documentList Controller', function() {
@@ -71,7 +71,7 @@ describe('documentList Controller', function() {
         });
     });
 
-    describe('edit Document', function() {                                              //edit document
+    describe('get Document', function() {                                              //edit document
         it('returns the result', function(done) {
             var req = {
                 query:{
@@ -80,12 +80,15 @@ describe('documentList Controller', function() {
             };
             // we provide the response object which the controller uses
             var res = {
-                end: function(data) {
-                    expect(data).to.be.a("string");
+                json: function(data) {
+                    expect(data).to.be.an("array");
                     done();
+                },
+                end:function(data){
+
                 }
             };
-            controllerToTest.editDocument(req,res); // call the function to be tested
+            controllerToTest.getDocument(req,res); // call the function to be tested
         });
 
         it('returns the result', function(done) {
@@ -96,14 +99,16 @@ describe('documentList Controller', function() {
             };
             // we provide the response object which the controller uses
             var res = {
-                end: function(data) {
+                json: function(data) {
 
+
+                },end:function(data){
                     expect(data).to.be.equal('invalid');
                     expect(data).to.be.a('string');
                     done();
                 }
             };
-            controllerToTest.editDocument(req,res); // call the function to be tested
+            controllerToTest.getDocument(req,res); // call the function to be tested
         });
 
         it('returns the result', function(done) {
@@ -114,13 +119,15 @@ describe('documentList Controller', function() {
             };
             // we provide the response object which the controller uses
             var res = {
-                end: function(data) {
+                json: function(data) {
+
+                },end:function(data){
                     expect(data).to.be.equal('invalid');
                     expect(data).to.be.a('string');
                     done();
                 }
             };
-            controllerToTest.editDocument(req,res); // call the function to be tested
+            controllerToTest.getDocument(req,res); // call the function to be tested
         });
         it('returns the result', function(done) {
             var req = {
@@ -130,15 +137,17 @@ describe('documentList Controller', function() {
             };
             // we provide the response object which the controller uses
             var res = {
-                end: function(data) {
+                json: function(data) {
+                    
+                },end:function(data){
                     expect(data).to.be.equal('invalid');
                     expect(data).to.be.a('string');
                     done();
                 }
             };
-            controllerToTest.editDocument(req,res); // call the function to be tested
+            controllerToTest.getDocument(req,res); // call the function to be tested
         });
-        
+
     });
 
     describe('search Document', function() {                                              //search document

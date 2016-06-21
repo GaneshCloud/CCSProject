@@ -6,38 +6,50 @@ describe('Main Controller', function () {
     /*jshint expr:true */
     beforeEach(module('myApp'));
 
-    var $controller,uploadMultipleServices,dashboardService;
+    var $controller,uploadMultipleServices,dashboardService,documentObj,departmentServices;
     var $q;
     var deferred;
+    beforeEach(module(function($provide) {
+        documentObj = {forms: {frmDoc: {submit:function(){}}}};
+        $provide.value('document', documentObj);
+    }));
 
-    beforeEach(inject(function(_$controller_,_$rootScope_, _$q_, _uploadMultipleServices_,_dashboardService_,$httpBackend){
+    beforeEach(inject(function(_$controller_,_$rootScope_, _$q_, _fileUploadServices_,_departmentServices_,_dashboardService_,$httpBackend){
 
         $q = _$q_;
+
         $scope = _$rootScope_.$new();
         deferred = _$q_.defer();
         $controller = _$controller_;
-        uploadMultipleServices= _uploadMultipleServices_;
+        uploadMultipleServices= _fileUploadServices_;
         dashboardService=_dashboardService_;
+        departmentServices=_departmentServices_;
 
-        $controller('multipleFileUploadController', {
+        $controller('fileUploadController', {
             $scope: $scope
         });
 
-        spyOn(uploadMultipleServices, 'getDepartment').and.returnValue(deferred.promise);
+        spyOn(departmentServices, 'getDepartment').and.returnValue(deferred.promise);
         spyOn(uploadMultipleServices, "goToDashboard");
+        spyOn(uploadMultipleServices, 'getDocument').and.returnValue(deferred.promise);
         $httpBackend.when("GET","/getLoggedInUser").respond("sample");
+        $httpBackend.when("GET","/api/dep").respond("sample");
 
 
     }));
 
-    describe('multiple File Upload Controller', function () {
-        it('check row increment', function () {
+        describe('multiple File Upload Controller', function () {
+            it('check row increment', function () {
 
-            var length=$scope.rows.length;
-            $scope.addRow();
-            expect($scope.rows.length).toBeGreaterThan(length);
-        });
-//x
+                var length=$scope.rows.length;
+                $scope.addRow();
+                expect($scope.rows.length).toBeGreaterThan(length);
+            });
+
+            // it('check for submit form', function () {
+            //     $scope.saveDoc ();
+            // });
+
         describe('get department',function(){
 
             it('should resolve promise',inject(function ($httpBackend) {
@@ -107,21 +119,39 @@ describe('Main Controller', function () {
             });
         });
         //
-        describe("save document",function(){
+        // describe("save document",function(){
+        //
+        //     beforeEach(inject(function ($rootScope, $controller, _uploadMultipleServices_) {
+        //         scope = $rootScope.$new();
+        //         multipleUploadService = _uploadMultipleServices_;
+        //     }));
+        //
+        //     it('check single file upload', function () {
+        //
+        //         spyOn(multipleUploadService, 'singleFileUpload');
+        //         $scope.singleFileUpload();
+        //         expect(multipleUploadService.singleFileUpload).toHaveBeenCalled();
+        //
+        //     });
+        //
+        // });
+            describe('edit document',function() {
+//
+            it('should resolve promise', function () {
+                $scope.editForm();
+                deferred.resolve({data:[{id: 1, DEP_NAME: 'ABC'}, {id: 2, DEP_NAME: 'xds'}]});
 
-            beforeEach(inject(function ($rootScope, $controller, _uploadMultipleServices_) {
-                scope = $rootScope.$new();
-                multipleUploadService = _uploadMultipleServices_;
-            }));
-
-            it('check single file upload', function () {
-
-                spyOn(multipleUploadService, 'singleFileUpload');
-                $scope.singleFileUpload();
-                expect(multipleUploadService.singleFileUpload).toHaveBeenCalled();
+                expect($scope.dep).toBeObject;
+                $scope.$digest();
 
             });
+            it('should resolve promise', function () {
 
+                $scope.editForm();
+                deferred.reject();
+                expect($scope.dep).toBeArray;
+                $scope.$apply();
+            });
         });
         describe("goto dashbord function",function () {
 

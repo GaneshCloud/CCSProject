@@ -6,11 +6,11 @@ describe('Search Controller', function () {
     /*jshint expr:true */
     beforeEach(module('myApp'));
 
-    var $controller,documentSearchServices,dashboardService,iconServices;
+    var $controller,documentSearchServices,dashboardService,iconServices,departmentServices;
     var $q;
     var deferred;
 
-    beforeEach(inject(function(_$controller_,_$rootScope_, _$q_, _documentSearchServices_,_iconServices_,_dashboardService_,$httpBackend){
+    beforeEach(inject(function(_$controller_,_$rootScope_, _$q_, _documentSearchServices_,_departmentServices_,_iconServices_,_dashboardService_,$httpBackend){
 
         $q = _$q_;
         $scope = _$rootScope_.$new();
@@ -19,12 +19,13 @@ describe('Search Controller', function () {
         documentSearchServices= _documentSearchServices_;
         dashboardService=_dashboardService_;
         iconServices=_iconServices_;
+        departmentServices=_departmentServices_;
 
         $controller('searchController', {
             $scope: $scope
         });
 
-        spyOn(documentSearchServices, 'getDepartment').and.returnValue(deferred.promise);
+        spyOn(departmentServices, 'getDepartment').and.returnValue(deferred.promise);
         spyOn(documentSearchServices, "goToDashboard");
         spyOn(documentSearchServices, "search").and.returnValue(deferred.promise);
         $httpBackend.when("GET","/getLoggedInUser").respond("sample");

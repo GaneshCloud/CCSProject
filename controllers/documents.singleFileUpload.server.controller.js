@@ -8,6 +8,7 @@ var path = require('path'),
     docService = new serDocument(con),
     depServiceObj = new serDepartment(con);
 
+var selectedFile,ext;
 
 exports.upload = function(req,res) {
 
@@ -23,7 +24,8 @@ exports.upload = function(req,res) {
   form.parse(req, function(err, fields, files) {
 
     // console.log(files.docFile.name);
-    var ext = path.extname(files.docFile.name);
+    selectedFile=files;
+    ext = path.extname(files.docFile.name);
     document.docDate = datetime;
     document.docCaption = fields.docCaption;
     document.docType = fields.docType;
@@ -34,30 +36,22 @@ exports.upload = function(req,res) {
     var insertId = null;
 
     if (fields.docId !== '')    {
-
-      docService.updateDoc(fields.docId,document,function(err,insId) {
-        insertId = insId;
-        fs.createReadStream(files.docFile.path).pipe(fs.createWriteStream(__dirname + '/../public/uploads/documents/' + files.docFile.name));
-        fs.rename(__dirname + '/../public/uploads/documents/' + files.docFile.name, __dirname + '/../public/uploads/documents/' + insertId + ext, function(err) {
-          if (err) throw err;
-
-        });
-      });
-
-    }    else
-                  docService.insertDoc(document,function(err,insId) {
-                    insertId = insId;
-                    fs.createReadStream(files.docFile.path).pipe(fs.createWriteStream(__dirname + '/../public/uploads/documents/' + files.docFile.name));
-                    fs.rename(__dirname + '/../public/uploads/documents/' + files.docFile.name, __dirname + '/../public/uploads/documents/' + insertId + ext, function(err) {
-                      if (err) throw err;
-                      console.log(err);
-                    });
-                  });
-    res.redirect('/documents/singleFileUpload');
+      docService.updateDoc(fields.docId,document,manageFile);
+    }else
+      docService.insertDoc(document,manageFile);
+      res.redirect('/documents/singleFileUpload');
 
   });
 };
 
+var manageFile=function(err,insId) {
+  insertId = insId;
+  fs.createReadStream(selectedFile.docFile.path).pipe(fs.createWriteStream(__dirname + '/../public/uploads/documents/' + selectedFile.docFile.name));
+  fs.rename(__dirname + '/../public/uploads/documents/' + selectedFile.docFile.name, __dirname + '/../public/uploads/documents/' + insertId + ext, function(err) {
+    if (err) throw err;
+    //console.log(err);
+  });
+};
 exports.getDepartment = function(req,res) {
 
   depServiceObj.getAllDep(function(err,data) {

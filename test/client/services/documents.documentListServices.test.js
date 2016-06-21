@@ -79,31 +79,7 @@ describe('Document List Services', function () {
             expect($httpBackend.flush).toThrow();
         }));
     });
-
-    describe('get documentList Service', function () {
-        it('department function', inject(function ($httpBackend) {
-            $httpBackend
-                .when('GET', '/api/dep')
-                .respond(200);
-            var res=$factory.getDepartment();
-            expect($httpBackend.flush).not.toThrow();
-        }));
-
-        it('department function invalid url', inject(function ($httpBackend) {
-            $httpBackend
-                .when('GET', '/api/dep2')
-                .respond(200);
-            var res=$factory.getDepartment();
-            expect($httpBackend.flush).toThrow();//ssss
-        }));
-    });
-
-    describe("new docmnwet",function () {
-        it('href redirects', function() {
-            $factory.newDocument();
-            expect(windowObj.location.href).toEqual('/documents/singleFileUpload');
-        });
-    });
+    
 
     // describe("logout docmnwet",function () {
     //     it('href redirects', function() {
@@ -112,7 +88,7 @@ describe('Document List Services', function () {
     //     });
     // });
 
-    describe("logout docmnwet",function () {
+    describe("go to dashboard",function () {
         it('href redirects', function() {
             $factory.goToDashboard();
             expect(windowObj.location.href).toEqual('/profile/dashboard');

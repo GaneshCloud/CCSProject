@@ -8,24 +8,23 @@
                 <thead>
                   <tr style="cursor: pointer;">
                     <th>Sl No</th>
-                    <th ng-click="orderMe('DOCCAPTION')" style="width:200px;">Caption</th>
+                    <th ng-click="orderMe('docCaption')" style="width:200px;">Caption</th>
                     <th ng-click="orderMe('DEP_NAME')" >Department</th>
-                    <th ng-click="orderMe('DOCDATE')">Posted Date</th>
-                    <th ng-click="orderMe('DOCNOVIEWS')">Views</th>
-                    <th ng-click="orderMe('DOCNODOWN')">Downloads</th>
+                    <th ng-click="orderMe('docDate')">Posted Date</th>
+                    <th ng-click="orderMe('docNoViews')">Views</th>
+                    <th ng-click="orderMe('docNoDown')">Downloads</th>
                     <th ng-click="orderMe('star')">Rating</th>
                   </tr>
                 </thead>
                 <tbody>
                 <!--filter:search |-->
-                  <tr ng-repeat="x in filteredRes |  orderBy:field:isReverse">
+                  <tr ng-repeat="x in searchres | filter:paginate | orderBy:field:isReverse">
                     <td>{{$index+1}}</td>
-                    <td style="overflow: hidden;"><img ng-src="{{ getIcon(x.DOCTYPE) }}">&nbsp;&nbsp;&nbsp;<a href="/documents/viewDocument?id={{x.ID}}
-                  &type={{x.DOCTYPE}}">{{x.DOCCAPTION}}</a></td>
+                    <td style="overflow: hidden;"><img ng-src="{{ getIcon(x.docType) }}">&nbsp;&nbsp;&nbsp;<a href="/documents/viewDocument?id={{x.id}}">{{x.docCaption}}</a></td>
                     <td>{{x.DEP_NAME}}</td>
-                    <td>{{x.DOCDATE | date:"dd-MM-yyyy"}}</td>
-                    <td>{{x.DOCNOVIEWS}}</td>
-                    <td>{{x.DOCNODOWN}}</td>
+                    <td>{{x.docDate | date:"dd-MM-yyyy"}}</td>
+                    <td>{{x.docNoViews}}</td>
+                    <td>{{x.docNoDown}}</td>
                     <td>
 
                       <div class="stars" style="width: 150px;">

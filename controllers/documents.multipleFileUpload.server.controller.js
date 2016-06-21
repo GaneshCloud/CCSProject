@@ -24,7 +24,6 @@ exports.uploadMultiple = function(req,res) {
   var ext;
   insertCallback = function (err, insId) {
     insertId = insId;
-    // console.log('i: ' + i);
     fs.createReadStream(files1['docFile' + i].path).pipe(fs.createWriteStream(__dirname + '/../public/uploads/documents/' + files1['docFile' + i].name));
     fs.rename(__dirname + '/../public/uploads/documents/' + files1['docFile' + i].name, __dirname + '/../public/uploads/documents/' + insertId + ext, function (err) {
       if (err) throw err;
@@ -43,6 +42,7 @@ exports.uploadMultiple = function(req,res) {
 
   form.parse(req, function (err, fields, files) {
 
+    if(err) throw err;
     for (i = 1; i <= Object.keys(files).length; i++) {
       files1=files;
       sync = false;

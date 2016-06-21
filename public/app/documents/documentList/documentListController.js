@@ -9,10 +9,13 @@
         'starServices',
         'iconServices',
         'dashboardService',
-        '$window'
+        'departmentServices',
+        'documentTypeServices',
+        '$window',
+        '$filter'
     ];
 
-    function documentListController($scope,documentListServices,starServices,iconServices,dashboardService,$window) {
+    function documentListController($scope,documentListServices,starServices,iconServices,dashboardService,departmentServices,documentTypeServices,$window,$filter) {
         $scope.formData = [];               //model for storing the inputting data
         $scope.filteredRes=[];              //model for store filtered result
         $scope.searchres=[];                //model for store the search result
@@ -25,49 +28,12 @@
         $scope.searchkey.docType=-1;        //search key doctype
         $scope.isReverse=false;             //model for ascending and descending
         $scope.filteredDoc =[];
-        $scope.field='DOCCAPTION';          //model for ordering field
+        $scope.field='docCaption';          //model for ordering field
         $scope.maxSize = 5;                 //maximum size of the page no to be show
         $scope.rateInfo=[];                 //model store the rating info
         $scope.popup='';                    //for popup window
         $scope.dep='';                      //for department
-        $scope.type=[
-            {
-                id:-1,
-                type:'All Document',
-                ptrn:""
-            },
-            {
-                id:1,
-                type:'PDF Document',
-                ptrn:".pdf"
-            },
-            {
-                id:2,
-                type:'Word Document',
-                ptrn:".docx"
-            },
-            {
-                id:3,
-                type:'Slide Document',
-                ptrn:".ppt"
-            },
-            {
-                id:4,
-                type:'Image Document',
-                ptrn:"image/*"
-            },
-            {
-                id:5,
-                type:'Archive Document',
-                ptrn:"*.zip|*.rar"
-            },
-            {
-                id:6,
-                type:'Video Document',
-                ptrn:".mp4"
-            }
-
-        ];//array for store document type
+        $scope.type=[];//array for store document type
 
         dashboardService.checkAdmin();
 
@@ -77,10 +43,14 @@
             if(f===null || f==='') $scope.isReverse=$scope.isReverse;
             if ($scope.field === f){
                 $scope.isReverse = !$scope.isReverse;
-                return;
+                // return;
             }
-            $scope.field = f;
-            $scope.isReverse = false;
+            else{
+                $scope.field = f;
+                $scope.isReverse = false;
+            }
+
+             $scope.searchres = $filter('orderBy')($scope.searchres, f, $scope.isReverse);
 
         };
 
@@ -97,15 +67,14 @@
             });
 
         };
-
-        $scope.newDocument=function(){
-            documentListServices.newDocument();
+        
+        getDocumentType=function(){
+            $scope.type=documentTypeServices.getDocumentType();
         };
-
 
 //function for getting department details//
         getDepartment=function(){
-            documentListServices.getDepartment()
+            departmentServices.getDepartment()
                 .then(function(response){
                     $scope.dep=response.data;
                     $scope.dep.splice(0, 0,
@@ -117,6 +86,14 @@
                 });
         };
 
+        $scope.paginate = function (value) {
+            var begin, end, index;
+            begin = ($scope.curPage - 1) * $scope.itemsPage;
+            end = begin + $scope.itemsPage;
+            index = $scope.searchres.indexOf(value);
+            return (begin <= index && index < end);
+        };
+        
         //function for searching documents//
         $scope.searchData = function() {
 
@@ -129,12 +106,12 @@
                     else
                         $scope.noData=false;
 
-                    $scope.$watch("curPage + itemsPage", function() {
-
-                        var begin = (($scope.curPage - 1) * $scope.itemsPage), end = begin + $scope.itemsPage;
-
-                        $scope.filteredRes = $scope.searchres.slice(begin, end);
-                    });
+                    // $scope.$watch("curPage + itemsPage + searchres", function() {
+                    //
+                    //     var begin = (($scope.curPage - 1) * $scope.itemsPage), end = begin + $scope.itemsPage;
+                    //
+                    //     $scope.filteredRes = $scope.searchres.slice(begin, end);
+                    // });
                 })
                 .catch(function(){
 
@@ -148,16 +125,7 @@
             if(id==='' ||  id===null || isNaN(id)) return false;
             return iconServices.getIcon(id);
         };
-
-        // $scope.editDoc=function(id) {
-        //     $scope.selId=$scope.docs[id].ID;
-        //     documentListServices.getDocument()
-        //         .then(function(response) {
-        //         })
-        //         .catch(function(){
-        //
-        //         });
-        // };
+        
 
         //function for delete a document//
         $scope.deleteDoc = function(id) {
@@ -184,6 +152,7 @@
 
         // call the functions when the page is loading//
         getDepartment();
+        getDocumentType();
         $scope.searchData();
 
     }

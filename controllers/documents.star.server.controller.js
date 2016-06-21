@@ -26,7 +26,7 @@ var serReatingObj=new serRating(con);
         if(id==='' || id===null) return res.end("invalid");
 
         serReatingObj.getStar(id,function(err,data){
-          if (err) throw err;
+           if (err) throw err;
            res.end(JSON.stringify(data));
       });
     };
@@ -37,7 +37,7 @@ var serReatingObj=new serRating(con);
         if(id==='' || id===null || isNaN(id)) return res.end("invalid");
 
         serReatingObj.getStarInfo(id,function(err,rows){
-        // console.log(rows);
+          if(err) throw err;
           res.end(JSON.stringify(rows));
 
         });

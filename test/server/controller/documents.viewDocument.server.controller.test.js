@@ -243,22 +243,22 @@ describe("viewDocument controller",function () {
     });
 
     describe('readZip Dcoument', function () {                                              //search document
-        it('returns the result', function (done) {
-            var req = {
-                query: {
-                    id: 2
-                }
-            };
-            // we provide the response object which the controller uses
-            var res = {
-                end: function (data) {
-                    expect(data).to.be.a("string");
-                    setTimeout(done(),3500);
-
-                }
-            };
-            controllerToTest.readZip(req, res); // call the function to be tested
-        });
+        // it('returns the result', function (done) {
+        //     var req = {
+        //         query: {
+        //             id: 2
+        //         }
+        //     };
+        //     // we provide the response object which the controller uses
+        //     var res = {
+        //         end: function (data) {
+        //             expect(data).to.be.a("string");
+        //             setTimeout(done(),3500);
+        //
+        //         }
+        //     };
+        //     controllerToTest.readZip(req, res); // call the function to be tested
+        // });
 
         it('returns the result', function (done) {
             var req = {
@@ -546,6 +546,34 @@ describe("viewDocument controller",function () {
         });
 
 
+    });
+
+    describe("user mode",function(){
+        it('returns the result', function (done) {
+            var req = {
+                query: {
+                    id: 506
+                },
+                session:{
+                    data:{
+                        userType:"admin"
+                    }
+                }
+            };
+            // we provide the response object which the controller uses
+            var resp = {
+                end: function (data) {
+
+                    expect(data).to.be.equal('{"mode":"admin"}');
+                    done();
+                },
+                send:function(){
+                    // done();
+                }
+
+            };
+            controllerToTest.userMode(req, resp); // call the function to be tested
+        });
     });
 });
 

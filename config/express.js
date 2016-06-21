@@ -14,8 +14,6 @@ module.exports = function() {
 
   if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));
-  } else if (process.env.NODE_ENV === 'production') {
-    app.use(compress());
   }
 
   app.use(bodyParser.urlencoded({
@@ -55,32 +53,23 @@ module.exports = function() {
   app.use(express.static('./public'));
 
   require('../routes/project.home.server.routes.js')(app);
-  require('../routes/project.upload.server.routes.js')(app);
   require('../routes/profile.login.server.routes.js')(app);
   require('../routes/profile.userProfile.server.routes.js')(app);
   require('../routes/profile.adminProfile.server.routes.js')(app);
   require('../routes/profile.logout.server.routes')(app);
   require('../routes/forum.home.server.routes.js')(app);
-  require('../routes/documents.documentList.server.routes')(app);
+  require('../routes/documents.documentManager.server.routes.js')(app);
   require('../routes/documents.singleFileUpload.server.routes')(app);
   require('../routes/documents.multipleFileUpload.server.routes')(app);
   require('../routes/documents.star.server.routes')(app);
   require('../routes/documents.viewDocument.server.routes')(app);
-  require('../routes/documents.search.server.routes')(app);
+  // require('../routes/documents.search.server.routes')(app);
   require('../routes/project.projectReg.server.route')(app);
 
 
 
   require('../routes/security.server.routes.js')(app);
   require('../routes/layout.server.routes.js')(app);	//Layout page route
-
-  app.use(function(err, req, res) {
-    res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: err
-    });
-  });
 
   return app;
 };
