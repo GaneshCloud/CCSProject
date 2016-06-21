@@ -34,19 +34,19 @@ describe('get data',function() {
         expect(projectRegService.goToDashboard).toHaveBeenCalled();  //Verifies this was calle
     });
 
-    it('check logout', function () {
-
-        var $scope = {};
-
-        var controller = $controller('projectRegController', {$scope: $scope});
-
-        $scope.onLogout();
-
-        console.log(controller);
-
-        expect().not.toBeTruthy();
-
-    });
+    // it('check logout', function () {
+    //
+    //     var $scope = {};
+    //
+    //     var controller = $controller('projectRegController', {$scope: $scope});
+    //
+    //     $scope.onLogout();
+    //
+    //     console.log(controller);
+    //
+    //     expect().not.toBeTruthy();
+    //
+    // });
 
     it('check order', function () {
 
