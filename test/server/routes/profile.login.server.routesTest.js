@@ -9,20 +9,27 @@ var chai = require('chai');
 
 var supertest = require('supertest');
 
-// var request = require('request');
-
 var should = chai.should();
 
 var server;
 
+var Browser = require('zombie');
+//
+// Browser.extend(function(browser) {
+//     browser.on('authenticate', function (authentication) {
+//         authentication.Email = 'csejananim@gmail.com';
+//         authentication.Passwd = 'jananimanoharan#';
+//
+//     });
+// });
+
+before(function () {
+    server = require('../../../server').server;
+});
 
 describe("#Get User Details",function () {
 
     this.timeout(40000);
-
-    beforeEach(function () {
-        server = require('../../../server').server;
-    });
 
     it("should verify the user validity",function (done) {
 
@@ -30,7 +37,7 @@ describe("#Get User Details",function () {
             user : 'CBE001',
             password : 'Janani@1'
         };
-        
+
         supertest(server).post('/auth/verifyUser')
             .send(data)
             .end(function (error,results) {
@@ -49,33 +56,61 @@ describe("#Get User Details",function () {
 
     });
 
-    afterEach(function () {
-        server.close();
+});
+
+describe("login using social sites",function () {
+
+    this.timeout(40000);
+
+    it("should login with facebook",function (done) {
+
+        Browser.visit('http://127.0.0.1:3000/auth/facebook',function (err,brw) {
+
+            if(err){
+                throw err;
+            }
+
+            brw.fill('email','csejananim@gmail.com').fill('pass', 'jananimanoharan')
+                .pressButton('login', function (err,brow) {
+                    brw.assert.success();
+                    done();
+                });
+
+        });
+
     });
+
+    // it("should login with google",function (done) {
+    //
+    //     Browser.visit('http://127.0.0.1:3000/auth/google',function (err,brw) {
+    //
+    //         if(err){
+    //             throw err;
+    //         }
+    //
+    //         brw.assert.success(done());
+    //
+    //         //
+    //         // brw.fill('Email','csejananim@gmail.com').pressButton('signIn',function () {
+    //         //         brw.fill('Passwd', 'jananimanoharan#').pressButton('signIn',function (err,brow) {
+    //         //             // should.exist(brow);
+    //         //             // should.not.exist(err);
+    //         //             brw.assert.success();
+    //         //             done();
+    //         //         });
+    //         //     });
+    //
+    //     });
+    //
+    //
+    //
+    // });
+
 
 });
 
-// describe("#Login with social sites",function () {
-//     var j = request.jar();
-//     var requestWithCookie = request.defaults({jar: j});
-//
-//     this.timeout(40000);
-//
-//     beforeEach(function (done) {
-//         server = require('../../../server').server;
-//         requestWithCookie.post('http://localhost:3000/auth/facebook', {user: 'janani', password: 'janani'}, done);
-//     });
-//
-//     it("Should login with facebook",function(done){
-//         var data = {
-//             user : 'csejananim@gmail.com',
-//             password : ''
-//         };
-//         request.get('/auth/facebook', function (err, res, user) {
-//             done();
-//         });
-//     });
-// });
-//
-//
-//
+
+after(function () {
+    server.close();
+});
+

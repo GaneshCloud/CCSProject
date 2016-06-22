@@ -46,7 +46,9 @@
     "q": "^1.4.1",
     "request": "^2.72.0",
     "sloc": "^0.1.10",
-    "supertest": "^1.2.0"
+    "supertest": "^1.2.0",
+    "supertest-session": "^2.0.1",
+    "zombie": "^4.2.1"
   },
   "devDependencies": {
     "angular-mocks": "^1.5.6",
