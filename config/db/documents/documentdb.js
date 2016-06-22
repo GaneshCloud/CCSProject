@@ -167,6 +167,7 @@ this.getDocByType=function(ser,typeId,cb){
 
 this.getDocByTypeDep=function(ser,typeId,depId,cb){
 
+    
       var myErr=null,data=null;
       if(typeId==null || typeId=='' || depId==null || depId=='' ) return cb("error",data);
       var qry="SELECT A.ID as id,A.DOCCAPTION as docCaption,A.DOCTYPE as docType,A.DOCDEP as docDep,A.DOCKEY as docKey,A.DOCDESC as docDesc,A.DOCDATE as docDate,A.DOCFILE as docFile,A.DOCNOVIEWS as docNoViews,A.DOCNODOWN as docNoDown,B.DEP_ID,B.DEP_NAME,COALESCE(FLOOR(AVG(C.STARS)),0) as star FROM TBL_DOCUMENTS A LEFT OUTER join TBL_DEPARTMENT B on (A.DOCDEP=B.DEP_ID) LEFT OUTER JOIN  TBL_DOC_STARS C  on  A.ID=C.DOC_ID WHERE A.DOCTYPE="+typeId+ " AND A.DOCDEP="+depId+" AND A.DOCCAPTION LIKE '" + ser+ "%' GROUP BY C.doc_id,A.ID ORDER BY A.ID DESC";

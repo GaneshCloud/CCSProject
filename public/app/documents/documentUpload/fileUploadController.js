@@ -68,9 +68,9 @@
         };
 
 
-        $scope.singleFileUpload = function () {
-            uploadMultipleServices.singleFileUpload();
-        };
+        // $scope.singleFileUpload = function () {
+        //     uploadMultipleServices.singleFileUpload();
+        // };
 
 
         //Function for get the department

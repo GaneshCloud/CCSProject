@@ -2,8 +2,13 @@
  * Created by Administrator on 5/30/2016ss.
  */
 var expect = require('chai').expect;
+var   db= require('../../../config/db');
+var mysql=require('mysql');
 var controllerToTest = require('../../../controllers/documents.documentManager.server.controller.js');
 var documentService = require('../../../config/db/documents/documentdb');
+var   con=mysql.createConnection(db);
+var   docService=new documentService(con);
+var sinon = require('sinon');
 
 describe('documentList Controller', function() {
     describe('delete Document', function() {
@@ -57,7 +62,7 @@ describe('documentList Controller', function() {
         it('returns the result', function(done) {
             var req = {
                 body:{
-                    ID: 'abc'
+                    ID: "'"
                 }
             };
             // we provide the response object which the controller uses
@@ -138,7 +143,7 @@ describe('documentList Controller', function() {
             // we provide the response object which the controller uses
             var res = {
                 json: function(data) {
-                    
+
                 },end:function(data){
                     expect(data).to.be.equal('invalid');
                     expect(data).to.be.a('string');
@@ -150,8 +155,19 @@ describe('documentList Controller', function() {
 
     });
 
-    describe('search Document', function() {                                              //search document
+    describe.only('search Document', function() {//search document
+        // var stub1;
+        // beforeEach(function() {
+        //     stub1 = sinon.spy(docService, 'getDocByTypeDep');
+        // });
+        //
+        // afterEach(function() {
+        //     stub1.restore();  // this actually doesn't restore the myFunc function, only window.myFunc
+        //
+        // });
+
         it('returns the result', function(done) {
+
             var req = {
                 query:{
                     docType: '2',
@@ -169,7 +185,12 @@ describe('documentList Controller', function() {
 
                 }
             };
+
+            // stub1.callsArgWithAsync(3,"eror","erroeeee");
             controllerToTest.searchDocument(req,res); // call the function to be tested
+
+
+
         });
 
         it('returns the result', function(done) {

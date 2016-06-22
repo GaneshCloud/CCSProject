@@ -6,12 +6,18 @@ describe('Main Controller', function () {
     /*jshint expr:true */
     beforeEach(module('myApp'));
 
-    var $controller,uploadMultipleServices,dashboardService,documentObj,departmentServices;
+    var $controller,uploadMultipleServices,dashboardService,documentObj,departmentServices,windowObj;
     var $q;
     var deferred;
     beforeEach(module(function($provide) {
         documentObj = {forms: {frmDoc: {submit:function(){}}}};
+        windowObj={
+            location:{
+                pathname:'/documents/editDoc'
+            }
+        };
         $provide.value('document', documentObj);
+        $provide.value('window', windowObj);
     }));
 
     beforeEach(inject(function(_$controller_,_$rootScope_, _$q_, _fileUploadServices_,_departmentServices_,_dashboardService_,$httpBackend){
@@ -39,6 +45,7 @@ describe('Main Controller', function () {
     }));
 
         describe('multiple File Upload Controller', function () {
+
             it('check row increment', function () {
 
                 var length=$scope.rows.length;
@@ -51,8 +58,14 @@ describe('Main Controller', function () {
             // });
 
         describe('get department',function(){
+            it("getedit doc",function(){
+
+                $scope.$apply();
+                $scope.$digest();
+            });
 
             it('should resolve promise',inject(function ($httpBackend) {
+
                 $httpBackend.when("GET","/api/dep").respond("sample");
                 getDepartment();
                 deferred.resolve({data:[{id:1,DEP_NAME:'ABC'},{id:2,DEP_NAME:'xds'}]});
