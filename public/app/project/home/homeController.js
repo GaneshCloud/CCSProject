@@ -40,10 +40,6 @@
     };
 
     dashboardService.checkAdmin();
-    // $scope.projectData();
-    // $scope.projectHistory();
-    // $scope.chartData();
-    // $scope.imageData();
 
     $scope.onLogout = function() {
       if ($window.confirm('Are You Sure ! Do you need to Log Out?')) {
@@ -89,26 +85,6 @@
               console.log("kkkkk"+results.data);
                   total = results.data[0];
                    $scope.totalPercentage = total.per;
-                  // $scope.myDataSource = {
-                  //     chart: {
-                  //         caption: 'Last 4 Days',
-                  //         numberSuffix: '%',
-                  //         theme: 'ocean'
-                  //     },
-                  //     data: [{
-                  //         label: total[0].x,
-                  //         value: total[0].y
-                  //     }, {
-                  //         label: total[1].x,
-                  //         value: total[1].y
-                  //     }, {
-                  //         label: total[2].x,
-                  //         value: totala[2].y
-                  //     }, {
-                  //         label: total[3].x,
-                  //         value: total[3].y
-                  //     }]
-              //}
           }).catch(function(error) {
             console.log('Error');
           });
@@ -127,7 +103,7 @@
      homeService.postQuestion($scope.question)
             .then(function(results) {
               console.log('Data Inserted Successfully');
-              $window.alert('Data Inserted Successfully');
+              //$window.alert('Data Inserted Successfully');
               $scope.question = '';
             }).catch(function (error) {
               console.log('Error');
