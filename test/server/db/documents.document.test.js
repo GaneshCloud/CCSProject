@@ -203,7 +203,7 @@ console.log(con);
             });
 
             it("check with existing string id", function (done) {                            //check the string  id
-                var id={ID:'ABC'};
+                var id={ID:"'"};
                 testDocument.deleteDoc(id,function (err, data) {
                     console.log(err);
                     expect(err).to.be.an('null');

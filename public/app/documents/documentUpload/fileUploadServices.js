@@ -16,12 +16,6 @@
             getDocument: function (id) {
                 return $http.get('/api/docs/getDoc?id=' + id);
             },
-            // getDepartment: function () {
-            //     return $http.get('/api/dep');
-            // },
-            // singleFileUpload: function () {
-            //     $window.location.href = '/documents/singleFileUpload';
-            // },
             goToDashboard: function () {
                 $window.location.href = '/profile/dashboard';
             }

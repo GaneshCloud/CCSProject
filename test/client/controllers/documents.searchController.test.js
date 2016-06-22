@@ -98,6 +98,13 @@ describe('Search Controller', function () {
             $scope.$digest();
 
         }));
+        it('should resolve promise', function () {
+
+            $scope.searchData ();
+            deferred.resolve({data:[]});
+            expect($scope.noData).toBeTruthy;
+            $scope.$digest();
+        });
         it('should resolve promise',inject(function ($httpBackend) {
             $scope.searchData();
             deferred.reject();
@@ -106,6 +113,17 @@ describe('Search Controller', function () {
         }));
     });
 
+    describe('paginate',function(){
+
+        it('should resolve promise', function () {
+            $scope.curPage=1;
+            $scope.itemsPage=5;
+            var res=$scope.paginate({docCaption:'caption1',id:2},{docCaption:'caption2',id:2});
+            expect(res).not.toBeNull;
+
+        });
+
+    });
     describe('#search Controller', function () {
 
             beforeEach(inject(function ($rootScope, $controller, _documentSearchServices_) {
