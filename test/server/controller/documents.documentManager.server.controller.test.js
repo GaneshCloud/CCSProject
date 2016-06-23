@@ -180,7 +180,7 @@ describe('documentList Controller', function() {
             var res = {
                 end: function(data) {
                     expect(data).to.be.a("string");
-                    stub1.restore();
+                    // stub1.restore();
                     done();
                 },
                 writeHead:function(){
