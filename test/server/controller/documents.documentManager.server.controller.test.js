@@ -156,7 +156,7 @@ describe('documentList Controller', function() {
 
     });
 
-    describe.only('search Document', function() {//search document
+    describe('search Document', function() {//search document
 
         beforeEach(function() {
 
