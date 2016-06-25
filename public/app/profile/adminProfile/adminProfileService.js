@@ -8,26 +8,15 @@
 
     adminProfileService.$inject=[
         '$http',
-        '$window',
-        '$q'
+        '$window'
     ];
 
-    function adminProfileService($http, $window, $q) {
-        var httpPromise;
+    function adminProfileService($http, $window) {
         return {
 
             getUserDetails: function () {
-                var deferred = $q.defer();
 
-                httpPromise = $http.get('/getUserDetails');
-
-                httpPromise.then(function (response) {
-                    deferred.resolve(response);
-                }, function (error) {
-                    console.error(error);
-                });
-
-                return deferred.promise;
+               return $http.get('/getUserDetails');
             },
 
             goToAdminDashboard: function () {

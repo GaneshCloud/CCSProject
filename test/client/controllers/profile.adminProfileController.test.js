@@ -68,7 +68,7 @@ describe('#Admin Profile Controller', function () {
         it('should return local image path from user data', function () {
 
             var user = {
-                profile_pic : '1.jpg'
+                profilePic : '1.jpg'
             }
             var path = scope.getImageSrcProfile(user);
             expect(path).toBeDefined();
@@ -78,7 +78,7 @@ describe('#Admin Profile Controller', function () {
         it('should return facebook image path from user data', function () {
 
             var user = {
-                facebook_img : '1.jpg'
+                facebookImage : '1.jpg'
             }
             var path = scope.getImageSrcProfile(user);
             expect(path).toBeDefined();
@@ -88,7 +88,7 @@ describe('#Admin Profile Controller', function () {
         it('should return google image path from user data', function () {
 
             var user = {
-                google_img : '1.jpg'
+                googleImage: '1.jpg'
             }
             var path = scope.getImageSrcProfile(user);
             expect(path).toBeDefined();

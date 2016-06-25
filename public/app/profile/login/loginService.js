@@ -8,11 +8,10 @@
 
   loginService.$inject=[
     '$http',
-    '$window',
-      '$q'
+    '$window'
   ];
 
-  function loginService($http, $window,$q) {
+  function loginService($http, $window) {
     return {
 
       loginWithFacebook: function () {
@@ -29,9 +28,7 @@
 
       verifyUser: function (user, password) {
 
-        var defer = $q.defer();
-
-        $http({
+        return $http({
           method: 'post',
 
           url: '/auth/verifyUser',
@@ -43,29 +40,17 @@
 
           }
 
-        }).then(function (results) {
-          defer.resolve(results);
-        },function (error) {
-          defer.reject(error);
-          $window.location.href = '/error';
         });
-
-        return defer.promise;
       },
 
       checkUser: function () {
-          var dfr = $q.defer();
 
-          var httpPromise = $http({
+          return $http({
             method: 'get',
 
             url: '/getLoggedInUser'
 
-          });
-
-          httpPromise.then(function (response) {
-            dfr.resolve(response);
-
+          }).then(function (response) {
             if(response.data.userType){
               localStorage.setItem('userType',response.data.userType);
               $window.location.href = '/profile/dashboard';
@@ -75,7 +60,6 @@
             console.error(error);
           });
 
-          return dfr.promise;
         }
 
     };

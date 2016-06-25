@@ -11,12 +11,10 @@
 
     dashboardService.$inject=[
         '$http',
-        '$window',
-        '$q'
+        '$window'
     ];
 
-    function dashboardService($http, $window, $q) {
-        var httpPromise;
+    function dashboardService($http, $window) {
         return {
 
             // pageReload: function () {
@@ -65,18 +63,13 @@
             },
 
             checkAdmin: function () {
-                var dfr = $q.defer();
 
-                httpPromise = $http({
+                return $http({
                     method: 'get',
 
                     url: '/getLoggedInUser'
 
-                });
-
-                httpPromise.then(function (response) {
-                    dfr.resolve(response);
-
+                }).then(function (response) {
                     if(response.data.userType){
                         localStorage.setItem('userType',response.data.userType);
                     }else {
@@ -88,7 +81,6 @@
                     console.error(error);
                 });
 
-                return dfr.promise;
             }
 
         };

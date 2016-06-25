@@ -56,11 +56,13 @@
       spinnerService.show('html5spinner');
       console.log('username --->' + user);
       // console.log("data"+loginService.verifyUser(user.$viewValue, password.$modelValue) );
-      if(loginService.verifyUser(user.$viewValue, password.$modelValue) !== ''){
-        loginService.dashboard();
-      }else {
-        $scope.loginPageWithError();
-      }
+      loginService.verifyUser(user.$viewValue,password.$modelValue).then(function (result) {
+        if(result !== ''){
+          loginService.dashboard();
+        }else {
+          $scope.loginPageWithError();
+        }
+      });
 
     };
 

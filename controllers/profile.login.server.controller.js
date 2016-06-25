@@ -70,7 +70,6 @@ router.post('/verifyUser',function(req,res) {
         .then(function(results) {
           if (results && (results.length > 0)) {
             req.session.data = results[0];
-              console.log("req.session.data"+JSON.stringify(req.session.data));
             res.send(results[0]);
           }
         },function (error) {
