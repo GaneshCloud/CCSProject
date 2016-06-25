@@ -78,6 +78,14 @@ describe('Main Controller', function () {
                 expect($scope.dep).toBeObject;
                 $scope.$digest();
             });
+
+            it('should resolve promise', function () {
+
+                $scope.searchData ();
+                deferred.resolve({data:[]});
+                expect($scope.noData).toBeTruthy;
+                $scope.$digest();
+            });
             it('should resolve promise',function () {
                 $scope.searchData ();
                 deferred.reject();
@@ -184,6 +192,18 @@ describe('Main Controller', function () {
                 expect($scope.rateInfo).toBeArray;
                 $scope.$digest();
             });
+        });
+
+        describe('paginate',function(){
+
+            it('should resolve promise', function () {
+                $scope.curPage=1;
+                $scope.itemsPage=5;
+                var res=$scope.paginate({docCaption:'caption1',id:2},{docCaption:'caption2',id:2});
+                expect(res).not.toBeNull;
+
+            });
+
         });
 
     describe("Oreder Function",function () {

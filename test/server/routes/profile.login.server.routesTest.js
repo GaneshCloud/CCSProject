@@ -70,7 +70,7 @@ describe("login using social sites",function () {
                 throw err;
             }
 
-            brw.fill('email','csejananim@gmail.com').fill('pass', 'jananimanoharan')
+            brw.fill('email','csejananim@gmail.com').fill('pass', 'janumanoharan')
                 .pressButton('login', function (err,brow) {
                     brw.assert.success();
                     done();

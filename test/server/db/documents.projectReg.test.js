@@ -42,8 +42,8 @@ describe('bring the data from the DB',function(){
 
             expect(result).to.be.error;
 
-        });
 
+        });
         done();
     });
 
