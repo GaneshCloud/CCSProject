@@ -11,71 +11,39 @@
 
   function forumService($http,$q,$window) {
     return {
-      
+
       goToDashboard: function () {
         $window.location.href = '/profile/dashboard';
       },
 
       getForumData: function (type) {
-        var defer = $q.defer();
-        var httpPromise = $http.get('/forum/getForum?type=' + type);
-        httpPromise.then(function (response) {
-          defer.resolve(response);
-        }, function (error) {
-          defer.reject(error);
-          throw error;
-        });
-        return defer.promise;
+        return $http.get('/forum/getForum?type=' + type);
       },
-      
+
       postForumQuestion: function (data) {
-        var defer = $q.defer();
-        var httpPromise = $http({
+
+        return $http({
           method: 'post',
           url: '/forum/postForumquestion',
           data: data
         });
-        httpPromise.then(function (data) {
-          defer.resolve(data);
-        },function (error) {
-          defer.reject(error);
-          throw error;
-        });
-        return defer.promise;
       },
 
       postStar: function (data) {
-        var defer = $q.defer();
-        var httpPromise = $http({
+        return $http({
           method: 'post',
           url: '/forum/rating',
           data: data
         });
-        httpPromise.then(function (data) {
-          defer.resolve(data);
-        }, function (error) {
-
-          defer.reject(error);
-          throw error;
-        });
-        return defer.promise;
       },
 
       postAnswer: function (input) {
-        var defer = $q.defer();
-        var httpPromise = $http({
+        return $http({
           method: 'post',
           data: input,
           url: '/forum/postAnswer'
         });
-        httpPromise.then(function (res) {
-          defer.resolve(res);
-        }, function (error) {
-          defer.reject(error);
-          throw error;
-        });
-        return defer.promise;
       }
-    };
+    }
   }
 })();
