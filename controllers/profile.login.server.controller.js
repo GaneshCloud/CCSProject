@@ -71,6 +71,8 @@ router.post('/verifyUser',function(req,res) {
           if (results && (results.length > 0)) {
             req.session.data = results[0];
             res.send(results[0]);
+          }else{
+              res.send('Warning');
           }
         },function (error) {
             res.status(500);

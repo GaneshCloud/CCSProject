@@ -57,10 +57,10 @@
       console.log('username --->' + user);
       // console.log("data"+loginService.verifyUser(user.$viewValue, password.$modelValue) );
       loginService.verifyUser(user.$viewValue,password.$modelValue).then(function (result) {
-        if(result !== ''){
-          loginService.dashboard();
-        }else {
+        if(result.data === 'Warning'){
           $scope.loginPageWithError();
+        }else {
+          loginService.dashboard();
         }
       });
 
