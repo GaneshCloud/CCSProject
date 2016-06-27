@@ -68,7 +68,7 @@
       },function (error) {
 
         if(error){
-          loginService.showError(error);
+          loginService.showError(error.data);
         }
       });
 

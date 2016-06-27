@@ -11,6 +11,10 @@ exports.getUserDetails = function(req,res) {
                 req.session.userDetails = results;
                 res.end(JSON.stringify(results));
               }
+            },function (error) {
+                if(error){
+                    res.send(500,{ error: error });
+                }
             });
 
 };
