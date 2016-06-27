@@ -18,13 +18,13 @@ function getUserValidity(userid, password) {
     qry += " p.branch as branch, p.year as year, p.project_fee as projectFees, p.fees_paid as feesPaid, ";
     qry += " p.fees_balance as feesBalance, p.profile_pic as profilePic, p.facebook_img as facebookImage,";
     qry += " p.google_img as googleImage from personaldata as p where p.userid = '"+userid+"' and p.password = '"+password+"'";
-    qry += " and p.status = 'active'";
+    qry += " and status = 'active'";
 
 
    con.query(qry, function(error, results) {
     if (error) {
       console.error(error);
-      throw error;
+      return deferred.reject(error);
     }
     deferred.resolve(results);
   });

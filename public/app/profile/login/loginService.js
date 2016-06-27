@@ -43,6 +43,11 @@
         });
       },
 
+      showError:function (error) {
+        localStorage.setItem('error',JSON.stringify(error.data.error));
+        $window.location.href = '/error/message';
+      },
+
       checkUser: function () {
 
           return $http({
