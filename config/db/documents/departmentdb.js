@@ -1,6 +1,11 @@
-module.exports = function(con){
 
-this.getAllDep = function (cb){
+var mysql=require('mysql');
+var   db= require('../../db');
+var   con=mysql.createConnection(db);
+
+// module.exports = function(con){
+
+exports.getAllDep = function (cb){
   
       var result=null,myErr=null;
 
@@ -20,7 +25,7 @@ this.getAllDep = function (cb){
 
 };
 
-this.getDepById = function (id,cb){
+exports.getDepById = function (id,cb){
   
       var result=null,myErr=null;
       if(id==null || id=='') return cb("error",result);
@@ -40,4 +45,4 @@ this.getDepById = function (id,cb){
  };
 
 
-};
+// };

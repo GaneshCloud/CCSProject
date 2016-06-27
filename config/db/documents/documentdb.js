@@ -1,9 +1,16 @@
-module.exports = function(con){
+
+
+var mysql=require('mysql');
+var fs=require('fs');
+var   db= require('../../db');
+var   con=mysql.createConnection(db);
+
+// module.exports = function(con){
 
 //var techDocument=require("../models/document");
 
 
-this.insertDoc=function(data,cb){
+exports.insertDoc=function(data,cb){
 
       var myErr=null,insertId=null;
       var qry="INSERT INTO TBL_DOCUMENTS SET ? ";
@@ -25,7 +32,7 @@ this.insertDoc=function(data,cb){
 
 
 
-this.getAllDoc=function(ser,cb){
+exports.getAllDoc=function(ser,cb){
 
       var myErr=null,data=null;
       var qry="SELECT A.ID as id,A.DOCCAPTION as docCaption,A.DOCTYPE as  docType,A.DOCDEP as docDep,A.DOCKEY as docKey,A.DOCDESC as docDesc,A.DOCDATE as docDate,A.DOCFILE as docFile,A.DOCNOVIEWS as docNoViews,A.DOCNODOWN as docNoDown,B.DEP_ID,B.DEP_NAME,COALESCE(FLOOR(AVG(C.STARS)),0) as star FROM TBL_DOCUMENTS A LEFT OUTER join TBL_DEPARTMENT B on (A.DOCDEP=B.DEP_ID) LEFT OUTER JOIN  TBL_DOC_STARS C  on  A.ID=C.DOC_ID WHERE A.DOCCAPTION LIKE '" + ser+ "%' GROUP BY A.id ORDER BY A.ID DESC";
@@ -45,7 +52,7 @@ this.getAllDoc=function(ser,cb){
    });
 };
 
-this.updateDoc=function(id,uData,cb){
+exports.updateDoc=function(id,uData,cb){
 
       var myErr=null,data=null;
       var qry="UPDATE TBL_DOCUMENTS SET ? WHERE ID="+id;
@@ -64,7 +71,7 @@ this.updateDoc=function(id,uData,cb){
    });
 };
 
-this.deleteDoc=function(id,cb){
+exports.deleteDoc=function(id,cb){
 
      var myErr=null,data=null;
      var objectConstructor = {}.constructor;
@@ -93,7 +100,7 @@ this.deleteDoc=function(id,cb){
    });
 };
 
-this.getDocById=function(id,nextPrev,cb){
+exports.getDocById=function(id,nextPrev,cb){
 
     var myErr=null,data=null,qry;
     if( id===null || id==='') return cb("error",data);
@@ -121,7 +128,7 @@ this.getDocById=function(id,nextPrev,cb){
 
 };
 
-this.getDocByDep=function(ser,depId,cb){
+exports.getDocByDep=function(ser,depId,cb){
 
       var myErr=null,data=null;
 
@@ -143,7 +150,7 @@ this.getDocByDep=function(ser,depId,cb){
 
 };
 
-this.getDocByType=function(ser,typeId,cb){
+exports.getDocByType=function(ser,typeId,cb){
 
       var myErr=null,data=null;
 
@@ -165,9 +172,8 @@ this.getDocByType=function(ser,typeId,cb){
 
 };
 
-this.getDocByTypeDep=function(ser,typeId,depId,cb){
+exports.getDocByTypeDep=function(ser,typeId,depId,cb){
 
-    
       var myErr=null,data=null;
       if(typeId==null || typeId=='' || depId==null || depId=='' ) return cb("error",data);
       var qry="SELECT A.ID as id,A.DOCCAPTION as docCaption,A.DOCTYPE as docType,A.DOCDEP as docDep,A.DOCKEY as docKey,A.DOCDESC as docDesc,A.DOCDATE as docDate,A.DOCFILE as docFile,A.DOCNOVIEWS as docNoViews,A.DOCNODOWN as docNoDown,B.DEP_ID,B.DEP_NAME,COALESCE(FLOOR(AVG(C.STARS)),0) as star FROM TBL_DOCUMENTS A LEFT OUTER join TBL_DEPARTMENT B on (A.DOCDEP=B.DEP_ID) LEFT OUTER JOIN  TBL_DOC_STARS C  on  A.ID=C.DOC_ID WHERE A.DOCTYPE="+typeId+ " AND A.DOCDEP="+depId+" AND A.DOCCAPTION LIKE '" + ser+ "%' GROUP BY C.doc_id,A.ID ORDER BY A.ID DESC";
@@ -188,7 +194,7 @@ this.getDocByTypeDep=function(ser,typeId,depId,cb){
 
 };
 
-this.incrViews=function(id,cb){
+exports.incrViews=function(id,cb){
 
      var myErr=null,data=null;
      if(id==null || id=='') return cb("error",data);
@@ -341,4 +347,4 @@ this.getLatestArchives=function(id,cb){
 //
 // };
 
-};
+// };

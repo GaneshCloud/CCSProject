@@ -1,38 +1,42 @@
 
 
-var mysql=require('mysql'),
-    path = require('path'),
+var path = require('path'),
     fs=require("fs"),
     admZip = require('adm-zip'),
-    db= require('../config/db'),
-    serDocument= require('../config/db/documents/documentdb'),
-    con=mysql.createConnection(db),
-    docService=new serDocument(con),
-    unZipFile=function(){};
+    docService= require('../config/db/documents/documentdb');
+    
 
 
     unZipFile=function(id,cb){
 
-            var sync=false;
+            // var sync=false;
             var files=[];
             var fileName="";
 
             docService.getDocById(id,0,function(err,data){
-                if(data.length<=0) cb("NoData",files);
-            fileName=data[0].docFile;
-            var ext = fileName.substring(fileName.lastIndexOf('.') + 1);
-            var zip = new admZip(__dirname+"/../public/uploads/documents/"+id+"."+ext);
-            var zipEntries = zip.getEntries();
-            zipEntries.forEach(function(zipEntry) {
-            files.push({file : zipEntry.entryName}) ;
-            });
-            sync=true;
+                if(data.length<=0) {
+                    cb("NoData",files);
+                }
+
+                else{
+                    fileName=data[0].docFile;
+                    var ext = fileName.substring(fileName.lastIndexOf('.') + 1);
+                    var zip = new admZip(__dirname+"/../public/uploads/documents/"+id+"."+ext);
+                    var zipEntries = zip.getEntries();
+                    zipEntries.forEach(function(zipEntry) {
+                        files.push({file : zipEntry.entryName}) ;
+                    });
+                    cb("success",files);
+                }
+
+            // sync=true;
 
             });
-            while(!sync) {
-            require('deasync').sleep(1000);
-                cb("success",files);
-            }
+            // while(!sync) {
+            // require('deasync').sleep(1000);
+            //     cb("success",files);
+            // }
+
 
     };
 
@@ -41,7 +45,10 @@ var mysql=require('mysql'),
 
         if(id==='' || id===null || isNaN(id)) return res.end("invalid");
         docService.incrViews(id,function(err){
-           if(err) throw err;
+           if(err){
+               res.end({error:err});
+           }
+            else
             res.end("valid");
         });
 
@@ -65,11 +72,13 @@ var mysql=require('mysql'),
         filename=data[0].docFile;
         ext = filename.substring(filename.lastIndexOf('.') + 1);
         docService.incrDown(id,function(err,res){
-        if(err) throw err;
+            if(err){
+                resp.end({error:err});
+            }
         else
         {
-          console.log(res);
-        }
+          // console.log(res);
+
 
               fs.access(__dirname+"/../public/uploads/documents/"+id+"."+ext, fs.F_OK, function(err) {
                 if (!err) {
@@ -79,6 +88,7 @@ var mysql=require('mysql'),
                 }
 
               });
+        }
 
         });
 
@@ -91,8 +101,10 @@ var mysql=require('mysql'),
         if(id==='' || id===null || isNaN(id)) return res.end("invalid");
 
       docService.getDocById(id,1,function(err,data){
-          if(err) throw err;
-          res.end(JSON.stringify(data));
+          if(err){
+              res.end({error:err});
+          }else
+            res.end(JSON.stringify(data));
 
     });
 
@@ -104,8 +116,10 @@ var mysql=require('mysql'),
         if(id==='' || id===null || isNaN(id)) return res.end("invalid");
 
       docService.getDocById(id,-1,function(err,data){
-          if(err) throw err;
-          res.end(JSON.stringify(data));
+          if(err){
+              res.end({error:err});
+          }else
+            res.end(JSON.stringify(data));
 
     });
 

@@ -3,15 +3,13 @@
  */
 
 var expect = require('chai').expect;
-var db= require('../../../config/db');
-var mysql=require('mysql');
 var controllerToTest = require('../../../controllers/documents.documentManager.server.controller.js');
-var documentService = require('../../../config/db/documents/documentdb');
-var con=mysql.createConnection(db);
-var docService=new documentService(con);
-// var sinon = require('sinon');
+var docService=require('../../../config/db/documents/documentdb');
+var sinon = require('sinon');
+var error = new Error('some error occured');
 
 describe('documentList Controller', function() {
+
     describe('delete Document', function() {
         it('returns the result', function(done) {
             var req = {
@@ -98,6 +96,29 @@ describe('documentList Controller', function() {
         });
 
         it('returns the result', function(done) {
+            var stub=sinon.stub(docService,"getDocById");
+            var req = {
+                query:{
+                    id: 508
+                }
+            };
+            // we provide the response object which the controller uses
+            var res = {
+                json: function(data) {
+                    expect(data).to.be.an("object");
+                    stub.restore();
+                    done();
+                },
+                end:function(data){
+
+                }
+            };
+            stub.callsArgWithAsync(2,error,null);
+            controllerToTest.getDocument(req,res); // call the function to be tested
+        });
+
+        it('returns the result', function(done) {
+            var stub=sinon.stub(docService,"getDocById");
             var req = {
                 query:{
                     id: ''
@@ -111,13 +132,16 @@ describe('documentList Controller', function() {
                 },end:function(data){
                     expect(data).to.be.equal('invalid');
                     expect(data).to.be.a('string');
+                    stub.restore();
                     done();
                 }
             };
+            stub.callsArgWithAsync(2,null,[]);
             controllerToTest.getDocument(req,res); // call the function to be tested
         });
 
         it('returns the result', function(done) {
+            var stub=sinon.stub(docService,"getDocById");
             var req = {
                 query:{
                     id:null
@@ -130,12 +154,15 @@ describe('documentList Controller', function() {
                 },end:function(data){
                     expect(data).to.be.equal('invalid');
                     expect(data).to.be.a('string');
+                    stub.restore();
                     done();
                 }
             };
+            stub.callsArgWithAsync(2,null,[]);
             controllerToTest.getDocument(req,res); // call the function to be tested
         });
         it('returns the result', function(done) {
+            var stub=sinon.stub(docService,"getDocById");
             var req = {
                 query:{
                     id: 'abc'
@@ -148,9 +175,74 @@ describe('documentList Controller', function() {
                 },end:function(data){
                     expect(data).to.be.equal('invalid');
                     expect(data).to.be.a('string');
+                    stub.restore();
                     done();
                 }
             };
+            stub.callsArgWithAsync(2,null,[]);
+            controllerToTest.getDocument(req,res); // call the function to be tested
+        });
+
+        it('returns the result', function(done) {
+            var stub=sinon.stub(docService,"getDocById");
+            var req = {
+                query:{
+                    id: '502'
+                }
+            };
+            // we provide the response object which the controller uses
+            var res = {
+                json: function(data) {
+                    expect(data[0].isFileExist).to.be.false;
+                    stub.restore();
+                    done();
+                },end:function(data){
+
+                }
+            };
+            stub.callsArgWithAsync(2,null,[{id:2,docCaption:'sample1',docFile:"2"}]);
+            controllerToTest.getDocument(req,res); // call the function to be tested
+        });
+        it('returns the result', function(done) {
+            var stub=sinon.stub(docService,"getDocById");
+            var req = {
+                query:{
+                    id: '506'
+                }
+            };
+            // we provide the response object which the controller uses
+            var res = {
+                json: function(data) {
+                    expect(data[0].isFileExist).to.be.true;
+                    stub.restore();
+                    done();
+                },end:function(data){
+
+                }
+            };
+            stub.callsArgWithAsync(2,null,[{ID:506,docCaption:'sample1',docFile:"ss.zip"}]);
+            controllerToTest.getDocument(req,res); // call the function to be tested
+        });
+
+        it('returns the result', function(done) {
+            var stub=sinon.stub(docService,"getDocById");
+            var req = {
+                query:{
+                    id: '502'
+                }
+            };
+            // we provide the response object which the controller uses
+            var res = {
+                json: function(data) {
+
+                },end:function(data){
+                    expect(data).to.be.equal('invalid');
+                    expect(data).to.be.a('string');
+                    stub.restore();
+                    done();
+                }
+            };
+            stub.callsArgWithAsync(2,null,[]);
             controllerToTest.getDocument(req,res); // call the function to be tested
         });
 
@@ -158,17 +250,34 @@ describe('documentList Controller', function() {
 
     describe('search Document', function() {//search document
 
-        beforeEach(function() {
+        it('returns the result', function(done) {
+           var stub = sinon.stub(docService, 'getDocByTypeDep');
+            var req = {
+                query:{
+                    docType: '2',
+                    dep:'4',
+                    serStr:"a"
+                }
+            };
+            // we provide the response object which the controller uses
+            var res = {
+                end: function(data) {
+                    expect(data).to.be.an("object");
+                    stub.restore();
+                    done();
+                },
+                writeHead:function(){
 
-        });
-
-        afterEach(function() {
-             // this actually doesn't restore the myFunc function, only window.myFunc
+                }
+            };
+            var error = new Error('some error occured');
+                stub.callsArgWithAsync(3,error,null);
+                controllerToTest.searchDocument(req,res); // call the function to be tested
 
         });
 
         it('returns the result', function(done) {
-            // var stub1 = sinon.stub(docService, 'getDocByTypeDep');
+            var stub = sinon.stub(docService, 'getDocByTypeDep');
             var req = {
                 query:{
                     docType: '2',
@@ -180,22 +289,45 @@ describe('documentList Controller', function() {
             var res = {
                 end: function(data) {
                     expect(data).to.be.a("string");
-                    // stub1.restore();
+                    stub.restore();
                     done();
                 },
                 writeHead:function(){
 
                 }
             };
-            // var error = new Error('Authentication failed.');
-            // stub1.callsArgWithAsync(3,error,error);
+            stub.callsArgWithAsync(3,null,{id:1,docCaption:"sample1"});
             controllerToTest.searchDocument(req,res); // call the function to be tested
-
-
 
         });
 
         it('returns the result', function(done) {
+            var stub = sinon.stub(docService, 'getAllDoc');
+            var req = {
+                query:{
+                    docType: '-1',
+                    dep:'-1',
+                    serStr:"a"
+                }
+            };
+            // we provide the response object which the controller uses
+            var res = {
+                end: function(data) {
+                    expect(data).to.be.an("object");
+                    stub.restore();
+                    done();
+                },
+                writeHead:function(){
+
+                }
+            };
+
+            stub.callsArgWithAsync(1,error,null);
+            controllerToTest.searchDocument(req,res); // call the function to be tested
+        });
+
+        it('returns the result', function(done) {
+            var stub = sinon.stub(docService, 'getAllDoc');
             var req = {
                 query:{
                     docType: '-1',
@@ -207,16 +339,44 @@ describe('documentList Controller', function() {
             var res = {
                 end: function(data) {
                     expect(data).to.be.a("string");
+                    stub.restore();
                     done();
                 },
                 writeHead:function(){
 
                 }
             };
+
+            stub.callsArgWithAsync(1,null,{id:1,docCaption:"sample1"});
             controllerToTest.searchDocument(req,res); // call the function to be tested
         });
 
         it('returns the result', function(done) {
+            var stub = sinon.stub(docService, 'getDocByType');
+            var req = {
+                query:{
+                    docType: '2',
+                    dep:'-1',
+                    serStr:"a"
+                }
+            };
+            // we provide the response object which the controller uses
+            var res = {
+                end: function(data) {
+                    expect(data).to.be.an("object");
+                    stub.restore();
+                    done();
+                },
+                writeHead:function(){
+
+                }
+            };
+            stub.callsArgWithAsync(2,error,null);
+            controllerToTest.searchDocument(req,res); // call the function to be tested
+        });
+
+        it('returns the result', function(done) {
+            var stub = sinon.stub(docService, 'getDocByType');
             var req = {
                 query:{
                     docType: '2',
@@ -228,16 +388,43 @@ describe('documentList Controller', function() {
             var res = {
                 end: function(data) {
                     expect(data).to.be.a("string");
+                    stub.restore();
                     done();
                 },
                 writeHead:function(){
 
                 }
             };
+            stub.callsArgWithAsync(2,null,{id:1,docCaption:"sample1"});
             controllerToTest.searchDocument(req,res); // call the function to be tested
         });
 
+
         it('returns the result', function(done) {
+            var stub = sinon.stub(docService, 'getDocByDep');
+            var req = {
+                query:{
+                    docType: '-1',
+                    dep:'1',
+                    serStr:"a"
+                }
+            };
+            // we provide the response object which the controller uses
+            var res = {
+                end: function(data) {
+                    expect(data).to.be.an("object");
+                    stub.restore();
+                    done();
+                },
+                writeHead:function(){
+
+                }
+            };
+            stub.callsArgWithAsync(2,error,null);
+            controllerToTest.searchDocument(req,res); // call the function to be tested
+        });
+        it('returns the result', function(done) {
+            var stub = sinon.stub(docService, 'getDocByDep');
             var req = {
                 query:{
                     docType: '-1',
@@ -249,12 +436,14 @@ describe('documentList Controller', function() {
             var res = {
                 end: function(data) {
                     expect(data).to.be.a("string");
+                    stub.restore();
                     done();
                 },
                 writeHead:function(){
 
                 }
             };
+            stub.callsArgWithAsync(2,null,{id:1,docCaption:'sample1'});
             controllerToTest.searchDocument(req,res); // call the function to be tested
         });//this
 
@@ -272,6 +461,7 @@ describe('documentList Controller', function() {
 
                     expect(data).to.be.equal('invalid');
                     expect(data).to.be.a('string');
+
                     done();
                 },
                 writeHead:function(){

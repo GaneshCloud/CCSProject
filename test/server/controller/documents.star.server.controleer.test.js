@@ -9,11 +9,15 @@
 
 var expect = require('chai').expect;
 var controllerToTest = require('../../../controllers/documents.star.server.controller');
+var serReatingObj= require('../../../config/db/documents/ratingdb');
+var sinon=require("sinon");
+var error=new Error("some error occured");
 
 
 describe("Star controller",function () {
     describe('set star Document', function() {                                              //search document
         it('returns the result', function(done) {
+            var stub=sinon.stub(serReatingObj,"setStar");
             var req = {
                 body:{
                     DOC_ID:2
@@ -29,11 +33,38 @@ describe("Star controller",function () {
                 end: function(data) {
                     expect(data).to.be.a("string");
                     expect(data).to.be.equal("valid");
+                    stub.restore();
                     done();
                 }
             };
+            stub.callsArgWithAsync(1,null,2);
             controllerToTest.setStar(req,res); // call the function to be tested
         });
+
+        it('returns the result', function(done) {
+            var stub=sinon.stub(serReatingObj,"setStar");
+            var req = {
+                body:{
+                    DOC_ID:2
+                },
+                session:{
+                    data:{
+                        id:1
+                    }
+                }
+            };
+            // we provide the response object which the controller uses
+            var res = {
+                end: function(data) {
+                    expect(data).to.be.an("object");
+                    stub.restore();
+                    done();
+                }
+            };
+            stub.callsArgWithAsync(1,error,null);
+            controllerToTest.setStar(req,res); // call the function to be tested
+        });
+
 
         it('returns the result', function(done) {
             var req = {
@@ -111,8 +142,11 @@ describe("Star controller",function () {
         // });
     });
 
-    describe('get star Document', function() {                                              //search document
+    describe('get star Document', function() {//search document
+
+
         it('returns the result', function(done) {
+            var stub=sinon.stub(serReatingObj,"getStar");
             var req = {
                 query:{
                     DOC_ID:2
@@ -122,10 +156,30 @@ describe("Star controller",function () {
             var res = {
                 end: function(data) {
                     expect(data).to.be.a("string");
-                    expect(data).to.be.a('string');
+                    stub.restore();
                     done();
                 }
             };
+            stub.callsArgWithAsync(1,null,{id:1,dtar:2});
+            controllerToTest.getStar(req,res); // call the function to be tested
+        });
+
+        it('returns the result', function(done) {
+            var stub=sinon.stub(serReatingObj,"getStar");
+            var req = {
+                query:{
+                    DOC_ID:2
+                }
+            };
+            // we provide the response object which the controller uses
+            var res = {
+                end: function(data) {
+                    expect(data).to.be.an("object");
+                    stub.restore();
+                    done();
+                }
+            };
+            stub.callsArgWithAsync(1,error,null);
             controllerToTest.getStar(req,res); // call the function to be tested
         });
 
@@ -149,6 +203,7 @@ describe("Star controller",function () {
 
                 }
             };
+            
             controllerToTest.getStar(req,res); // call the function to be tested
         });
 
@@ -198,6 +253,7 @@ describe("Star controller",function () {
 
     describe('get star info', function() {                                              //search document
         it('returns the result', function(done) {
+            var stub=sinon.stub(serReatingObj,"getStarInfo");
             var req = {
                 query:{
                     id:2
@@ -208,9 +264,30 @@ describe("Star controller",function () {
                 end: function(data) {
                     expect(data).to.be.a("string");
                     expect(data).to.be.a('string');
+                    stub.restore();
                     done();
                 }
             };
+            stub.callsArgWithAsync(1,null,{id:1,dtar:2});
+            controllerToTest.getRatingInfo(req,res); // call the function to be tested
+        });
+
+        it('returns the result', function(done) {
+            var stub=sinon.stub(serReatingObj,"getStarInfo");
+            var req = {
+                query:{
+                    id:2
+                }
+            };
+            // we provide the response object which the controller uses
+            var res = {
+                end: function(data) {
+                    expect(data).to.be.an("object");
+                    stub.restore();
+                    done();
+                }
+            };
+            stub.callsArgWithAsync(1,error,null);
             controllerToTest.getRatingInfo(req,res); // call the function to be tested
         });
 

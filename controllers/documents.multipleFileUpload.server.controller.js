@@ -1,10 +1,7 @@
 var path = require('path'),
-     mysql = require('mysql'),
     fs = require('fs'),
-    db = require('../config/db'),
-    serDocument = require('../config/db/documents/documentdb'),
-    con = mysql.createConnection(db),
-    docService = new serDocument(con);
+    docService = require('../config/db/documents/documentdb');
+
 
 
 
@@ -17,8 +14,7 @@ exports.uploadMultiple = function(req,res) {
   var formidable = require('formidable');
   // console.log(req.body);
   var sync = false;
-  var insertCallback = function () {
-  };
+  var insertCallback;
   var insertId = null;
   var i = 0;
   var ext;
@@ -26,9 +22,10 @@ exports.uploadMultiple = function(req,res) {
     insertId = insId;
     fs.createReadStream(files1['docFile' + i].path).pipe(fs.createWriteStream(__dirname + '/../public/uploads/documents/' + files1['docFile' + i].name));
     fs.rename(__dirname + '/../public/uploads/documents/' + files1['docFile' + i].name, __dirname + '/../public/uploads/documents/' + insertId + ext, function (err) {
-      if (err) throw err;
-      console.log(err);
+      if (err) {
+        res.end({error:err});
 
+      }
       sync = true;
     });
   };
@@ -37,7 +34,7 @@ exports.uploadMultiple = function(req,res) {
   var form = new formidable.IncomingForm(),
       files1 = {},
       fields = {};
-  
+
 
 
   form.parse(req, function (err, fields, files) {
