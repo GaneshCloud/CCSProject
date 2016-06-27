@@ -45,7 +45,7 @@ describe('#Login Controller', function () {
 
 
         $httpBackend.when("GET","/getLoggedInUser").respond("sample");
-        spyOn(loginService, 'verifyUser').and.returnValue();
+        spyOn(loginService, 'verifyUser').and.returnValue(deferred.promise);
         spyOn(loginService, 'dashboard').and.returnValue();
         spyOn(loginService, 'loginWithGoogle').and.returnValue();
         spyOn(loginService, 'loginWithFacebook').and.returnValue();
@@ -77,8 +77,14 @@ describe('#Login Controller', function () {
             // var controller = loginController();
 
             scope.submit('CBE001','Janani@1');
-            expect(loginService.verifyUser).toHaveBeenCalled();
-            expect(loginService.dashboard).toHaveBeenCalled();
+
+            deferred.resolve();
+            scope.$apply();
+
+            scope.submit('CBE001','Janani@1');
+
+            deferred.resolve({id:1});
+            scope.$apply();
 
         });
 
@@ -108,10 +114,55 @@ describe('#Login Controller', function () {
         });
     });
 
-    describe('#should check admin',function () {
+    describe('#should check validity',function () {
 
-        it('Check Admin',function () {
+        it('should return input validity',function () {
 
+            var data = {
+                $valid:true
+            }
+
+            var value = scope.isInputValid(data);
+
+            expect(value).toEqual(true);
+
+        });
+
+        it('should return input invalid',function () {
+
+            var data = {
+                $invalid:true,
+                $dirty:true
+            }
+
+            var value = scope.isInputInvalid(data);
+
+            expect(value).toEqual(true);
+
+        });
+
+        it('should return password validity',function () {
+
+            var data = {
+                $valid:true
+            }
+
+            var value = scope.isPasswordValid(data);
+
+            expect(value).toEqual(true);
+
+        });
+
+        it('should return password invalid',function () {
+
+            var data = {
+                $invalid:true,
+                $dirty:true
+            }
+
+            var value = scope.isPasswordInvalid(data);
+
+            expect(value).toEqual(true);
 
         });
 

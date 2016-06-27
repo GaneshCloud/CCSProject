@@ -63,13 +63,13 @@
 
         };
         
-        function checkUserType() {
+        $scope.checkUserType = function () {
             
             dashboardService.checkAdmin();
             
         }
         
-        checkUserType();
+        $scope.checkUserType();
 
     }
 })();

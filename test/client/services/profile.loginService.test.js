@@ -51,7 +51,7 @@ describe('loginService',function(){
         it('Check User',inject(function($httpBackend){
             $httpBackend
                 .when('GET','/getLoggedInUser')
-                .respond(200, {config: {data: {userType:'admin'}}});
+                .respond(200, {response: {data: {userType:'admin'}}});
             var res=$factory.checkUser();
             expect($httpBackend.flush).not.toThrow();
 

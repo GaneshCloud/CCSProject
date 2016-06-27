@@ -305,17 +305,17 @@
 
             if ($scope.personalData.profile_pic !== null) {
 
-              $scope.file = '../../../uploads/profile/' + $scope.personalData.profile_pic;
+              $scope.file = '../../../uploads/profile/' + $scope.personalData.profilePic;
 
               console.log('User Profile Pic --->' + $scope.file);
 
             }
 
-            if ($scope.personalData.facebook_img !== null) {
+            if ($scope.personalData.facebookImage !== null) {
               $scope.fb_link = false;
               open();
             }
-            if ($scope.personalData.google_img !== null) {
+            if ($scope.personalData.googleImage !== null) {
               $scope.google_link = false;
             }
 

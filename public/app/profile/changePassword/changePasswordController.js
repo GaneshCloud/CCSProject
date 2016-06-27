@@ -133,18 +133,18 @@
               $scope.userCredentials = false;
             }
 
-            if ($scope.personalData.facebook_img !== null) {
+            if ($scope.personalData.facebookImage !== null) {
 
-              $scope.file = '../images/uploads/' + $scope.personalData.facebook_img;
+              $scope.file = '../images/uploads/' + $scope.personalData.facebookImage;
 
               console.log('User Profile Pic --->' + $scope.file);
 
             }
 
-            if ($scope.personalData.facebook_img !== null) {
+            if ($scope.personalData.facebookImage !== null) {
               $scope.fb_link = false;
             }
-            if ($scope.personalData.google_img !== null) {
+            if ($scope.personalData.googleImage !== null) {
               $scope.google_link = false;
             }
 

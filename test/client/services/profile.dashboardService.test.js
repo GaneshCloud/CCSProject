@@ -70,15 +70,28 @@ describe('dashboardService',function(){
         }));
 
         it('Check Admin',inject(function($httpBackend){
-            $httpBackend
-                .when('GET','/getLoggedInUser')
-                .respond(200, {config: {data: {userType:'admin'}}});
-            var res=$factory.checkAdmin();
-            expect($httpBackend.flush).not.toThrow();
+
+            var response = {
+                data: {
+                    userType : 'admin'
+                }
+            }
 
             $httpBackend
                 .when('GET','/getLoggedInUser')
-                .respond(200, {config: {data: {}}});
+                .respond(200, response);
+            var res=$factory.checkAdmin();
+            expect($httpBackend.flush).not.toThrow();
+
+            response = {
+                data : {
+
+                }
+            }
+
+            $httpBackend
+                .when('GET','/getLoggedInUser')
+                .respond(200, response);
             var res=$factory.checkAdmin();
             expect($httpBackend.flush).not.toThrow();
 

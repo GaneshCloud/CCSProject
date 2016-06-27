@@ -292,13 +292,37 @@ describe('#User Profile Controller', function () {
 
         });
 
-        // it('old password valid',function () {
-        //
-        //     var data = {
-        //         $dirty:
-        //     }
-        //
-        // });
+        it('old password valid',function () {
+
+            var data = {
+                $dirty:true,
+                $viewValue:'hi'
+            }
+
+            scope.personalData = {
+                password : 'hi'
+            }
+
+            value = scope.isOldPasswordValid(data);
+
+            expect(value).toEqual(false);
+
+            var data = {
+                $dirty:true,
+                $viewValue:'hi'
+            }
+
+            scope.personalData = {
+                password : 'hello'
+            }
+
+            value = scope.isOldPasswordValid(data);
+
+            expect(value).toEqual(true);
+
+
+
+        });
     });
 
 });

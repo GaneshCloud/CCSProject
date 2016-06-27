@@ -8,11 +8,9 @@
   userProfileService.$inject=[
     '$http',
     '$window',
-    '$q',
       'Upload'
   ];
-  function userProfileService($http, $window, $q,Upload) {
-    var httpPromise;
+  function userProfileService($http, $window,Upload) {
     return {
       changePassword: function () {
         $window.location.href = '/profile/changePassword';
@@ -35,42 +33,22 @@
       },
 
       getPersonalData: function () {
-        var deferred = $q.defer();
-
-        httpPromise = $http.get('/connect/getPersonalData');
-
-        httpPromise.then(function (response) {
-          deferred.resolve(response);
-        }, function (error) {
-          console.error(error);
-        });
-
-        return deferred.promise;
+        return $http.get('/connect/getPersonalData');
       },
 
       uploadImage: function (file) {
-        var dfr = $q.defer();
 
-        httpPromise = Upload.upload({
+        return Upload.upload({
           url: '/connect/uploadImage',
 
           data: {file: file}
 
         });
-
-        httpPromise.then(function (response) {
-          dfr.resolve(response);
-        }, function (error) {
-          console.error(error);
-        });
-        return dfr.promise;
       },
 
       updatePersonalData: function (personalData) {
 
-        var dfr = $q.defer();
-
-        httpPromise = $http({
+        return $http({
           method: 'post',
 
           url: '/connect/updatePersonalData',
@@ -78,12 +56,6 @@
           data: personalData
 
         });
-        httpPromise.then(function (response) {
-          dfr.resolve(response);
-        }, function (error) {
-          console.error(error);
-        });
-        return dfr.promise;
       }
 
     };

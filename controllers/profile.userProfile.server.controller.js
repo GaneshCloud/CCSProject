@@ -47,6 +47,11 @@ var upload = multer({ //multer settings
 
 
 router.get('/getPersonalData', function(req,res) {
+
+    console.log("req"+req+"req.session"+JSON.stringify(req.session));
+
+    console.log(req.session.authorization);
+
     if (req.session.passport) {
       req.session.data = [];
 
@@ -54,14 +59,14 @@ router.get('/getPersonalData', function(req,res) {
     }
 
     personaldataManager.getPersonalData(req.session.data.id)
-            .then(function(results) {
+            .then(function(results,error) {
+            if(error){
+                throw error;
+            }
               if (results && results.length > 0) {
                 req.session.data = results[0];
                 res.send(results[0]);
               }
-            })
-            .fail(function(err) {
-              console.error(JSON.stringify(err));
             });
 
 });

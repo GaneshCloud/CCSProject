@@ -57,6 +57,9 @@
                 controller: 'viewDocumentController'
             }).when('/error', {
                 templateUrl: '../app/core/error.html'
+            }).when('/error/message', {
+                templateUrl: 'app/error/errorMessage.html',
+                controller:'errorMessageController'
             }).otherwise({
                 redirectTo: '/error'
             });

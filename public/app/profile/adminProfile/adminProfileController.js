@@ -88,12 +88,12 @@
 
       var img;
 
-      if (user.profile_pic) {
-        img = '../uploads/profile/' + user.profile_pic;
-      }else if (user.facebook_img) {
-        img = '../uploads/profile/' + user.facebook_img;
-      }else if (user.google_img) {
-        img = '../uploads/profile/' + user.google_img;
+      if (user.profilePic) {
+        img = '../uploads/profile/' + user.profilePic;
+      }else if (user.facebookImage) {
+        img = '../uploads/profile/' + user.facebookImage;
+      }else if (user.googleImage) {
+        img = '../uploads/profile/' + user.googleImage;
       }else {
         img = $scope.file;
       }
