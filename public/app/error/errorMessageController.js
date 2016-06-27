@@ -12,9 +12,22 @@
     ];
 
     function errorMessageController($scope) {
-        if(localStorage.getItem('error')) {
-            $scope.error = localStorage.getItem('error');
-            localStorage.setItem('error', null);
+
+        if(localStorage.getItem('errorCode') !== null){
+            $scope.errorCode = localStorage.getItem('errorCode');
         }
+        if(localStorage.getItem('errorNum') !== null){
+            $scope.errorNum = localStorage.getItem('errorNum');
+        }
+        if(localStorage.getItem('fatal') !== null){
+            $scope.fatal = localStorage.getItem('fatal');
+        }
+        if(localStorage.getItem('sqlState') !== null){
+            $scope.sqlState = localStorage.getItem('sqlState');
+        }
+        if(localStorage.getItem('index') !== null) {
+            $scope.index = localStorage.getItem('index');
+        }
+        localStorage.clear();
     }
 })();

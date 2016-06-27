@@ -59,14 +59,13 @@ router.get('/getPersonalData', function(req,res) {
     }
 
     personaldataManager.getPersonalData(req.session.data.id)
-            .then(function(results,error) {
-            if(error){
-                throw error;
-            }
+            .then(function(results) {
               if (results && results.length > 0) {
                 req.session.data = results[0];
                 res.send(results[0]);
               }
+            },function (error) {
+                res.send(500,{ error: error });
             });
 
 });
@@ -77,17 +76,15 @@ router.post('/updatePersonalData', function(req,res) {
               if (results) {
                 res.send(results);
               }
-            })
-            .fail(function(err) {
-              console.error(JSON.stringify(err));
+            },function (error) {
+                res.send(500,{ error: error });
             });
 });
 
 router.post('/uploadImage',function (req,res) {
     upload(req,res,function(results,error){
         if(error){
-            res.json({error_code:1,err_desc:error});
-            return;
+            res.send(500,{ error: error });
         }
         req.session.data = results;
         res.json({error_code:0,err_desc:null});

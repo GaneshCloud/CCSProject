@@ -44,7 +44,21 @@
       },
 
       showError:function (error) {
-        localStorage.setItem('error',JSON.stringify(error.data.error));
+        if(error.error.code !== null){
+          localStorage.setItem('errorCode',error.error.code);
+        }
+        if(error.error.errno !== null){
+          localStorage.setItem('errorNum',error.error.errno);
+        }
+        if(error.error.fatal !== null){
+          localStorage.setItem('fatal',error.error.fatal);
+        }
+        if(error.error.sqlState !== null){
+          localStorage.setItem('sqlState',error.error.sqlState);
+        }
+        if(error.error.index !== null){
+          localStorage.setItem('index',error.error.index);
+        }
         $window.location.href = '/error/message';
       },
 

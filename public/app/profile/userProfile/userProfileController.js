@@ -124,6 +124,8 @@
         // $scope.progressbar.complete();
         spinnerService.hide('html5spinner');
         $scope.personalData = response.data;
+      },function (error) {
+        dashboardService.showError(error.data);
       });
     };
 
@@ -134,6 +136,8 @@
         // $scope.progressbar.complete();
         spinnerService.hide('html5spinner');
         $scope.personalData = response.data;
+      },function (error) {
+        dashboardService.showError(error.data);
       });
     };
 
@@ -150,7 +154,7 @@
       if ($window.confirm('Are You Sure ! Do you need to update the ProfilPicture?')) {
         // $scope.progressbar.start();
         spinnerService.show('html5spinner');
-        userProfileService.uploadImage($scope.file).then(function() {
+        userProfileService.uploadImage($scope.file).then(function(result) {
           // $scope.progressbar.complete();
           spinnerService.hide('html5spinner');
           $scope.imageChanged = false;
@@ -165,6 +169,8 @@
             console.log('e' + e);
             $(this).parent().fadeTo(500, 0).slideUp(500);
           });
+        },function(error){
+          dashboardService.showError(error.data);
         });
 
       }
@@ -244,8 +250,10 @@
 
         // $scope.progressbar.start();
         spinnerService.show('html5spinner');
-        userProfileService.updatePersonalData($scope.personalData).then(function() {
+        userProfileService.updatePersonalData($scope.personalData).then(function(result) {
           spinnerService.hide('html5spinner');
+        },function (error) {
+          dashboardService.showError(error.data);
         });
 
         angular.element('#result').html('<div class="alert alert-success"><button type="button" class="close">×</button>Successfully updated record!</div>');
@@ -322,6 +330,7 @@
           }, function(error) {
 
             console.error(error);
+            dashboardService.showError(error.data);
 
           });
 

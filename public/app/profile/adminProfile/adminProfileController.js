@@ -74,6 +74,7 @@
           }, function(error) {
 
             console.error(error);
+            dashboardService.showError(error.data);
 
           }) ;
 

@@ -31,7 +31,7 @@ function getUserDetails(userType) {
   con.query(qry,function(err, results) {
       if (err) {
         console.error(err);
-        throw err;
+        return deffered.reject(err);
       }
       deffered.resolve(results);
     });
@@ -55,7 +55,7 @@ function getPersonalData(id) {
 
   con.query(qry, function(error, results) {
     if (error) {
-      throw error;
+      return deferred.reject(error);
     }
     deferred.resolve(results);
   });
@@ -82,9 +82,12 @@ function updatePersonalData(userData) {
         con.query(query, function(error, result) {
           if (error) {
             console.error(error);
-            throw error;
+            return deferred.reject(error);
           }
-          getPersonalData(result.insertId).then(function(result) {
+          getPersonalData(result.insertId).then(function(error,result) {
+            if(error){
+              return deferred.reject(error);
+            }
             deferred.resolve(result);
           });
         });
@@ -102,7 +105,7 @@ function deletePersonalData(id) {
       con.query(query, function(error, result) {
         if (error) {
           console.error(error);
-          throw error;
+          return deferred.reject(error);
         }
         deferred.resolve({affectedRows: result.affectedRows});
       });
@@ -111,7 +114,10 @@ function deletePersonalData(id) {
 
 function updateImage(data) {
   var deffered = q.defer();
-  updatePersonalData(data).then(function(result) {
+  updatePersonalData(data).then(function(error,result) {
+    if(error){
+      return deffered.reject(error);
+    }
     deffered.resolve(result);
   });
   return deffered.promise;
@@ -135,10 +141,18 @@ function updateFacebookPersonalData(req,profile,accessToken) {
     if (profile.emails && profile.emails[0]) {
       data.fbEmail = profile.emails[0].value;
     }
-    updatePersonalData(data).then(function() {
-      updateFacebookProfilePicture(profile).then(function(result) {
-        deferred.resolve(result);
-      });
+    updatePersonalData(data).then(function(error,result) {
+      if(error){
+        return deferred.reject(error);
+      }
+      if(result) {
+        updateFacebookProfilePicture(profile).then(function (error, result) {
+          if (error) {
+            return deferred.reject(error);
+          }
+          deferred.resolve(result);
+        });
+      }
     });
   }else {
 
@@ -157,7 +171,7 @@ function updateFacebookPersonalData(req,profile,accessToken) {
         con.query(query, function(error, result) {
             if (error) {
               console.error(error);
-              throw error;
+              return deferred.reject(error);
             }
             if (result && result.length > 0) {
               data = result[0];
@@ -174,16 +188,32 @@ function updateFacebookPersonalData(req,profile,accessToken) {
               if (profile.emails && profile.emails[0]) {
                 data.fbEmail = profile.emails[0].value;
               }
-              updatePersonalData(data).then(function() {
-                updateFacebookProfilePicture(profile).then(function(result) {
-                  deferred.resolve(result);
-                });
+              updatePersonalData(data).then(function(error,result) {
+                if(error){
+                  return deferred.reject(error);
+                }
+                if(result) {
+                  updateFacebookProfilePicture(profile).then(function (error, result) {
+                    if (error) {
+                      return deferred.reject(error);
+                    }
+                    deferred.resolve(result);
+                  });
+                }
               });
             }else {
-              insertFacebookProfileData(profile,accessToken).then(function() {
-                updateFacebookProfilePicture(profile).then(function(result) {
-                  deferred.resolve(result);
-                });
+              insertFacebookProfileData(profile,accessToken).then(function(error,result) {
+                if(error){
+                  return deferred.reject(error);
+                }
+                if(result) {
+                  updateFacebookProfilePicture(profile).then(function (error,result) {
+                    if(error){
+                      return deferred.reject(error);
+                    }
+                    deferred.resolve(result);
+                  });
+                }
               });
             }
           });
@@ -207,7 +237,7 @@ function updateFacebookProfilePicture(profile) {
       con.query(fbDataUpdate, function(error, results) {
         if (error) {
           console.error(error);
-          throw error;
+          deferred.reject(error);
         }
         http.get(profile.photos[0].value, function(res) {
           var buffers = [];
@@ -227,7 +257,10 @@ function updateFacebookProfilePicture(profile) {
               }else {
                 var data = results[0];
                 data.facebookImage = 'file-' + profile.id + '.' + fileType(image).ext;
-                updateImage(data).then(function(result) {
+                updateImage(data).then(function(error,result) {
+                  if(error){
+                    return deferred.reject(error);
+                  }
                   deferred.resolve(result);
                 });
               }
@@ -247,7 +280,7 @@ function deleteFacebookProfileData(profile) {
       con.query(query, function(error, result) {
         if (error) {
           console.error(error);
-          throw error;
+          return deferred.reject(error);
         }
         deferred.resolve({affectedRows: result.affectedRows});
       });
@@ -291,7 +324,7 @@ function insertFacebookProfileData(profile, accessToken) {
   con.query(qry, function(error, result) {
     if (error) {
       console.error(error);
-      throw error;
+      return deferred.reject(error);
     }
     deferred.resolve({affectedRows: result.affectedRows});
   });
@@ -328,11 +361,19 @@ function updateGooglePersonalData(req,profile,accessToken) {
       data.googleEmail = profile.email;
     }
 
-    updatePersonalData(data).then(function(result) {
+    updatePersonalData(data).then(function(error,result) {
+      if(error){
+        return deferred.reject(error);
+      }
       console.log('Result' + result);
-      updateGoogleProfilePicture(profile).then(function(result) {
-        deferred.resolve(result);
-      });
+      if(result) {
+        updateGoogleProfilePicture(profile).then(function (error,result) {
+          if(error){
+            return deferred.reject(error);
+          }
+          deferred.resolve(result);
+        });
+      }
     });
 
   }else {
@@ -352,7 +393,7 @@ function updateGooglePersonalData(req,profile,accessToken) {
     con.query(query, function(error, result) {
       if (error) {
         console.error(error);
-        throw error;
+        return deferred.reject(error);
       }
       if (result && (result.length > 0)) {
 
@@ -375,21 +416,35 @@ function updateGooglePersonalData(req,profile,accessToken) {
           data.googleEmail = profile.email;
         }
 
-        updatePersonalData(data).then(function(result) {
+        updatePersonalData(data).then(function(error, result) {
+          if(error){
+            return deferred.reject(error);
+          }
           console.log('Result' + result);
-          updateGoogleProfilePicture(profile).then(function(result) {
-            deferred.resolve(result);
-          });
+          if(result) {
+            updateGoogleProfilePicture(profile).then(function (error,result) {
+              if(error){
+                return deferred.reject(error);
+              }
+              deferred.resolve(result);
+            });
+          }
         });
 
       }else {
 
-        insertGoogleProfileData(profile,accessToken).then(function() {
-
-          updateGoogleProfilePicture(profile).then(function(results) {
-            deferred.resolve(results);
-          });
-
+        insertGoogleProfileData(profile,accessToken).then(function(error,result) {
+          if(error){
+            return deferred.reject(error);
+          }
+          if(result) {
+            updateGoogleProfilePicture(profile).then(function (error,results) {
+              if(error){
+                return deferred.reject(error);
+              }
+              deferred.resolve(results);
+            });
+          }
         });
 
       }
@@ -416,7 +471,7 @@ function updateGoogleProfilePicture(profile) {
   con.query(fbDataUpdate, function(error, results) {
     if (error) {
       console.error(error);
-      throw error;
+      return deferred.reject(error);
     }
 
     http.get(profile.photos[0].value,function(res) {
@@ -451,7 +506,10 @@ function updateGoogleProfilePicture(profile) {
 
             data.googleImage = 'file-' + profile.id + '.' + fileType(image).ext;
 
-            updateImage(data).then(function(result) {
+            updateImage(data).then(function(error,result) {
+              if(error){
+                return deferred.reject(error);
+              }
               deferred.resolve(result);
             });
 
@@ -480,7 +538,7 @@ function deleteGoogleProfileData(profile) {
   con.query(query, function(error, result) {
     if (error) {
       console.error(error);
-      throw error;
+      return deferred.reject(error);
     }
     deferred.resolve({affectedRows: result.affectedRows});
   });
@@ -532,7 +590,7 @@ function insertGoogleProfileData(profile,accessToken) {
   con.query(qry, function(error, result) {
     if (error) {
       console.error(error);
-      throw error;
+      return deferred.reject(error);
     }
     deferred.resolve({affectedRows: result.affectedRows});
   });

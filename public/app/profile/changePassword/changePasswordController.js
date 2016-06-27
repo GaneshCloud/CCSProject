@@ -80,7 +80,7 @@
 
         spinnerService.show('html5spinner');
 
-        changePasswordService.updatePersonalData($scope.personalData).then(function() {
+        changePasswordService.updatePersonalData($scope.personalData).then(function(result) {
 
           spinnerService.hide('html5spinner');
           angular.element('#result').html('<div class="alert alert-success"><button type="button" class="close">×</button>Password Changed!</div>');
@@ -96,6 +96,8 @@
 
           $timeout(changePasswordService.profilePage(),6000);
 
+        },function (error) {
+          dashboardService.showError(error.data);
         });
 
       } else {
@@ -151,6 +153,7 @@
           }, function(error) {
 
             console.error(error);
+            dashboardService.showError(error.data);
 
           });
 
