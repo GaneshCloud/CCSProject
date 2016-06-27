@@ -20,7 +20,7 @@ function getUserValidity(userid, password) {
     qry += " p.google_img as googleImage from personaldata as p where p.userid = '"+userid+"' and p.password = '"+password+"'";
     qry += " and status = 'active'";
 
-
+console.log(qry);
    con.query(qry, function(error, results) {
     if (error) {
       console.error(error);

@@ -69,7 +69,7 @@ function updatePersonalData(userData) {
     dataUpdate += 'userType,fname,mname,lname,email,fb_fname,fb_mname,fb_lname,fb_email,';
     dataUpdate += 'g_fname,g_mname,g_lname,g_email,contact,address,college,course,branch,year,project_fee,fees_paid,';
     dataUpdate += 'fees_balance,createdDate,status,profile_pic,facebook_img,google_img)';
-    dataUpdate += ' values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,now(),?,?,?,?,?)';
+    dataUpdate += ' values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,now(),?,?,?,?)';
     console.log('Query template' + dataUpdate);
    
         var query = mysql.format(dataUpdate, [userData.facebookId,userData.facebookToken,
@@ -84,10 +84,7 @@ function updatePersonalData(userData) {
             console.error(error);
             return deferred.reject(error);
           }
-          getPersonalData(result.insertId).then(function(error,result) {
-            if(error){
-              return deferred.reject(error);
-            }
+          getPersonalData(result.insertId).then(function(result) {
             deferred.resolve(result);
           });
         });
@@ -114,10 +111,7 @@ function deletePersonalData(id) {
 
 function updateImage(data) {
   var deffered = q.defer();
-  updatePersonalData(data).then(function(error,result) {
-    if(error){
-      return deffered.reject(error);
-    }
+  updatePersonalData(data).then(function(result) {
     deffered.resolve(result);
   });
   return deffered.promise;
@@ -146,10 +140,8 @@ function updateFacebookPersonalData(req,profile,accessToken) {
         return deferred.reject(error);
       }
       if(result) {
-        updateFacebookProfilePicture(profile).then(function (error, result) {
-          if (error) {
-            return deferred.reject(error);
-          }
+        updateFacebookProfilePicture(profile).then(function (result) {
+
           deferred.resolve(result);
         });
       }
@@ -188,29 +180,17 @@ function updateFacebookPersonalData(req,profile,accessToken) {
               if (profile.emails && profile.emails[0]) {
                 data.fbEmail = profile.emails[0].value;
               }
-              updatePersonalData(data).then(function(error,result) {
-                if(error){
-                  return deferred.reject(error);
-                }
+              updatePersonalData(data).then(function(result) {
                 if(result) {
-                  updateFacebookProfilePicture(profile).then(function (error, result) {
-                    if (error) {
-                      return deferred.reject(error);
-                    }
+                  updateFacebookProfilePicture(profile).then(function (result) {
                     deferred.resolve(result);
                   });
                 }
               });
             }else {
-              insertFacebookProfileData(profile,accessToken).then(function(error,result) {
-                if(error){
-                  return deferred.reject(error);
-                }
+              insertFacebookProfileData(profile,accessToken).then(function(result) {
                 if(result) {
-                  updateFacebookProfilePicture(profile).then(function (error,result) {
-                    if(error){
-                      return deferred.reject(error);
-                    }
+                  updateFacebookProfilePicture(profile).then(function (result) {
                     deferred.resolve(result);
                   });
                 }
@@ -257,10 +237,7 @@ function updateFacebookProfilePicture(profile) {
               }else {
                 var data = results[0];
                 data.facebookImage = 'file-' + profile.id + '.' + fileType(image).ext;
-                updateImage(data).then(function(error,result) {
-                  if(error){
-                    return deferred.reject(error);
-                  }
+                updateImage(data).then(function(result) {
                   deferred.resolve(result);
                 });
               }
@@ -361,16 +338,10 @@ function updateGooglePersonalData(req,profile,accessToken) {
       data.googleEmail = profile.email;
     }
 
-    updatePersonalData(data).then(function(error,result) {
-      if(error){
-        return deferred.reject(error);
-      }
+    updatePersonalData(data).then(function(result) {
       console.log('Result' + result);
       if(result) {
-        updateGoogleProfilePicture(profile).then(function (error,result) {
-          if(error){
-            return deferred.reject(error);
-          }
+        updateGoogleProfilePicture(profile).then(function (result) {
           deferred.resolve(result);
         });
       }
@@ -416,16 +387,10 @@ function updateGooglePersonalData(req,profile,accessToken) {
           data.googleEmail = profile.email;
         }
 
-        updatePersonalData(data).then(function(error, result) {
-          if(error){
-            return deferred.reject(error);
-          }
+        updatePersonalData(data).then(function(result) {
           console.log('Result' + result);
           if(result) {
-            updateGoogleProfilePicture(profile).then(function (error,result) {
-              if(error){
-                return deferred.reject(error);
-              }
+            updateGoogleProfilePicture(profile).then(function (result) {
               deferred.resolve(result);
             });
           }
@@ -433,15 +398,9 @@ function updateGooglePersonalData(req,profile,accessToken) {
 
       }else {
 
-        insertGoogleProfileData(profile,accessToken).then(function(error,result) {
-          if(error){
-            return deferred.reject(error);
-          }
+        insertGoogleProfileData(profile,accessToken).then(function(result) {
           if(result) {
-            updateGoogleProfilePicture(profile).then(function (error,results) {
-              if(error){
-                return deferred.reject(error);
-              }
+            updateGoogleProfilePicture(profile).then(function (results) {
               deferred.resolve(results);
             });
           }
@@ -506,10 +465,7 @@ function updateGoogleProfilePicture(profile) {
 
             data.googleImage = 'file-' + profile.id + '.' + fileType(image).ext;
 
-            updateImage(data).then(function(error,result) {
-              if(error){
-                return deferred.reject(error);
-              }
+            updateImage(data).then(function(result) {
               deferred.resolve(result);
             });
 
