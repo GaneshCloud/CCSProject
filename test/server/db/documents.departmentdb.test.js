@@ -2,20 +2,20 @@
  * Created by Administrator on 5/28/2016.
  */
 var expect  = require("chai").expect;
-var mysql   = require("mysql");
+// var mysql   = require("mysql");
 
-var department = require("../../../config/db/documents/departmentdb");
-var testDepartment;
-var database = require('../../../config/db');
-var con = mysql.createConnection(
-    database
-);
+var testDepartment = require("../../../config/db/documents/departmentdb");
+// var testDepartment;
+// var database = require('../../../config/db');
+// var con = mysql.createConnection(
+//     database
+// );
 
 
 describe("department Service Testing",function(){
 
     beforeEach(function () {
-        testDepartment = new department(con);
+         // = new department(con);
     });
     describe("get All department", function () {
         it("get all data", function (done) {

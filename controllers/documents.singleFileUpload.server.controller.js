@@ -1,12 +1,7 @@
 var path = require('path'),
-    mysql = require('mysql'),
     fs = require('fs'),
-    db = require('../config/db'),
-    serDocument = require('../config/db/documents/documentdb'),
-    serDepartment = require('../config/db/documents/departmentdb'),
-    con = mysql.createConnection(db),
-    docService = new serDocument(con),
-    depServiceObj = new serDepartment(con);
+    docService = require('../config/db/documents/documentdb'),
+    depServiceObj = require('../config/db/documents/departmentdb');
 
 var selectedFile,ext;
 

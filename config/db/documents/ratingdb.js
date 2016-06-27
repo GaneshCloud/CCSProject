@@ -1,6 +1,12 @@
-module.exports = function(con){
 
-this.getStarInfo = function (id,cb){
+
+var mysql=require('mysql');
+var   db= require('../../db');
+var   con=mysql.createConnection(db);
+
+// module.exports = function(con){
+
+exports.getStarInfo = function (id,cb){
 
       var myErr=null,result=null;
       if(id=="" || id==undefined ||  id==null) return cb("error",result);
@@ -21,7 +27,7 @@ this.getStarInfo = function (id,cb){
 
 };
 
-this.setStar=function(data,cb){
+exports.setStar=function(data,cb){
 
     var myErr=null,insertId=null;
 
@@ -52,8 +58,8 @@ this.setStar=function(data,cb){
 };
 
 
-this.getStar=function(id,cb){
-
+exports.getStar=function(id,cb){
+console.log("Dd");
       var myErr=null,stardata=null;
       var qry="SELECT FLOOR(AVG(STARS)) AS STR FROM TBL_DOC_STARS WHERE DOC_ID="+id;
     console.log(qry);
@@ -75,4 +81,4 @@ this.getStar=function(id,cb){
 
 
 
-};
+// };

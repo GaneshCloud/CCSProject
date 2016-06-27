@@ -1,10 +1,7 @@
 
-var mysql=require('mysql');
 var fs=require('fs');
-var   db= require('../config/db');
 var   serDocument= require('../config/db/documents/documentdb');
-var   con=mysql.createConnection(db);
-var   docService=new serDocument(con);
+var   docService=require('../config/db/documents/documentdb');
 
 
     exports.searchDocument=function(req,res){
@@ -17,34 +14,51 @@ var   docService=new serDocument(con);
 
             if(type===''||type===null || isNaN(type) ||dep===''||dep===null || isNaN(dep)) return res.end("invalid");
 
-            // console.log("type:"+type+"dep="+dep);
-
             if(type==='-1' && dep==='-1')
             {
               docService.getAllDoc(serStr,function(err,data){
-                  if(err) throw err;
-                  result=data;
-                  res.end(JSON.stringify(result));
+                  if(err) {
+                      res.end({error:err});
+                  }
+                  else {
+                      result=data;
+                      res.end(JSON.stringify(result));
+                  }
               });
             }
             else if(type==='-1')
                 docService.getDocByDep(serStr,dep,function(err,data){
-                    if(err) throw err;
-                    result=data;
-                    res.end(JSON.stringify(result));
+                    if(err) {
+                        res.end({error:err});
+                    }
+                    else {
+                        result=data;
+                        res.end(JSON.stringify(result));
+                    }
               });
             else if(dep==='-1')
               docService.getDocByType(serStr,type,function(err,data){
-                  if(err) throw err;
-                  result=data;
-                  res.end(JSON.stringify(result));
+                  if(err) {
+                      res.end({error:err});
+                  }
+                  else {
+                      result=data;
+                      res.end(JSON.stringify(result));
+                  }
               });
             else
               docService.getDocByTypeDep(serStr,type,dep,function(err,data){
-                  if(err) throw err;
-                  result=data;
-                  res.end(JSON.stringify(result));
-              });
+                  if(err) {
+                      res.end({error:err});
+                  }
+                  else {
+                      result=data;
+                      res.end(JSON.stringify(result));
+                  }
+                  });
+
+
+
     };
 
   
@@ -54,8 +68,7 @@ var   docService=new serDocument(con);
       var id=req.query.id,ext,filename,myData;
       if(id==='' || id===null || isNaN(id)) {res.end("invalid");  return};
       docService.getDocById(id,0,function(err,data){
-              // res.end(JSON.stringify(data));
-              if(err) throw err;
+              if(err) return res.json({error:err});
               if(data.length <=0) {res.end("invalid"); return};
               filename=data[0].docFile;
               ext = filename.substring(filename.lastIndexOf('.') + 1);
@@ -75,7 +88,7 @@ var   docService=new serDocument(con);
 
     exports.deleteDocument=function(req,res){
         var data = req.body;
-        console.log(data);
+
         if(data.ID==='' || data.ID===null || isNaN(data.ID)) return res.end("invalid");
         docService.deleteDoc(data,function(){
             console.log("Deleted Record...."+data);
