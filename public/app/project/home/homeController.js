@@ -15,7 +15,7 @@
       $scope.events = [];
       $scope.myDataSource = {};
       $scope.images = [];
-      $scope.data=[];
+      var data=[];
 
     $scope.accordionGroupOptions1={
       open:true
@@ -64,12 +64,12 @@
     $scope.projectHistory = function(){
       homeService.projectHistory()
           .then(function (results) {	//Success function
-              $scope.data=results.data;
-              for (var i = 0;i < $scope.data.length;i++) {
+              data=results.data;
+              for (var i = 0;i < data.length;i++) {
                 if (i % 2 === 0) {	//Even badge
-                  $scope.events.push({badgeClass: 'info', badgeIconClass: 'glyphicon-check', title: $scope.data[i].Date, content: $scope.data[i].History});
+                  $scope.events.push({badgeClass: 'info', badgeIconClass: 'glyphicon-check', title: data[i].Date, content: data[i].History});
                 }else {	//Odd badge
-                  $scope.events.push({badgeClass: 'warning', badgeIconClass: 'glyphicon-credit-card', title: $scope.data[i].Date, content: $scope.data[i].History});
+                  $scope.events.push({badgeClass: 'warning', badgeIconClass: 'glyphicon-credit-card', title: data[i].Date, content: data[i].History});
                 }
               }
           }).catch(function (error) {
@@ -82,8 +82,7 @@
       homeService.chartData()
           .then(function (results) {	//Success function
               var total=[];
-              console.log("kkkkk"+results.data);
-                  total = results.data[0];
+              total = results.data[0];
                    $scope.totalPercentage = total.per
           }).catch(function(error) {
             console.log('Error');
