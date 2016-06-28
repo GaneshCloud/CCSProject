@@ -9,7 +9,7 @@ describe('#User Profile Controller', function () {
     var $controller,dashboardService,spinnerService,window;
     var filterFilter,userProfileService;
     var $q;
-    var deferred;
+    var deferred,element;
 
     var spy,scope;
 
@@ -35,8 +35,11 @@ describe('#User Profile Controller', function () {
 
         deferred = $q.defer();
 
+        window = jasmine.createSpyObj('$window', ['confirm']);
+
         $controller('userProfileController', {
-            $scope: scope
+            $scope: scope,
+            $window: window
         });
 
         element = angular.element('<spinner name="html5spinner" ng-cloak="">' +
@@ -49,7 +52,6 @@ describe('#User Profile Controller', function () {
             '</spinner>');
 
         $compile(element)(scope);
-        $compile(angular.element('<div style="width: 300px; height: 10px;" id="result"></div>'))(scope);
         $compile(angular.element('<input type="file" ng-model="file" name="file" accept="image/*" ngf-max-size="20MB" id="fileInput" style="display:none" onchange=""/>'));
         //
         // $compile(element)(scope);
@@ -66,6 +68,7 @@ describe('#User Profile Controller', function () {
         spyOn(userProfileService, 'getPersonalData').and.returnValue(deferred.promise);
         spyOn(userProfileService, 'updatePersonalData').and.returnValue(deferred.promise);
         spyOn(dashboardService, 'logout').and.returnValue();
+        spyOn(dashboardService, 'showError').and.returnValue();
         spyOn(userProfileService, 'changePassword').and.returnValue();
 
     }));
@@ -139,9 +142,25 @@ describe('#User Profile Controller', function () {
 
         });
 
+        it('should add facebook account with error', function () {
+            scope.addFacebookAccount();
+            deferred.reject({data:{error:{code:''}}});
+            scope.$apply();
+
+
+        });
+
         it('should add google account', function () {
             scope.addGoogleAccount();
             deferred.resolve({data:{id: 1,userType:'admin',facebook_img:''}});
+            scope.$apply();
+
+
+        });
+
+        it('should add google account with error', function () {
+            scope.addGoogleAccount();
+            deferred.reject({data:{error:{code:''}}});
             scope.$apply();
 
 
@@ -159,8 +178,19 @@ describe('#User Profile Controller', function () {
         });
 
         it('should upload file', function () {
+            window.confirm.and.returnValue(true);
             scope.fileUpload();
-            deferred.resolve();
+            deferred.resolve({data:{id: 1,userType:'admin',facebook_img:''}});
+
+            scope.$apply();
+
+        });
+
+
+        it('should upload file with error', function () {
+            window.confirm.and.returnValue(true);
+            scope.fileUpload();
+            deferred.reject({data:{error:{code:''}}});
 
             scope.$apply();
 
@@ -201,15 +231,36 @@ describe('#User Profile Controller', function () {
 
             }
 
+            window.confirm.and.returnValue(true);
+
             scope.onSubmitPersonalData();
 
-            deferred.resolve();
+            deferred.resolve({data:{id: 1,userType:'admin',facebook_img:''}});
             scope.$apply();
 
 
         });
 
+        it('should submit personal data with error', function () {
+
+            scope.personalData={
+
+            }
+
+            window.confirm.and.returnValue(true);
+
+            scope.onSubmitPersonalData();
+
+            deferred.reject({data:{error:{code:''}}});
+            scope.$apply();
+
+
+        });
+
+
         it('should cancel update personal data', function () {
+
+            window.confirm.and.returnValue(true);
 
             scope.onCancelPersonalData();
 
@@ -222,6 +273,8 @@ describe('#User Profile Controller', function () {
         });
 
         it('should logout', function () {
+
+            window.confirm.and.returnValue(true);
 
             scope.onLogout();
 
@@ -258,6 +311,35 @@ describe('#User Profile Controller', function () {
 
             deferred.resolve({data:{id: 1,userType:'admin',facebook_img:''}});
             scope.$apply();
+
+        });
+
+        it('Should getPersonal DAta with error', function () {
+
+            scope.getPersonalData();
+
+            deferred.reject({data:{error:{code:''}}});
+            scope.$apply();
+
+        });
+
+        it('Show updated alert', function () {
+
+            scope.showUpdatedStatus = true;
+
+            var value = scope.showUpdatedAlert();
+
+            expect(value).toEqual(true);
+
+        });
+
+        it('close alert', function () {
+
+            scope.closeAlert();
+
+            expect(scope.showUpdatedStatus).toEqual(false);
+
+            expect(scope.successMsg).toEqual('');
 
         });
 

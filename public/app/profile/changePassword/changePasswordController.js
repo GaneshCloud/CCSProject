@@ -19,6 +19,8 @@
 
     $scope.userCredentials = false;
 
+    $scope.showUpdatedStatus = false;
+
     dashboardService.checkAdmin();
 
     $scope.isOldPasswordValid = function(oldPassword) {
@@ -83,18 +85,9 @@
         changePasswordService.updatePersonalData($scope.personalData).then(function(result) {
 
           spinnerService.hide('html5spinner');
-          angular.element('#result').html('<div class="alert alert-success"><button type="button" class="close">×</button>Password Changed!</div>');
-          $window.setTimeout(function() {
-            $('.alert').fadeTo(500, 0).slideUp(500, function() {
-              $(this).remove();
-            });
-          }, 5000);
-          $('.alert .close').on('click', function(e) {
-            console.log('e' + e);
-            $(this).parent().fadeTo(500, 0).slideUp(500);
-          });
 
-          $timeout(changePasswordService.profilePage(),6000);
+          $scope.showUpdatedStatus = true;
+
 
         },function (error) {
           dashboardService.showError(error.data);
@@ -112,6 +105,17 @@
 
     };
 
+    $scope.showUpdatedAlert = function () {
+      return $scope.showUpdatedStatus;
+    };
+
+    $scope.closeAlert = function () {
+
+      $scope.showUpdatedStatus = false;
+
+      changePasswordService.profilePage();
+
+    };
     $scope.onCancelChangePassword = function() {
 
       if ($window.confirm('Are You Sure ! Do you need to leave the changes?')) {

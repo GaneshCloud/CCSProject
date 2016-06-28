@@ -28,11 +28,15 @@
 
     $scope.imageChanged = false;
 
-    $scope.showLocImg = false;
+    // $scope.showLocImg = false;
+    //
+    // $scope.showFbImage = false;
+    //
+    // $scope.showGImage = false;
 
-    $scope.showFbImage = false;
+    $scope.successMsg = '';
 
-    $scope.showGImage = false;
+    $scope.showUpdatedStatus = false;
 
     $scope.fb_link = true;
 
@@ -118,10 +122,8 @@
     };
 
     $scope.addFacebookAccount = function() {
-      // $scope.progressbar.start();
       spinnerService.show('html5spinner');
       userProfileService.addFacebookAccount().then(function(response) {
-        // $scope.progressbar.complete();
         spinnerService.hide('html5spinner');
         $scope.personalData = response.data;
       },function (error) {
@@ -130,10 +132,8 @@
     };
 
     $scope.addGoogleAccount = function() {
-      // $scope.progressbar.start();
       spinnerService.show('html5spinner');
       userProfileService.addGoogleAccount().then(function(response) {
-        // $scope.progressbar.complete();
         spinnerService.hide('html5spinner');
         $scope.personalData = response.data;
       },function (error) {
@@ -152,23 +152,16 @@
     $scope.fileUpload = function() {
 
       if ($window.confirm('Are You Sure ! Do you need to update the ProfilPicture?')) {
-        // $scope.progressbar.start();
         spinnerService.show('html5spinner');
         userProfileService.uploadImage($scope.file).then(function(result) {
-          // $scope.progressbar.complete();
+          $scope.personalData = result.data;
           spinnerService.hide('html5spinner');
           $scope.imageChanged = false;
 
-          angular.element('#result').html('<div class="alert alert-success"><button type="button" class="close">×</button>Profile Picture Changed!</div>');
-          $window.setTimeout(function() {
-            $('.alert').fadeTo(500, 0).slideUp(500, function() {
-              $(this).remove();
-            });
-          }, 5000);
-          $('.alert .close').on('click', function(e) {
-            console.log('e' + e);
-            $(this).parent().fadeTo(500, 0).slideUp(500);
-          });
+          $scope.successMsg = 'Profile Picture Changed!';
+
+          $scope.showUpdatedStatus = true;
+
         },function(error){
           dashboardService.showError(error.data);
         });
@@ -180,10 +173,8 @@
     $scope.onCancelFileUpload = function() {
 
       $scope.imageChanged = false;
-      // $scope.progressbar.start();
       spinnerService.show('html5spinner');
       userProfileService.getPersonalData().then(function() {
-        // $scope.progressbar.complete();
         spinnerService.hide('html5spinner');
       });
 
@@ -247,27 +238,31 @@
       if ($window.confirm('Are You Sure ! Do you need to update the changes?')) {
 
         $scope.editPersonalData = false;
-
-        // $scope.progressbar.start();
         spinnerService.show('html5spinner');
         userProfileService.updatePersonalData($scope.personalData).then(function(result) {
+          $scope.personalData = result.data;
           spinnerService.hide('html5spinner');
         },function (error) {
           dashboardService.showError(error.data);
         });
 
-        angular.element('#result').html('<div class="alert alert-success"><button type="button" class="close">×</button>Successfully updated record!</div>');
-        $window.setTimeout(function() {
-          $('.alert').fadeTo(500, 0).slideUp(500, function() {
-            $(this).remove();
-          });
-        }, 5000);
-        $('.alert .close').on('click', function(e) {
-          console.log('e' + e);
-          $(this).parent().fadeTo(500, 0).slideUp(500);
-        });
+        $scope.successMsg = 'Successfully updated record!';
+
+        $scope.showUpdatedStatus = true;
 
       }
+
+    };
+
+    $scope.showUpdatedAlert = function () {
+      return $scope.showUpdatedStatus;
+    };
+
+    $scope.closeAlert = function () {
+
+      $scope.successMsg = '';
+
+      $scope.showUpdatedStatus = false;
 
     };
 

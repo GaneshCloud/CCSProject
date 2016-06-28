@@ -71,30 +71,47 @@ describe('dashboardService',function(){
 
         it('Check Admin',inject(function($httpBackend){
 
-            var response = {
-                data: {
-                    userType : 'admin'
-                }
-            }
-
             $httpBackend
                 .when('GET','/getLoggedInUser')
-                .respond(200, response);
+                .respond(200,{userType:'admin'});
             var res=$factory.checkAdmin();
             expect($httpBackend.flush).not.toThrow();
 
-            response = {
-                data : {
+        }));
 
-                }
-            }
+        it('Check Admin',inject(function($httpBackend){
 
             $httpBackend
                 .when('GET','/getLoggedInUser')
-                .respond(200, response);
+                .respond(200, {data:{userType:''}});
             var res=$factory.checkAdmin();
             expect($httpBackend.flush).not.toThrow();
 
+        }));
+
+        it('Check Admin',inject(function($httpBackend){
+
+            $httpBackend
+                .when('GET','/getLoggedInUser')
+                .respond(500, {error:{userType:''}});
+            var res=$factory.checkAdmin();
+            expect($httpBackend.flush).not.toThrow();
+
+        }));
+
+        it('open Error Screen',inject(function(){
+            var data = {
+                error:{
+                    code:'',
+                    errno:'',
+                    fatal:'',
+                    sqlState:'',
+                    index:''
+                }
+            }
+            $factory.showError(data);
+            expect(windowObj.location.href).toEqual('/error/message');
+            localStorage.clear();
         }));
 
     });

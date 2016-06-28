@@ -9,7 +9,7 @@ describe('#Change Password Controller', function () {
 
     beforeEach(module('myApp'));
 
-    var $controller,dashboardService,spinnerService,window;
+    var $controller,dashboardService,spinnerService,$window;
     var changePasswordService;
     var $q,deferred,scope,element;
 
@@ -25,14 +25,17 @@ describe('#Change Password Controller', function () {
 
         changePasswordService = _changePasswordService_;
 
-        window = _$window_;
+        $window = _$window_;
 
         $q = _$q_;
 
         deferred = $q.defer();
 
+        $window = jasmine.createSpyObj('$window', ['confirm']);
+
         $controller('changePasswordController', {
-            $scope: scope
+            $scope: scope,
+            $window:$window
         });
 
         element = angular.element('<spinner name="html5spinner" ng-cloak="">' +
@@ -45,16 +48,14 @@ describe('#Change Password Controller', function () {
             '</spinner>');
 
         $compile(element)(scope);
-        
-        $compile(angular.element('<div style="width: 300px; height: 10px;" id="result"></div>'))(scope);
+
         $httpBackend.when("GET","/getLoggedInUser").respond("sample");
         $httpBackend.when("GET","/connect/getPersonalData").respond({id: 1});
         spyOn(changePasswordService, 'updatePersonalData').and.returnValue(deferred.promise);
         spyOn(changePasswordService, 'getPersonalData').and.returnValue(deferred.promise);
-        spyOn(changePasswordService, 'profilePage').and.returnValue();
-        // spyOn(dashboardService, 'project').and.returnValue();
-        // spyOn(dashboardService, 'forum').and.returnValue();
+        spyOn(changePasswordService, 'profilePage').and.returnValue(deferred.promise);
 
+        spyOn(dashboardService, 'showError').and.returnValue();
     }));
 
     describe('#Change Password', function () {
@@ -69,12 +70,41 @@ describe('#Change Password Controller', function () {
                 password:''
             }
 
+            $window.confirm.and.returnValue(true);
+
             scope.updatePassword(data);
 
             deferred.resolve();
             scope.$apply();
 
+            $window.confirm.and.returnValue(false);
+            scope.updatePassword(data);
+
+            deferred.resolve();
+            scope.$apply();
         });
+
+        it('Update Password with error', function () {
+
+            var data = {
+                $viewValue : 'hi',
+                password:''
+            }
+
+            scope.personalData = {
+                password:''
+            }
+
+            $window.confirm.and.returnValue(true);
+
+            scope.updatePassword(data);
+
+            deferred.reject({data:{error:{code:''}}});
+            scope.$apply();
+            expect(dashboardService.showError).toHaveBeenCalled();
+
+        });
+
 
         it('get Personal DAta', function () {
 
@@ -84,7 +114,18 @@ describe('#Change Password Controller', function () {
             scope.$apply();
         });
 
+        it('get Personal DAta with error', function () {
+
+            scope.getPersonalData();
+
+            deferred.reject({data:{error:{code:''}}});
+            scope.$apply();
+            expect(dashboardService.showError).toHaveBeenCalled();
+        });
+
         it('Cancel Change Password', function () {
+
+            $window.confirm.and.returnValue(true);
 
             scope.onCancelChangePassword();
 
@@ -182,6 +223,25 @@ describe('#Change Password Controller', function () {
             expect(value).toEqual(true);
 
         });
+
+        it('Show updated alert', function () {
+
+            scope.showUpdatedStatus = true;
+
+            var value = scope.showUpdatedAlert();
+
+            expect(value).toEqual(true);
+
+        });
+
+        it('close alert', function () {
+
+            scope.closeAlert();
+
+            expect(scope.showUpdatedStatus).toEqual(false);
+
+        });
+
 
     });
     

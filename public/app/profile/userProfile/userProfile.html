@@ -145,7 +145,11 @@
 
                         <div align="right">
 
-                            <div style="width: 300px; height: 10px;" id="result"></div>
+                            <div style="width: 300px; height: 10px;" id="result" ng-show="showUpdatedAlert()">
+
+                                <div class="alert alert-success"><button type="button" class="close" ng-click="closeAlert()">×</button>{{successMsg}}</div>
+
+                            </div>
 
                         </div>
 
@@ -524,7 +528,13 @@
 
                         <div align="right">
 
-                            <div style="width: 300px; height: 10px;" id="result"></div>
+                            <div style="width: 300px; height: 10px;" id="result">
+
+                                <div ng-show="profilePoctureUpdated" class="alert alert-success"><button type="button" class="close">×</button>Profile Picture Changed!</div>
+
+                                <div ng-show="profileUpdated" class="alert alert-success"><button type="button" class="close">×</button>Successfully updated record!</div>
+
+                            </div>
 
                         </div>
 

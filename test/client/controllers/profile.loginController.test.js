@@ -50,6 +50,7 @@ describe('#Login Controller', function () {
         spyOn(loginService, 'loginWithGoogle').and.returnValue();
         spyOn(loginService, 'loginWithFacebook').and.returnValue();
         spyOn(loginService,'checkUser').and.returnValue(deferred.promise);
+        spyOn(loginService,'showError').and.returnValue();
 
         deferred.resolve({data:{id: 1,userType:'admin',facebook_img:''}});
         scope.$apply();
@@ -72,30 +73,53 @@ describe('#Login Controller', function () {
     });
 
     describe('#should login with user data', function () {
+
+        // it('check login error', function () {
+        //
+        //     scope.submit('CBE001','Janani@1');
+        //
+        //     deferred.reject({error:{code:''}});
+        //     scope.$apply();
+        //     // expect(loginService.showError).toHaveBeenCalled();
+        //
+        // });
+
         it('check login user data', function () {
 
             // var controller = loginController();
 
             scope.submit('CBE001','Janani@1');
 
-            deferred.resolve();
+            var obj = 'Warning';
+            
+            var result = {
+                data:obj
+            }
+
+            deferred.resolve(result);
             scope.$apply();
 
-            scope.submit('CBE001','Janani@1');
-
-            deferred.resolve({id:1});
-            scope.$apply();
+            // scope.submit('CBE001','Janani@1');
+            //
+            // deferred.resolve({id:1});
+            // scope.$apply();
 
         });
 
-        it('Make login Page with Error', function () {
+
+
+        it('Make login Page with password doesnt match', function () {
             scope.loginPageWithError();
             expect(scope.user).toBe('');
             expect(scope.password).toBe('');
             expect(scope.credentialsInvalid).toBe(true);
 
         });
+
+
+
     });
+
 
     describe('#should login with social sites', function () {
         it('Facebook login', function () {

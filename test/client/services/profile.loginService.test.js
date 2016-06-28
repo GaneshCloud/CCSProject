@@ -47,14 +47,49 @@ describe('loginService',function(){
         //     expect($httpBackend.flush).toThrow();
         //
         // }));
-
         it('Check User',inject(function($httpBackend){
+
             $httpBackend
                 .when('GET','/getLoggedInUser')
-                .respond(200, {response: {data: {userType:'admin'}}});
+                .respond(200,{userType:'admin'});
             var res=$factory.checkUser();
             expect($httpBackend.flush).not.toThrow();
 
+        }));
+
+        it('Check User',inject(function($httpBackend){
+
+            $httpBackend
+                .when('GET','/getLoggedInUser')
+                .respond(200, {data:{userType:''}});
+            var res=$factory.checkUser();
+            expect($httpBackend.flush).not.toThrow();
+
+        }));
+
+        it('Check User',inject(function($httpBackend){
+
+            $httpBackend
+                .when('GET','/getLoggedInUser')
+                .respond(500, {error:{userType:''}});
+            var res=$factory.checkUser();
+            expect($httpBackend.flush).not.toThrow();
+
+        }));
+
+        it('open Error Screen',inject(function(){
+            var data = {
+                error:{
+                    code:'',
+                    errno:'',
+                    fatal:'',
+                    sqlState:'',
+                    index:''
+                }
+            }
+            $factory.showError(data);
+            expect(windowObj.location.href).toEqual('/error/message');
+            localStorage.clear();
         }));
     });
 
