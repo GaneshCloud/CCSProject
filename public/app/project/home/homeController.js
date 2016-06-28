@@ -77,13 +77,10 @@
           });
     };
 
-
     $scope.chartData = function(){
       homeService.chartData()
           .then(function (results) {	//Success function
-              var total=[];
-              total = results.data[0];
-                   $scope.totalPercentage = total.per
+                   $scope.totalPercentage = results.data[0].per;
           }).catch(function(error) {
             console.log('Error');
           });

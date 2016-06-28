@@ -58,7 +58,7 @@ exports.imageData = function(req, res) {
 
 exports.postQuestion = function(req, res) {
   var now = new Date();
-  connection.query('Insert into questions(Question, createdBy, createdAt) values(\'' + req.body + '\',\'Ganesh\',\'' + dateFormat(now, 'dddd, mmmm dS, yyyy, h:MM:ss TT') + '\')', function(err,result) {
+  connection.query('Insert into stud_questions(Question, createdBy, createdAt) values(\'' + req.body + '\',\'Ganesh\',\'' + dateFormat(now, 'dddd, mmmm dS, yyyy, h:MM:ss TT') + '\')', function(err,result) {
 
     if (err) {
      // console.log('Error when get postQuestion data : ' + err);
