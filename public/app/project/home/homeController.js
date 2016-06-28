@@ -84,7 +84,7 @@
               var total=[];
               console.log("kkkkk"+results.data);
                   total = results.data[0];
-                   $scope.totalPercentage = total.per;
+                   $scope.totalPercentage = total.per
           }).catch(function(error) {
             console.log('Error');
           });
