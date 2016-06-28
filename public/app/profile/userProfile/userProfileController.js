@@ -13,10 +13,12 @@
     '$window',
     'userProfileService',
     'spinnerService',
-    'dashboardService'
+    'dashboardService',
+      'defaultProfilePicture',
+      'uploadedProfilePicturePath'
   ];
 
-  function userProfileController($scope,$window,userProfileService,spinnerService,dashboardService) {
+  function userProfileController($scope,$window,userProfileService,spinnerService,dashboardService,defaultProfilePicture,uploadedProfilePicturePath) {
 
     dashboardService.checkAdmin();
 
@@ -27,12 +29,6 @@
     $scope.editPersonalData = false;
 
     $scope.imageChanged = false;
-
-    // $scope.showLocImg = false;
-    //
-    // $scope.showFbImage = false;
-    //
-    // $scope.showGImage = false;
 
     $scope.successMsg = '';
 
@@ -46,7 +42,7 @@
 
     $scope.dataChanged = false;
 
-    $scope.file = '../../../images/profile/no_profile.png';
+    $scope.file = defaultProfilePicture;
 
     if (!localStorage.$dirty) {
 
@@ -109,17 +105,17 @@
       $scope.dataChanged = true;
     };
 
-    $scope.showFacebookImage = function() {
-      $scope.file = '../../../uploads/profile/' + $scope.personalData.facebook_img;
-    };
-
-    $scope.showGoogleImage = function() {
-      $scope.file = '../../../uploads/profile/' + $scope.personalData.google_img;
-    };
-
-    $scope.showLocalImg = function() {
-      $scope.file = '../../../uploads/profile/' + $scope.personalData.profile_pic;
-    };
+    // $scope.showFacebookImage = function() {
+    //   $scope.file = '../../../uploads/profile/' + $scope.personalData.facebook_img;
+    // };
+    //
+    // $scope.showGoogleImage = function() {
+    //   $scope.file = '../../../uploads/profile/' + $scope.personalData.google_img;
+    // };
+    //
+    // $scope.showLocalImg = function() {
+    //   $scope.file = '../../../uploads/profile/' + $scope.personalData.profile_pic;
+    // };
 
     $scope.addFacebookAccount = function() {
       spinnerService.show('html5spinner');
@@ -199,7 +195,7 @@
     $scope.getImageSrc = function(image) {
       var img = '';
       if (image) {
-        img = '../../../uploads/profile/' + image;
+        img = uploadedProfilePicturePath + image;
       }else {
         img = $scope.file;
       }
@@ -308,7 +304,7 @@
 
             if ($scope.personalData.profile_pic !== null) {
 
-              $scope.file = '../../../uploads/profile/' + $scope.personalData.profilePic;
+              $scope.file = uploadedProfilePicturePath + $scope.personalData.profilePic;
 
               console.log('User Profile Pic --->' + $scope.file);
 

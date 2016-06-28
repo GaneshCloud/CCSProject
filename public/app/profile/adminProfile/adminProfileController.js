@@ -13,16 +13,18 @@
     'adminProfileService',
     'spinnerService',
     'filterFilter',
-    'dashboardService'
+    'dashboardService',
+      'defaultProfilePicture',
+      'uploadedProfilePicturePath'
   ];
 
-  function adminProfileController($scope,$window,adminProfileService,spinnerService,filterFilter,dashboardService) {
+  function adminProfileController($scope,$window,adminProfileService,spinnerService,filterFilter,dashboardService,defaultProfilePicture,uploadedProfilePicturePath) {
 
     dashboardService.checkAdmin();
 
     $scope.userCredentials = false;
 
-    $scope.file = '../images/profile/no_profile.png';
+    $scope.file = defaultProfilePicture;
 
     $scope.noData = true;
 
@@ -90,11 +92,11 @@
       var img;
 
       if (user.profilePic) {
-        img = '../uploads/profile/' + user.profilePic;
+        img = uploadedProfilePicturePath + user.profilePic;
       }else if (user.facebookImage) {
-        img = '../uploads/profile/' + user.facebookImage;
+        img = uploadedProfilePicturePath + user.facebookImage;
       }else if (user.googleImage) {
-        img = '../uploads/profile/' + user.googleImage;
+        img = uploadedProfilePicturePath + user.googleImage;
       }else {
         img = $scope.file;
       }
@@ -108,7 +110,7 @@
       var img;
 
       if (image) {
-        img = '../uploads/profile/' + image;
+        img = uploadedProfilePicturePath + image;
       }else {
         img = $scope.file;
       }
