@@ -181,16 +181,8 @@
                                     <div class="btn-group">
                                         <button  class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" >
                                             <span  class="caret"></span></button>
-
-                                        <ul class="dropdown-menu" role="menu">
-                                            <li><a ng-click="order('projectCode')"> <span class="glyphicon glyphicon-sort-by-alphabet"></span>&nbsp;Ascending</a></li>
-                                            <li><a ng-click="order1('projectCode')"><span class="glyphicon glyphicon-sort-by-alphabet-alt"></span>&nbsp;Descending</a></li>
-
-                                            <li><a ng-click="searchBox(0)" ng-show="visible[0]"><span class="glyphicon glyphicon-search"></span>&nbsp;Search</a></li>
-
-                                            <li><a ng-click="search1Box(0)" ng-hide="visible[0]"><span class="glyphicon glyphicon-search"></span>&nbsp;Hide search</a></li>
-
-                                        </ul></div>
+                                        <my-directive field="projectCode" search-box="searchBox(0)" search1-box="search1Box(0)"" visible-arr="visible[0]" order-dsc="order1(field)" order-asc="order(field)"></my-directive>
+                                        </div>
                                     <input type="text" class="form-control" ng-show="searchText[0]" ng-model="name1" value="search">
                                 </th>
 
@@ -199,17 +191,8 @@
                                     <div class="btn-group">
                                         <button  class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" >
                                             <span  class="caret"></span></button>
-
-                                        <ul class="dropdown-menu" role="menu">
-                                            <li><a ng-click="order('Title')"><span class="glyphicon glyphicon-sort-by-alphabet"></span>&nbsp;Ascending</a></li>
-
-                                            <li><a ng-click="order1('Title')"><span class="glyphicon glyphicon-sort-by-alphabet-alt"></span>&nbsp;Descending</a></li>
-
-                                            <li><a ng-click="searchBox(1)" ng-show="visible[1]"><span class="glyphicon glyphicon-search"></span>&nbsp;Search</a></li>
-
-                                            <li><a ng-click="search1Box(1)" ng-hide="visible[1]"><span class="glyphicon glyphicon-search"></span>&nbsp;Hide search</a></li>
-
-                                        </ul></div>
+                                        <my-directive field="Title" search-box="searchBox(1)" search1-box="search1Box(1)"" visible-arr="visible[1]" order-dsc="order1(field)" order-asc="order(field)"></my-directive>
+                                    </div>
                                     <input type="text" class="form-control" ng-show="searchText[1]" ng-model="name2" value="search">
 
                                 </th>
@@ -219,17 +202,8 @@
                                     <div class="btn-group">
                                         <button  class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" >
                                             <span  class="caret"></span></button>
-
-                                        <ul class="dropdown-menu" role="menu">
-                                            <li><a ng-click="order('Department')"><span class="glyphicon glyphicon-sort-by-alphabet"></span>&nbsp;Ascending</a></li>
-
-                                            <li><a ng-click="order1('Department')"><span class="glyphicon glyphicon-sort-by-alphabet-alt"></span>&nbsp;Descending</a></li>
-
-                                            <li><a ng-click="searchBox(2)" ng-show="visible[2]"><span class="glyphicon glyphicon-search"></span>&nbsp;Search</a></li>
-
-                                            <li><a ng-click="search1Box(2)" ng-hide="visible[2]"><span class="glyphicon glyphicon-search"></span>&nbsp;Hide search</a></li>
-
-                                        </ul></div>
+                                        <my-directive field="Department" search-box="searchBox(2)" search1-box="search1Box(2)"" visible-arr="visible[2]" order-dsc="order1(field)" order-asc="order(field)"></my-directive>
+                                    </div>
                                     <input type="text" class="form-control" ng-show="searchText[2]" ng-model="name3" value="search">
 
                                 </th>
@@ -239,19 +213,9 @@
                                     <div class="btn-group">
                                         <button  class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" >
                                             <span class="caret"></span></button>
+                                        <my-directive field="subHeads" search-box="searchBox(3)" search1-box="search1Box(3)"" visible-arr="visible[3]" order-dsc="order1(field)" order-asc="order(field)"></my-directive>
 
-                                        <ul class="dropdown-menu" role="menu">
-                                            <li><a ng-click="order('subHeads')"><span class="glyphicon glyphicon-sort-by-alphabet"></span>&nbsp;Ascending</a></li>
-
-
-
-                                            <li><a ng-click="order1('subHeads')"><span class="glyphicon glyphicon-sort-by-alphabet-alt"></span>&nbsp;Descending</a></li>
-
-                                            <li><a ng-click="searchBox(3)" ng-show="visible[3]"><span class="glyphicon glyphicon-search"></span>&nbsp;Search</a></li>
-
-                                            <li><a ng-click="search1Box(3)" ng-hide="visible[3]"><span class="glyphicon glyphicon-search"></span>&nbsp;Hide search</a></li>
-
-                                        </ul></div>
+                                    </div>
                                     <input type="text" class="form-control" ng-show="searchText[3]" ng-model="name4" value="search">
                                 </th>
 
@@ -260,17 +224,8 @@
                                     <div class="btn-group">
                                         <button  class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" >
                                             <span  class="caret"></span></button>
-
-                                        <ul class="dropdown-menu" role="menu">
-                                            <li><a ng-click="order('Software')"><span class="glyphicon glyphicon-sort-by-alphabet"></span>&nbsp;Ascending</a></li>
-
-                                            <li><a ng-click="order1('Software')"><span class="glyphicon glyphicon-sort-by-alphabet-alt"></span>&nbsp;Descending</a></li>
-
-                                            <li><a ng-click="searchBox(4)" ng-show="visible[4]"><span class="glyphicon glyphicon-search"></span>&nbsp;Search</a></li>
-
-                                            <li><a ng-click="search1Box(4)" ng-hide="visible[4]"><span class="glyphicon glyphicon-search"></span>&nbsp;Hide search</a></li>
-
-                                        </ul></div>
+                                        <my-directive field="Amount" search-box="searchBox(4)" search1-box="search1Box(4)"" visible-arr="visible[4]" order-dsc="order1(field)" order-asc="order(field)"></my-directive>
+                                    </div>
                                     <input type="text" class="form-control" ng-show="searchText[4]" ng-model="name5" value="search">
 
                                 </th>
@@ -280,18 +235,8 @@
                                     <div class="btn-group">
                                         <button  class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" >
                                             <span  class="caret"></span></button>
-
-                                        <ul class="dropdown-menu" role="menu">
-
-                                            <li><a ng-click="order('catlogCode')"><span class="glyphicon glyphicon-sort-by-alphabet"></span>&nbsp;Ascending</a></li>
-
-                                            <li><a ng-click="order1('catlogCode')"><span class="glyphicon glyphicon-sort-by-alphabet-alt"></span>&nbsp;Descending</a></li>
-
-                                            <li><a ng-click="searchBox(5)" ng-show="visible[5]"><span class="glyphicon glyphicon-search"></span>&nbsp;Search</a></li>
-
-                                            <li><a ng-click="search1Box(5)" ng-hide="visible[5]"><span class="glyphicon glyphicon-search"></span>&nbsp;Hide search</a></li>
-
-                                        </ul></div>
+                                        <my-directive field="catlogCode" search-box="searchBox(5)" search1-box="search1Box(5)"" visible-arr="visible[5]" order-dsc="order1(field)" order-asc="order(field)"></my-directive>
+                                    </div>
                                     <input type="text" class="form-control" ng-show="searchText[5]" ng-model="name6" value="search">
                                 </th>
 
@@ -300,17 +245,8 @@
                                     <div class="btn-group">
                                         <button  class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" >
                                             <span  class="caret"></span></button>
-
-                                        <ul class="dropdown-menu" role="menu">
-                                            <li><a ng-click="order('Domain')"><span class="glyphicon glyphicon-sort-by-alphabet"></span>&nbsp;Ascending</a></li>
-
-                                            <li><a ng-click="order1('Domain')"><span class="glyphicon glyphicon-sort-by-alphabet-alt"></span>&nbsp;Descending</a></li>
-
-                                            <li><a ng-click="searchBox(6)" ng-show="visible[6]"><span class="glyphicon glyphicon-search"></span>&nbsp;Search</a></li>
-
-                                            <li><a ng-click="search1Box(6)" ng-hide="visible[6]"><span class="glyphicon glyphicon-search"></span>&nbsp;Hide search</a></li>
-
-                                        </ul></div>
+                                        <my-directive field="Domain" search-box="searchBox(6)" search1-box="search1Box(6)"" visible-arr="visible[6]" order-dsc="order1(field)" order-asc="order(field)"></my-directive>
+                                    </div>
                                     <input type="text" class="form-control" ng-show="searchText[6]" ng-model="name7" value="search">
                                 </th>
                                 <th style="text-align:center; font-size:medium">If Any Changes
