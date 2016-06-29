@@ -272,28 +272,28 @@
 
 
 
-                                    <td ng-hide="hideTitle"> <select class="form-control" data-toggle="tooltip" data-placement="top" title="Title" ng-options="y for y in Title" ng-model="detail.Title" ng-show=$index==rowEdit>
+                                    <td ng-hide="hideTitle"> <select class="form-control" data-toggle="tooltip" data-placement="top" title="Title" ng-options="y for y in Title" ng-model="detail.title" ng-show=$index==rowEdit>
                                     </select><span ng-hide="$index==rowEdit"> {{ detail.title }} </span></td>
 
 
-                                    <td ng-hide="hideDepartment"> <select class="form-control" data-toggle="tooltip" data-placement="top" title="Department" ng-options="x for x in names" ng-model="detail.Department" ng-show=$index==rowEdit>
+                                    <td ng-hide="hideDepartment"> <select class="form-control" data-toggle="tooltip" data-placement="top" title="Department" ng-options="x for x in names" ng-model="detail.department" ng-show=$index==rowEdit>
                                        </select> <span ng-hide="$index==rowEdit"> {{ detail.department }} </span></td>
 
 
                                     <td ng-hide="hideSubHeads"> <select class="form-control" data-toggle="tooltip" data-placement="top" title="subHeads" ng-options="z for z in subHeads" ng-model="detail.subHeads" ng-show=$index==rowEdit></select><span ng-hide="$index==rowEdit"> {{ detail.subHeads }} </span></td>
 
 
-                                    <td ng-hide="hideAmount"><input type="text" data-toggle="tooltip" data-placement="top" title="SoftwareCost" class="form-control" ng-model="detail.Software" ng-show=$index==rowEdit><input type="text" class="form-control" data-toggle="tooltip" data-placement="top" title="HardwareCost" ng-model="detail.Hardware" ng-show=$index==rowEdit ><span ng-hide=$index==rowEdit>   ${{ detail.software + detail.hardware }} </span></td>
+                                    <td ng-hide="hideAmount"><input type="text" data-toggle="tooltip" data-placement="top" title="SoftwareCost" class="form-control" ng-model="detail.software" ng-show=$index==rowEdit><input type="text" class="form-control" data-toggle="tooltip" data-placement="top" title="HardwareCost" ng-model="detail.hardware" ng-show=$index==rowEdit ><span ng-hide=$index==rowEdit>   ${{ detail.software + detail.hardware }} </span></td>
 
 
                                     <td ng-hide="hideCatlogCode"> <select class="form-control" data-toggle="tooltip" data-placement="top" title="Catlog Code" ng-options="w for w in catlogCode" ng-model="detail.catlogCode" ng-show=$index==rowEdit></select><span ng-hide=$index==rowEdit> {{ detail.catlogCode }} </span></td>
 
-                                    <td ng-hide="hideDomain"><select class="form-control" data-toggle="tooltip" data-placement="top" title="Domain" ng-options="w for w in Domain" ng-model="detail.Domain" ng-show=$index==rowEdit></select>
+                                    <td ng-hide="hideDomain"><select class="form-control" data-toggle="tooltip" data-placement="top" title="Domain" ng-options="w for w in Domain" ng-model="detail.domain" ng-show=$index==rowEdit></select>
                                         <span ng-hide=$index==rowEdit>  {{ detail.domain }}</span> </td>
 
                                     <!-- EDIT UPDATE AND DELETE BUTTON -->
 
-                                    <td><a class="btn btn-default btn-small" data-toggle="tooltip" data-placement="top" title="Edit" ng-click="editData($index)" ng-hide="$index==rowEdit" >
+                                    <td><a class="btn btn-default btn-small" data-toggle="tooltip" data-placement="top" title="Edit" ng-click="editProjectData($index)" ng-hide="$index==rowEdit" >
                                         <span class="glyphicon glyphicon-edit"></span> </a>
 
                                         <a class="btn btn-default" data-toggle="tooltip" data-placement="top" title="upDate" ng-click="updateProject(detail,$index)" ng-show="$index==rowEdit">

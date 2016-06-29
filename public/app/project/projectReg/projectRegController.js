@@ -18,9 +18,9 @@
         $scope.Domain = ['RFID', 'ROBOTICS', 'BIOMEDICAL PROJECTS', 'C,C++ AND VC++ PROJECTS', 'CIVIL DESIGN Projects'];
 
 
-        $scope.isEdit = true;
+        var isEdit = true;
 
-        $scope.noData = true;
+        var noData = true;
 
         $scope.cur_page = 1;
 
@@ -45,7 +45,7 @@
         };
 
         $scope.showPagination = function() {
-            return $scope.noData;
+            return noData;
         };
 
         $scope.goToDashboard = function() {
@@ -96,7 +96,7 @@
 
                     if ($scope.datas.length > 0) {
 
-                        $scope.noData = false;
+                        noData = false;
 
                         $scope.totalLength = $scope.datas.length;
 
@@ -159,9 +159,9 @@
             });
         };
 
-        $scope.editData = function(index) {
+        $scope.editProjectData = function(index) {
             $scope.rowEdit = index;
-            $scope.isEdit = false;
+            isEdit = false;
 
         };
 
