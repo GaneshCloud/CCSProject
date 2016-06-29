@@ -1,7 +1,7 @@
 module.exports = function(app) {
   var con = require('../controllers/project.projectReg.server.controller');
-  app.get('/getdata',con.getData);
-  app.post('/postdata',con.postData);
-  app.post('/editdata',con.EditData);
-  app.post('/deletedata',con.DeleteData);
+  app.get('/getAllProjects',con.getAllProject);
+  app.post('/postNewProject',con.postProject);
+  app.post('/updateProject',con.editProject);
+  app.post('/deleteProject',con.deleteProject);
 };

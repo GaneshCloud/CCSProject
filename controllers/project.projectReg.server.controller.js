@@ -4,31 +4,13 @@ var db=require('../config/db.js');
 var connection=mysql.createConnection(db);
 var documents=require('../config/db/projectRegManager.js');
 var objDocument=new documents(connection);
-
-
 exports.home=function(req,res){
   res.sendfile('./public/app/core/layout.html');
 };
 
-
-exports.getData=function(req,res){
-  objDocument.GET_DATA(function(err,result){
+exports.getAllProject=function(req,res){
+  objDocument.getProjects(function(err,result){
     if(err){
-      res.send(err);
-      //throw err;
-    }
-    else{
-      res.send(result);
-    }
-  });
-};
-
-exports.postData=function(req,res){
-  var data=req.body;
-  objDocument.POST_DATA(data,function(err,result){
-    if(err){
-
-      //throw err;
       res.send(err);
     }
     else{
@@ -37,16 +19,24 @@ exports.postData=function(req,res){
   });
 };
 
-exports.EditData=function(req,res){
+exports.postProject=function(req,res){
   var data=req.body;
+  objDocument.postProjects(data,function(err,result){
+    if(err){
+      res.send(err);
+    }
+    else{
+      res.send(result);
+    }
+  });
+};
 
-  // console.log(req.params.id);
-  objDocument.EDIT_DATA(data.id,req.body,function(err,result){
+exports.editProject=function(req,res){
+  var data=req.body;
+  objDocument.editProjects(data.id,req.body,function(err,result){
     console.log(result);
     if(err){
-      //console.log(err);
       res.send(err);
-      //throw err;
     }
     else{
       res.send(result);
@@ -54,16 +44,14 @@ exports.EditData=function(req,res){
   });
 };
 
-exports.DeleteData=function(req,res){
+exports.deleteProject=function(req,res){
   var data=req.body.id;
-  objDocument.DELETE_DATA(data,function(err,result){
+  objDocument.deleteProjects(data,function(err,result){
     if(err){
       res.send(err);
-      //throw err;
     }
     else{
       res.send(result);
     }
-
   });
 };

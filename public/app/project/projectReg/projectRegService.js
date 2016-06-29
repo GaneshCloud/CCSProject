@@ -7,31 +7,29 @@
   function projectRegService($http, $window) {
 
 
-    this.getFeedbacks = function () {
-      return $http.get('/getdata');
+    this.getAllProjects = function () {
+      return $http.get('/getAllProjects');
     };
 
 
-    this.postData = function (data) {
+    this.postNewProject = function (data) {
 
-      return $http.post('/postdata', data);
+      return $http.post('/postNewProject', data);
     };
 
-    this.updateData = function (data) {
+    this.updateProject = function (data) {
 
-      return $http.post('/editdata', data);
+      return $http.post('/updateProject', data);
 
     };
 
-    this.deleteData = function (id) {
+    this.deleteProject = function (id) {
       var data = {
         id : id
       };
-      return $http.post('/deletedata', data);
+      return $http.post('/deleteProject', data);
     };
-
     
-
     this.goToDashboard = function () {
       $window.location.href = '/profile/dashboard';
     };

@@ -16,7 +16,7 @@
         $scope.subHeads = ['CEA-ATMEL', 'CEA-OTHERS', 'CEC-PC BASED', 'CEA-DSP PROJECTS', 'IEEE PAPERS'];
         $scope.catlogCode = ['CIS-C# NET PROJECTS', 'CDB BIO MEDICAL PROJECTS', 'C,C++ AND VC++ PROJECTS', 'CAD/CAM/CAE PROJECTS', 'CIVIL DESIGN PROJECTS'];
         $scope.Domain = ['RFID', 'ROBOTICS', 'BIOMEDICAL PROJECTS', 'C,C++ AND VC++ PROJECTS', 'CIVIL DESIGN Projects'];
-        // $scope.asc=false;
+
 
         $scope.isEdit = true;
 
@@ -48,10 +48,6 @@
             return $scope.noData;
         };
 
-        // $scope.onLogout = function() {
-        //     if ($window.confirm('Are You Sure ! Do you need to Log Out?'));
-        // };
-
         $scope.goToDashboard = function() {
             projectRegService.goToDashboard();
         };
@@ -61,13 +57,6 @@
         $scope.searchText = [false,false,false,false,false,false,false];
 
         $scope.visible = [true,true,true,true,true,true,true];
-
-
-        // $(document).ready(function() {
-        //     $('[data-toggle="tooltip"]').tooltip();
-        // });
-
-
 
         $scope.order = function(predicate)    {
             $scope.predicate = predicate;
@@ -83,8 +72,6 @@
 
         };
 
-
-
         $scope.searchBox = function(index)    {
             $scope.searchText[index] = true;
             $scope.visible[index] = false;
@@ -98,15 +85,10 @@
         };
 
 
-
-
-
         $scope.displaySave = true;
-        // $scope.sel_id="";
 
-
-        $scope.getFeedbacks = function() {
-            projectRegService.getFeedbacks()
+        $scope.getAllProjects = function() {
+            projectRegService.getAllProjects()
 
                 .then(function(response) {
 
@@ -125,7 +107,7 @@
                             var begin = (($scope.cur_page - 1) * $scope.items_per_page), end = begin + $scope.items_per_page;
                             console.log(begin + ' ' + end);
                             $scope.dataFilter = $scope.datas.slice(begin, end);
-                            // Alert("data"+$scope.searches);
+
                         });
                     }
 
@@ -146,7 +128,7 @@
 
                 .catch(function(error) {
                     //Showing error message
-                    $scope.status = 'Unable to retrieve Feedbacks' + error;
+                    $scope.status = 'Unable To Retrieve The Project Details' + error;
 
                 });
 
@@ -154,7 +136,7 @@
 
         };
 
-        $scope.postData = function() {
+        $scope.postNewProject = function() {
 
             var data = {projectCode: $scope.new.projectCode,
                 Title: $scope.new.Title,
@@ -167,36 +149,25 @@
             };
 
 
-            projectRegService.postData(data)
+            projectRegService.postNewProject(data)
                 .then(function(data) {
-                alert('The Feedback Saved Successfully!!!');
-                $scope.getFeedbacks();
+                alert('New Project Added Successfully!!!');
+                $scope.getAllProjects();
             }).
             catch(function(error) {
-                alert('unable to save the feedback :' + error);
+                alert('Unable To The Project :' + error);
             });
-
-
         };
-
 
         $scope.editData = function(index) {
-
             $scope.rowEdit = index;
-            //$scope.datas[index].edit=true;
             $scope.isEdit = false;
-
-
 
         };
 
 
 
-        $scope.updateData = function(x,rowedit) {
-
-            //$scope.editdata = false;
-            //$scope.updatedata = true;
-
+        $scope.updateProject = function(x,rowedit) {
 
             $scope.dataFilter[rowedit].projectCode = x.projectCode;
             $scope.dataFilter[rowedit].Title = x.Title;
@@ -221,52 +192,30 @@
                 id: $scope.dataFilter[rowedit].id
             };
 
-            projectRegService.updateData(data)
+            projectRegService.updateProject(data)
 
                 .then(function(response) {
-            
-
-                    alert('The Feedback Updated Successfully!!!');
-
-                    //$window.location.href='/';
+                    alert('The Project Updated Successfully!!!');
                     $scope.rowEdit = -1;
-                    $scope.getFeedbacks();
-
-                    /*$scope.updatedata = false;
-                     $scope.editdata = true;*/
+                    $scope.getAllProjects();
                     $scope.isEdit = true;
-
-
                 })
                 .catch(function(error) {
-
-                    alert('Unable to update a Feedback: ' + error);
+                    alert('Unable to Update The Project: ' + error);
                 });
-
-
         };
 
-
-        $scope.deleteData = function(id)    {
-            // Var del = {id: id};
-            projectRegService.deleteData(id)
-
-
+        $scope.deleteProject = function(id)    {
+            projectRegService.deleteProject(id)
                 .then(function(data) {
-
-                    alert('the data deleted successfully');
-                    $scope.getFeedbacks();
-
-
+                    alert('The Selected Project deleted successfully');
+                    $scope.getAllProjects();
                 }).
             catch(function(error) {
-                alert('unable to delete a feedback' + error);
+                alert('Unable To Delete The Project' + error);
             });
         };
-
-
-
-        $scope.getFeedbacks();
+        $scope.getAllProjects();
     }
 })();
 

@@ -12,106 +12,86 @@ describe('projectReg service',function(){
     });
     beforeEach(inject(function($injector,$httpBackend){
         $factory=$injector.get("projectRegService");
-
     }));
 
-    describe('get the data',function(){
-        it('get data function',inject(function($httpBackend){
+    describe('get the project',function(){
+        it('get project function',inject(function($httpBackend){
             $httpBackend
-                .when('GET','/getdata')
+                .when('GET','/getAllProjects')
                 .respond(200);
-            var res=$factory.getFeedbacks();
+            var res=$factory.getAllProjects();
             expect($httpBackend.flush).not.toThrow();
-
         }));
 
-        it('get data invalid url function',inject(function($httpBackend){
+        it('get project invalid url function',inject(function($httpBackend){
             $httpBackend
-                .when('GET','/getdata12')
+                .when('GET','/getAllProjects1')
                 .respond(200);
-            var res=$factory.getFeedbacks();
+            var res=$factory.getAllProjects();
             expect($httpBackend.flush).toThrow();
-
         }));
-
     });
 
-    describe('post data',function(){
-       it('post data function',inject(function($httpBackend){
-
+    describe('post project',function(){
+       it('post project function',inject(function($httpBackend){
            $httpBackend
-               .when('POST','/postdata')
+               .when('POST','/postNewProject')
                .respond(200);
-           var res=$factory.postData();
+           var res=$factory.postNewProject();
            expect($httpBackend.flush).not.toThrow();
        })) ;
 
-        it('post data invalid url function',inject(function($httpBackend){
-
+        it('post project invalid url function',inject(function($httpBackend){
             $httpBackend
-                .when('POST','/postdata34')
+                .when('POST','/postNewProject1')
                 .respond(200);
-            var res=$factory.postData();
+            var res=$factory.postNewProject();
             expect($httpBackend.flush).toThrow();
         })) ;
-
     });
 
-    describe('update data',function(){
+    describe('update project',function(){
         it('post data function',inject(function($httpBackend){
-
             $httpBackend
-                .when('POST','/editdata')
+                .when('POST','/updateProject')
                 .respond(200);
-            var res=$factory.updateData();
+            var res=$factory.updateProject();
             expect($httpBackend.flush).not.toThrow();
         })) ;
 
-        it('update data invalid url function',inject(function($httpBackend){
-
+        it('update project invalid url function',inject(function($httpBackend){
             $httpBackend
-                .when('POST','/editdata45')
+                .when('POST','/updateProject1')
                 .respond(200);
-            var res=$factory.updateData();
+            var res=$factory.updateProject();
             expect($httpBackend.flush).toThrow();
         })) ;
 
     });
 
-    describe('delete data',function(){
+    describe('delete project',function(){
         it('post data function',inject(function($httpBackend){
 
             $httpBackend
-                .when('POST','/deletedata')
+                .when('POST','/deleteProject')
                 .respond(200);
-            var res=$factory.deleteData(16);
+            var res=$factory.deleteProject(16);
             expect($httpBackend.flush).not.toThrow();
         })) ;
 
-        it('delete data invalid url function',inject(function($httpBackend){
-
+        it('delete project invalid url function',inject(function($httpBackend){
             $httpBackend
-                .when('POST','/deletedata12/100')
+                .when('POST','/deleteProject12/100')
                 .respond(200);
-            var res=$factory.deleteData(100);
+            var res=$factory.deleteProject(100);
             expect($httpBackend.flush).toThrow();
         })) ;
-
     });
-
-
 
     describe("dashboard service",function () {
-
         it('href redirects', function() {
             $factory.goToDashboard();
             expect(windowObj.location.href).not.toEqual('/profile/adminDashboard');
         });
     });
-
-
-    
-
-
-
 });
