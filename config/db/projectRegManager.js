@@ -1,6 +1,6 @@
 module.exports=function(connection){
     this.getProjects=function(cb){
-        var qry="select * from erp_database";
+        var qry="select q.projectCode as projectCode,q.title as title,q.department as department,q.subHeads as subHeads,q.software as software,q.hardware as hardware,q.catlogCode as catlogCode,q.domain as domain,q.id as id from erp_database q";
         console.log("get the data from DB" + qry);
         var err=null,results=null;
         connection.query(qry,function(err,results){
