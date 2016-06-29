@@ -1,9 +1,6 @@
 /**
  * Created by CSS on 28-05-2016.
  */
-/**
- * Created by CSS on 09-06-2016.
- */
 
 var chai = require('chai');
 
@@ -23,8 +20,9 @@ var Browser = require('zombie');
 //     });
 // });
 
-before(function () {
+before(function (done) {
     server = require('../../../server').server;
+    done();
 });
 
 describe("#Get User Details",function () {
@@ -80,31 +78,33 @@ describe("login using social sites",function () {
 
     });
 
-    // it("should login with google",function (done) {
-    //
-    //     Browser.visit('http://127.0.0.1:3000/auth/google',function (err,brw) {
-    //
-    //         if(err){
-    //             throw err;
-    //         }
-    //
-    //         brw.assert.success(done());
-    //
-    //         //
-    //         // brw.fill('Email','csejananim@gmail.com').pressButton('signIn',function () {
-    //         //         brw.fill('Passwd', 'jananimanoharan#').pressButton('signIn',function (err,brow) {
-    //         //             // should.exist(brow);
-    //         //             // should.not.exist(err);
-    //         //             brw.assert.success();
-    //         //             done();
-    //         //         });
-    //         //     });
-    //
-    //     });
-    //
-    //
-    //
-    // });
+    it("should login with google",function (done) {
+
+        this.timeout(80000);
+
+        Browser.visit('http://127.0.0.1:3000/auth/google',function (err,brw) {
+
+            if(err){
+                throw err;
+            }
+
+            brw.fill('Email','csejananim@gmail.com').pressButton('signIn',function () {
+                (brw.fill('Passwd', '18mydearnithya#').pressButton('signIn')).then(function (err,brow) {
+                    console.log(brw.text('title'));
+                    brw.assert.success(done());
+                    // brw.assert.success();
+                    // done();
+                });
+            });
+
+
+
+
+        });
+
+
+
+    });
 
 
 });
