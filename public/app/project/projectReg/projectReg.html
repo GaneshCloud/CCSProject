@@ -80,13 +80,13 @@
                                             <label class="col-xs-2 control-label">Title</label>
                                         </td><td>
 
-                                            <select class="form-control" data-toggle="tooltip" data-placement="top" title="Title" ng-options="y for y in Title" data-ng-model="new.Title">
+                                            <select class="form-control" data-toggle="tooltip" data-placement="top" title="Title" ng-options="y for y in Title" data-ng-model="new.title">
                                             </select><br>
                                         </td></tr>
                                         <tr><td>
 
                                             <label class="col-xs-2 control-label" for="inputSuccess">Department</label></td><td>
-                                            <select class="form-control" data-toggle="tooltip" data-placement="top" title="Department" ng-options="x for x in names" data-ng-model="new.Department">
+                                            <select class="form-control" data-toggle="tooltip" data-placement="top" title="Department" ng-options="x for x in names" data-ng-model="new.department">
                                             </select><br>
                                         </td></tr>
 
@@ -103,14 +103,14 @@
                                             <label class="col-xs-2 control-label" for="inputSuccess">SoftwareAmount</label>
                                         </td>
                                             <td>
-                                                <input type="text" class="form-control"  data-toggle="tooltip" data-placement="top" title="Software Cost" data-ng-model="new.Software"  name="price_field"
+                                                <input type="text" class="form-control"  data-toggle="tooltip" data-placement="top" title="Software Cost" data-ng-model="new.software"  name="price_field"
                                                        ng-pattern="/^[0-9]{1,7}$/" required>
                                                 <span ng-show="sampleform.price_field.$error.pattern">Not a valid number!</span><br></td></tr>
                                         <tr><td>
                                             <label class="col-xs-2 control-label" for="inputSuccess">HardwareAmount</label>
                                         </td>
                                             <td>
-                                                <input type="text" class="form-control" data-toggle="tooltip" data-placement="top" title="Hardware Cost" data-ng-model="new.Hardware"  name="price_field1"
+                                                <input type="text" class="form-control" data-toggle="tooltip" data-placement="top" title="Hardware Cost" data-ng-model="new.hardware"  name="price_field1"
                                                        ng-pattern="/^[0-9]{1,7}$/" required>
                                                 <span ng-show="sampleform.price_field1.$error.pattern">Not a valid number!</span><br>
                                             </td></tr>
@@ -127,7 +127,7 @@
                                             <label class="col-xs-2 control-label" for="inputSuccess">Domain</label>
                                         </td>
                                             <td>
-                                                <select class="form-control" data-toggle="tooltip" data-placement="top" title="Domain" ng-options="w for w in Domain" data-ng-model="new.Domain"></select><br>
+                                                <select class="form-control" data-toggle="tooltip" data-placement="top" title="Domain" ng-options="w for w in Domain" data-ng-model="new.domain"></select><br>
                                             </td></tr>
 
                                     </div>
@@ -264,7 +264,7 @@
                                 <tbody>
 
 
-                                <tr ng-repeat="detail in dataFilter | orderBy : predicate : reverse | filter:search | filter:{projectCode:name1,Title:name2,Department:name3,subHeads:name4,Software:name5,catlogCode:name6,Domain:name7}">
+                                <tr ng-repeat="detail in dataFilter | orderBy : predicate : reverse | filter:search | filter:{projectCode:name1,title:name2,department:name3,subHeads:name4,software:name5,catlogCode:name6,domain:name7}">
 
 
                                     <td ng-hide="hideProjectCode"><input type="text" class="form-control" ng-model="detail.projectCode" ng-show=$index==rowEdit><span ng-hide="$index==rowEdit"> {{ detail.projectCode }}</span></td>
@@ -273,23 +273,23 @@
 
 
                                     <td ng-hide="hideTitle"> <select class="form-control" data-toggle="tooltip" data-placement="top" title="Title" ng-options="y for y in Title" ng-model="detail.Title" ng-show=$index==rowEdit>
-                                    </select><span ng-hide="$index==rowEdit"> {{ detail.Title }} </span></td>
+                                    </select><span ng-hide="$index==rowEdit"> {{ detail.title }} </span></td>
 
 
                                     <td ng-hide="hideDepartment"> <select class="form-control" data-toggle="tooltip" data-placement="top" title="Department" ng-options="x for x in names" ng-model="detail.Department" ng-show=$index==rowEdit>
-                                       </select> <span ng-hide="$index==rowEdit"> {{ detail.Department }} </span></td>
+                                       </select> <span ng-hide="$index==rowEdit"> {{ detail.department }} </span></td>
 
 
                                     <td ng-hide="hideSubHeads"> <select class="form-control" data-toggle="tooltip" data-placement="top" title="subHeads" ng-options="z for z in subHeads" ng-model="detail.subHeads" ng-show=$index==rowEdit></select><span ng-hide="$index==rowEdit"> {{ detail.subHeads }} </span></td>
 
 
-                                    <td ng-hide="hideAmount"><input type="text" data-toggle="tooltip" data-placement="top" title="SoftwareCost" class="form-control" ng-model="detail.Software" ng-show=$index==rowEdit><input type="text" class="form-control" data-toggle="tooltip" data-placement="top" title="HardwareCost" ng-model="detail.Hardware" ng-show=$index==rowEdit ><span ng-hide=$index==rowEdit>   ${{ detail.Software + detail.Hardware }} </span></td>
+                                    <td ng-hide="hideAmount"><input type="text" data-toggle="tooltip" data-placement="top" title="SoftwareCost" class="form-control" ng-model="detail.Software" ng-show=$index==rowEdit><input type="text" class="form-control" data-toggle="tooltip" data-placement="top" title="HardwareCost" ng-model="detail.Hardware" ng-show=$index==rowEdit ><span ng-hide=$index==rowEdit>   ${{ detail.software + detail.hardware }} </span></td>
 
 
                                     <td ng-hide="hideCatlogCode"> <select class="form-control" data-toggle="tooltip" data-placement="top" title="Catlog Code" ng-options="w for w in catlogCode" ng-model="detail.catlogCode" ng-show=$index==rowEdit></select><span ng-hide=$index==rowEdit> {{ detail.catlogCode }} </span></td>
 
                                     <td ng-hide="hideDomain"><select class="form-control" data-toggle="tooltip" data-placement="top" title="Domain" ng-options="w for w in Domain" ng-model="detail.Domain" ng-show=$index==rowEdit></select>
-                                        <span ng-hide=$index==rowEdit>  {{ detail.Domain }}</span> </td>
+                                        <span ng-hide=$index==rowEdit>  {{ detail.domain }}</span> </td>
 
                                     <!-- EDIT UPDATE AND DELETE BUTTON -->
 
