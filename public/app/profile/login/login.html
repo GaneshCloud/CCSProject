@@ -103,7 +103,7 @@
 
                         <div class="col-sm-10">
 
-                            <input type="password" id="password" name="password" ng-pattern="/(?=.*\d)(?=.*[A-Z])(?=.*[@#$%])/" ng-minlength="8" ng-maxlength="20" ng-blur="showmsg1 = false" ng-focus="showmsg1 = true" ng-model="password" class="form-control" placeholder="Password" required/>
+                            <input type="password" id="password" name="password" ng-pattern="/(?=.*\d)(?=.*[A-Z])(?=.*[@#$%_*^!&()|/~`])/" ng-minlength="8" ng-maxlength="20" ng-blur="showmsg1 = false" ng-focus="showmsg1 = true" ng-model="password" class="form-control" placeholder="Password" required/>
 
                             <p class="help-block ng-hide" ng-show="showmsg1">Should be minimum 8 characters and maximum 20 characters and must contain atleast one Capital letter, Special Character and a number</p>
 

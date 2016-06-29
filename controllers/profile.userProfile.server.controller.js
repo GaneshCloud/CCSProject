@@ -29,7 +29,7 @@ var storage = multer.diskStorage({ //multers disk storage settings
         personaldataManager.getPersonalData(data.id).then(function (results) {
             if(results && results.length > 0){
                 userData = results[0];
-                userData.profile_pic = data.file_name;
+                userData.profilePic = data.file_name;
                 personaldataManager.updateImage(userData).then(function (result) {
                    if(result && result.length > 0){
                        userData = result[0];
@@ -47,6 +47,11 @@ var upload = multer({ //multer settings
 
 
 router.get('/getPersonalData', function(req,res) {
+
+    console.log("req"+req+"req.session"+JSON.stringify(req.session));
+
+    console.log(req.session.authorization);
+
     if (req.session.passport) {
       req.session.data = [];
 
@@ -59,9 +64,8 @@ router.get('/getPersonalData', function(req,res) {
                 req.session.data = results[0];
                 res.send(results[0]);
               }
-            })
-            .fail(function(err) {
-              console.error(JSON.stringify(err));
+            },function (error) {
+                res.send(500,{ error: error });
             });
 
 });
@@ -69,23 +73,18 @@ router.get('/getPersonalData', function(req,res) {
 router.post('/updatePersonalData', function(req,res) {
     personaldataManager.updatePersonalData(req.body)
             .then(function(results) {
-              if (results) {
-                res.send(results);
+              if (results && results.length > 0) {
+                  req.session.data = results[0];
+                  res.send(results[0]);
               }
-            })
-            .fail(function(err) {
-              console.error(JSON.stringify(err));
+            },function (error) {
+                res.send(500,{ error: error });
             });
 });
 
 router.post('/uploadImage',function (req,res) {
-    upload(req,res,function(results,error){
-        if(error){
-            res.json({error_code:1,err_desc:error});
-            return;
-        }
-        req.session.data = results;
-        res.json({error_code:0,err_desc:null});
+    upload(req,res,function(){
+        res.send(req.session.data);
     });
 
     console.log("req--->"+req);

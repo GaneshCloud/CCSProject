@@ -8,11 +8,12 @@
 
   loginController.$inject=[
     '$scope',
+      '$window',
     'loginService',
     'spinnerService'
   ];
 
-  function loginController($scope,loginService,
+  function loginController($scope,$window,loginService,
                            spinnerService) {
 
     $scope.userCredentials = false;
@@ -56,11 +57,20 @@
       spinnerService.show('html5spinner');
       console.log('username --->' + user);
       // console.log("data"+loginService.verifyUser(user.$viewValue, password.$modelValue) );
-      if(loginService.verifyUser(user.$viewValue, password.$modelValue) !== ''){
-        loginService.dashboard();
-      }else {
-        $scope.loginPageWithError();
-      }
+      loginService.verifyUser(user.$viewValue,password.$modelValue).then(function (result) {
+
+
+        if(result.data === 'Warning'){
+          $scope.loginPageWithError();
+        }else {
+          loginService.dashboard();
+        }
+      },function (error) {
+
+        if(error){
+          loginService.showError(error.data);
+        }
+      });
 
     };
 

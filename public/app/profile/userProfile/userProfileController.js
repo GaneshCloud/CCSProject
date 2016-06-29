@@ -13,10 +13,12 @@
     '$window',
     'userProfileService',
     'spinnerService',
-    'dashboardService'
+    'dashboardService',
+      'defaultProfilePicture',
+      'uploadedProfilePicturePath'
   ];
 
-  function userProfileController($scope,$window,userProfileService,spinnerService,dashboardService) {
+  function userProfileController($scope,$window,userProfileService,spinnerService,dashboardService,defaultProfilePicture,uploadedProfilePicturePath) {
 
     dashboardService.checkAdmin();
 
@@ -28,11 +30,9 @@
 
     $scope.imageChanged = false;
 
-    $scope.showLocImg = false;
+    $scope.successMsg = '';
 
-    $scope.showFbImage = false;
-
-    $scope.showGImage = false;
+    $scope.showUpdatedStatus = false;
 
     $scope.fb_link = true;
 
@@ -42,7 +42,7 @@
 
     $scope.dataChanged = false;
 
-    $scope.file = '../../../images/profile/no_profile.png';
+    $scope.file = defaultProfilePicture;
 
     if (!localStorage.$dirty) {
 
@@ -105,35 +105,35 @@
       $scope.dataChanged = true;
     };
 
-    $scope.showFacebookImage = function() {
-      $scope.file = '../../../uploads/profile/' + $scope.personalData.facebook_img;
-    };
-
-    $scope.showGoogleImage = function() {
-      $scope.file = '../../../uploads/profile/' + $scope.personalData.google_img;
-    };
-
-    $scope.showLocalImg = function() {
-      $scope.file = '../../../uploads/profile/' + $scope.personalData.profile_pic;
-    };
+    // $scope.showFacebookImage = function() {
+    //   $scope.file = '../../../uploads/profile/' + $scope.personalData.facebook_img;
+    // };
+    //
+    // $scope.showGoogleImage = function() {
+    //   $scope.file = '../../../uploads/profile/' + $scope.personalData.google_img;
+    // };
+    //
+    // $scope.showLocalImg = function() {
+    //   $scope.file = '../../../uploads/profile/' + $scope.personalData.profile_pic;
+    // };
 
     $scope.addFacebookAccount = function() {
-      // $scope.progressbar.start();
       spinnerService.show('html5spinner');
       userProfileService.addFacebookAccount().then(function(response) {
-        // $scope.progressbar.complete();
         spinnerService.hide('html5spinner');
         $scope.personalData = response.data;
+      },function (error) {
+        dashboardService.showError(error.data);
       });
     };
 
     $scope.addGoogleAccount = function() {
-      // $scope.progressbar.start();
       spinnerService.show('html5spinner');
       userProfileService.addGoogleAccount().then(function(response) {
-        // $scope.progressbar.complete();
         spinnerService.hide('html5spinner');
         $scope.personalData = response.data;
+      },function (error) {
+        dashboardService.showError(error.data);
       });
     };
 
@@ -148,23 +148,18 @@
     $scope.fileUpload = function() {
 
       if ($window.confirm('Are You Sure ! Do you need to update the ProfilPicture?')) {
-        // $scope.progressbar.start();
         spinnerService.show('html5spinner');
-        userProfileService.uploadImage($scope.file).then(function() {
-          // $scope.progressbar.complete();
+        userProfileService.uploadImage($scope.file).then(function(result) {
+          $scope.personalData = result.data;
           spinnerService.hide('html5spinner');
           $scope.imageChanged = false;
 
-          angular.element('#result').html('<div class="alert alert-success"><button type="button" class="close">×</button>Profile Picture Changed!</div>');
-          $window.setTimeout(function() {
-            $('.alert').fadeTo(500, 0).slideUp(500, function() {
-              $(this).remove();
-            });
-          }, 5000);
-          $('.alert .close').on('click', function(e) {
-            console.log('e' + e);
-            $(this).parent().fadeTo(500, 0).slideUp(500);
-          });
+          $scope.successMsg = 'Profile Picture Changed!';
+
+          $scope.showUpdatedStatus = true;
+
+        },function(error){
+          dashboardService.showError(error.data);
         });
 
       }
@@ -174,10 +169,8 @@
     $scope.onCancelFileUpload = function() {
 
       $scope.imageChanged = false;
-      // $scope.progressbar.start();
       spinnerService.show('html5spinner');
       userProfileService.getPersonalData().then(function() {
-        // $scope.progressbar.complete();
         spinnerService.hide('html5spinner');
       });
 
@@ -202,7 +195,7 @@
     $scope.getImageSrc = function(image) {
       var img = '';
       if (image) {
-        img = '../../../uploads/profile/' + image;
+        img = uploadedProfilePicturePath + image;
       }else {
         img = $scope.file;
       }
@@ -241,25 +234,31 @@
       if ($window.confirm('Are You Sure ! Do you need to update the changes?')) {
 
         $scope.editPersonalData = false;
-
-        // $scope.progressbar.start();
         spinnerService.show('html5spinner');
-        userProfileService.updatePersonalData($scope.personalData).then(function() {
+        userProfileService.updatePersonalData($scope.personalData).then(function(result) {
+          $scope.personalData = result.data;
           spinnerService.hide('html5spinner');
+        },function (error) {
+          dashboardService.showError(error.data);
         });
 
-        angular.element('#result').html('<div class="alert alert-success"><button type="button" class="close">×</button>Successfully updated record!</div>');
-        $window.setTimeout(function() {
-          $('.alert').fadeTo(500, 0).slideUp(500, function() {
-            $(this).remove();
-          });
-        }, 5000);
-        $('.alert .close').on('click', function(e) {
-          console.log('e' + e);
-          $(this).parent().fadeTo(500, 0).slideUp(500);
-        });
+        $scope.successMsg = 'Successfully updated record!';
+
+        $scope.showUpdatedStatus = true;
 
       }
+
+    };
+
+    $scope.showUpdatedAlert = function () {
+      return $scope.showUpdatedStatus;
+    };
+
+    $scope.closeAlert = function () {
+
+      $scope.successMsg = '';
+
+      $scope.showUpdatedStatus = false;
 
     };
 
@@ -305,23 +304,24 @@
 
             if ($scope.personalData.profile_pic !== null) {
 
-              $scope.file = '../../../uploads/profile/' + $scope.personalData.profile_pic;
+              $scope.file = uploadedProfilePicturePath + $scope.personalData.profilePic;
 
               console.log('User Profile Pic --->' + $scope.file);
 
             }
 
-            if ($scope.personalData.facebook_img !== null) {
+            if ($scope.personalData.facebookImage !== null) {
               $scope.fb_link = false;
               open();
             }
-            if ($scope.personalData.google_img !== null) {
+            if ($scope.personalData.googleImage !== null) {
               $scope.google_link = false;
             }
 
           }, function(error) {
 
             console.error(error);
+            dashboardService.showError(error.data);
 
           });
 

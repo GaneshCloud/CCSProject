@@ -70,18 +70,48 @@ describe('dashboardService',function(){
         }));
 
         it('Check Admin',inject(function($httpBackend){
-            $httpBackend
-                .when('GET','/getLoggedInUser')
-                .respond(200, {config: {data: {userType:'admin'}}});
-            var res=$factory.checkAdmin();
-            expect($httpBackend.flush).not.toThrow();
 
             $httpBackend
                 .when('GET','/getLoggedInUser')
-                .respond(200, {config: {data: {}}});
+                .respond(200,{userType:'admin'});
             var res=$factory.checkAdmin();
             expect($httpBackend.flush).not.toThrow();
 
+        }));
+
+        it('Check Admin',inject(function($httpBackend){
+
+            $httpBackend
+                .when('GET','/getLoggedInUser')
+                .respond(200, {data:{userType:''}});
+            var res=$factory.checkAdmin();
+            expect($httpBackend.flush).not.toThrow();
+
+        }));
+
+        it('Check Admin',inject(function($httpBackend){
+
+            $httpBackend
+                .when('GET','/getLoggedInUser')
+                .respond(500, {error:{userType:''}});
+            var res=$factory.checkAdmin();
+            expect($httpBackend.flush).not.toThrow();
+
+        }));
+
+        it('open Error Screen',inject(function(){
+            var data = {
+                error:{
+                    code:'',
+                    errno:'',
+                    fatal:'',
+                    sqlState:'',
+                    index:''
+                }
+            }
+            $factory.showError(data);
+            expect(windowObj.location.href).toEqual('/error/message');
+            localStorage.clear();
         }));
 
     });

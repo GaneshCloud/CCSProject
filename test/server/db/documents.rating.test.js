@@ -1,19 +1,19 @@
 
 var expect  = require("chai").expect;
-var mysql   = require("mysql");
-var starDocument = require("../../../config/db/documents/ratingdb");
+// var mysql   = require("mysql");
+var testStarDoc = require("../../../config/db/documents/ratingdb");
 
-var database = require('../../../config/db');
-var con = mysql.createConnection(
-database
-);
+// var database = require('../../../config/db');
+// var con = mysql.createConnection(
+// database
+// );
 var testStarDoc;
 
 
 describe("Unit test for Rating  Services",function() {
 
   beforeEach(function () {
-    testStarDoc = new starDocument(con);
+    // testStarDoc = new starDocument(con);
   });
 
   describe("Rate info", function () {

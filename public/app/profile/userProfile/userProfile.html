@@ -145,7 +145,11 @@
 
                         <div align="right">
 
-                            <div style="width: 300px; height: 10px;" id="result"></div>
+                            <div style="width: 300px; height: 10px;" id="result" ng-show="showUpdatedAlert()">
+
+                                <div class="alert alert-success"><button type="button" class="close" ng-click="closeAlert()">×</button>{{successMsg}}</div>
+
+                            </div>
 
                         </div>
 
@@ -188,24 +192,24 @@
 
                                     <div class="col-md-7">
 
-                                        <label ng-hide="editPersonalData">{{(personalData.fname)?personalData.fname:'' + ' ' + ((personalData.mname)?personalData.mname:'') + ' ' + ((personalData.lname)?personalData.lname:'')}}</label>
+                                        <label ng-hide="editPersonalData">{{(personalData.firstName)?personalData.firstName:'' + ' ' + ((personalData.middleName)?personalData.middleName:'') + ' ' + ((personalData.lastName)?personalData.lastName:'')}}</label>
 
                                         <div ng-show="editPersonalData">
 
                                             <div class="col-md-4">
 
-                                                <input type="text" class="form-control" placeholder="First Name" ng-model="personalData.fname" ng-change="dataChanges()">
+                                                <input type="text" class="form-control" placeholder="First Name" ng-model="personalData.firstName" ng-change="dataChanges()">
 
                                             </div>
 
                                             <div class="col-md-4">
-                                                <input type="text" class="form-control" placeholder="Middle Name" ng-model="personalData.mname" ng-change="dataChanges()">
+                                                <input type="text" class="form-control" placeholder="Middle Name" ng-model="personalData.middleName" ng-change="dataChanges()">
 
                                             </div>
 
                                             <div class="col-md-4">
 
-                                                <input type="text" class="form-control" placeholder="Last Name" ng-model="personalData.lname" ng-change="dataChanges()">
+                                                <input type="text" class="form-control" placeholder="Last Name" ng-model="personalData.lastName" ng-change="dataChanges()">
 
                                             </div>
 
@@ -343,7 +347,7 @@
 
                                     <div class="col-md-7">
 
-                                        <label>{{personalData.project_fee}}</label>
+                                        <label>{{personalData.projectFees}}</label>
 
                                         <!--<input type="text" class="form-control"  ng-model="personalData.year"></input> -->
 
@@ -357,7 +361,7 @@
 
                                     <div class="col-md-7">
 
-                                        <label>{{personalData.fees_paid}}</label>
+                                        <label>{{personalData.feesPaid}}</label>
 
                                         <!--<input type="text" class="form-control"  ng-model="personalData.year"></input> -->
 
@@ -371,7 +375,7 @@
 
                                     <div class="col-md-7">
 
-                                        <label>{{personalData.fees_balance}}</label>
+                                        <label>{{personalData.feesBalance}}</label>
 
                                         <!--<input type="text" class="form-control"  ng-model="personalData.year"></input> -->
 
@@ -429,7 +433,7 @@
 
                                 <div class="form-group" data-toggle="tooltip" title="Click to change Profile Picture" >
 
-                                    <img ngf-src="getImageSrc(personalData.facebook_img)" class="image-holder img-responsive" width = '300'/>
+                                    <img ngf-src="getImageSrc(personalData.facebookImage)" class="image-holder img-responsive" width = '300'/>
 
                                 </div>
 
@@ -443,24 +447,24 @@
 
                                     <div class="col-md-7">
 
-                                        <label ng-hide="editPersonalData">{{personalData.fb_fname + ' ' + ((personalData.fb_mname)?personalData.fb_mname:'') + ' ' + ((personalData.fb_lname)?personalData.fb_lname:'')}}</label>
+                                        <label ng-hide="editPersonalData">{{personalData.fbFirstName + ' ' + ((personalData.fbMiddleName)?personalData.fbMiddleName:'') + ' ' + ((personalData.fbLastName)?personalData.fbLastName:'')}}</label>
 
                                         <div ng-show="editPersonalData">
 
                                             <div class="col-md-4">
 
-                                                <input type="text" class="form-control" placeholder="First Name" ng-model="personalData.fb_fname" ng-change="dataChanges()">
+                                                <input type="text" class="form-control" placeholder="First Name" ng-model="personalData.fbFirstName" ng-change="dataChanges()">
 
                                             </div>
 
                                             <div class="col-md-4">
-                                                <input type="text" class="form-control" placeholder="Middle Name" ng-model="personalData.fb_mname" ng-change="dataChanges()">
+                                                <input type="text" class="form-control" placeholder="Middle Name" ng-model="personalData.fbMiddleName" ng-change="dataChanges()">
 
                                             </div>
 
                                             <div class="col-md-4">
 
-                                                <input type="text" class="form-control" placeholder="Last Name" ng-model="personalData.fb_lname" ng-change="dataChanges()">
+                                                <input type="text" class="form-control" placeholder="Last Name" ng-model="personalData.fbLastName" ng-change="dataChanges()">
 
                                             </div>
 
@@ -476,9 +480,9 @@
 
                                     <div class="col-md-7">
 
-                                        <label ng-hide="editPersonalData">{{personalData.fb_email}}</label>
+                                        <label ng-hide="editPersonalData">{{personalData.fbEmail}}</label>
 
-                                        <input type="email" class="form-control" name="email" ng-show="editPersonalData" ng-model="personalData.fb_email" placeholder="Email ex.abc@email.com" ng-change="dataChanges()">
+                                        <input type="email" class="form-control" name="email" ng-show="editPersonalData" ng-model="personalData.fbEmail" placeholder="Email ex.abc@email.com" ng-change="dataChanges()">
 
                                     </div>
 
@@ -524,7 +528,13 @@
 
                         <div align="right">
 
-                            <div style="width: 300px; height: 10px;" id="result"></div>
+                            <div style="width: 300px; height: 10px;" id="result">
+
+                                <div ng-show="profilePoctureUpdated" class="alert alert-success"><button type="button" class="close">×</button>Profile Picture Changed!</div>
+
+                                <div ng-show="profileUpdated" class="alert alert-success"><button type="button" class="close">×</button>Successfully updated record!</div>
+
+                            </div>
 
                         </div>
 
@@ -534,7 +544,7 @@
 
                                 <div class="form-group" data-toggle="tooltip" title="Click to change Profile Picture" >
 
-                                    <img ngf-src="getImageSrc(personalData.google_img)" class="image-holder img-responsive" width = '300'/>
+                                    <img ngf-src="getImageSrc(personalData.googleImage)" class="image-holder img-responsive" width = '300'/>
 
                                 </div>
 
@@ -548,24 +558,24 @@
 
                                     <div class="col-md-7">
 
-                                        <label ng-hide="editPersonalData">{{personalData.g_fname + ' ' + ((personalData.g_mname)?personalData.g_mname:'') + ' ' + ((personalData.g_lname)?personalData.g_lname:'')}}</label>
+                                        <label ng-hide="editPersonalData">{{personalData.googleFirstName + ' ' + ((personalData.googleMiddleName)?personalData.googleMiddleName:'') + ' ' + ((personalData.googleLastName)?personalData.googleLastName:'')}}</label>
 
                                         <div ng-show="editPersonalData">
 
                                             <div class="col-md-4">
 
-                                                <input type="text" class="form-control" placeholder="First Name" ng-model="personalData.g_fname" ng-change="dataChanges()">
+                                                <input type="text" class="form-control" placeholder="First Name" ng-model="personalData.googleFirstname" ng-change="dataChanges()">
 
                                             </div>
 
                                             <div class="col-md-4">
-                                                <input type="text" class="form-control" placeholder="Middle Name" ng-model="personalData.g_mname" ng-change="dataChanges()">
+                                                <input type="text" class="form-control" placeholder="Middle Name" ng-model="personalData.googleMiddleName" ng-change="dataChanges()">
 
                                             </div>
 
                                             <div class="col-md-4">
 
-                                                <input type="text" class="form-control" placeholder="Last Name" ng-model="personalData.g_lname" ng-change="dataChanges()">
+                                                <input type="text" class="form-control" placeholder="Last Name" ng-model="personalData.googleLastName" ng-change="dataChanges()">
 
                                             </div>
 
@@ -581,9 +591,9 @@
 
                                     <div class="col-md-7">
 
-                                        <label ng-hide="editPersonalData">{{personalData.fb_email}}</label>
+                                        <label ng-hide="editPersonalData">{{personalData.googleEmail}}</label>
 
-                                        <input type="email" class="form-control" name="email" ng-show="editPersonalData" ng-model="personalData.g_email" placeholder="Email ex.abc@email.com" ng-change="dataChanges()">
+                                        <input type="email" class="form-control" name="email" ng-show="editPersonalData" ng-model="personalData.googleEmail" placeholder="Email ex.abc@email.com" ng-change="dataChanges()">
 
                                     </div>
 

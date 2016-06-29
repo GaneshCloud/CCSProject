@@ -8,12 +8,10 @@
 
   changePasswordService.$inject=[
     '$http',
-    '$window',
-    '$q'
+    '$window'
   ];
 
-  function changePasswordService($http, $window, $q) {
-    var httpPromise;
+  function changePasswordService($http, $window) {
     return {
 
       // pageReload: function () {
@@ -25,23 +23,12 @@
       },
 
       getPersonalData: function () {
-        var deferred = $q.defer();
 
-        httpPromise = $http.get('/connect/getPersonalData');
-
-        httpPromise.then(function (response) {
-          deferred.resolve(response);
-        }, function (error) {
-          console.error(error);
-
-          $window.location.href = '/logout';
-        });
-
-        return deferred.promise;
+       return $http.get('/connect/getPersonalData');
       },
 
       updatePersonalData: function (personalData) {
-        $http({
+        return $http({
           method: 'post',
 
           url: '/connect/updatePersonalData',

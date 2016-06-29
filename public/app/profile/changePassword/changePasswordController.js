@@ -19,6 +19,8 @@
 
     $scope.userCredentials = false;
 
+    $scope.showUpdatedStatus = false;
+
     dashboardService.checkAdmin();
 
     $scope.isOldPasswordValid = function(oldPassword) {
@@ -80,22 +82,15 @@
 
         spinnerService.show('html5spinner');
 
-        changePasswordService.updatePersonalData($scope.personalData).then(function() {
+        changePasswordService.updatePersonalData($scope.personalData).then(function(result) {
 
           spinnerService.hide('html5spinner');
-          angular.element('#result').html('<div class="alert alert-success"><button type="button" class="close">×</button>Password Changed!</div>');
-          $window.setTimeout(function() {
-            $('.alert').fadeTo(500, 0).slideUp(500, function() {
-              $(this).remove();
-            });
-          }, 5000);
-          $('.alert .close').on('click', function(e) {
-            console.log('e' + e);
-            $(this).parent().fadeTo(500, 0).slideUp(500);
-          });
 
-          $timeout(changePasswordService.profilePage(),6000);
+          $scope.showUpdatedStatus = true;
 
+
+        },function (error) {
+          dashboardService.showError(error.data);
         });
 
       } else {
@@ -110,6 +105,17 @@
 
     };
 
+    $scope.showUpdatedAlert = function () {
+      return $scope.showUpdatedStatus;
+    };
+
+    $scope.closeAlert = function () {
+
+      $scope.showUpdatedStatus = false;
+
+      changePasswordService.profilePage();
+
+    };
     $scope.onCancelChangePassword = function() {
 
       if ($window.confirm('Are You Sure ! Do you need to leave the changes?')) {
@@ -133,24 +139,25 @@
               $scope.userCredentials = false;
             }
 
-            if ($scope.personalData.facebook_img !== null) {
+            if ($scope.personalData.facebookImage !== null) {
 
-              $scope.file = '../images/uploads/' + $scope.personalData.facebook_img;
+              $scope.file = '../images/uploads/' + $scope.personalData.facebookImage;
 
               console.log('User Profile Pic --->' + $scope.file);
 
             }
 
-            if ($scope.personalData.facebook_img !== null) {
+            if ($scope.personalData.facebookImage !== null) {
               $scope.fb_link = false;
             }
-            if ($scope.personalData.google_img !== null) {
+            if ($scope.personalData.googleImage !== null) {
               $scope.google_link = false;
             }
 
           }, function(error) {
 
             console.error(error);
+            dashboardService.showError(error.data);
 
           });
 

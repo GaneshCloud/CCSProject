@@ -56,13 +56,15 @@
 
 <div class="container">
 	 <div class="panel-group" ng-accordion options="simpleAccordionOptions">
+		 <div class="row">
 			<div class="col-md-3">
 
-				<div class="panel panel-info" ng-accordion-group options="accordionGroupOptions1">
+				<div class="panel panel-info" ng-init=""panel1="true" ng-click="panel1=!panel1" ng-accordion-group options="accordionGroupOptions1">
 
 					<div class="panel-heading" ng-accordion-heading>
 						<label>Payment Status</label>
-						<b><span class="pull-right" style="color:#1719dd"> <i class="fa fa-rupee"></i>{{datas.Amount-datas.Paid}}</span></b>
+						<b><span class="pull-right" ng-show="panel1" style="color:#1719dd"><a href="#"><i class="fa fa-rupee"></i>{{datas.Amount-datas.Paid}}</a></span></b>
+						<b><span class="pull-right" ng-show="!panel1" style="color:#1719dd"><a href="#"><u>Hide...</u></a></span></b>
 					</div>
 				 <div class="panel-collapse collapse in" ng-accordion-body>
 					<div class="panel-body">
@@ -75,10 +77,11 @@
 				</div>
 
 
-				<div class="panel panel-info" ng-accordion-group options="accordionGroupOptions2">
+				<div class="panel panel-info" ng-init=""panel2="true" ng-click="panel2=!panel2" ng-accordion-group options="accordionGroupOptions2">
 					<div class="panel-heading" ng-accordion-heading>
 						<label>Project Handled By</label>
-						<b><span class="pull-right" style="color:#1719dd"><a href="#"><u>view...</u></a></span></b>
+						<b><span class="pull-right" ng-show="panel2" style="color:#1719dd"><a href="#"><u>View...</u></a></span></b>
+						<b><span class="pull-right" ng-show="!panel2" style="color:#1719dd"><a href="#"><u>Hide...</u></a></span></b>
 					</div>
 				 <div class="panel-collapse collapse in" ng-accordion-body>
 					<div class="panel-body">			
@@ -90,22 +93,16 @@
 			</div>
 
 			<div class="col-md-6">
-				<div class="panel panel-info" ng-accordion-group options="accordionGroupOptions4">
+				<div class="panel panel-info" ng-init=""panel3="true" ng-click="panel3=!panel3" ng-accordion-group options="accordionGroupOptions4">
 					<div class="panel-heading" ng-accordion-heading>
 						<label>About Project</label>
-						<b><span class="pull-right" style="color:#1719dd"><a href="#"><u>view...</u></a></span></b>
+						<b><span class="pull-right" ng-show="panel3" style="color:#1719dd"><a href="#"><u>View...</u></a></span></b>
+						<b><span class="pull-right" ng-show="!panel3" style="color:#1719dd"><a href="#"><u>Hide...</u></a></span></b>
 					</div>
 				 <div class="panel-collapse collapse in" ng-accordion-body>
 					<div class="panel-body">
 					<p class="text-justify">
-
-						The current System of a company is very ancient and need to be replacing as companies business is expanding. One of the biggest disadvantages of the current system is that lacking of computerized food order each time a customer need to order food he has to wait for the wairt to take their order and then give to the chef who will be preparing our food. So this process is very time consuming and very ancient. This is very difficult to manage. And there also situations where the customers mixes the order and gives food of one customer to another and there are also situations where customer forgets to take the order and even after tking the order he forgets to supply food on time.
-
-						All the existing system is traditional and lack of use of technology, therefore the process is very time consuming and lengthy as paper work is there. This was creating problem in maintain data record at the end like employee attendence, bill, payslip, salary slip etc.
-
-						This document will propose all features and procedures to develop the system.
-
-						This document specially containing details about objectives, scope limitation, process model, primary requirements, team development,  possible project risks, project schedule, and finally monitoring and reporting mechanisms.
+						{{datas.Abstract}}
 					</p>
 					</div>
 				 </div>
@@ -113,12 +110,13 @@
 			</div>
 
 			<div class="col-md-3">
-				<div class="panel panel-info" ng-accordion-group options="accordionGroupOptions5">
+				<div class="panel panel-info" ng-init=""panel4="true" ng-click="panel4=!panel4" ng-accordion-group options="accordionGroupOptions5">
 					<div class="panel-heading" ng-accordion-heading>
 						<label>Project Status</label>
-						<b><span class="pull-right" style="color:#1719dd">{{totalPercentage}}%</span></b>
+						<b><span class="pull-right" ng-show="panel4" style="color:#1719dd"><a href="#">{{totalPercentage}}%</a></span></b>
+						<b><span class="pull-right" ng-show="!panel4" style="color:#1719dd"><a href="#"><u>Hide...</u></a></span></b>
 					</div>
-				 <div class="panel-collapse collapse in" ng-accordion-body>	
+				 <div class="panel-collapse collapse in" ng-accordion-body>
 					<div class="panel-body" >
 						<label>Project Completion Status : <span class="text-success"> {{totalPercentage}}%</span></label>
 						<!-- chart types : column2d, column3d, line, area2d, bar2d, bar3d, pie2d, pie3d, doughnut2d, doughnut3d, pareto2d, pareto3d -->
@@ -129,22 +127,24 @@
 				 </div>
 				</div>
 
-				<div class="panel panel-info" ng-accordion-group options="accordionGroupOptions6">
+				<div class="panel panel-info" ng-init=""panel5="true" ng-click="panel5=!panel5" ng-accordion-group options="accordionGroupOptions6">
 					<div class="panel-heading" ng-accordion-heading>
 						<label>Delivery Date</label>
-						<b><span class="pull-right" style="color:#1719dd">{{datas.DeliveryDate}}</span></b>
+						<b><span class="pull-right" ng-show="panel5" style="color:#1719dd"><a href="#">{{datas.DeliveryDate}}</a></span></b>
+						<b><span class="pull-right" ng-show="!panel5" style="color:#1719dd"><a href="#"><u>Hide...</u></a></span></b>
 					</div>
-					 <div class="panel-collapse collapse in" ng-accordion-body>	
+					 <div class="panel-collapse collapse in" ng-accordion-body>
 						<div class="panel-body">
 							<p>{{datas.DeliveryDate}}</p>
 						</div>
 			 		</div>
 				</div>
 
-				<div class="panel panel-info" ng-accordion-group options="accordionGroupOptions3">
+				<div class="panel panel-info" ng-init=""panel6="true" ng-click="panel6=!panel6" ng-accordion-group options="accordionGroupOptions3">
 					<div class="panel-heading" ng-accordion-heading>
 						<label>Project Manager</label>
-						<b><span class="pull-right" style="color:#1719dd"><a href="#"><u>view...</u></a></span></b>
+						<b><span class="pull-right" ng-show="panel6" style="color:#1719dd"><a href="#"><u>View...</u></a></span></b>
+						<b><span class="pull-right" ng-show="!panel6" style="color:#1719dd"><a href="#"><u>Hide...</u></a></span></b>
 					</div>
 				 <div class="panel-collapse collapse in" ng-accordion-body>
 					<div class="panel-body">
@@ -158,29 +158,31 @@
 
 		<div class="row">
 		    <div class="col-md-12">
-		    	<div class="panel panel-info" ng-accordion-group options="accordionGroupOptions7">
+		    	<div class="panel panel-info" ng-init=""panel7="true" ng-click="panel7=!panel7" ng-accordion-group options="accordionGroupOptions7">
 					<div class="panel-heading" ng-accordion-heading>
 						<label>Project Images</label>
-						<b><span class="pull-right" style="color:#1719dd"><a href="#"><u>view...</u></a></span></b>
+						<b><span class="pull-right" ng-show="!panel7" style="color:#1719dd"><a href="#"><u>View...</u></a></span></b>
+						<b><span class="pull-right" ng-show="panel7" style="color:#1719dd"><a href="#"><u>Hide...</u></a></span></b>
 					</div>
-					 <div class="panel-collapse collapse in" ng-accordion-body>	
+					 <div class="panel-collapse collapse in" ng-accordion-body>
 						<div class="panel-body">
 							<div class="col-md-4" ng-repeat="image in images">
-								<a href="#" class="thumbnail">
-						        	<p>CB2-1516-CSD0001</p>    
-						        	<img src="../uploads/project/{{image.fileName}}" alt="Project Image" style="width:150px;height:150px">
+								<a ng-href="../uploads/project/{{image.fileName}}" class="thumbnail">
+						        	<p>CB2-1516-CSD0001</p>
+						        	<img ng-src="../uploads/project/{{image.fileName}}" alt="Project Image" style="width:150px;height:150px">
 						      </a>
 						    </div>
 						</div>
 			 		</div>
 				</div>
 		      
-				<div class="panel panel-info" ng-accordion-group options="accordionGroupOptions8">
+				<div class="panel panel-info" ng-init=""panel8="true" ng-click="panel8=!panel8" ng-accordion-group options="accordionGroupOptions8">
 					<div class="panel-heading" ng-accordion-heading>
 						<label>Project History</label>
-						<b><span class="pull-right" style="color:#1719dd"><a href="#"><u>view...</u></a></span></b>
+						<b><span class="pull-right" ng-show="!panel8" style="color:#1719dd"><a href="#"><u>View...</u></a></span></b>
+						<b><span class="pull-right" ng-show="panel8" style="color:#1719dd"><a href="#"><u>Hide...</u></a></span></b>
 					</div>
-				 <div class="panel-collapse collapse in" ng-accordion-body>	
+				 <div class="panel-collapse collapse in" ng-accordion-body>
 					<div class="panel-body">
 						<timeline>
 						  <timeline-event ng-repeat="event in events" side="alternate">
@@ -199,17 +201,17 @@
 				 </div>
 				</div>
 
-				<div class="panel panel-info" ng-accordion-group options="accordionGroupOptions9">
+				<div class="panel panel-info"  ng-init=""panel9="true" ng-click="panel9=!panel9" ng-accordion-group options="accordionGroupOptions9">
 					<div class="panel-heading" ng-accordion-heading>
 						<label>For any queries or changes in this project (Title change or other clarification)</label>
-						
+						<b><span class="pull-right" ng-show="!panel9" style="color:#1719dd"><a href="#"><u>View...</u></a></span></b>
+						<b><span class="pull-right" ng-show="panel9" style="color:#1719dd"><a href="#"><u>Hide...</u></a></span></b>
 					</div>
 				 <div class="panel-collapse collapse in" ng-accordion-body>
 					<div class="panel-body">
 						<textarea class="form-control" rows="5" ng-model="question" ng-required="true"></textarea>
 						<br/>
-						
-							<button type="submit" class="btn btn-primary pull-right"  ng-click="postData()">SUBMIT</button>
+							<button type="submit" class="btn btn-primary pull-right" ng-disabled="!question.length"  ng-click="postData()">SUBMIT</button>
 					</div>
 				 </div>
 				</div>

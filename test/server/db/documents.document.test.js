@@ -2,20 +2,20 @@
  * Created by Administrator on 5/27/2016.
  */
 var expect  = require("chai").expect;
-var mysql   = require("mysql");
+// var mysql   = require("mysql");
 
-var Document = require("../../../config/db/documents/documentdb");
-var testDocument;
-var database = require('../../../config/db');
-var con = mysql.createConnection(
-    database
-);
-console.log(con);
+var testDocument = require("../../../config/db/documents/documentdb");
+// var testDocument;
+// var database = require('../../../config/db');
+// var con = mysql.createConnection(
+//     database
+// );
+// console.log(con);
 
     describe("Unit test for Document",function() {
 
         beforeEach(function () {
-            testDocument = new Document(con);
+            // testDocument = new Document(con);
         });
 
         describe("get All Document", function () {
@@ -114,7 +114,6 @@ console.log(con);
         it("check with existing  Data", function (done) {                            //check the existing id
             var id=522;
             testDocument.getDocById(id,0,function (err, data) {
-                console.log(data);
                 expect(err).to.be.a('null');
                 expect(data).to.be.an('array');
                 //expect(data[0].ID).to.be.equal(522);
@@ -126,7 +125,6 @@ console.log(con);
         it("check with existing  Data", function (done) {                            //check the existing id
             var id=506;
             testDocument.getDocById(id,1,function (err, data) {
-                console.log(data);
                 expect(err).to.be.a('null');
                 expect(data).to.be.an('array');
                 //expect(data[0].ID).to.be.equal(522);
@@ -138,7 +136,6 @@ console.log(con);
         it("check with existing  Data", function (done) {                            //check the existing id
             var id=507;
             testDocument.getDocById(id,-1,function (err, data) {
-                console.log(data);
                 expect(err).to.be.a('null');
                 expect(data).to.be.an('array');
                 //expect(data[0].ID).to.be.equal(522);
@@ -150,7 +147,6 @@ console.log(con);
         it("check with string Data", function (done) {                            //check the existing id
             var id='abc';
             testDocument.getDocById(id,0,function (err, data) {
-                console.log(data);
                 expect(err).to.be.an('error');
                 expect(data).to.be.an('null');
 
@@ -205,7 +201,6 @@ console.log(con);
             it("check with existing string id", function (done) {                            //check the string  id
                 var id={ID:"'"};
                 testDocument.deleteDoc(id,function (err, data) {
-                    console.log(err);
                     expect(err).to.be.an('null');
                     expect(data).to.be.an('object');
 
@@ -255,7 +250,6 @@ console.log(con);
             it("check with existing  Data", function (done) {                            //check the existing id
                 var id=2;
                 testDocument.getDocByDep(ser,depId,function (err, data) {
-                    console.log(data);
                     expect(err).to.be.a('null');
                     expect(data).to.be.an('array');
 
@@ -268,7 +262,6 @@ console.log(con);
                 var id=2;
                 ser="'";
                 testDocument.getDocByDep(ser,depId,function (err, data) {
-                    console.log(data);
                     expect(err).to.be.an('error');
                     done();
                 });
@@ -316,7 +309,6 @@ console.log(con);
             it("check with existing  Data", function (done) {                            //check the existing id
                 var typeId=2;
                 testDocument.getDocByType(ser,typeId,function (err, data) {
-                    console.log(data);
                     expect(err).to.be.a('null');
                     expect(data).to.be.an('array');
 
@@ -329,7 +321,6 @@ console.log(con);
                 typeId=2;
                 ser="'";
                 testDocument.getDocByType(ser,typeId,function (err, data) {
-                    console.log(data);
                     expect(err).to.be.an('error');
                     done();
                 });
@@ -376,7 +367,6 @@ console.log(con);
             it("check with existing  Data", function (done) {                            //check the existing id
                 var typeId=2,depId=2;
                 testDocument.getDocByTypeDep(ser,typeId,depId,function (err, data) {
-                    console.log(data);
                     expect(err).to.be.a('null');
                     expect(data).to.be.an('array');
                     done();
@@ -387,7 +377,6 @@ console.log(con);
                 typeId=2,depId=2;
                 ser="'";
                 testDocument.getDocByTypeDep(ser,typeId,depId,function (err, data) {
-                    console.log(data);
                     expect(err).to.be.an('error');
                     done();
                 });
@@ -433,7 +422,6 @@ console.log(con);
             it("check with existing  Data", function (done) {                            //check the existing id
                 var id=510;
                 testDocument.incrViews(id,function (err, data) {
-                    console.log(data);
                     expect(err).to.be.a('null');
                     expect(data).to.be.a('string');
 
@@ -482,7 +470,6 @@ console.log(con);
             it("check with existing  Data", function (done) {                            //check the existing id
                 var id=510;
                 testDocument.incrViews(id,function (err, data) {
-                    console.log(data);
                     expect(err).to.be.a('null');
                     expect(data).to.be.an('string');
 

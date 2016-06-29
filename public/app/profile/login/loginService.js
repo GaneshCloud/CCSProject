@@ -8,11 +8,10 @@
 
   loginService.$inject=[
     '$http',
-    '$window',
-      '$q'
+    '$window'
   ];
 
-  function loginService($http, $window,$q) {
+  function loginService($http, $window) {
     return {
 
       loginWithFacebook: function () {
@@ -29,9 +28,7 @@
 
       verifyUser: function (user, password) {
 
-        var defer = $q.defer();
-
-        $http({
+        return $http({
           method: 'post',
 
           url: '/auth/verifyUser',
@@ -43,29 +40,36 @@
 
           }
 
-        }).then(function (results) {
-          defer.resolve(results);
-        },function (error) {
-          defer.reject(error);
-          $window.location.href = '/error';
         });
+      },
 
-        return defer.promise;
+      showError:function (error) {
+        if(error.error.code !== null){
+          localStorage.setItem('errorCode',error.error.code);
+        }
+        if(error.error.errno !== null){
+          localStorage.setItem('errorNum',error.error.errno);
+        }
+        if(error.error.fatal !== null){
+          localStorage.setItem('fatal',error.error.fatal);
+        }
+        if(error.error.sqlState !== null){
+          localStorage.setItem('sqlState',error.error.sqlState);
+        }
+        if(error.error.index !== null){
+          localStorage.setItem('index',error.error.index);
+        }
+        $window.location.href = '/error/message';
       },
 
       checkUser: function () {
-          var dfr = $q.defer();
 
-          var httpPromise = $http({
+          return $http({
             method: 'get',
 
             url: '/getLoggedInUser'
 
-          });
-
-          httpPromise.then(function (response) {
-            dfr.resolve(response);
-
+          }).then(function (response) {
             if(response.data.userType){
               localStorage.setItem('userType',response.data.userType);
               $window.location.href = '/profile/dashboard';
@@ -75,7 +79,6 @@
             console.error(error);
           });
 
-          return dfr.promise;
         }
 
     };

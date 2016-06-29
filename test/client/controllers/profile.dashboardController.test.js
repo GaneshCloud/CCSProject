@@ -24,8 +24,11 @@ describe('#Login Controller', function () {
 
         window = _$window_;
 
+        window = jasmine.createSpyObj('$window', ['confirm']);
+
         $controller('dashboardController', {
-            $scope: scope
+            $scope: scope,
+            $window:window
         });
 
         element = angular.element('<spinner name="html5spinner" ng-cloak="">' +
@@ -56,6 +59,7 @@ describe('#Login Controller', function () {
         });
 
         it('Open Logout Page', function () {
+            window.confirm.and.returnValue(true);
             scope.onLogout();
             expect(dashboardService.logout).toHaveBeenCalled();
 
@@ -89,5 +93,7 @@ describe('#Login Controller', function () {
 
 
         });
+        
+
     });
 });

@@ -4,9 +4,12 @@
 /**
  * Created by Administrator on 6/13/2016.
  */
+var fs=require("fs");
 var expect = require('chai').expect;
 var supertest = require('supertest');
 var controllerToTest = require('../../../controllers/documents.multipleFileUpload.server.controller');
+var sinon=require("sinon");
+var error=new Error("some error occured");
 var server;
 
 
@@ -35,6 +38,9 @@ describe("multiple FileUpload controller",function () {
                 });
 
         });
+
+
+
 
 
     });

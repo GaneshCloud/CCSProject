@@ -5,6 +5,9 @@
 
     config.$inject = ['$routeProvider', '$locationProvider'];
 
+    angular.module('myApp').constant('defaultProfilePicture', '../images/profile/no_profile.png');
+    angular.module('myApp').constant('uploadedProfilePicturePath', '../uploads/profile/');
+
     function config($routeProvider, $locationProvider) {
         $routeProvider
             .when('/', {
@@ -57,6 +60,9 @@
                 controller: 'viewDocumentController'
             }).when('/error', {
                 templateUrl: '../app/core/error.html'
+            }).when('/error/message', {
+                templateUrl: 'app/error/errorMessage.html',
+                controller:'errorMessageController'
             }).otherwise({
                 redirectTo: '/error'
             });

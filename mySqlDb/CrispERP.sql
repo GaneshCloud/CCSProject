@@ -174,13 +174,17 @@ CREATE TABLE IF NOT EXISTS `project` (
   `HandledBy` varchar(50) default NULL,
   `EmpContact` decimal(50,0) default NULL,
   `Manager` varchar(50) default NULL,
-  `ManagerContact` decimal(10,0) default NULL
+  `ManagerContact` decimal(10,0) default NULL,
+  `Abstract` longtext
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 # Dumping data for table cloudproject.project: 1 rows
 /*!40000 ALTER TABLE `project` DISABLE KEYS */;
-INSERT INTO `project` (`PCode`, `Title`, `Amount`, `Paid`, `DeliveryDate`, `HandledBy`, `EmpContact`, `Manager`, `ManagerContact`) VALUES ('CB2-1516-CSD0001', 'Product Management System', 18000, 6000, '16/05/2016', 'GANESH KUMAR R', 9894339708, 'GURU ANANDAN', 7373630000);
+INSERT INTO `project` (`PCode`, `Title`, `Amount`, `Paid`, `DeliveryDate`, `HandledBy`, `EmpContact`, `Manager`, `ManagerContact`, `Abstract`) VALUES ('CB2-1516-CSD0001', 'Product Management System', 18000, 6000, '16/05/2016', 'GANESH KUMAR R', 9894339708, 'GURU ANANDAN', 7373630000, 'The current System of a company is very ancient and need to be replacing as companies business is expanding. One of the biggest disadvantages of the current system is that lacking of computerized food order each time a customer need to order food he has to wait for the wairt to take their order and then give to the chef who will be preparing our food. So this process is very time consuming and very ancient. This is very difficult to manage. And there also situations where the customers mixes the order and gives food of one customer to another and there are also situations where customer forgets to take the order and even after tking the order he forgets to supply food on time. An abstract is a self-contained, short, and powerful statement that describes a larger work. Components vary according to discipline. An abstract of a social science or scientific work may contain the scope, purpose, results, and contents of the work. An abstract of a humanities work may contain the thesis, background, and conclusion of the larger work. An abstract is not a review, nor does it evaluate the work being abstracted. While it contains key words found in the larger work, the abstract is an original document rather than an excerpted passage. You may write an abstract for various reasons. The two most important are selection and indexing. Abstracts allow readers who may be interested in a longer work to quickly decide whether it is worth their time to read it.');
 /*!40000 ALTER TABLE `project` ENABLE KEYS */;
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 
 
 # Dumping structure for table cloudproject.projectdetails
@@ -238,8 +242,8 @@ INSERT INTO `question` (`qusId`, `Question`, `Dates`, `Explation`, `Type`, `user
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 
 
-# Dumping structure for table cloudproject.questions
-CREATE TABLE IF NOT EXISTS `questions` (
+# Dumping structure for table cloudproject.stud_questions
+CREATE TABLE IF NOT EXISTS `stud_questions` (
   `Id` int(11) NOT NULL auto_increment,
   `Question` varchar(5000) default NULL,
   `createdBy` varchar(50) default NULL,
@@ -247,10 +251,10 @@ CREATE TABLE IF NOT EXISTS `questions` (
   PRIMARY KEY  (`Id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
-# Dumping data for table cloudproject.questions: 15 rows
-/*!40000 ALTER TABLE `questions` DISABLE KEYS */;
-INSERT INTO `questions` (`Id`, `Question`, `createdBy`, `createdAt`) VALUES (1, 'What is AngularJS?', 'Ganesh', 'Saturday, April 30th, 2016, 11:54:20 AM'), (2, 'What is AngularJS?', 'Ganesh', 'Wednesday, May 4th, 2016, 1:46:41 PM'), (3, 'What is Node JS?', 'Ganesh', 'Wednesday, May 4th, 2016, 5:25:06 PM'), (4, 'What is JQuery?', 'Ganesh', 'Friday, May 20th, 2016, 11:12:30 AM'), (5, 'What is Template?', 'Ganesh', 'Friday, May 20th, 2016, 6:15:45 PM'), (6, 'What is Unit Testing?', 'Ganesh', 'Friday, May 20th, 2016, 6:29:08 PM'), (7, 'asdfasfdasf', 'Ganesh', 'Monday, May 23rd, 2016, 4:56:13 PM'), (8, 'casdfeasgsdfa', 'Ganesh', 'Monday, May 23rd, 2016, 4:56:32 PM'), (9, 'asdfasfsafd?', 'Ganesh', 'Monday, May 23rd, 2016, 5:48:05 PM'), (10, 'sdf', 'Ganesh', 'Monday, May 23rd, 2016, 5:55:41 PM'), (11, 'asfd', 'Ganesh', 'Monday, May 23rd, 2016, 5:56:07 PM'), (12, 'asdfadf', 'Ganesh', 'Monday, May 23rd, 2016, 5:56:28 PM'), (13, 'asfdasdfasfasdfasdfsadf', 'Ganesh', 'Monday, May 23rd, 2016, 5:59:58 PM'), (14, 'sgsdfgsdfg', 'Ganesh', 'Monday, May 23rd, 2016, 6:06:11 PM'), (15, 'What is Unit Testing?', 'Ganesh', 'Thursday, May 26th, 2016, 3:33:30 PM');
-/*!40000 ALTER TABLE `questions` ENABLE KEYS */;
+# Dumping data for table cloudproject.stud_questions: 15 rows
+/*!40000 ALTER TABLE `stud_questions` DISABLE KEYS */;
+INSERT INTO `stud_questions` (`Id`, `Question`, `createdBy`, `createdAt`) VALUES (1, 'What is AngularJS?', 'Ganesh', 'Saturday, April 30th, 2016, 11:54:20 AM'), (2, 'What is AngularJS?', 'Ganesh', 'Wednesday, May 4th, 2016, 1:46:41 PM'), (3, 'What is Node JS?', 'Ganesh', 'Wednesday, May 4th, 2016, 5:25:06 PM'), (4, 'What is JQuery?', 'Ganesh', 'Friday, May 20th, 2016, 11:12:30 AM'), (5, 'What is Template?', 'Ganesh', 'Friday, May 20th, 2016, 6:15:45 PM'), (6, 'What is Unit Testing?', 'Ganesh', 'Friday, May 20th, 2016, 6:29:08 PM'), (7, 'asdfasfdasf', 'Ganesh', 'Monday, May 23rd, 2016, 4:56:13 PM'), (8, 'casdfeasgsdfa', 'Ganesh', 'Monday, May 23rd, 2016, 4:56:32 PM'), (9, 'asdfasfsafd?', 'Ganesh', 'Monday, May 23rd, 2016, 5:48:05 PM'), (10, 'sdf', 'Ganesh', 'Monday, May 23rd, 2016, 5:55:41 PM'), (11, 'asfd', 'Ganesh', 'Monday, May 23rd, 2016, 5:56:07 PM'), (12, 'asdfadf', 'Ganesh', 'Monday, May 23rd, 2016, 5:56:28 PM'), (13, 'asfdasdfasfasdfasdfsadf', 'Ganesh', 'Monday, May 23rd, 2016, 5:59:58 PM'), (14, 'sgsdfgsdfg', 'Ganesh', 'Monday, May 23rd, 2016, 6:06:11 PM'), (15, 'What is Unit Testing?', 'Ganesh', 'Thursday, May 26th, 2016, 3:33:30 PM');
+/*!40000 ALTER TABLE `stud_questions` ENABLE KEYS */;
 
 
 # Dumping structure for table cloudproject.rating

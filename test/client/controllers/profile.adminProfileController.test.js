@@ -31,8 +31,11 @@ describe('#Admin Profile Controller', function () {
 
         deferred = $q.defer();
 
+        window = jasmine.createSpyObj('$window', ['confirm']);
+
         $controller('adminProfileController', {
-            $scope: scope
+            $scope: scope,
+            $window:window
         });
 
         element = angular.element('<spinner name="html5spinner" ng-cloak="">' +
@@ -50,6 +53,7 @@ describe('#Admin Profile Controller', function () {
         spyOn(adminProfileService, 'getUserDetails').and.returnValue(deferred.promise);
         spyOn(adminProfileService, 'goToAdminDashboard').and.returnValue();
         spyOn(dashboardService, 'logout').and.returnValue();
+        spyOn(dashboardService, 'showError').and.returnValue();
         // spyOn(dashboardService, 'project').and.returnValue();
         // spyOn(dashboardService, 'forum').and.returnValue();
 
@@ -63,12 +67,24 @@ describe('#Admin Profile Controller', function () {
             deferred.resolve({data:[{id: 1, STNAME: 'ABC',mode:'Admin'},{id: 1, STNAME: 'ABC',mode:'Admin'}],length:2});
             scope.$apply();
 
+
+        });
+
+        it('getUser Details', function () {
+
+            scope.getUserDetails();
+
+            deferred.reject({data:{error:{code:''}}});
+            scope.$apply();
+            // expect(dashboardService.showError).toHaveBeenCalled();
+
+
         });
 
         it('should return local image path from user data', function () {
 
             var user = {
-                profile_pic : '1.jpg'
+                profilePic : '1.jpg'
             }
             var path = scope.getImageSrcProfile(user);
             expect(path).toBeDefined();
@@ -78,7 +94,7 @@ describe('#Admin Profile Controller', function () {
         it('should return facebook image path from user data', function () {
 
             var user = {
-                facebook_img : '1.jpg'
+                facebookImage : '1.jpg'
             }
             var path = scope.getImageSrcProfile(user);
             expect(path).toBeDefined();
@@ -88,7 +104,7 @@ describe('#Admin Profile Controller', function () {
         it('should return google image path from user data', function () {
 
             var user = {
-                google_img : '1.jpg'
+                googleImage: '1.jpg'
             }
             var path = scope.getImageSrcProfile(user);
             expect(path).toBeDefined();
@@ -128,6 +144,8 @@ describe('#Admin Profile Controller', function () {
         });
 
         it('Should open logout screen', function () {
+
+            window.confirm.and.returnValue(true);
 
             scope.onLogout();
 

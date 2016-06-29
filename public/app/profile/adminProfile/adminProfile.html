@@ -21,8 +21,20 @@
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
+
+
+            <li>
+
+                <a ng-click='goToDashboard()'>
+
+                    <span class="glyphicon glyphicon-arrow-left"></span>
+
+                </a>
+
+            </li>
+
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="color:white">Settings <span class="caret"></span></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="color:white"><span class="glyphicon glyphicon-cog"></span></a>
                 <ul class="dropdown-menu" role="menu">
 
                     <li align='right'>
@@ -36,7 +48,7 @@
                     </li>
 
                     <li align='right'>
-
+n
                         <a ng-click='onLogout()'>
 
                             <span class="glyphicon glyphicon-log-out"></span>Log Out
@@ -84,7 +96,7 @@
 
                                     <div>
 
-                                        <label>{{((user.fname)?user.fname:((user.fb_fname)?user.fb_fname:((user.g_fname)?user.g_fname:'')))+ ' ' + ((user.mname)?user.mname:'') + ' ' + ((user.lname)?user.lname:'')}}</label>
+                                        <label>{{((user.firstName)?user.firstName:((user.fbFirstName)?user.fbFirstName:((user.googleFirstName)?user.googleFirstName:'')))+ ' ' + ((user.middleName)?user.middleName:'') + ' ' + ((user.lastName)?user.lastName:'')}}</label>
 
                                     </div>
 
@@ -127,7 +139,7 @@
 
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title">{{((user.fname)?user.fname:((user.fb_fname)?user.fb_fname:((user.g_fname)?user.g_fname:'')))+ '' + ((user.mname)?user.mname:'') + '' + ((user.lname)?user.lname:'')}}</h4>
+                                <h4 class="modal-title">{{((user.firstName)?user.firstName:((user.fbFirstName)?user.fbFirstName:((user.googleFirstName)?user.googleFirstName:'')))+ '' + ((user.middleName)?user.middleName:'') + '' + ((user.lastName)?user.lastName:'')}}</h4>
                             </div>
 
                             <div class="modal-body">
@@ -140,7 +152,7 @@
 
                                             <div class="form-group">
 
-                                                <input type="image" style="padding: 2px" class="img-responsive" width="300" ng-src="{{getImageSrc(user.profile_pic)}}">
+                                                <input type="image" style="padding: 2px" class="img-responsive" width="300" ng-src="{{getImageSrc(user.profilePic)}}">
 
                                             </div>
 
@@ -254,7 +266,7 @@
 
                                                 <div class="col-md-7">
 
-                                                    <label>{{user.project_fee}}</label>
+                                                    <label>{{user.projectFees}}</label>
 
                                                 </div>
 
@@ -266,7 +278,7 @@
 
                                                 <div class="col-md-7">
 
-                                                    <label>{{user.fees_paid}}</label>
+                                                    <label>{{user.feesPaid}}</label>
 
                                                 </div>
 
@@ -278,7 +290,7 @@
 
                                                 <div class="col-md-7">
 
-                                                    <label>{{user.fees_balance}}</label>
+                                                    <label>{{user.feesBalance}}</label>
 
                                                 </div>
 
@@ -289,7 +301,7 @@
 
                                 </div>
 
-                                <div class="row" ng-show = "(user.facebook_img)?true:false">
+                                <div class="row" ng-show = "(user.facebookImage)?true:false">
 
                                     <form role="form" class="form-horizontal">
 
@@ -297,7 +309,7 @@
 
                                             <div class="form-group">
 
-                                                <input type="image" class="img-responsive" width="300" ng-src="{{getImageSrc(user.facebook_img)}}">
+                                                <input type="image" class="img-responsive" width="300" ng-src="{{getImageSrc(user.facebookImage)}}">
 
                                             </div>
 
@@ -313,7 +325,7 @@
 
                                                     <div class="col-md-7">
 
-                                                        <label>{{user.fb_fname + '' + ((user.fb_mname)?user.fb_mname:'') + '' + ((user.fb_lname)?user.fb_lname:'')}}</label>
+                                                        <label>{{user.fbFirstName + '' + ((user.fbMiddleName)?user.fbMiddleName:'') + '' + ((user.fbLastName)?user.fbLastName:'')}}</label>
 
                                                     </div>
 
@@ -327,7 +339,7 @@
 
                                                 <div class="col-md-7">
 
-                                                    <label>{{user.fb_email}}</label>
+                                                    <label>{{user.fbEmail}}</label>
 
                                                 </div>
 
@@ -339,7 +351,7 @@
 
                                 </div>
 
-                                <div class="row" ng-show = "(user.google_img)?true:false">
+                                <div class="row" ng-show = "(user.googleImage)?true:false">
 
                                     <form role="form" class="form-horizontal">
 
@@ -347,7 +359,7 @@
 
                                             <div class="form-group">
 
-                                                <input type="image" class="img-responsive" width="300" ng-src="{{getImageSrc(user.google_img)}}">
+                                                <input type="image" class="img-responsive" width="300" ng-src="{{getImageSrc(user.googleImage)}}">
 
                                             </div>
 
@@ -363,7 +375,7 @@
 
                                                     <div class="col-md-7">
 
-                                                        <label>{{user.g_fname + '' + ((user.g_mname)?user.g_mname:'') + '' + ((user.g_lname)?user.g_lname:'')}}</label>
+                                                        <label>{{user.googleFirstName + '' + ((user.googleMiddleName)?user.googleMiddleName:'') + '' + ((user.googleLastName)?user.googleLastName:'')}}</label>
 
                                                     </div>
 
@@ -377,7 +389,7 @@
 
                                                 <div class="col-md-7">
 
-                                                    <label>{{user.g_email}}</label>
+                                                    <label>{{user.googleEmail}}</label>
 
                                                 </div>
 
