@@ -20,6 +20,8 @@
     function dashboardController($scope,$window,dashboardService,spinnerService) {
 
         $scope.userCredentials = false;
+        $scope.unregisteredUser = false;
+        $scope.userData = [];
 
         $scope.openProfilePage = function() {
             spinnerService.show('html5spinner');
@@ -64,9 +66,22 @@
         };
         
         $scope.checkUserType = function () {
+
+            dashboardService.checkAdmin().then(function (result) {
+                $scope.userData = result;
+                if($scope.userData.userid){
+                    $scope.unregisteredUser = false;
+                }else{
+                    $scope.unregisteredUser = true;
+                }
+            });
+
+
             
-            dashboardService.checkAdmin();
-            
+        };
+
+        $scope.isUnregisteredUser = function () {
+            return $scope.unregisteredUser;
         }
         
         $scope.checkUserType();

@@ -5,7 +5,8 @@ angular.module('myApp',[
     'ngFileUpload',
     'ngProgress',
     'angularSpinners',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'disableAll'
 ]);
 
 
