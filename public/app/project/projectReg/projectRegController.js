@@ -177,7 +177,7 @@
             $scope.dataFilter[rowedit].hardware = x.hardware;
             $scope.dataFilter[rowedit].catlogCode = x.catlogCode;
             $scope.dataFilter[rowedit].domain = x.domain;
-            $scope.dataFilter[rowedit].editData = false;
+            $scope.dataFilter[rowedit].editProjectData = false;
             console.log($scope.dataFilter);
             console.log($scope.rowEdit);
             var data = {

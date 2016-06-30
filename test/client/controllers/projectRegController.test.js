@@ -112,7 +112,7 @@ describe('get data',function() {
 
         console.log(controller);
 
-        $scope.editData(1);
+        $scope.editProjectData(1);
 
         expect($scope.isedit).not.toBeTruthy();
 
