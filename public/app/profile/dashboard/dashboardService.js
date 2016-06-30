@@ -72,6 +72,7 @@
                 }).then(function (response) {
                     if(response.data.userType){
                         localStorage.setItem('userType',response.data.userType);
+                        return response.data;
                     }else {
                         $window.location.href = '/';
                     }
