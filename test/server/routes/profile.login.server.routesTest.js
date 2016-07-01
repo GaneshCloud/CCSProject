@@ -68,7 +68,7 @@ describe("login using social sites",function () {
                 throw err;
             }
 
-            brw.fill('email','csejananim@gmail.com').fill('pass', 'janumanoharan')
+            brw.fill('email','9095818988').fill('pass', 'crispsystem')
                 .pressButton('login', function (err,brow) {
                     brw.assert.success();
                     done();
@@ -78,33 +78,33 @@ describe("login using social sites",function () {
 
     });
 
-    it("should login with google",function (done) {
+    // it("should login with google",function (done) {
 
-        this.timeout(80000);
+        // this.timeout(80000);
+        //
+        // Browser.visit('http://127.0.0.1:3000/auth/google',function (err,brw) {
+        //
+        //     if(err){
+        //         throw err;
+        //     }
+        //
+        //     brw.fill('Email','janani@email.com').pressButton('signIn',function () {
+        //         (brw.fill('Passwd', 'janani#').pressButton('signIn')).then(function (err,brow) {
+        //             console.log(brw.text('title'));
+        //             brw.assert.success(done());
+        //             // brw.assert.success();
+        //             // done();
+        //         });
+        //     });
+        //
+        //
+        //
+        //
+        // });
 
-        Browser.visit('http://127.0.0.1:3000/auth/google',function (err,brw) {
-
-            if(err){
-                throw err;
-            }
-
-            brw.fill('Email','csejananim@gmail.com').pressButton('signIn',function () {
-                (brw.fill('Passwd', '18mydearnithya#').pressButton('signIn')).then(function (err,brow) {
-                    console.log(brw.text('title'));
-                    brw.assert.success(done());
-                    // brw.assert.success();
-                    // done();
-                });
-            });
 
 
-
-
-        });
-
-
-
-    });
+    // });
 
 
 });
