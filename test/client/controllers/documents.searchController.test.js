@@ -117,11 +117,14 @@ describe('Search Controller', function () {
 
         it('should resolve promise', function () {
             $scope.curPage=1;
-            $scope.itemsPage=5;
-            var res=$scope.paginate({docCaption:'caption1',id:2},{docCaption:'caption2',id:2});
+            $scope.itemsPage=1;
+            $scope.searchres=[{$$hashKey:"object:36",docCaption:'caption1',id:2},{$$hashKey:"object:37",docCaption:'caption2',id:3}];
+            var res=$scope.paginate({$$hashKey:"object:36",docCaption:'caption1',id:2});
             expect(res).not.toBeNull;
 
         });
+
+
 
     });
     describe('#search Controller', function () {

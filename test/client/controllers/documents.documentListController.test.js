@@ -145,7 +145,6 @@ describe('Main Controller', function () {
               var controller = $controller('documentListController', { $scope: $scope });
 
               $scope.getRateInfo(id);
-              console.log($scope.rateInfo);
               expect($scope.rateInfo).not.toBeNull();
           });
 
@@ -212,7 +211,6 @@ describe('Main Controller', function () {
             var field='docCaption';
             var controller = $controller('documentListController', { $scope: $scope });
             $scope.orderMe(field);
-            console.log($scope.isReverse);
             expect($scope.isReverse).toBeTruthy();
         });
 
@@ -221,7 +219,6 @@ describe('Main Controller', function () {
             var field='DOCDEP';
             var controller = $controller('documentListController', { $scope: $scope });
             $scope.orderMe(field);
-            console.log($scope.isReverse);
             expect($scope.isReverse).not.toBeTruthy();
 
             $scope.orderMe(field);
@@ -251,7 +248,6 @@ describe('Main Controller', function () {
             var field='';
             var controller = $controller('documentListController', { $scope: $scope });
             $scope.orderMe(field);
-            console.log($scope.isReverse);
             expect($scope.rateInfo).not.toBeNull();
         });
 
@@ -260,62 +256,6 @@ describe('Main Controller', function () {
     });
 
     
-
-        // describe("get Data function",function () {
-        //
-        //     var documentListService,scope;
-        //
-        //     beforeEach(inject(function ($rootScope, $controller, _documentListServices_) {
-        //         scope = $rootScope.$new();
-        //         documentListService = _documentListServices_;
-        //         $controller('documentListController', {
-        //             $scope: scope,
-        //         });
-        //     }));
-        //
-        //
-        //     it("should receive a successful response", function() {
-        //         var fakeHttpPromise = {
-        //             then: function(data) {
-        //             }
-        //         }
-        //         spyOn(documentListService, "getDepartment").and.callFake(function() {
-        //             return  fakeHttpPromise
-        //         });
-        //         scope.getDepartment();
-        //         expect(documentListService.getDepartment).toHaveBeenCalled();  //Verifies this was called
-        //     });
-        // });
-
-        // describe("edit doc function",function () {
-        //
-        //     var documentListService,scope;
-        //     beforeEach(inject(function ($rootScope, $controller, _documentListServices_) {
-        //         scope = $rootScope.$new();
-        //         documentListService = _documentListServices_;
-        //         $controller('documentListController', {
-        //             $scope: scope,
-        //         });
-        //     }));
-        //
-        //
-        //     it("should receive a successful response", function() {
-        //         var fakeHttpPromise = {
-        //             success: function(data) {
-        //             }
-        //         }
-        //         spyOn(documentListService, "edit").and.callFake(function() {
-        //             return  fakeHttpPromise
-        //         });
-        //         scope.docs=[{ID:100,DOCCAPTION:'TESTCAP1',DOCDEP:1},
-        //                     {ID:101,DOCCAPTION:'TESTCAP2',DOCDEP:1},
-        //                     {ID:102,DOCCAPTION:'TESTCAP3',DOCDEP:1}];
-        //         scope.editDoc(1);
-        //         expect(documentListService.edit).toHaveBeenCalled();  //Verifies this was called
-        //     });
-        // });
-
-
 
         describe("get icon function",function () {
         it('check get Icon function', function () {
@@ -422,12 +362,7 @@ describe('Main Controller', function () {
                 };
             }));
 
-            // it("should receive a successful response", function() {
-            //     scope.deleteDoc(5);
-            //     // myHttpBackend.flush();
-            //     deferred.resolve({'name':'value'});
-            //     // scope.$digest();
-            // });
+
 
         });
 

@@ -6,17 +6,18 @@ describe('single File Upload Controller', function () {
     /*jshint expr:true */
     beforeEach(module('myApp'));
 
-    var $controller,viewDocumentServices,starServices,location,departmentServices;
+    var $controller,viewDocumentServices,starServices,location,departmentServices,$location;
     var $q;
     var deferred,windowObj;
 
-    beforeEach(inject(function(_$controller_,_$rootScope_, _$q_, _viewDocumentServices_,_departmentServices_,_starServices_,$httpBackend,$location){
+    beforeEach(inject(function(_$location_,_$controller_,_$rootScope_, _$q_, _viewDocumentServices_,_departmentServices_,_starServices_,$httpBackend,$location){
 
         $q = _$q_;
         $scope = _$rootScope_.$new();
         deferred = _$q_.defer();
         deferred_sub = _$q_.defer();
         $controller = _$controller_;
+        $location=_$location_;
         viewDocumentServices= _viewDocumentServices_;
         departmentServices=_departmentServices_;
         starServices=_starServices_;
@@ -26,6 +27,8 @@ describe('single File Upload Controller', function () {
         windowObj = {location: {href: '/sample?type=5'}};
 
         spyOn(viewDocumentServices, 'getUser').and.returnValue(deferred.promise);
+        spyOn($location, 'path').and.returnValue('/documents/viewDocument?id=715');
+        spyOn($location, 'search').and.returnValue({id:12} );
         spyOn(departmentServices, 'getDepartment').and.returnValue(deferred.promise);
         spyOn(viewDocumentServices, 'getArchieve').and.returnValue(deferred_sub.promise);
         spyOn(viewDocumentServices, 'getNextDoc').and.returnValue(deferred.promise);
@@ -48,7 +51,7 @@ describe('single File Upload Controller', function () {
 
         it('should resolve promise', function () {
             getUser();
-            deferred.resolve({data:{id: 1, STNAME: 'ABC',mode:'Admin'}});
+            deferred.resolve({data:{id: 1, STNAME: 'ABC',mode:'admin'}});
             expect($scope.isAdmin).toBeTruthy;
             $scope.$digest();
 
@@ -179,7 +182,7 @@ describe('single File Upload Controller', function () {
         });
         it('should resolve promise',function () {
             $scope.doc=[{ID:1},{ID:2}];
-            $scope.doc.ID='undefined';
+            $scope.doc.id='undefined';
             $scope.getNext(5);
             deferred.resolve({data:[{id:1,docCaption:'ABC',docType:5,docFile:"C:/ABC.PNG"}]});
             $scope.$digest();
@@ -244,7 +247,7 @@ describe('single File Upload Controller', function () {
         });
         it('should resolve promise',function () {
             $scope.doc=[{ID:1},{ID:2}];
-            $scope.doc.ID ='undefined';
+            $scope.doc.id ='undefined';
             $scope.getPrevios (5);
             deferred.resolve({data:[{id:1,docCaption:'ABC',docType:5,docFile:"C:/ABC.PNG"}]});
             $scope.$digest();

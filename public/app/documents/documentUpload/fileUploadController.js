@@ -12,6 +12,7 @@
         'documentTypeServices',
         '$window'
 
+
     ];
     function fileUploadController($location,$scope, fileUploadServices, dashboardService,departmentServices,documentTypeServices, $window) {
 
@@ -85,7 +86,6 @@
         };
 
         $scope.editForm = function () {
-
             fileUploadServices.getDocument(getParameterByName('id'))
                 .then(function (response) {
 
@@ -113,7 +113,8 @@
         };
 
         //Initially calling the function
-        if (window.location.pathname === '/documents/editDoc'){
+        if ($location.path() === '/documents/editDoc'){
+
             $scope.editForm();
             $scope.getPattern($scope.formData.docType);
         }
