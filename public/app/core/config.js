@@ -7,6 +7,7 @@
 
     angular.module('myApp').constant('defaultProfilePicture', '../images/profile/no_profile.png');
     angular.module('myApp').constant('uploadedProfilePicturePath', '../uploads/profile/');
+    angular.module('myApp').constant('UPLOAD_DOC_PATH', 'uploads/documents/');
 
     function config($routeProvider, $locationProvider) {
         $routeProvider

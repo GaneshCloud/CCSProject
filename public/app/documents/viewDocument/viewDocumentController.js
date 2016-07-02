@@ -9,9 +9,10 @@
         '$scope',
         'viewDocumentServices',
         'departmentServices',
-        'starServices'
+        'starServices',
+        'UPLOAD_DOC_PATH'
     ];
-    function viewDocumentController($location,$scope, viewDocumentServices,departmentServices, starServices) {
+    function viewDocumentController($location,$scope, viewDocumentServices,departmentServices, starServices,UPLOAD_DOC_PATH) {
 
 
         $scope.doc = [];
@@ -154,7 +155,7 @@
                 $scope.doc = response.data[0];
                 getStar($scope.doc.id);
                 var filename = $scope.doc.docFile;
-                $scope.thisFile = 'uploads/documents/' + $scope.doc.id + '.' + filename.split('.').pop();
+                $scope.thisFile = UPLOAD_DOC_PATH + $scope.doc.id + '.' + filename.split('.').pop();
 
             if ($scope.doc.docType === 5) {
                 viewDocumentServices.getArchieve($scope.doc.id)
