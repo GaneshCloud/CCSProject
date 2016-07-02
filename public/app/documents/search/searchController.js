@@ -76,6 +76,7 @@
       begin = ($scope.curPage - 1) * $scope.itemsPage;
       end = begin + $scope.itemsPage;
       index = $scope.searchres.indexOf(value);
+
       return (begin <= index && index < end);
     };
 

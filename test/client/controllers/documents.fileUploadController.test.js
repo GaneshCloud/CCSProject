@@ -6,25 +6,17 @@ describe('Main Controller', function () {
     /*jshint expr:true */
     beforeEach(module('myApp'));
 
-    var $controller,uploadMultipleServices,dashboardService,documentObj,departmentServices,windowObj;
+    var $controller,uploadMultipleServices,dashboardService,documentObj,departmentServices,$location;
     var $q;
     var deferred;
-    beforeEach(module(function($provide) {
-        documentObj = {forms: {frmDoc: {submit:function(){}}}};
-        windowObj={
-            location:{
-                pathname:'/documents/editDoc'
-            }
-        };
-        $provide.value('document', documentObj);
-        $provide.value('window', windowObj);
-    }));
+    
 
-    beforeEach(inject(function(_$controller_,_$rootScope_, _$q_, _fileUploadServices_,_departmentServices_,_dashboardService_,$httpBackend){
+    beforeEach(inject(function(_$location_,_$controller_,_$rootScope_, _$q_, _fileUploadServices_,_departmentServices_,_dashboardService_,$httpBackend){
 
         $q = _$q_;
 
         $scope = _$rootScope_.$new();
+        $location=_$location_;
         deferred = _$q_.defer();
         $controller = _$controller_;
         uploadMultipleServices= _fileUploadServices_;
@@ -36,10 +28,17 @@ describe('Main Controller', function () {
         });
 
         spyOn(departmentServices, 'getDepartment').and.returnValue(deferred.promise);
+        spyOn($location, 'path').and.returnValue('/documents/editDoc');
+        spyOn($location, 'search').and.returnValue({id:12} );
         spyOn(uploadMultipleServices, "goToDashboard");
         spyOn(uploadMultipleServices, 'getDocument').and.returnValue(deferred.promise);
         $httpBackend.when("GET","/getLoggedInUser").respond("sample");
         $httpBackend.when("GET","/api/dep").respond("sample");
+        var frm = document.createElement('FORM');
+        frm.name="frmDoc";
+        document.body.appendChild(frm);
+        document.forms.frmDoc.submit = jasmine.createSpy('HTML Element').and.callFake(function() {
+        });
 
 
     }));
@@ -53,15 +52,18 @@ describe('Main Controller', function () {
                 expect($scope.rows.length).toBeGreaterThan(length);
             });
 
-            // it('check for submit form', function () {
-            //     $scope.saveDoc ();
-            // });
+            it('check for submit form', function () {
+                var controller = $controller('fileUploadController', { $scope: $scope });
+                $scope.saveDoc ();
+            });
 
         describe('get department',function(){
-            it("getedit doc",function(){
 
+            it("getedit doc",function(){
+                var controller = $controller('fileUploadController', { $scope: $scope });
                 $scope.$apply();
                 $scope.$digest();
+                expect($location.path).toHaveBeenCalled();
             });
 
             it('should resolve promise',inject(function ($httpBackend) {
@@ -125,31 +127,9 @@ describe('Main Controller', function () {
             });
 
         });
-        describe("save document",function(){
 
-            it('save document', function () {
-                // $scope.saveDoc();
-            });
-        });
-        //
-        // describe("save document",function(){
-        //
-        //     beforeEach(inject(function ($rootScope, $controller, _uploadMultipleServices_) {
-        //         scope = $rootScope.$new();
-        //         multipleUploadService = _uploadMultipleServices_;
-        //     }));
-        //
-        //     it('check single file upload', function () {
-        //
-        //         spyOn(multipleUploadService, 'singleFileUpload');
-        //         $scope.singleFileUpload();
-        //         expect(multipleUploadService.singleFileUpload).toHaveBeenCalled();
-        //
-        //     });
-        //
-        // });
+
             describe('edit document',function() {
-//
             it('should resolve promise', function () {
                 $scope.editForm();
                 deferred.resolve({data:[{id: 1, DEP_NAME: 'ABC'}, {id: 2, DEP_NAME: 'xds'}]});
