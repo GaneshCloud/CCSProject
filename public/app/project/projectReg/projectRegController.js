@@ -6,16 +6,22 @@
         '$scope',
         '$window',
         'projectRegService',
-        'dashboardService'
+        'dashboardService',
+        'DEPARTMENTS',
+        'TITLE',
+        'SUB_HEADS',
+        'CATELOG_CODE',
+        'DOMAIN'
+
     ];
 
-    function projectRegController($scope,$window,projectRegService,dashboardService) {
+    function projectRegController($scope,$window,projectRegService,dashboardService,DEPARTMENTS,TITLE,SUB_HEADS,CATELOG_CODE,DOMAIN) {
 
-        $scope.names = ['mechanical', 'mechatronics', 'ECE', 'CS', 'IT'];
-        $scope.Title = ['Mechanical Projects', 'Aeronatical Projects', 'ECE Projects', 'Embaded projects', 'IT Projects'];
-        $scope.subHeads = ['CEA-ATMEL', 'CEA-OTHERS', 'CEC-PC BASED', 'CEA-DSP PROJECTS', 'IEEE PAPERS'];
-        $scope.catlogCode = ['CIS-C# NET PROJECTS', 'CDB BIO MEDICAL PROJECTS', 'C,C++ AND VC++ PROJECTS', 'CAD/CAM/CAE PROJECTS', 'CIVIL DESIGN PROJECTS'];
-        $scope.Domain = ['RFID', 'ROBOTICS', 'BIOMEDICAL PROJECTS', 'C,C++ AND VC++ PROJECTS', 'CIVIL DESIGN Projects'];
+        $scope.departments = DEPARTMENTS;
+        $scope.Title = TITLE;
+        $scope.subHeads = SUB_HEADS;
+        $scope.catlogCode = CATELOG_CODE;
+        $scope.Domain = DOMAIN;
 
 
         var isEdit = true;
@@ -33,7 +39,6 @@
         $scope.totalLength = 0;
 
         $scope.max_size = Math.ceil($scope.userDetails / $scope.items_per_page);
-
         $scope.new = {projectCode: '',
             title: '',
             department: '',
@@ -112,14 +117,14 @@
                     }
 
                     $scope.new = {
-                        PROJECT_CODE: '',
-                        TITLE: '',
-                        DEPARTMENT: '',
-                        SUB_HEADS: '',
-                        SOFTWARE: '',
-                        HARDWARE: '',
-                        CATELOG_CODE: '',
-                        DOMAIN: ''
+                        projectCode: '',
+                        title: '',
+                        department: '',
+                        subHeads: '',
+                        software: '',
+                        hardware: '',
+                        catlogCode: '',
+                        domain: ''
 
                     };
 
@@ -138,14 +143,14 @@
 
         $scope.postNewProject = function() {
 
-            var data = {PROJECT_CODE: $scope.new.PROJECT_CODE,
-                TITLE: $scope.new.TITLE,
-                DEPARTMENT: $scope.new.DEPARTMENT,
-                SUB_HEADS: $scope.new.SUB_HEADS,
-                SOFTWARE: $scope.new.SOFTWARE,
-                HARDWARE: $scope.new.HARDWARE,
-                CATELOG_CODE: $scope.new.CATELOG_CODE,
-                DOMAIN: $scope.new.DOMAIN
+            var data = {projectCode: $scope.new.projectCode,
+                title: $scope.new.title,
+                department: $scope.new.department,
+                subHeads: $scope.new.subHeads,
+                software: $scope.new.software,
+                hardware: $scope.new.hardware,
+                catlogCode: $scope.new.catlogCode,
+                domain: $scope.new.domain
             };
 
 
@@ -169,26 +174,26 @@
 
         $scope.updateProject = function(x,rowedit) {
 
-            $scope.dataFilter[rowedit].PROJECT_CODE = x.PROJECT_CODE;
-            $scope.dataFilter[rowedit].TITLE = x.TITLE;
-            $scope.dataFilter[rowedit].DEPARTMENT = x.DEPARTMENT;
-            $scope.dataFilter[rowedit].SUB_HEADS = x.SUB_HEADS;
-            $scope.dataFilter[rowedit].SOFTWARE = x.SOFTWARE;
-            $scope.dataFilter[rowedit].HARDWARE = x.HARDWARE;
-            $scope.dataFilter[rowedit].CATELOG_CODE = x.CATELOG_CODE;
-            $scope.dataFilter[rowedit].DOMAIN = x.DOMAIN;
+            $scope.dataFilter[rowedit].projectCode = x.projectCode;
+            $scope.dataFilter[rowedit].title = x.title;
+            $scope.dataFilter[rowedit].department = x.department;
+            $scope.dataFilter[rowedit].subHeads = x.subHeads;
+            $scope.dataFilter[rowedit].software = x.software;
+            $scope.dataFilter[rowedit].hardware = x.hardware;
+            $scope.dataFilter[rowedit].catlogCode = x.catlogCode;
+            $scope.dataFilter[rowedit].domain = x.domain;
             $scope.dataFilter[rowedit].editProjectData = false;
             console.log($scope.dataFilter);
             console.log($scope.rowEdit);
             var data = {
-                PROJECT_CODE: x.PROJECT_CODE,
-                TITLE: x.TITLE,
-                DEPARTMENT: x.DEPARTMENT,
-                SUB_HEADS: x.SUB_HEADS,
-                SOFTWARE: x.SOFTWARE,
-                HARDWARE: x.HARDWARE,
-                CATELOG_CODE: x.CATELOG_CODE,
-                DOMAIN: x.DOMAIN,
+                projectCode: x.projectCode,
+                title: x.title,
+                department: x.department,
+                subHeads: x.subHeads,
+                software: x.software,
+                hardware: x.hardware,
+                catlogCode: x.catlogCode,
+                domain: x.domain,
                 id: $scope.dataFilter[rowedit].id
             };
 

@@ -7,16 +7,16 @@
 
     angular.module('myApp').constant('defaultProfilePicture', '../images/profile/no_profile.png');
     angular.module('myApp').constant('uploadedProfilePicturePath', '../uploads/profile/');
-    angular.module('myApp').constant('PROJECT_CODE', 'projectCode');
-    angular.module('myApp').constant('TITLE', 'title');
-    angular.module('myApp').constant('DEPARTMENT', 'department');
-    angular.module('myApp').constant('SUB_HEADS', 'subHeads');
-    angular.module('myApp').constant('SOFTWARE', 'software');
-    angular.module('myApp').constant('HARDWARE', 'hardware');
-    angular.module('myApp').constant('CATLOG_CODE', 'catelogCode');
-    angular.module('myApp').constant('DOMAIN', 'domain');
+    angular.module('myApp').constant('DEPARTMENTS', ['mechanical', 'mechatronics', 'ECE', 'CS', 'IT']);
+    angular.module('myApp').constant('TITLE', ['Mechanical Projects', 'Aeronatical Projects', 'ECE Projects', 'Embaded projects', 'IT Projects']);
+    angular.module('myApp').constant('SUB_HEADS', ['CEA-ATMEL', 'CEA-OTHERS', 'CEC-PC BASED', 'CEA-DSP PROJECTS', 'IEEE PAPERS']);
+    angular.module('myApp').constant('CATELOG_CODE', ['CIS-C# NET PROJECTS', 'CDB BIO MEDICAL PROJECTS', 'C,C++ AND VC++ PROJECTS', 'CAD/CAM/CAE PROJECTS', 'CIVIL DESIGN PROJECTS']);
+    angular.module('myApp').constant('DOMAIN', ['RFID', 'ROBOTICS', 'BIOMEDICAL PROJECTS', 'C,C++ AND VC++ PROJECTS', 'CIVIL DESIGN Projects']);
+
+
 
     function config($routeProvider, $locationProvider) {
+
         $routeProvider
             .when('/', {
                 controller: 'loginController',
