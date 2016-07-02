@@ -7,6 +7,14 @@
 
     angular.module('myApp').constant('defaultProfilePicture', '../images/profile/no_profile.png');
     angular.module('myApp').constant('uploadedProfilePicturePath', '../uploads/profile/');
+    angular.module('myApp').constant('PROJECT_CODE', 'projectCode');
+    angular.module('myApp').constant('TITLE', 'title');
+    angular.module('myApp').constant('DEPARTMENT', 'department');
+    angular.module('myApp').constant('SUB_HEADS', 'subHeads');
+    angular.module('myApp').constant('SOFTWARE', 'software');
+    angular.module('myApp').constant('HARDWARE', 'hardware');
+    angular.module('myApp').constant('CATLOG_CODE', 'catelogCode');
+    angular.module('myApp').constant('DOMAIN', 'domain');
 
     function config($routeProvider, $locationProvider) {
         $routeProvider

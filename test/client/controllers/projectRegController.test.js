@@ -135,28 +135,28 @@ describe('get data',function() {
     });
 
     it('should post the new project', function () {
-        var x={projectCode:'1',
-                    Title:'7777',
-                    Department:'dsg',
-                    subHeads:'sdf',
-                    Software:'152',
-                    Hardware:'2362',
-                    catlogCode:'sdf',
-                    Domain:'sdfg'
+        var x={PROJECT_CODE:'1',
+                    TITLE:'7777',
+                    DEPARTMENT:'dsg',
+                    SUB_HEADS:'sdf',
+                    SOFTWARE:'152',
+                    HARDWARE:'2362',
+                    CATLOG_CODE:'sdf',
+                    DOMIAN:'sdfg'
                 };
         $scope.postNewProject();
         deferred.resolve({data:[x]});
         $scope.$apply();
     });
     it('should post the new project undefined',function () {
-        var x={projectCode:'1',
-            Title:'7777',
-            Department:'dsg',
-            subHeads:'sdf',
-            Software:'152',
-            Hardware:'2362',
-            catlogCode:'sdf',
-            Domain:'sdfg'
+        var x={PROJECT_CODE:'1',
+            TITLE:'7777',
+            DEPARTMENT:'dsg',
+            SUB_HEADS:'sdf',
+            SOFTWARE:'152',
+            HARDWARE:'2362',
+            CATLOG_CODE:'sdf',
+            DOMIAN:'sdfg'
         };
         $scope.postNewProject();
         deferred.reject(x);
@@ -165,14 +165,14 @@ describe('get data',function() {
 
     it('Update the project', function () {
 
-        var y={projectCode:'1',
-            Title:'7777',
-            Department:'dsg',
-            subHeads:'sdf',
-            Software:'152',
-            Hardware:'2362',
-            catlogCode:'sdf',
-            Domain:'sdfg',
+        var y={PROJECT_CODE:'1',
+            TITLE:'7777',
+            DEPARTMENT:'dsg',
+            SUB_HEADS:'sdf',
+            SOFTWARE:'152',
+            HARDWARE:'2362',
+            CATLOG_CODE:'sdf',
+            DOMIAN:'sdfg',
             id:0
         };
 
@@ -184,14 +184,14 @@ describe('get data',function() {
     });
     it('update the project undefined', function () {
 
-        var y={projectCode:'1',
-            Title:'7777',
-            Department:'dsg',
-            subHeads:'sdf',
-            Software:'152',
-            Hardware:'2362',
-            catlogCode:'sdf',
-            Domain:'sdfg',
+        var y={PROJECT_CODE:'1',
+            TITLE:'7777',
+            DEPARTMENT:'dsg',
+            SUB_HEADS:'sdf',
+            SOFTWARE:'152',
+            HARDWARE:'2362',
+            CATLOG_CODE:'sdf',
+            DOMIAN:'sdfg',
             id:0
         };
 
