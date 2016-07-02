@@ -136,13 +136,13 @@ describe('get data',function() {
 
     it('should post the new project', function () {
         var x={projectCode:'1',
-                    Title:'7777',
-                    Department:'dsg',
-                    subHeads:'sdf',
-                    Software:'152',
-                    Hardware:'2362',
-                    catlogCode:'sdf',
-                    Domain:'sdfg'
+            title:'7777',
+            department:'dsg',
+            subHeads:'sdf',
+            software:'152',
+            hardware:'2362',
+            catlogCode:'sdf',
+            domain:'sdfg'
                 };
         $scope.postNewProject();
         deferred.resolve({data:[x]});
@@ -150,13 +150,13 @@ describe('get data',function() {
     });
     it('should post the new project undefined',function () {
         var x={projectCode:'1',
-            Title:'7777',
-            Department:'dsg',
+            title:'7777',
+            department:'dsg',
             subHeads:'sdf',
-            Software:'152',
-            Hardware:'2362',
+            software:'152',
+            hardware:'2362',
             catlogCode:'sdf',
-            Domain:'sdfg'
+            domain:'sdfg'
         };
         $scope.postNewProject();
         deferred.reject(x);
@@ -166,14 +166,13 @@ describe('get data',function() {
     it('Update the project', function () {
 
         var y={projectCode:'1',
-            Title:'7777',
-            Department:'dsg',
+            title:'7777',
+            department:'dsg',
             subHeads:'sdf',
-            Software:'152',
-            Hardware:'2362',
+            software:'152',
+            hardware:'2362',
             catlogCode:'sdf',
-            Domain:'sdfg',
-            id:0
+            domain:'sdfg'
         };
 
         $scope.dataFilter=[y]
@@ -185,14 +184,13 @@ describe('get data',function() {
     it('update the project undefined', function () {
 
         var y={projectCode:'1',
-            Title:'7777',
-            Department:'dsg',
+            title:'7777',
+            department:'dsg',
             subHeads:'sdf',
-            Software:'152',
-            Hardware:'2362',
+            software:'152',
+            hardware:'2362',
             catlogCode:'sdf',
-            Domain:'sdfg',
-            id:0
+            domain:'sdfg'
         };
 
         $scope.dataFilter=[y]

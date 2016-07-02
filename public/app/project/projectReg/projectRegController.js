@@ -6,16 +6,22 @@
         '$scope',
         '$window',
         'projectRegService',
-        'dashboardService'
+        'dashboardService',
+        'DEPARTMENTS',
+        'TITLE',
+        'SUB_HEADS',
+        'CATELOG_CODE',
+        'DOMAIN'
+
     ];
 
-    function projectRegController($scope,$window,projectRegService,dashboardService) {
+    function projectRegController($scope,$window,projectRegService,dashboardService,DEPARTMENTS,TITLE,SUB_HEADS,CATELOG_CODE,DOMAIN) {
 
-        $scope.names = ['mechanical', 'mechatronics', 'ECE', 'CS', 'IT'];
-        $scope.Title = ['Mechanical Projects', 'Aeronatical Projects', 'ECE Projects', 'Embaded projects', 'IT Projects'];
-        $scope.subHeads = ['CEA-ATMEL', 'CEA-OTHERS', 'CEC-PC BASED', 'CEA-DSP PROJECTS', 'IEEE PAPERS'];
-        $scope.catlogCode = ['CIS-C# NET PROJECTS', 'CDB BIO MEDICAL PROJECTS', 'C,C++ AND VC++ PROJECTS', 'CAD/CAM/CAE PROJECTS', 'CIVIL DESIGN PROJECTS'];
-        $scope.Domain = ['RFID', 'ROBOTICS', 'BIOMEDICAL PROJECTS', 'C,C++ AND VC++ PROJECTS', 'CIVIL DESIGN Projects'];
+        $scope.departments = DEPARTMENTS;
+        $scope.Title = TITLE;
+        $scope.subHeads = SUB_HEADS;
+        $scope.catlogCode = CATELOG_CODE;
+        $scope.Domain = DOMAIN;
 
 
         var isEdit = true;
@@ -33,7 +39,6 @@
         $scope.totalLength = 0;
 
         $scope.max_size = Math.ceil($scope.userDetails / $scope.items_per_page);
-
         $scope.new = {projectCode: '',
             title: '',
             department: '',
