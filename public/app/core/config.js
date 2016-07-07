@@ -14,9 +14,9 @@
     angular.module('myApp').constant('DOMAIN', ['RFID', 'ROBOTICS', 'BIOMEDICAL PROJECTS', 'C,C++ AND VC++ PROJECTS', 'CIVIL DESIGN Projects']);
 
 
+    angular.module('myApp').constant('UPLOAD_DOC_PATH', 'uploads/documents/');
 
     function config($routeProvider, $locationProvider) {
-
         $routeProvider
             .when('/', {
                 controller: 'loginController',

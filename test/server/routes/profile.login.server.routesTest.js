@@ -68,7 +68,7 @@ describe("login using social sites",function () {
                 throw err;
             }
 
-            brw.fill('email','9095818988').fill('pass', 'crispsystem')
+            brw.fill('email','angular.node.5').fill('pass', 'crispsystem')
                 .pressButton('login', function (err,brow) {
                     brw.assert.success();
                     done();
