@@ -320,3 +320,30 @@ INSERT INTO `tbl_doc_stars` (`ID`, `DOC_ID`, `STARS`, `USER_ID`, `STAR_DATE`) VA
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+
+-- Dumping structure for table file_upload.file_uploading
+# Dumping structure for table cloudproject.file_uploading
+CREATE TABLE IF NOT EXISTS `file_uploading` (
+  `Doc_Caption` varchar(500) NOT NULL,
+  `Doc_Type` varchar(500) NOT NULL,
+  `Department` varchar(500) NOT NULL,
+  `Keywords` varchar(500) NOT NULL,
+  `Description` varchar(500) NOT NULL,
+  `Doc_File` varchar(500) NOT NULL,
+  `id` int(100) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
+
+# Dumping data for table cloudproject.file_uploading: ~5 rows (approximately)
+/*!40000 ALTER TABLE `file_uploading` DISABLE KEYS */;
+INSERT INTO `file_uploading` (`Doc_Caption`, `Doc_Type`, `Department`, `Keywords`, `Description`, `Doc_File`, `id`) VALUES
+	('string:SYNAPSIS', 'string:PDF', 'string:MECHATRONICS', 'fhgf', 'gfddxhg', '15.doc', 8),
+	('string:SYNAPSIS', 'string:WORD', 'string:MECHANICAL', 'dfhggfh', '', '16.doc', 9),
+	('ecee', 'asdgf', 'zdsgfzd', 'zdsgf', 'zsdf', 'angularjs_tutorial1.pdf', 32),
+	('mech', 'DOC', 'mechanical', 'xdfgdfg', 'dfgfd', 'waterMark.doc', 33),
+	('ECE', 'DOC', 'ECE', 'fgh', 'fhgdfgh', 'Doc7e17(1).doc', 34);
+/*!40000 ALTER TABLE `file_uploading` ENABLE KEYS */;
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+

@@ -66,6 +66,9 @@
             }).when('/documents/viewDocument', {
                 templateUrl: 'app/documents/viewDocument/viewDocument.html',
                 controller: 'viewDocumentController'
+             }).when('/documents/waterMarkModule', {
+            templateUrl: 'app/documents/waterMarkModule/waterMark.html',
+            controller: 'waterMarkController'
             }).when('/error', {
                 templateUrl: '../app/core/error.html'
             }).when('/error/message', {

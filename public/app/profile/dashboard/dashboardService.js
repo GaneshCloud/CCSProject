@@ -42,6 +42,14 @@
                 }
             },
 
+            waterMark: function () {
+                //if (localStorage.getItem('userType') === 'admin') {
+                    $window.location.href = '/documents/waterMarkModule';
+               // }else{
+                    // $window.location.href = '/documents/home';
+                // }
+            },
+
             project: function () {
                 if(localStorage.getItem('userType') === 'admin') {
                     $window.location.href = '/project/projectReg';
