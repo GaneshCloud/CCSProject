@@ -36,6 +36,9 @@
             }).when('/profile/changePassword', {
                 templateUrl: '../app/profile/changePassword/changePassword.html',
                 controller: 'changePasswordController'
+            }).when('/profile/onlinePayment', {
+                templateUrl: '../app/profile/onlinePayment/onlinePayment.html',
+                controller: 'onlinePaymentController'
             }).when('/logout', {
                 templateUrl: '../app/profile/logout/logout.html',
                 controller: 'logoutController'

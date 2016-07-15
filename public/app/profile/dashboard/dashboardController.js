@@ -81,7 +81,10 @@
         };
 
         $scope.isUnregisteredUser = function () {
-            return $scope.unregisteredUser;
+            if($scope.unregisteredUser){
+                return true;
+            }
+            return false;
         }
         
         $scope.checkUserType();
