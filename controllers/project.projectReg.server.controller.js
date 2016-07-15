@@ -1,6 +1,7 @@
 
 var mysql=require('mysql');
 var db=require('../config/db.js');
+
 var connection=mysql.createConnection(db);
 var documents=require('../config/db/projectRegManager.js');
 var objDocument=new documents(connection);

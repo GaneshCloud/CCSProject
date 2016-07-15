@@ -45,6 +45,12 @@
 
         };
 
+        $scope.openWaterMark = function() {
+            spinnerService.show('html5spinner');
+            dashboardService.waterMark();
+
+        };
+
         $scope.openProject = function() {
             spinnerService.show('html5spinner');
             dashboardService.project();
@@ -75,8 +81,6 @@
                     $scope.unregisteredUser = true;
                 }
             });
-
-
             
         };
 

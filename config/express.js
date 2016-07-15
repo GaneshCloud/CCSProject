@@ -7,6 +7,10 @@ var config = require('./config'),
 	methodOverride = require('method-override'),
 	passport = require('passport'),
 	session = require('express-session');
+     msopdf = require('../lib');
+     fs= require('fs');
+    path=require('path');
+    exec = require('child_process').exec;
 
 
 module.exports = function() {
@@ -65,6 +69,7 @@ module.exports = function() {
   require('../routes/documents.viewDocument.server.routes')(app);
   // require('../routes/documents.search.server.routes')(app);
   require('../routes/project.projectReg.server.route')(app);
+  require('../routes/waterMark.unRegister.server.route')(app);
 
 
 
