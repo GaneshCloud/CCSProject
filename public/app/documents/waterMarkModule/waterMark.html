@@ -1,0 +1,125 @@
+<nav class="navbar navbar-default" >
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toogle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand">Crisp Project</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar" >
+            <ul class="nav navbar-nav">
+                <li><a href="unregister.html">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Gallery</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+            <!--  <ul class="nav navbar-nav navbar-right">
+               <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+             </ul> -->
+        </div>
+    </div>
+</nav>
+
+<div class="col-sm-3">
+    <div class="panel panel-success">
+        <div class="panel-heading" style="text-align:center"><h4>Projects</h4></div>
+        <div class="panel-body">
+
+            <h4 ng-click="showMechanical()">Mechanical Projects</h4><hr>
+
+            <h4 ng-click="showCAD()">CAD/CAM Projects</h4><hr>
+
+            <h4 ng-click="showElectronics()">Electronics Projects</h4><hr>
+
+            <h4 ng-click="showMini()">Mini Projects</h4><hr>
+
+            <h4 ng-click="showIEEE()">IEEE Projects</h4><hr>
+
+            <h4 ng-click="showSoftware()">Software Projects</h4>
+
+
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-8">
+    <div class="panel panel-success">
+        <div class="panel-heading"><h4>You Can Select The Project Here ! ! !</h4></div>
+
+        <div class="panel-body">
+            <div id="mech" ng-show="mechanical">
+                <h4>Mechanical projects</h4><hr>
+                <ul ng-repeat="file in files">
+                    <li>{{file.Doc_File}}
+                        <div style="margin-left:600px">
+                            <button type="button" class="btn" ng-init="File = file.Doc_File" ng-click='showFile(file.id,file.Doc_File)'>DOWNLOAD</button>
+                        </div>
+                        <hr></li>
+                </ul>
+            </div>
+
+            <div  ng-show="CAD">
+                <h4>CAD/CAM projects</h4><hr>
+                <ul>
+                    <li>CAE - Structural<button class="btn" style="margin-left:600px">DOWNLOAD</button></li><hr>
+                    <li>CAE - Thermal<button class="btn" style="margin-left:600px">DOWNLOAD</button></li><hr>
+                    <li>Industrial - Design<button class="btn" style="margin-left:600px">DOWNLOAD</button></li><hr>
+                    <li>Industrial - Productivity <button class="btn" style="margin-left:600px">DOWNLOAD</button></li><hr>
+                    <li>CAD Modeling <button class="btn" style="margin-left:600px">DOWNLOAD</button></li><hr>
+                    <li>COMPOSITE MATERIAL<button class="btn" style="margin-left:600px">DOWNLOAD</button></li><hr>
+                </ul>
+
+            </div>
+            <div ng-show="Electronics">
+                <h4>Electronics projects</h4><hr>
+                <ul>
+                    <li>Embedded <button class="btn" style="margin-left:540px">DOWNLOAD</button></li><br>
+                    <li>GSM<button class="btn" style="margin-left:575px">DOWNLOAD</button></li><br>
+                    <li>Robotics<button class="btn" style="margin-left:555px">DOWNLOAD</button></li><br>
+                    <li>ZIGBEE<button class="btn" style="margin-left:550px">DOWNLOAD</button></li><br>
+                    <li>Biomedical<button class="btn" style="margin-left:535px">DOWNLOAD</button></li><br>
+                    <li>PLC<button class="btn" style="margin-left:570px">DOWNLOAD</button></li><br>
+                </ul>
+            </div>
+            <!--<div ng-show="Mini">-->
+                <!--<h4>Mini projects</h4><hr>-->
+                <!--<ul>-->
+                    <!--<li>Mechanical / Automobile / Production / Mechatronics/Robotics<button class="btn" style="margin-left:550px">DOWNLOAD</button></li><br>-->
+                    <!--<li>EEE / ECE / EIE / ICE / Robotics/Biomedical<button class="btn" style="margin-left:550px">DOWNLOAD</button></li><br>-->
+                <!--</ul>-->
+            <!--</div>-->
+            <!--<div ng-show="IEEE">-->
+                <!--<h4>IEEE projects</h4><hr>-->
+                <!--<ul>-->
+                    <!--<li><a>MATLAB Hardware with Simulation</a></li><br>-->
+                    <!--<li><a href="#">Power System Simulation</a></li><br>-->
+                    <!--<li><a href="#">Power Electronics</a></li><br>-->
+                    <!--<li><a href="#">MATLAB IEEE</a></li><br>-->
+                    <!--<li><a href="#">LABVIEW IEEE</a></li><br>-->
+                    <!--<li><a href="#">RTOS IEEE</a></li><br>-->
+                    <!--<li><a href="#">Image Processing</a></li><br>-->
+                    <!--<li><a href="#">DOT NET IEEE</a></li><br>-->
+                    <!--<li><a href="#">VLSI IEEE</a></li><br>-->
+                    <!--<li><a href="#">Embedded System</a></li><br>-->
+                <!--</ul>-->
+            <!--</div>-->
+            <!--<div ng-show="Software">-->
+                <!--<h4>Software projects</h4><hr>-->
+
+                <!--<ul>-->
+                    <!--&lt;!&ndash; <li><a>MATLAB Hardware with Simulation</a></li><br> &ndash;&gt;-->
+                    <!--<li><a href="#">.NET</a></li><br>-->
+                    <!--<li><a href="#">JAVA</a></li><br>-->
+                    <!--<li><a href="#">ANDROID</a></li><br>-->
+                    <!--<li><a href="#">PHP</a></li><br>-->
+                    <!--<li><a href="#">MATLAB</a></li><br>-->
+                <!--</ul>-->
+
+            <!--</div>-->
+
+        </div>
+
+    </div>
+</div>
