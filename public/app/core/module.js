@@ -6,7 +6,6 @@ angular.module('myApp',[
     'ngProgress',
     'angularSpinners',
     'ui.bootstrap'
-    //'disableAll'
 ]);
 
 
