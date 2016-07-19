@@ -23,7 +23,7 @@ describe('bring the project from the database',function(){
         }
         var res={
             send:function(data){
-                expect(data).not.to.be.error;
+                expect(data).to.be.error;
                 done();
             }
         };
@@ -31,7 +31,7 @@ describe('bring the project from the database',function(){
     });
 });
 
-it('getAllProject',function(done){
+it('getAllPdfFiles undefined',function(done){
     var req={};
     var res={
         send:function(data){

@@ -10,7 +10,9 @@ describe('bring the project from the DB',function(){
     it('get pdf files',function(done){
         objDocument.getPdfFiles(function(err,result){
             expect(result).to.be.error;
+            done();
         });
-        done();
+
     });
+
 });

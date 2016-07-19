@@ -116,15 +116,15 @@
             unRegisterService.getFileDoc()
 
 
-                .success(function(data){
+                .then(function(response){
 
-                    $scope.files=data;
+                    $scope.files=response.data;
 
                     alert('the file was selected');
 
-                    $scope.window=data;
-                }).
-            error(function(error){
+                    //$scope.window=data;
+                })
+                .catch(function(error){
 
                 alert('unable to retrive a feedback');
             });
