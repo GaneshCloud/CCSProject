@@ -16,11 +16,13 @@ describe('getDocFile',function() {
                 $scope: $scope
             });
        $httpBackend.when('GET', '/fileDoc').respond('sample');
+        //spyOn(unRegisterService, 'getFileDoc').and.returnValue(deferred.promise);
         }));
 
     it("should receive a successful response", function () {
 
         spyOn(unRegisterService, "goToDashboard");
+        spyOn(unRegisterService, "getFileDoc").and.returnValue(deferred.promise);
         $scope.goToDashboard();
         expect(unRegisterService.goToDashboard).toHaveBeenCalled();
     });
@@ -115,12 +117,24 @@ describe('getDocFile',function() {
         expect().not.toBeTruthy();
 
     });
+    it('should show the watermark pdf files', function(){
+        var $scope = {};
+
+        var controller = $controller('waterMarkController', {$scope:$scope});
+
+        $scope.showFile(32,'angularjs_tutorial1.pdf');
+
+        console.log(controller);
+
+        expect().not.toBeTruthy();
+
+    });
 
 
     it('should get the watermarked pdf files', function () {
 
         $scope.getFileDoc();
-        deferred.resolve({data:[{id: 8},{id:9}]});
+        deferred.resolve({data:[{id: 32},{id: 33}]});
         $scope.$apply();
     });
     it('should get the watermarked pdf files of undefined', function () {
