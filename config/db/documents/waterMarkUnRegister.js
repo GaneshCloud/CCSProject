@@ -1,3 +1,8 @@
+var msopdf = require('../../../lib');
+var path=require('path');
+var exec = require('child_process').exec;
+    var fs= require('fs');
+
 module.exports=function(connection){
     
     this.getPdfFiles=function(cb) {
@@ -31,15 +36,16 @@ module.exports=function(connection){
 
                     console.log(jsonDATA.length);
                     for (i = 0; i <= jsonDATA.length - 1; i++) {
+
                         sync=false;
                         var ext = path.extname(jsonDATA[i].Doc_File);
-
+                        
                         if (ext === '.doc') {
 
 
                             office.word({
-                                input: "./public/uploads/waterMark/" + jsonDATA[i].Doc_File,
-                                output: "./public/uploads/waterMark/" + jsonDATA[i].Doc_File + ".pdf"
+                                input: "public/uploads/waterMark/" + jsonDATA[i].Doc_File,
+                                output: "public/uploads/waterMark/" + jsonDATA[i].Doc_File + ".pdf"
                             }, function (error, pdf) {
 
                                 if (error) {
