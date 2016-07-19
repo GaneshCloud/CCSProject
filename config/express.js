@@ -7,7 +7,6 @@ var config = require('./config'),
 	methodOverride = require('method-override'),
 	passport = require('passport'),
 	session = require('express-session');
-     msopdf = require('../lib');
      fs= require('fs');
     path=require('path');
     exec = require('child_process').exec;
