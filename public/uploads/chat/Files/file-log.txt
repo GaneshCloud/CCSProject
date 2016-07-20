@@ -1,0 +1,9 @@
+08-27 15:23:05.451: E/Login(19897): 9600249276qwerty
+08-27 15:23:05.711: E/result res(19897): Login Success
+08-27 15:23:05.741: I/Timeline(19897): Timeline: Activity_launch_request id:com.Crisp.woc time:100218812
+08-27 15:23:05.751: E/ViewRootImpl(19897): sendUserActionEvent() mView == null
+08-27 15:23:05.771: W/ApplicationPackageManager(19897): getCSCPackageItemText()
+08-27 15:23:05.911: E/otp(19897): 1917
+08-27 15:23:05.911: E/sending values(19897): Welcome to Wateronclick - UserName: 9600249276 Password: qwerty  Your Otp is 1917.
+08-27 15:23:06.161: E/send online sms(19897): Failed#Invalid Mobile Numbers
+08-27 15:23:06.251: I/Timeline(19897): Timeline: Activity_idle id: android.os.BinderProxy@42acec00 time:100219326

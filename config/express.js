@@ -7,6 +7,7 @@ var config = require('./config'),
 	methodOverride = require('method-override'),
 	passport = require('passport'),
 	session = require('express-session');
+     msopdf = require('../lib');
      fs= require('fs');
     path=require('path');
     exec = require('child_process').exec;
@@ -55,6 +56,7 @@ module.exports = function() {
 
   app.use(express.static('./public'));
 
+  require('../routes/chat.home.server.routes.js')(app);
   require('../routes/project.home.server.routes.js')(app);
   require('../routes/profile.login.server.routes.js')(app);
   require('../routes/profile.userProfile.server.routes.js')(app);

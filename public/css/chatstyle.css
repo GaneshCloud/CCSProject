@@ -1,0 +1,65 @@
+
+body {
+    font-family: cursive;
+
+}
+.container{
+    padding-top:80px;
+    height: 100%;
+}
+.chatbox{
+    height: 200px;
+    overflow-y:scroll;
+    border-radius: 0px;
+    background-color:white;
+
+    border: solid 1px #BDBDBD;
+}
+.msg_box{
+    border-radius: 0px;
+    border: solid 1px #BDBDBD;
+    background-color:white;
+
+}
+.user li{
+    text-decoration: none;
+    list-style-type: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.you{
+    font-size: 10px;
+    float: right;
+    color: #353535;
+}
+p{
+    margin: 50px;
+}
+.sender{
+    font-size: 15px;
+    font-style:inherit;
+    color: #3845ff;
+}
+.sender_msg{
+    padding-center: 25px;
+}
+
+ .text{
+     /*padding: 1px;*/
+     /*background-color:light-grey;*/
+     /*!*box-shadow: 1px 1px 1px grey;*!*/
+     /*width: auto;*/
+
+ }
+.test {
+    width: 5em;
+    word-wrap: break-word;
+    /*width: auto;*/
+
+}
+
+.attach
+{
+    margin-left:650px;
+}

@@ -12,6 +12,7 @@
   function forumService($http,$q,$window) {
     return {
 
+      
       goToDashboard: function () {
         $window.location.href = '/profile/dashboard';
       },
