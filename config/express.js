@@ -6,30 +6,15 @@ var config = require('./config'),
 	bodyParser = require('body-parser'),
 	methodOverride = require('method-override'),
 	passport = require('passport'),
-	session = require('express-session'),
-    fs = require('fs'),
-    http = require('http'),
-	session = require('express-session'),
-    path=require('path'),
+	session = require('express-session');
+     msopdf = require('../lib');
+     fs= require('fs');
+    path=require('path');
     exec = require('child_process').exec;
 
 
- // app.use(require("express").static('data'));
-// app.use(bodyParser.urlencoded({
-//   extended: true
-// }));
-//
-// app.use(require("express").static('data'));
-// app.use(bodyParser.urlencoded({
-//   extended: true
-// }));
-//app.use(bodyParser.json());
-
 module.exports = function() {
   var app = express();
-console.log('hi');
-
-
 
   if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));
@@ -85,7 +70,7 @@ console.log('hi');
   require('../routes/documents.viewDocument.server.routes')(app);
   // require('../routes/documents.search.server.routes')(app);
   require('../routes/project.projectReg.server.route')(app);
-  // require('../routes/waterMark.unRegister.server.route')(app);
+  require('../routes/waterMark.unRegister.server.route')(app);
 
 
 

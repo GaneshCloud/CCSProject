@@ -1,0 +1,120 @@
+<nav class="navbar navbar-default" >
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toogle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand">Crisp Project</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar" >
+            <ul class="nav navbar-nav">
+                <li><a href="unregister.html">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Gallery</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+            <!--  <ul class="nav navbar-nav navbar-right">
+               <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+             </ul> -->
+        </div>
+    </div>
+</nav>
+
+<div class="col-sm-3">
+    <div class="panel panel-primary">
+        <div class="panel-heading" style="text-align:center"><h4>Projects</h4></div>
+        <div class="panel-body">
+
+            <h4 ng-click="showMechanical()">Mechanical Projects</h4><hr>
+
+            <h4 ng-click="showCAD()">CAD/CAM Projects</h4><hr>
+
+            <h4 ng-click="showElectronics()">Electronics Projects</h4><hr>
+
+            <h4 ng-click="showMini()">Mini Projects</h4><hr>
+
+            <h4 ng-click="showIEEE()">IEEE Projects</h4><hr>
+
+            <h4 ng-click="showSoftware()">Software Projects</h4>
+
+
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-8">
+    <div class="panel panel-primary">
+        <div class="panel-heading"><h4>You Can Select The Project Here ! ! !</h4></div>
+
+        <div class="panel-body">
+            <div id="mech" ng-show="mechanical">
+                <h4>Mechanical projects</h4><hr>
+                <ul ng-repeat="file in files">
+                    <li class="panel col-sm-offset-1">{{file.Doc_File}}
+                        <div class="panel col-sm-offset-8">
+                            <button type="button" class="btn btn-primary" ng-init="File = file.Doc_File" ng-click='showFile(file.id,file.Doc_File)'>DOWNLOAD</button>
+                        </div>
+                        </li>
+                </ul>
+            </div>
+
+            <div  ng-show="CAD">
+                <h4>CAD/CAM projects</h4><hr>
+                <ul ng-repeat="file in files">
+                    <li class="panel col-sm-offset-1">{{file.Doc_File}}
+                        <div class="panel col-sm-offset-8">
+                            <button type="button" class="btn btn-primary" ng-init="File = file.Doc_File" ng-click='showFile(file.id,file.Doc_File)'>DOWNLOAD</button>
+                        </div>
+                    </li>
+                </ul>
+
+            </div>
+            <div ng-show="Electronics">
+                <h4>Electronics projects</h4><hr>
+                <ul ng-repeat="file in files">
+                    <li class="panel col-sm-offset-1">{{file.Doc_File}}
+                        <div class="panel col-sm-offset-8">
+                            <button type="button" class="btn btn-primary" ng-init="File = file.Doc_File" ng-click='showFile(file.id,file.Doc_File)'>DOWNLOAD</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div ng-show="Mini">
+                <h4>Mini projects</h4><hr>
+                <ul ng-repeat="file in files">
+                    <li class="panel col-sm-offset-1">{{file.Doc_File}}
+                        <div class="panel col-sm-offset-8">
+                            <button type="button" class="btn btn-primary" ng-init="File = file.Doc_File" ng-click='showFile(file.id,file.Doc_File)'>DOWNLOAD</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div ng-show="IEEE">
+                <h4>IEEE projects</h4><hr>
+                <ul ng-repeat="file in files">
+                    <li class="panel col-sm-offset-1">{{file.Doc_File}}
+                        <div class="panel col-sm-offset-8">
+                            <button type="button" class="btn btn-primary" ng-init="File = file.Doc_File" ng-click='showFile(file.id,file.Doc_File)'>DOWNLOAD</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div ng-show="Software">
+                <h4>Software projects</h4><hr>
+
+                <ul ng-repeat="file in files">
+                    <li class="panel col-sm-offset-1">{{file.Doc_File}}
+                        <div class="panel col-sm-offset-8">
+                            <button type="button" class="btn btn-primary" ng-init="File = file.Doc_File" ng-click='showFile(file.id,file.Doc_File)'>DOWNLOAD</button>
+                        </div>
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>

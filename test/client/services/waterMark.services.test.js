@@ -1,15 +1,16 @@
 describe('unRegister service',function() {
 
     var $controller, $factory, windowObj;
+
+
+    beforeEach(module('myApp'));
+    // module(function($provide){
+    //     //$provide.value('$window',$window);
+    // });
     beforeEach(module(function ($provide) {
         windowObj = {location: {href: ''}};
         $provide.value('$window', windowObj);
     }));
-
-    beforeEach(module('myApp'));
-    module(function($provide){
-        $provide.value('$window',$window);
-    });
     beforeEach(inject(function($injector,$httpBackend){
         $factory=$injector.get("unRegisterService");
     }));
@@ -36,7 +37,7 @@ describe('unRegister service',function() {
     describe("dashboard service",function () {
         it('href redirects', function() {
             $factory.goToDashboard();
-            expect(windowObj.location.href).not.toEqual('/profile/adminDashboard');
+            expect(windowObj.location.href).toEqual('/profile/dashboard');
         });
     });
 

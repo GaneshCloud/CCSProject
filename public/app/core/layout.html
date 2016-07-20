@@ -1,7 +1,6 @@
  <!DOCTYPE html>
 <html lang="en" ng-app="myApp">
 <head>
-
   <title>Crisp Cloud Solutions</title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -21,7 +20,6 @@
   <link rel="stylesheet" type="text/css" href="../../css/starDisable.css">
   <link rel="stylesheet" type="text/css" href="../../css/documentStyle.css">
   <link rel="stylesheet" type="text/css" href="../../css/commonStyle.css">
-  <link rel="stylesheet" type="text/css" href="../../css/simple-sidebar.css">
   <link rel="stylesheet" type="text/css" ng-href="../../css/{{css}}">
 
 
@@ -32,12 +30,14 @@
 <body>
 <!-- TEMPLATE VIEW -->
 	<ng-view></ng-view>
+
 <!-- FOOTER -->
   <footer class="footer">
     <div class="container">
       <center class="text-muted"><i class="fa fa-copyright" aria-hidden="true"> Designed and Developed By Crisp Team</i></center>
     </div>
   </footer>
+
 <!-- LIBRARIES AND PLUGINS -->
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
   <script src="bower_components/angular/angular.min.js"></script>
@@ -58,14 +58,7 @@
   <script type="text/javascript" data-require="ui-bootstrap@*" data-semver="0.12.1" src="../../js/ui-bootstrap-tpls-0.12.1.min.js"></script>
   <!--<script type="text/javascript" data-require="ui-bootstrap@*" data-semver="0.12.1" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.1.min.js"></script>-->
   <!--<script src="bower_components/angular-disable-all/dist/angular-disable-all.js"></script>-->
-  <!--<script src="bower_components/angular-credit-cards/release/angular-credit-cards.js"></script>-->
-
-<!--<script src="/socket.io/socket.io.js"></script>-->
-
-<!--<script src="bower_components/socket.io-client/socket.io.js"></script>-->
-<!--&lt;!&ndash;<script src="bower_components/angular-socket-io/socket.js"></script>-->
-
-  <!--<sctipt src="bower_components/socket.io-client/socket.io.js"></sctipt>
+  <script src="bower_components/angular-credit-cards/release/angular-credit-cards.js"></script>
 
 <!-- CORE -->
   <script src="app/core/module.js"></script>
@@ -94,11 +87,6 @@
   <!--Change Password-->
   <script src="app/profile/changePassword/changePasswordService.js"></script>
   <script src="app/profile/changePassword/changePasswordController.js"></script>
-
-  <!--&lt;!&ndash;Online Payment&ndash;&gt;-->
-  <!--<script src="app/profile/onlinePayment/onlinePaymentFilter.js"></script>-->
-  <!--<script src="app/profile/onlinePayment/onlinePaymentService.js"></script>-->
-  <!--<script src="app/profile/onlinePayment/onlinePaymentController.js"></script>-->
 
   <!--Logout-->
   <!--<script src="app/profile/logout/logoutService.js"></script>-->
@@ -147,8 +135,8 @@
   <script src="../app/project/projectReg/projectRegDirectives.js"></script>
 
   <!--Synopsis for unregister students-->
-  <!--<script src="app/documents/waterMarkModule/waterMarkController.js"></script>-->
-  <!--<script src="app/documents/waterMarkModule/waterMarkServices.js"></script>-->
+  <script src="app/documents/waterMarkModule/waterMarkController.js"></script>
+  <script src="app/documents/waterMarkModule/waterMarkServices.js"></script>
 
   <!--Error Message-->
   <script src="../app/error/errorMessageController.js"></script>
