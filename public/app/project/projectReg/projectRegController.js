@@ -49,6 +49,10 @@
             domain: ''
         };
 
+        $scope.onLogout = function () {
+            dashboardService.logout();
+        };
+
         $scope.showPagination = function() {
             return noData;
         };
