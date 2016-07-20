@@ -1,0 +1,289 @@
+﻿<!DOCTYPE html>
+ <html>
+<head>
+    <meta charset="utf-8">
+
+  <!-- <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"/>-->
+	
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+	
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+   <script src="HTMLpage2.js"></script>
+   
+   <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
+    
+      <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+      <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+      <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+      <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	 <style type="text/css">
+         .datepickerdemo md-content {
+            padding-bottom: 200px; 
+         }
+        .datepickerdemo .validation-messages {
+            font-size: 11px;
+            color: darkred;
+            margin: 10px 0 0 25px; 
+         }
+     
+
+    table.center {
+    margin-left:auto; 
+    margin-right:auto;
+  }
+  .myModule {
+  /** Demo styles for mdCalendar. */ }
+  .myModule md-content {
+    padding-bottom: 200px; }
+  .myModule .validation-messages {
+    font-size: 11px;
+    color: darkred;
+    margin: 10px 0 0 25px; 
+	}
+
+</style>
+</head>
+<body ng-app="myModule" ng-controller="myController">
+ <br><br>
+
+<div class="container">
+  <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">Click me</button>
+  <div id="demo" class="collapse">
+
+
+ <br><br>
+ <form name="sampleform">
+ <br><table class="center">
+ 
+     <tr>
+	 <td>
+     <label class="col-xs-2 control-label" for="inputSuccess">NAME:</label></td><td>
+     <input type="text" class="form-control" placeholder="Enter Name" data-ng-model="newFeedback.Name">
+<md-tooltip md-direction="{{demo.tooltipDirection}}">Enter Name!</md-tooltip> </input>
+<br>
+	 </div></div>
+      </td></tr>
+	 <tr><td>
+	 <div class="form-group">
+    <label class="col-xs-2 control-label">REG_NO</label>
+	</td><td>
+	
+     <input type="text" class="form-control" data-placement="top" placeholder="Regno" data-ng-model="newFeedback.Reg_no">
+	 <md-tooltip md-direction="{{demo.tooltipDirection}}">Enter Reg_no!</md-tooltip> </input><br>
+     </td></tr></div>
+	  <tr><td>
+	 <div class="form-group">
+    <label class="col-xs-2 control-label">EMAIL</label>
+	</td><td>
+	
+     <input type="email" class="form-control" placeholder="Mail_id" data-ng-model="newFeedback.Email">
+	 <md-tooltip md-direction="{{demo.tooltipDirection}}">Enter Mail_id!</md-tooltip> </input><br>
+     </td></tr>
+	 
+	 <tr><td>
+	  <div class="form-group">
+     <label class="col-xs-2 control-label" for="inputSuccess">GENDER</label></td><td>
+	   <input type="radio" name="name1" value="male" data-ng-model="newFeedback.Gender">MALE
+	  <input type="radio" name="name1" value="female" data-ng-model="newFeedback.Gender">FEMALE<br>
+	  </td></tr>
+</div>
+	  <tr><td>
+	   
+	   <label class="col-xs-2 control-label" for="inputSuccess">DEPARTMENT</label></td><td>
+	<select class="form-control" data-toggle="tooltip" data-placement="top" title="Select Your Department" ng-options="x for x in names" data-ng-model="newFeedback.Department">
+
+	</select><a data-toggle="tooltip" data-placement="top" title="Reference" href="https://www.google.co.in/?gfe_rd=cr&ei=xXEGV-b3EKHv8wf-mrXABg&gws_rd=ssl">www.google.com</a><br>
+ </td></tr>
+ <tr><td>
+<label> Project_id </label>
+</td><td>
+<select class="form-control" multiple ng-multiple="true"  ng-options="opt as opt for opt in months" data-ng-model="newFeedback.Project_id">
+
+</select></td></tr>
+<br>
+<br>
+	 <tr>
+	 <td>
+     <label class="col-xs-2 control-label" for="inputSuccess">ID:</label></td><td><br>
+     <input type="text" class="form-control" data-placement="top" placeholder="Enter id" data-ng-model="newFeedback.id">
+
+<md-tooltip md-direction="{{demo.tooltipDirection}}">Enter ID!</md-tooltip> </input><br>
+	 </div></div>
+	 <tr>
+	<td>
+	<label class="col-xs-2 control-label" for="inputSuccess">Date:</label>
+	</td>
+	
+	<td>
+	<br>
+	<div class="datetimepickerdemo" layout="column" ng-cloak>
+        
+            <md-datepicker 
+              data-ng-model="newFeedback.Date" 
+               md-placeholder="Enter date">
+			   </md-datepicker>
+       
+	   </div>
+	</td>
+	</tr>
+	 
+</table>  
+ 
+<input type="button" class="btn btn-primary" value="Save" data-ng-click="createdata()" />
+                <br/>
+                <p>{{status}}</p>
+				</div>
+ <table class="table table-condensed table-striped table-bordered table-hover no-margin" style="text-align:center">
+            <thead>
+                <tr>
+				 <div class="form-group">
+					<th style="text-align:center; font-size:large">Name
+					 <div class="btn-group">
+      <button style="border:hidden" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" >
+      <span style="text-align:right" ng-model="sortcolumn" ng-model="grid" class="caret"></span></button>
+	 
+      <ul class="dropdown-menu" role="menu">
+        <li><a ng-click="order()" ng-show="reverse"><span style="cursor:pointer">ascending</span><br></a></li>
+		 <li><a ng-hide="reverse"><span style="cursor:not-allowed">ascending</span><br></a></li>
+		  <li><a ng-show="reverse"><span style="cursor:not-allowed">descending</span><br></a></li>
+        <li><a ng-click="order()" ng-hide="reverse"><span style="cursor:pointer">descending</span><br></a>	</li>
+      </ul></div>	 
+					<input type="text" class="form-control" ng-model="name1"></th></div>
+					
+					
+					
+				<div class="form-group">
+				 <th style="text-align:center; font-size:large">Regno
+				 <div class="btn-group">
+      <button style="border:hidden" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" >
+      <span style="text-align:right" ng-model="sortcolumn" ng-model="grid" class="caret"></span></button>
+	 
+      <ul class="dropdown-menu" role="menu">
+        <li><a ng-click="order()" ng-show="reverse"><span style="cursor:pointer">ascending</span><br></a></li>
+		 <li><a ng-hide="reverse"><span style="cursor:not-allowed">ascending</span><br></a></li>
+		  <li><a ng-show="reverse"><span style="cursor:not-allowed">descending</span><br></a></li>
+        <li><a ng-click="order()" ng-hide="reverse"><span style="cursor:pointer">descending</span><br></a>	</li>
+      </ul></div>
+
+		<input type="text" class="form-control" ng-model="name2"></div>
+         </th>
+					 <div class="form-group">
+                    <th style="text-align:center; font-size:large">Email
+					<div class="btn-group">
+      <button style="border:hidden" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" >
+      <span style="text-align:right" ng-model="sortcolumn" ng-model="grid" class="caret"></span></button>
+	 
+      <ul class="dropdown-menu" role="menu">
+        <li><a ng-click="order()" ng-show="reverse"><span style="cursor:pointer">ascending</span><br></a></li>
+		 <li><a ng-hide="reverse"><span style="cursor:not-allowed">ascending</span><br></a></li>
+		  <li><a ng-show="reverse"><span style="cursor:not-allowed">descending</span><br></a></li>
+        <li><a ng-click="order()" ng-hide="reverse"><span style="cursor:pointer">descending</span><br></a>	</li>
+      </ul></div>
+	
+			
+					<input type="text" class="form-control" ng-model="name3"></th></div>
+					 <div class="form-group">
+                    <th style="text-align:center; font-size:large">Gender
+					<div class="btn-group">
+      <button style="border:hidden" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" >
+      <span style="text-align:right" ng-model="sortcolumn" ng-model="grid" class="caret"></span></button>
+	 
+      <ul class="dropdown-menu" role="menu">
+        <li><a ng-click="order()" ng-show="reverse"><span style="cursor:pointer">ascending</span><br></a></li>
+		 <li><a ng-hide="reverse"><span style="cursor:not-allowed">ascending</span><br></a></li>
+		  <li><a ng-show="reverse"><span style="cursor:not-allowed">descending</span><br></a></li>
+        <li><a ng-click="order()" ng-hide="reverse"><span style="cursor:pointer">descending</span><br></a>	</li>
+      </ul></div>
+
+							 
+					<input type="text" class="form-control" ng-model="name4"></th></div>
+					 <div class="form-group">
+                    <th style="text-align:center; font-size:large">Department
+					<div class="btn-group">
+      <button style="border:hidden" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" >
+      <span style="text-align:right" ng-model="sortcolumn" ng-model="grid" class="caret"></span></button>
+	 
+      <ul class="dropdown-menu" role="menu">
+        <li><a ng-click="order()" ng-show="reverse"><span style="cursor:pointer">ascending</span><br></a></li>
+		 <li><a ng-hide="reverse"><span style="cursor:not-allowed">ascending</span><br></a></li>
+		  <li><a ng-show="reverse"><span style="cursor:not-allowed">descending</span><br></a></li>
+        <li><a ng-click="order()" ng-hide="reverse"><span style="cursor:pointer">descending</span><br></a>	</li>
+      </ul></div><input type="text" class="form-control" ng-model="name5"></th></div>
+	  <div class="form-group">
+                    <th style="text-align:center; font-size:large">Project_id
+					<div class="btn-group">
+      <button style="border:hidden" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" >
+      <span style="text-align:right" ng-model="sortcolumn" ng-model="grid" class="caret"></span></button>
+	 
+      <ul class="dropdown-menu" role="menu">
+        <li><a ng-click="order()" ng-show="reverse"><span style="cursor:pointer">ascending</span><br></a></li>
+		 <li><a ng-hide="reverse"><span style="cursor:not-allowed">ascending</span><br></a></li>
+		  <li><a ng-show="reverse"><span style="cursor:not-allowed">descending</span><br></a></li>
+        <li><a ng-click="order()" ng-hide="reverse"><span style="cursor:pointer">descending</span><br></a>	</li>
+      </ul></div>
+
+							
+					<input type="text" class="form-control" ng-model="name6"></th></div>
+					 <div class="form-group">
+                    <th style="text-align:center; font-size:large">Date
+					<div class="btn-group">
+      <button style="border:hidden" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" >
+      <span style="text-align:right" ng-model="sortcolumn" ng-model="grid" class="caret"></span></button>
+	 
+      <ul class="dropdown-menu" role="menu">
+        <li><a ng-click="order()" ng-show="reverse"><span style="cursor:pointer">ascending</span><br></a></li>
+		 <li><a ng-hide="reverse"><span style="cursor:not-allowed">ascending</span><br></a></li>
+		  <li><a ng-show="reverse"><span style="cursor:not-allowed">descending</span><br></a></li>
+        <li><a ng-click="order()" ng-hide="reverse"><span style="cursor:pointer">descending</span><br></a>	</li>
+      </ul></div>
+
+							
+					<input type="text" class="form-control" ng-model="name7"></th></div>
+					<div class="form-group">
+                    <th style="text-align:center; font-size:large">Id
+					<div class="btn-group">
+      <button style="border:hidden" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" >
+      <span style="text-align:right" ng-model="sortcolumn" ng-model="grid" class="caret"></span></button>
+	 
+      <ul class="dropdown-menu" role="menu">
+        <li><a ng-click="order()" ng-show="reverse"><span style="cursor:pointer">ascending</span><br></a></li>
+		 <li><a ng-hide="reverse"><span style="cursor:not-allowed">ascending</span><br></a></li>
+		  <li><a ng-show="reverse"><span style="cursor:not-allowed">descending</span><br></a></li>
+        <li><a ng-click="order()" ng-hide="reverse"><span style="cursor:pointer">descending</span><br></a>	</li>
+      </ul></div>
+							 
+					<input type="text" class="form-control" ng-model="name8"> </th></div>
+					<div class="form-group">
+					<th style="text-align:center; font-size:large">if any changes</th></div>
+                </tr>
+            </thead>
+			
+			  <tbody>
+
+                <tr  ng-repeat="feedback in feedbacks | filter:{Name:name1,Reg_no:name2,Email:name3,Gender:name4,Department:name5,Project_id:name6,Date:name7,id:name8} | orderBy:predicate:reverse">
+				 
+                    <td><input type="text" ng-model="feedback.Name" ng-show=$index==sel_row><span ng-hide=$index==sel_row>{{feedback.Name}}</span></td>
+                    <td><input type="text" ng-model="feedback.Reg_no" ng-show=$index==sel_row><span ng-hide=$index==sel_row>{{feedback.Reg_no}}</span></td>
+                    <td><input type="text" ng-model="feedback.Email" ng-show=$index==sel_row><span ng-hide=$index==sel_row>{{feedback.Email}}</span></td>
+                    <td><input type="text" ng-model="feedback.Gender" ng-show=$index==sel_row><span ng-hide=$index==sel_row>{{feedback.Gender}}</span></td>
+                    <td><input type="text" ng-model="feedback.Department" ng-show=$index==sel_row><span ng-hide=$index==sel_row>{{feedback.Department}}</span></td>
+					<td><input type="text" ng-model="feedback.Project_id" ng-show=$index==sel_row><span ng-hide=$index==sel_row>{{feedback.Project_id}}</span></td>
+					<td><input type="text" ng-model="feedback.Date" ng-show=$index==sel_row><span ng-hide=$index==sel_row>{{feedback.Date}}</span></td>
+					<td><input type="text" ng-model="feedback.id" ng-show=$index==sel_row><span ng-hide=$index==sel_row>{{feedback.id}}</span></td>
+					<td><button type="button" class="btn btn-link" ng_click="edit($index)" ng-hide="$index==sel_row">Edit</button><button type="button" class="btn btn-link" ng_click="update(feedback,$index)" ng-show="$index==sel_row">Update</button>
+					 |
+                     <a data-ng-click="deletedata(feedback.id)">Delete</a></td>
+              </td>
+		  </tr>
+				  </tbody>
+				 
+        </table>
+</form>
+  </div>
+</div>
+
+</body>
+</html>
