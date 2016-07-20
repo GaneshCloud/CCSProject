@@ -7,15 +7,21 @@
     '$scope',
     'homeService',
     '$window',
-    'dashboardService'
+    'dashboardService',
+      'spinnerService'
   ];
 
-  function homeController($scope,homeService,$window,dashboardService) {
+  function homeController($scope,homeService,$window,dashboardService,spinnerService) {
       $scope.datas = [];
       $scope.events = [];
       $scope.myDataSource = {};
       $scope.images = [];
       var data=[];
+
+      $scope.gotoChat = function() {
+          spinnerService.show('html5spinner');
+          homeService.chatting();
+      };
 
     $scope.accordionGroupOptions1={
       open:true

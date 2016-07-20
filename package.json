@@ -48,6 +48,7 @@
     "sinon": "^1.17.4",
     "sinon-chai": "^2.8.0",
     "sloc": "^0.1.10",
+    "socketio-file-upload": "^0.4.6",
     "supertest": "^1.2.0",
     "supertest-session": "^2.0.1",
     "zombie": "^4.2.1"

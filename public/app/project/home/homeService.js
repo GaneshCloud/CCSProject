@@ -6,6 +6,9 @@
 
   function homeService($http, $window) {
     return {
+      chatting:function(){
+        $window.location.href = '/chat/chathome';
+      },
       projectData: function () {
         return $http.get('/data');
       },

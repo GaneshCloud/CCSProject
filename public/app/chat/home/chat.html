@@ -1,0 +1,109 @@
+
+
+<div class="container">
+    <div class="panel-group">
+        <div class="alert alert-info fade in">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <strong>Note!</strong> &nbsp; Chosse the User!!!
+        </div>
+        <div class="panel panel-info">
+            <div class="panel-heading"><h2>Chat
+                <img src="./images/chat/Online-Chat.jpg" width="80" height="70" class="img-circle"></h2>
+                </div>
+            <div class="panel-body">
+
+                <div class="row">
+                    <div class="col-xs-8">
+                        <!-- showing messages -->
+                        <div class="chatbox" id="chatbox">
+                            <!--<div class="panel-heading">-->
+                               <!--<div class="attach"> </div>-->
+                            <!--</div>-->
+                            <div>
+
+                            <!--<span class='sender_msg'>{{ //msgs.msg }}</span>-->
+                                <div id="msgBox" class="col-lg-12" ng-repeat="data in msgs">
+                                    <div class="text">
+                                        <span class='sender'>{{(data.myid==my_id)? 'You :':data.name +' says :'}}</span>&nbsp;
+                                        <div style="word-wrap: break-word;">{{data.msg}}-{{data.date |  date:'h:mma'}}</div>
+                                <!--{{(data.msg==null)? '<img ng-src="{{data.image}}">':data.msg}}-->
+                                <!--<span ng-show="(data.msg=='' && data.file == null)"><img ng-src="{{data.imagePath}}" width="400" height="100"></span>-->
+                                <!--<span ng-show="(data.msg==!'' && data.image==null && data.file==null)">{{data.msg}}</span>-->
+                                <!--<a ng-if="(data.file!==null)" ng-init="file=data.filePath" ng-click="openFile(file)">{{data.file}}</a>-->
+                                    <span ng-if="data.image!==null"><img ng-src="{{data.imagePath}}"  class="img-responsive"></span>
+                                    <!--<span  ng-if="data.msg!==''">{{data.msg}}</span>-->
+                                    <a ng-if="data.file!==null" ng-init="file=data.filePath" ng-click="openFile(file)">{{data.file}}</a>
+                                </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <br/>
+
+                        <div class="row">
+                            <div class="col-sm-10">
+
+                                <div id="name-group" class="form-group">
+                                       <textarea class="form-control msg_box" id="myInputs" ng-model='msg_text'></textarea>
+                                </form>
+                                    <div data-toggle="collapse" data-target="#demo">
+                                                    <br>
+                                                     <span class="fa-stack fa-lg" ng-hide="(select_userid === null)" ng-click="showImage()">
+                                                        <i class="fa fa-square-o fa-stack-2x"></i>
+                                                        <i class="fa fa-camera fa-stack-1x"></i>
+                                                     </span>
+                                                     <span class="fa-stack fa-lg" ng-click="showFile()" ng-hide="(select_userid === null)">
+                                                        <i class="fa fa-square-o fa-stack-2x"></i>
+                                                        <i class="fa fa-folder-open fa-stack-1x"></i>
+                                                     </span>
+
+                                                </div>
+
+                                    <input type='text' style='display:none' ng-model='selected_id' />
+                                </div>
+                            </div>
+
+                            <div class="col-sm-2">
+                                <button type="button" class="btn btn-info"  ng-disabled="(select_userid === null)" id="msg_box" ng-model='msg_text' ng-click="send_msg(null)">
+                                    <span class="glyphicon glyphicon-send"></span>
+                                </button>
+                                <!--<button class="btn btn-warning" ng-click="choose()"></button>-->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-4">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">Online</div>
+                            <ul class="user">
+                                <!-- appending username  -->
+                                <li class= "" ng-repeat="user_list in user_show" ng-style="{
+                          'background': clicked==user_list.id ? 'lightblue' :'white',
+                          'cursor': my_id==user_list.id ?  'not-allowed' :'pointer'
+                      }" ng-click="clicked_highlight(user_list.id,user_list.user_id)">
+                                    <img ng-src="{{profilePicPath+user_list.profilePic}}" class="img-rounded" width="20" height="20">&nbsp;<span style="font-size:8px"> {{ user_list.user_name }}</span>
+                      <span class="online"  ng-style="{
+                          'background-color': my_id==user_list.id ? 'online' :'#0EE700'
+                      }"><span class="glyphicon glyphicon-ok-circle"></span></span>
+
+                                </li>
+                            </ul>
+                        </div>
+                    <!--</div>-->
+                    <!--<br>-->
+                    <!--<br>-->
+                    <!--<div class="col-xs-4">-->
+                        <div class="panel panel-info">
+                            <div class="panel-heading">Users</div>
+                            <ul class="user"></ul>
+                            </div>
+                        </div>
+                </div>
+            </div>
+
+            <input style="visibility: hidden" type="file" id="f1" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" id="fileInput" onchange="angular.element(this).scope().uploadImage(this.files)"/>
+            <input type="file" type="file" class="form-control" style="visibility: hidden" name="Files" id="f2" ng-model="docFile" accept="{{docPattern}}" onchange="angular.element(this).scope().uploadFile(this.files)"  valid-file required file-
+        </div>
+
+    </div>
+</div>

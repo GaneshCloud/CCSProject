@@ -10,10 +10,11 @@
     '$rootScope',
     'forumService',
     'dashboardService',
+    'spinnerService',
     'filterFilter'
   ];
 
-  function forumController($scope,$window,$rootScope,forumService,dashboardService,filterFilter) {
+  function forumController($scope,$window,$rootScope,forumService,dashboardService,spinnerService,filterFilter) {
     $scope.getForumQus = [];
     $scope.qusId = 0;
     $scope.forumtype = 'All';
@@ -25,6 +26,9 @@
     $scope.maxSize = 4;
     $scope.totalItems = 0;
 
+
+    dashboardService.checkAdmin();
+    
 
     // -------------------------lodout------------------------------------------------- //
     $scope.onLogout = function() {

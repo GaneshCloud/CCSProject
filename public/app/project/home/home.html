@@ -1,5 +1,12 @@
 
-
+<spinner name="html5spinner" ng-cloak="">
+	<div class="overlay"></div>
+	<div class="spinner">
+		<div class="double-bounce1"></div>
+		<div class="double-bounce2"></div>
+	</div>
+	<div class="please-wait">Please Wait...</div>
+</spinner>
 	<nav class="nav navbar-dark bg-primary" role="navigation">
 		<div class="nav-header">
 			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -90,6 +97,20 @@
 					</div>
 				 </div>
 				</div>
+
+				<div class="panel panel-info" ng-init=""panel10="true" ng-click="panel10=!panel10" ng-accordion-group options="accordionGroupOptions2">
+					<div class="panel-heading" ng-accordion-heading>
+						<label>Chat</label>
+						<b><span class="pull-right" ng-show="panel10" style="color:#1719dd"><a href="#"><u>View...</u></a></span></b>
+						<b><span class="pull-right" ng-show="!panel10" style="color:#1719dd"><a href="#"><u>Hide...</u></a></span></b>
+					</div>
+					<div class="panel-collapse collapse in" ng-accordion-body>
+						<div class="panel-body">
+							<center><a ng-click="gotoChat()"><span class="fa fa-comments fa-5x" aria-hidden="true"></span></a></center>
+						</div>
+					</div>
+				</div>
+
 			</div>
 
 			<div class="col-md-6">
@@ -215,6 +236,8 @@
 					</div>
 				 </div>
 				</div>
+
+
 
 			</div>
 		</div>

@@ -32,5 +32,5 @@ console.log(qry);
 }
 
 module.exports = {
-  getUserValidity: getUserValidity
+    getUserValidity: getUserValidity
 };
