@@ -56,6 +56,11 @@
             dashboardService.project();
         };
 
+        $scope.openMessaging = function() {
+            spinnerService.show('html5spinner');
+            dashboardService.messaging();
+        };
+
         $scope.openForum = function() {
             spinnerService.show('html5spinner');
             dashboardService.forum();

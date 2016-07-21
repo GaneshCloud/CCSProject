@@ -57,6 +57,13 @@
                     $window.location.href = '/project/home';
                 }
             },
+            messaging: function () {
+                if(localStorage.getItem('userType') === 'admin') {
+                    $window.location.href = 'sms/sendMessage';
+                }else{
+                    $window.location.href = '/project/home';
+                }
+            },
 
             forum:function () {
                 if(localStorage.getItem('userType') === 'admin') {

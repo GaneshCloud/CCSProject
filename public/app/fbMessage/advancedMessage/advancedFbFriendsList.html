@@ -1,0 +1,121 @@
+<div ng-include="'../app/header/adminHeader.html'"></div>
+<div class="container" ng-cloak>
+    <div class="container-fluid" style="padding: 100px 0px ">
+        <div class="col-lg-12 col-sm-12" style="background: white;max-height: 650px; border: 1px solid #D1D0CF">
+
+            <div ng-include src="'../app/sms/templates/menu.html'"></div>
+
+            <div class="col-lg-9" style="padding-top: 25px;border-left: 1px solid #D1D0CF;max-height: 650px">   <!--message area-->
+                <div>
+
+                    <div style="height: 600px;border: 1px solid #365899; margin-bottom: 15px">
+                        <div style="background-color: #365899;height:35px;color: white; padding: 5px;"><strong>Facebook Friends List</strong></div>
+
+                        <br>
+                        <div style="height: 50px;padding-top: 10px">
+
+
+                            <!--<br>-->
+                            <!--<br>-->
+
+                            <div id="projectTab">
+                                <div class="">
+                                    <div class=" col-lg-4">
+                                        <select class="form-control" ng-options="pr.prId as pr.prCaption for pr in prInfo" ng-model="selProject" ng-change="getContactsByPrId();">
+                                            <option value="">Select Project</option>
+                                        </select>
+                                    </div>
+
+                                    <div  class="col-lg-4">
+                                        <select class="form-control col-lg-6" ng-options="pr as pr.prDep for pr in prDepartment" ng-model="selDep" ng-change="getContactsByDep();">
+                                            <option value="">Select Department</option>
+                                        </select>
+                                    </div>
+
+                                    <div class=" col-lg-2">
+                                        <a href="" class="btn btn-info" ng-click="getFriendsList()">Show All</a>
+                                    </div>
+
+                                    <div class=" col-lg-2">
+                                        <a href="" ng-disabled="selectedFrnd.length <=0" class="btn btn-info" ng-click="showMsgDialog()">Send Message</a>
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div ng-hide="isWaiting" class="col-lg-12">
+                            <h3 ng-show="friendList.length <=0 ">No Data</h3>
+                            <div style="width: 50%;height: 30px; margin: 10px 0px 0px 10px;background-color: #EBE9E7" ng-repeat="frnd in friendList">
+                                <div style="display: inline-block;width: 10px;height: 10px">
+                                    <input type="checkbox" ng-model="selectedArray[$index]" ng-change="addToFriendList($index)">
+                                </div>
+                                <div style="width: 30px;height: 30px; display: inline-block">
+                                    <img ng-src="{{frnd.profilePicture}}" style="width: 30px;height: 30px;">
+                                </div>
+                                <div style="display: inline-block;padding-left:5px ">
+                                    <label>{{frnd.fullName}}</label>
+                                    <!--<a href="" ng-click="showMsgDialog($index)">Send Message</a>-->
+
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div  style="padding: 100px" ng-show="isWaiting" class="col-lg-12 col-lg-offset-3">
+                                <img style="width:150px;height: 150px" src="/images/fb/loading.gif">
+                        </div>
+
+                        <div ng-repeat="frd in selectedFrnd">
+                            {{frd.userID}}
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+
+</div>
+
+
+
+<!--popup window-->
+<div id="popup1" ng-style="popup" class="overlay">
+    <div class="popup" style="overflow: auto; width:450px; max-height:500px;">
+
+        <h3>Send Message</h3>
+        <hr>
+        <a class="close" ng-click="popup={'visibility': 'hide','opacity': 0}">&times;</a>
+        <div class="content">
+
+            <div id="msgContent" style="border: 1px solid darkgray; word-wrap: break-word;height: 200px; overflow: auto; width:400px;">
+                <!--<div ng-repeat="msg in msgData">-->
+                        <!--<h5 ng-if="msg.msg!==''">{{msg.msg}}</h5>-->
+                         <!--<img ng-if="msg.attachment!==''" src="/uploads/fb/" style="width: 60px;height: 60px; margin-left: 15px;">-->
+                <!--</div>-->
+            </div>
+            <br>
+            <img src="images/fb/attachment.png" ng-click="showFileDialog()" style="cursor: pointer"><br>
+            <div>
+                <textarea class="form-control"  ng-model="newMsg.msg"></textarea>&nbsp;&nbsp; <br>
+                <button style="display: inline" class="btn btn-primary col-lg-2" ng-click="sendMessage()" >send</button>
+            </div>
+            <input style="visibility: hidden" id="file1" type="file"  file-input="newMsg.attachment">
+
+
+        </div>
+    </div>
+</div>

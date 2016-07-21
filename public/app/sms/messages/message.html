@@ -1,0 +1,79 @@
+<style>
+    textarea:focus, input:focus{
+        outline: none;
+    }
+</style>
+
+<div ng-include="'../app/header/adminHeader.html'"></div>
+
+<div class="container">
+    <div class="container-fluid" style="padding: 100px 0px ">
+        <div class="col-lg-12 col-sm-12" style="background: white;min-height: 700px; border: 1px solid #D1D0CF">
+
+            <div ng-include src="'../app/sms/templates/menu.html'"></div>
+
+            <div class="col-lg-9" style="padding-top: 25px;border-left: 1px solid #D1D0CF;min-height: 700px">   <!--message area-->
+
+                <h3>Send SMS</h3>
+                <br>
+                <div><label class="control-label">Mobile No</label> <div ng-repeat="grp in newSms.selectGroup" class="btn btn-primary btn-xs" style="margin: 5px 5px">{{grp.grpName}}&nbsp; &nbsp;&nbsp;<a href="#" ng-click="removeGroup($index)" style="color:white;">x</a></a> </div> </div>
+                <div class="form-control" style="height: auto">
+                    <div ng-repeat="contact in newSms.selectedContacts  | limitTo:(newSms.selectedContacts.length-1)" class="btn btn-primary btn-xs" style="margin: 5px 5px">{{contact}}&nbsp; &nbsp;&nbsp;<a href="#" ng-click="removeContact($index)" style="color:white;">x</a></a> </div>
+                    <input id="contactId" type="text"  style="border: none; display:inline-block;" ng-model="contactString" onkeydown="">
+
+
+                </div>
+                <!--<div ng-show="true">-->
+                    <!--<div style="height: auto" class="col-lg-12">-->
+                        <!--<div ng-repeat="cont in newSms.selectedContacts track by $index" style="margin-left:5px;margin-bottom:2px;display:inline-block;height: 55px;padding: 2px;;border: 1px solid #9C9B9A;background-color: #EBE9E7" class="col-lg-3">-->
+                            <!--<div style="padding-left:1px;float: left;height: 50px; border-radius: 50%;" class="col-lg-4">-->
+                                <!--<img src="images/fb/icon-user.png" style="width: 50px;height: 50px; border-radius: 50%;">-->
+                            <!--</div>-->
+                            <!--<div style="height: 50px;padding-left:1px;float: left" class="col-lg-6">-->
+                                <!--<div style="word-wrap: break-word;overflow: hidden">-->
+                                    <!--<div class="col-lg-12"><label style="overflow: hidden;word-wrap: normal">{{cont.name}}</label></div>-->
+                                    <!--<label style="overflow: hidden">{{cont.mob}}</label>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="col-lg-1">-->
+                                <!--<a href="" ng-click="removeContact($index)" style="">X</a>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <br>
+                Select Group &nbsp;&nbsp;<select ng-options="grp as grp.grpName for grp in grpList" ng-change="selectGroup()" ng-model="selectedGrp"></select>
+
+
+
+                <!--<search-box list="contacts"  search-class="form-control" list-class="" output="newSms.selectedContacts">{{contacts}}</search-box>-->
+                       <!--<input type="text" class="form-control" ng-model="contactString">-->
+                        <br>
+
+
+                <div>
+                    <div class="tab-content">
+                        <div id="text" class="tab-pane fade in active">
+                            <h3>Text</h3>
+                            <div style="border: 1px solid #EEECEB">
+                                <div><span class="pull-right" style="padding: 5px;width: 100%; text-align:right; border-bottom: 1px solid #D1D0CF">{{newSms.smsText.length+"/"+numSms}}</span></div>
+                                <textarea rows="15"  style="border: none;width: 100%" ng-change="calculateCharacter()"data-ng-model="newSms.smsText"></textarea>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div style="padding: 10px 0px 10px"><button class="btn btn-success btn-md" ng-click="sendSms()">Send</button></div>
+
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+
+</div>
+
