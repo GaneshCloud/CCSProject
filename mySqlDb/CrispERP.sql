@@ -337,11 +337,11 @@ CREATE TABLE IF NOT EXISTS `file_uploading` (
 # Dumping data for table cloudproject.file_uploading: ~5 rows (approximately)
 /*!40000 ALTER TABLE `file_uploading` DISABLE KEYS */;
 INSERT INTO `file_uploading` (`Doc_Caption`, `Doc_Type`, `Department`, `Keywords`, `Description`, `Doc_File`, `id`) VALUES
-	('string:SYNAPSIS', 'string:PDF', 'string:MECHATRONICS', 'fhgf', 'gfddxhg', '15.doc', 8),
-	('string:SYNAPSIS', 'string:WORD', 'string:MECHANICAL', 'dfhggfh', '', '16.doc', 9),
 	('ecee', 'asdgf', 'zdsgfzd', 'zdsgf', 'zsdf', 'angularjs_tutorial1.pdf', 32),
 	('mech', 'DOC', 'mechanical', 'xdfgdfg', 'dfgfd', 'waterMark.doc', 33),
-	('ECE', 'DOC', 'ECE', 'fgh', 'fhgdfgh', 'Doc7e17(1).doc', 34);
+	('SQL', 'DOC', 'BE', 'BE', 'BE', 'SQL.doc', 36),
+	('MATLAB', 'DOC', 'BE', 'vbh', 'dfgd', 'Matlab.doc', 37);
+
 /*!40000 ALTER TABLE `file_uploading` ENABLE KEYS */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
