@@ -1,0 +1,97 @@
+<div ng-include="'../app/header/adminHeader.html'"></div>
+
+<div class="container">
+    <div class="container-fluid" style="padding: 100px 0px ">
+        <div class="col-lg-12 col-sm-12" style="background: white;min-height: 700px; border: 1px solid #D1D0CF">
+
+            <div ng-include src="'../app/sms/templates/menu.html'"></div>
+
+            <div class="col-lg-9" style="padding-top: 25px;border-left: 1px solid #D1D0CF;min-height: 700px">   <!--message area-->
+
+                <h3>Member</h3>
+                <div>
+
+                    <div>
+
+                        <!--<div><a href="sms/group" class="btn btn-success pull-right">Back</a></div>-->
+                        <br>
+                        <label class="control-label">Group Name</label>
+                        <select class="form-control" ng-model="newMember.grpId" ng-options="grp.grpId as grp.grpName for grp in grpList">
+                            <!--<option value="1" >Group 1</option>-->
+
+                        </select>
+
+                        <label class="control-label">Member Name</label>
+                        <input  class="form-control" type="text" ng-model="newMember.memName">
+
+                        <label class="control-label">Mobile No</label>
+                        <input  class="form-control" type="text" ng-model="newMember.memMob">
+
+                        <br>
+
+
+
+                        <button class="btn btn-primary" ng-show="isSave" ng-click="addMember()">Save</button>
+                        <button class="btn btn-success" ng-hide="isSave" ng-click="addMember()">Update</button>
+                        <button class="btn btn-primary" ng-hide="isSave" ng-click="newMemberCreation()">New</button>
+
+
+
+                    </div>
+
+                    <div>
+                        <br>
+                        <table class="table table-bordered table-responsive">
+                            <thead>
+                            <tr>
+                                <th>Sl No</th>
+                                <th>Member Name</th>
+                                <th>Mob No</th>
+                                <th>Groups</th>
+                                <th>edit</th>
+                                <th>Delete</th>
+                            </tr>
+                            </thead>
+
+                            <tr ng-repeat="member in memberList | filter:paginate">
+                                <td>{{$index+1}}</td>
+                                <td>{{member.memName}}</td>
+                                <td>{{member.memMob}}</td>
+                                <td>{{member.groups}}</td>
+                                <td><a href="" ng-click="editMemeber($index)" class="btn btn-default btn-sm">Edit</a></td>
+                                <td><a href="" ng-click="deleteMember($index)" class="btn btn-danger btn-sm">Delete</a></td>
+                            </tr>
+
+                        </table>
+                    </div>
+
+                    <div class="col-sm-offset-0 col-sm-12" style="padding: 0px">
+
+                        <pagination
+                                ng-model="curPage"
+                                total-items="memberList.length"
+                                items-per-page="itemsPage"
+                                max-size="maxSize"
+                                boundary-links="true">
+                        </pagination>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
