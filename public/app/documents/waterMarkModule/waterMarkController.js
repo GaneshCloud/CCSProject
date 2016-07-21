@@ -25,6 +25,7 @@
         $scope.Mini=true;
         $scope.IEEE=true;
         $scope.Software=true;
+        $scope.hideAllDept=true;
 
         $scope.showMechanical=function(){
             $scope.mechanical=true;
@@ -33,6 +34,7 @@
             $scope.Mini=false;
             $scope.IEEE=false;
             $scope.Software=false;
+            $scope.hideAllDept=true;
         };
 
         $scope.showCAD=function(){
@@ -42,6 +44,7 @@
             $scope.Mini=false;
             $scope.IEEE=false;
             $scope.Software=false;
+            $scope.hideAllDept=false;
         };
 
         $scope.showElectronics=function(){
@@ -51,6 +54,7 @@
             $scope.Mini=false;
             $scope.IEEE=false;
             $scope.Software=false;
+            $scope.hideAllDept=false;
         };
 
         $scope.showMini=function(){
@@ -60,6 +64,7 @@
             $scope.Mini=true;
             $scope.IEEE=false;
             $scope.Software=false;
+            $scope.hideAllDept=false;
         };
 
         $scope.showIEEE=function(){
@@ -69,6 +74,7 @@
             $scope.Mini=false;
             $scope.IEEE=true;
             $scope.Software=false;
+            $scope.hideAllDept=false;
         };
 
         $scope.showSoftware=function(){
@@ -78,6 +84,7 @@
             $scope.Mini=false;
             $scope.IEEE=false;
             $scope.Software=true;
+            $scope.hideAllDept=false;
         };
 
 

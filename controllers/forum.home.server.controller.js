@@ -2,6 +2,7 @@ var express = require('express');
 
 var forumConfig = require('../config/db/forumManager');
 
+
 var router = express.Router();
 
 router.get('/getForum', function(req, res) {

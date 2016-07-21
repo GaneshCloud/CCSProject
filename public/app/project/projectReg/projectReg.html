@@ -14,29 +14,20 @@
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
+            <li><a ng-click='goToDashboard()'  style="color:white"><span class="glyphicon glyphicon-arrow-left"></span></a></li>
             <li class="dropdown">
-                <a href="#"  style="color:white" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Settings <span class="caret"></span></a>
+                <a href="#"  style="color:white" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
                 <ul class="dropdown-menu" role="menu">
 
                     <li align='right'>
 
-                        <a ng-click='goToDashboard()'>
+                        <a ng-click='onLogout()'>
 
-                            <span class="glyphicon glyphicon-th-large"></span>Dashboard
+                            <span class="glyphicon glyphicon-log-out"></span>Log Out
 
                         </a>
 
                     </li>
-
-                    <!--<li align='right'>-->
-
-                        <!--<a ng-click='onLogout()'>-->
-
-                            <!--<span class="glyphicon glyphicon-log-out"></span>Log Out-->
-
-                        <!--</a>-->
-
-                    <!--</li>-->
 
                 </ul>
 

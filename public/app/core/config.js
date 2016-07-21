@@ -7,6 +7,8 @@
 
     angular.module('myApp').constant('defaultProfilePicture', '../images/profile/no_profile.png');
     angular.module('myApp').constant('uploadedProfilePicturePath', '../uploads/profile/');
+    angular.module('myApp').constant('uploadedChatImagePath', '../uploads/chat/');
+    angular.module('myApp').constant('uploadedChatFilePath', '../uploads/chat/Files/');
     angular.module('myApp').constant('DEPARTMENTS', ['mechanical', 'mechatronics', 'ECE', 'CS', 'IT']);
     angular.module('myApp').constant('TITLE', ['Mechanical Projects', 'Aeronatical Projects', 'ECE Projects', 'Embaded projects', 'IT Projects']);
     angular.module('myApp').constant('SUB_HEADS', ['CEA-ATMEL', 'CEA-OTHERS', 'CEC-PC BASED', 'CEA-DSP PROJECTS', 'IEEE PAPERS']);
@@ -98,8 +100,11 @@
             }).when('/error/message', {
                 templateUrl: 'app/error/errorMessage.html',
                 controller:'errorMessageController'
-            }).otherwise({
-                redirectTo: '/error'
+             }).when('/chat/chathome', {
+            templateUrl: 'app/chat/home/chat.html',
+            controller: 'chatController'
+            // }).otherwise({
+                //redirectTo: '/error'
             });
 
         $locationProvider.html5Mode(true);

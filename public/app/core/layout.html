@@ -12,6 +12,7 @@
   <link rel="stylesheet" type="text/css" href="../../bower_components/angular-timeline/dist/angular-timeline.css"/>
   <link rel="stylesheet" type="text/css" href="../../bower_components/angular-timeline/dist/angular-timeline-bootstrap.css"/>
 
+  <link rel="stylesheet" type="text/css" href="../../css/chatstyle.css">
   <link rel="stylesheet" type="text/css" href="../../css/style.css">
   <link rel="stylesheet" type="text/css" href="../../css/Star.css">
   <link rel="stylesheet" type="text/css" href="../../css/modalscroll.css">
@@ -20,8 +21,6 @@
   <link rel="stylesheet" type="text/css" href="../../css/documentStyle.css">
   <link rel="stylesheet" type="text/css" href="../../css/commonStyle.css">
   <link rel="stylesheet" type="text/css" ng-href="../../css/{{css}}">
-
-
 
 <!-- BASE URL -->
   <base href="/">
@@ -43,7 +42,9 @@
   <script src="bower_components/angular/angular.min.js"></script>
   <script src="bower_components/angular-route/angular-route.min.js"></script>
   <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script src="bower_components/ui-accordion/dist/scripts/ui-accordion.js"></script>
+  <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script src="js/socket.io.js"></script>
+   <script src="bower_components/ui-accordion/dist/scripts/ui-accordion.js"></script>
   <script src="bower_components/fusioncharts/fusioncharts.js"></script>
   <script src="bower_components/fusioncharts/fusioncharts.charts.js"></script>
   <script src="bower_components/fusioncharts/themes/fusioncharts.theme.ocean.js"></script>
@@ -55,8 +56,8 @@
   <script src="bower_components/ngprogress/build/ngProgress.js"></script>
   <script type="text/javascript" data-require="ui-bootstrap@*" data-semver="0.12.1" src="../../js/ui-bootstrap-tpls-0.12.1.min.js"></script>
   <!--<script type="text/javascript" data-require="ui-bootstrap@*" data-semver="0.12.1" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.1.min.js"></script>-->
-  <script src="bower_components/angular-disable-all/dist/angular-disable-all.js"></script>
-
+  <!--<script src="bower_components/angular-disable-all/dist/angular-disable-all.js"></script>-->
+  <script src="bower_components/angular-credit-cards/release/angular-credit-cards.js"></script>
 
 <!-- CORE -->
   <script src="app/core/module.js"></script>
@@ -93,6 +94,12 @@
  <!----forum-------->
   <script src="app/forum/home/forumService.js"></script>
   <script src="app/forum/home/forumController.js"></script>
+
+<!----chat-------->
+
+<script src="app/chat/home/chatService.js"></script>
+  <script src="app/chat/home/chatController.js"></script>
+  <!--<script src="app/chat/home/keyboard.js"></script>-->
 
   <script src="app/documents/documentlist/documentListController.js"></script>
   <script src="app/documents/documentlist/documentListServices.js"></script>
