@@ -1,6 +1,6 @@
 <div ng-include="'../app/header/adminHeader.html'"></div>
 <div class="container" ng-cloak>
-    <div class="container-fluid" style="padding: 100px 0px ">
+    <div class="container-fluid" style="padding: 0px 0px ">
         <div class="col-lg-12 col-sm-12" style="background: white;max-height: 650px; border: 1px solid #D1D0CF">
 
             <div ng-include src="'../app/sms/templates/menu.html'"></div>
@@ -27,7 +27,7 @@
                                     </div>
 
                                     <div  class="col-lg-4">
-                                        <select class="form-control col-lg-6" ng-options="pr as pr.prDep for pr in prDepartment" ng-model="selDep" ng-change="getContactsByDep();">
+                                        <select class="form-control col-lg-6" ng-options="pr as pr.DEP_NAME for pr in prDepartment" ng-model="selDep" ng-change="getContactsByDep();">
                                             <option value="">Select Department</option>
                                         </select>
                                     </div>

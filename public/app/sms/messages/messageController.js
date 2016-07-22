@@ -11,10 +11,11 @@
         '$scope',
         'messageServices',
         'groupServices',
-        '$filter'
+        '$filter',
+        'departmentServices'
     ];
 
-    function messageController($scope,messageServices,groupServices,$filter){
+    function messageController($scope,messageServices,groupServices,$filter,departmentServices){
         //$scope.selectedContacts=[];                                                        //selected contact list
         $scope.contacts=[
             {name:"name1",mob:"9100821578"},
@@ -40,21 +41,26 @@
             {id:4,name:'Ilyas',mob:10214205478,prId:1001}
         ];
 
-        $scope.prDepartment=[
-            {depCode:101,prDep:'Computer Science'},
-            {depCode:102,prDep:'Electronics'}
-
-        ];
+        $scope.prDepartment=[];
         $scope.prInfo=[
-            {prId:1001,prCaption:'Cloud Project',prDep:$scope.prDepartment[0].depCode},
-            {prId:1002,prCaption:'Java Project',prDep:$scope.prDepartment[0].depCode},
-            {prId:1003,prCaption:'Embedded Project',prDep:$scope.prDepartment[1].depCode}
+            {prId:1001,prCaption:'Cloud Project',prDep:1},
+            {prId:1002,prCaption:'Java Project',prDep:2},
+            {prId:1003,prCaption:'Embedded Project',prDep:4}
 
         ];
 
 
         var str='';
 
+        $scope.getDepartment=function(){
+            departmentServices.getDepartment()
+                .then(function(response){
+                    $scope.prDepartment=response.data;
+                },function(err){
+
+                });
+
+        };
 
         $scope.getContactsBySelection=function(id){
             if($scope.selStud===null) return;
@@ -80,7 +86,7 @@
 
             $scope.newSms.selectedContacts=[];
             if($scope.selDep===null) return;
-            var selProjects=$filter("filter")($scope.prInfo,{prDep:$scope.selDep.depCode});
+            var selProjects=$filter("filter")($scope.prInfo,{prDep:$scope.selDep.DEP_ID});
 
             for(var i=0;i<selProjects.length;i++){
 
@@ -206,5 +212,6 @@
 
         listGroup();
         getContactList();
+        $scope.getDepartment();
     }
 })();
