@@ -12,10 +12,11 @@
     advancedFbFriendsListController.$inject=[
         '$scope',
         'advancedFbFriendsListServices',
-        '$filter'
+        '$filter',
+        'departmentServices'
     ];
 
-    function advancedFbFriendsListController($scope,advancedFbFriendsListServices,$filter){
+    function advancedFbFriendsListController($scope,advancedFbFriendsListServices,$filter,departmentServices){
 
         $scope.friendList=[];
         $scope.contInfo=[
@@ -25,15 +26,11 @@
             {id:4,name:'Ilyas',mob:10214205478,prId:1001,fbId:'100002196848047'}
         ];
 
-        $scope.prDepartment=[
-            {depCode:101,prDep:'Computer Science'},
-            {depCode:102,prDep:'Electronics'}
-
-        ];
+        $scope.prDepartment=[];
         $scope.prInfo=[
-            {prId:1001,prCaption:'Cloud Project',prDep:$scope.prDepartment[0].depCode},
-            {prId:1002,prCaption:'Java Project',prDep:$scope.prDepartment[0].depCode},
-            {prId:1003,prCaption:'Embedded Project',prDep:$scope.prDepartment[1].depCode}
+            {prId:1001,prCaption:'Cloud Project',prDep:1},
+            {prId:1002,prCaption:'Java Project',prDep:2},
+            {prId:1003,prCaption:'Embedded Project',prDep:4}
 
         ];
 
@@ -52,6 +49,15 @@
         $scope.isWaiting=true;
         $scope.isLoading=true;
 
+        $scope.getDepartment=function(){
+            departmentServices.getDepartment()
+                .then(function(response){
+                    $scope.prDepartment=response.data;
+                },function(err){
+
+                });
+
+        };
 
         $scope.getFriendsList=function(){
             $scope.isWaiting=true;
@@ -103,7 +109,7 @@
                 .then(function(response){
                     $scope.friendList=response.data;
                     data=$scope.friendList.slice();
-                    var selProjects=$filter("filter")($scope.prInfo,{prDep:$scope.selDep.depCode});
+                    var selProjects=$filter("filter")($scope.prInfo,{prDep:$scope.selDep.DEP_ID});
                     $scope.friendList=[];
                     for(var i=0;i<selProjects.length;i++){
 
@@ -206,6 +212,7 @@
 
 
         $scope.getFriendsList();
+        $scope.getDepartment();
 
     };
 
