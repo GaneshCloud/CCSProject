@@ -1,27 +1,23 @@
-<nav class="navbar navbar-default" >
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toogle="collapse" data-target="#myNavbar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand">Crisp Project</a>
-        </div>
-        <div class="collapse navbar-collapse" id="myNavbar" >
-            <ul class="nav navbar-nav">
-                <li><a href="unregister.html">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Gallery</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-            <!--  <ul class="nav navbar-nav navbar-right">
-               <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-             </ul> -->
-        </div>
+<nav class="nav navbar-dark bg-primary" role="navigation">
+    <div class="nav-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <label class="navbar-brand">Crisp Cloud Solutions</label>
+
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a ng-click='goToDashboard()'  style="color:white"><span class="glyphicon glyphicon-arrow-left"></span></a></li>
+
+        </ul>
     </div>
 </nav>
-
+<div class="container">
+    <div class="row content">
 <div class="col-sm-3">
     <div class="panel panel-primary">
         <div class="panel-heading" style="text-align:center"><h4>Projects</h4></div>
@@ -119,3 +115,5 @@
 
     </div>
 </div>
+    </div>
+    </div>

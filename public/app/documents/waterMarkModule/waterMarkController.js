@@ -14,10 +14,13 @@
     function waterMarkController($scope,$http,$window,unRegisterService)
     {
 
-
+        $scope.onLogout = function () {
+            dashboardService.logout();
+        };
         $scope.goToDashboard = function() {
             unRegisterService.goToDashboard();
         };
+
 
         $scope.mechanical=true;
         $scope.CAD=true;
@@ -88,21 +91,6 @@
         };
 
 
-// $scope.viewer = pdf.Instance("viewer");
-
-//     $scope.nextPage = function() {
-//         $scope.viewer.nextPage();
-//     };
-
-//     $scope.prevPage = function() {
-//         $scope.viewer.prevPage();
-//     };
-
-//     $scope.pageLoaded = function(curPage, totalPages) {
-//         $scope.currentPage = curPage;
-//         $scope.totalPages = totalPages;
-//     };
-
         $scope.showFile = function(id,file){
 
             var thisFile;
@@ -127,9 +115,8 @@
 
                     $scope.files=response.data;
 
-                    alert('the file was selected');
+                    //alert('the file was selected');
 
-                    //$scope.window=data;
                 })
                 .catch(function(error){
 
