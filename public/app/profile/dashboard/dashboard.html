@@ -110,7 +110,7 @@
                                         <i class="fa fa-tasks fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div>waterMark</div>
+                                        <div>Synopsis</div>
                                     </div>
                                 </div>
                             </div>
@@ -191,6 +191,61 @@
                         </div>
                     </div>
 
+                    <!--<div ng-show="reqButton">-->
+                    <button type="button" id="showModel" ng-click="hideButton()" ng-hide="true" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Request</button>
+                    <!--</div>-->
+                        <div class="modal fade" id="myModal" role="dialog">
+                        <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Modal Header</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="checkbox col-sm-offset-3">
+                                        <h3>Welcome to crisp solution</h3>
+                                    </div>
+                                    <div class="checkbox col-sm-offset-2">
+                                        <p>you can choose a way to connect with us</p>
+                                    </div>
+                                    <div class="checkbox col-sm-offset-3">
+                                        <label><button type="button" ng-hide="userData.facebookId!=null" ng-click="addFacebookAccount()" class="btn btn-primary">Facebook</button></label>
+                                        <label><button type="button" ng-click="showMobNo()" class="btn btn-primary">Mobile sms</button></label>
+                                    </div>
+                                    <div ng-hide="request">
+
+                                        <div class="form-group col-sm-offset-2" ng-hide="userData.mobNumber!=null">
+                                            <p>Enter your Mobile Number here !!!</p>
+
+                                        </div>
+                                        <table class="col-sm-offset-3">
+                                            <!--<tr><td>-->
+                                                <!--<label ng-show="faceBook">Facebook id:</label></td><td>-->
+                                                <!--<input type="text" class="form-control" ng-show="userData.facebookId==null" placeholder="Enter Id">-->
+                                            <!--</td></tr>-->
+                                            <tr><td>
+                                                <label><input type="checkbox" ng-click="hideAlternateNo()" value="">Already updated number</label>
+                                            </td></tr>
+                                            <!--<tr><td>-->
+                                                <!--<label ng-show="mobNo1">Mobile No:</label></td><td>-->
+                                                <!--<input type="text" class="form-control" ng-model="userData.contact" ng-show="mobNo1" placeholder="Enter No"></td></tr>-->
+                                            <tr><td>
+                                                <label>Mobile No:</label></td><td>
+                                                <input type="text" class="form-control" ng-model="userData.msgNumber" placeholder="Enter No">
+
+                                            </td></tr></table>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" style="text-align:right" ng-click="onSubmitPersonalData()" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-saved"></span> Submit</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal"><< Skip >></button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
 
             </div>

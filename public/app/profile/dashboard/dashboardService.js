@@ -98,6 +98,20 @@
                 });
 
             },
+            updatePersonalData: function (personalData) {
+
+                return $http({
+                    method: 'post',
+
+                    url: '/connect/updatePersonalData',
+
+                    data: personalData
+
+                });
+            },
+            addFacebookAccount: function () {
+                $window.location.href = '/auth/facebook';
+            },
             showError:function (error) {
                 if(error.error.code !== null){
                     localStorage.setItem('errorCode',error.error.code);

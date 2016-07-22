@@ -16,6 +16,7 @@
         </ul>
     </div>
 </nav>
+
 <div class="container">
     <div class="row content">
 <div class="col-sm-3">
@@ -23,17 +24,17 @@
         <div class="panel-heading" style="text-align:center"><h4>Projects</h4></div>
         <div class="panel-body">
 
-            <h4 ng-click="showMechanical()">Mechanical Projects</h4><hr>
+            <a href="#" ng-click="showMechanical()">Mechanical Projects</a><hr>
 
-            <h4 ng-click="showCAD()">CAD/CAM Projects</h4><hr>
+            <a href="#" ng-click="showCAD()">CAD/CAM Projects</a><hr>
 
-            <h4 ng-click="showElectronics()">Electronics Projects</h4><hr>
+            <a href="#" ng-click="showElectronics()">Electronics Projects</a><hr>
 
-            <h4 ng-click="showMini()">Mini Projects</h4><hr>
+            <a href="#" ng-click="showMini()">Mini Projects</a><hr>
 
-            <h4 ng-click="showIEEE()">IEEE Projects</h4><hr>
+            <a href="#" ng-click="showIEEE()">IEEE Projects</a><hr>
 
-            <h4 ng-click="showSoftware()">Software Projects</h4>
+            <a href="#" ng-click="showSoftware()">Software Projects</a>
 
 
         </div>
@@ -42,12 +43,22 @@
 
 <div class="col-sm-8">
     <div class="panel panel-primary">
-        <div class="panel-heading"><h4>You Can Select The Project Here ! ! !</h4></div>
-
-        <div class="panel-body">
-            <div id="mech" ng-show="mechanical">
+        <div class="panel-heading" style="height: 70px">
+            <div class="col-lg-6"><h4>You Can Select The Project Here ! ! !</h4></div>
+        <div class="col-lg-6"><button type="button" class="btn btn-primary col-sm-offset-10"  data-toggle="collapse" data-target="#demo">Search</button></div>
+        </div>
+            <div class="panel-body">
+            <form class="form-horizontal" role="form">
+                <div class="form-group collapse" id="demo">
+                    <label class="control-label col-sm-2">Search:</label>
+                    <div class="col-sm-8">
+                        <input type="text" ng-model="searchText" class="form-control" placeholder="Search...">
+                    </div>
+                </div>
+                </form>
+            <div ng-show="mechanical">
                 <h4>Mechanical projects</h4><hr>
-                <ul ng-repeat="file in files">
+                <ul ng-repeat="file in files | filter:searchText">
                     <li class="panel col-sm-offset-1">{{file.Doc_File}}
                         <div class="panel col-sm-offset-8">
                             <button type="button" class="btn btn-primary" ng-init="File = file.Doc_File" ng-click='showFile(file.id,file.Doc_File)'>DOWNLOAD</button>
@@ -58,7 +69,7 @@
             <div ng-hide="hideAllDept">
             <div  ng-show="CAD">
                 <h4>CAD/CAM projects</h4><hr>
-                <ul ng-repeat="file in files">
+                <ul ng-repeat="file in files | filter:searchText">
                     <li class="panel col-sm-offset-1">{{file.Doc_File}}
                         <div class="panel col-sm-offset-8">
                             <button type="button" class="btn btn-primary" ng-init="File = file.Doc_File" ng-click='showFile(file.id,file.Doc_File)'>DOWNLOAD</button>
@@ -69,7 +80,7 @@
             </div>
             <div ng-show="Electronics">
                 <h4>Electronics projects</h4><hr>
-                <ul ng-repeat="file in files">
+                <ul ng-repeat="file in files | filter:searchText">
                     <li class="panel col-sm-offset-1">{{file.Doc_File}}
                         <div class="panel col-sm-offset-8">
                             <button type="button" class="btn btn-primary" ng-init="File = file.Doc_File" ng-click='showFile(file.id,file.Doc_File)'>DOWNLOAD</button>
@@ -79,7 +90,7 @@
             </div>
             <div ng-show="Mini">
                 <h4>Mini projects</h4><hr>
-                <ul ng-repeat="file in files">
+                <ul ng-repeat="file in files | filter:searchText">
                     <li class="panel col-sm-offset-1">{{file.Doc_File}}
                         <div class="panel col-sm-offset-8">
                             <button type="button" class="btn btn-primary" ng-init="File = file.Doc_File" ng-click='showFile(file.id,file.Doc_File)'>DOWNLOAD</button>
@@ -89,7 +100,7 @@
             </div>
             <div ng-show="IEEE">
                 <h4>IEEE projects</h4><hr>
-                <ul ng-repeat="file in files">
+                <ul ng-repeat="file in files | filter:searchText">
                     <li class="panel col-sm-offset-1">{{file.Doc_File}}
                         <div class="panel col-sm-offset-8">
                             <button type="button" class="btn btn-primary" ng-init="File = file.Doc_File" ng-click='showFile(file.id,file.Doc_File)'>DOWNLOAD</button>
@@ -100,7 +111,7 @@
             <div ng-show="Software">
                 <h4>Software projects</h4><hr>
 
-                <ul ng-repeat="file in files">
+                <ul ng-repeat="file in files | filter:searchText">
                     <li class="panel col-sm-offset-1">{{file.Doc_File}}
                         <div class="panel col-sm-offset-8">
                             <button type="button" class="btn btn-primary" ng-init="File = file.Doc_File" ng-click='showFile(file.id,file.Doc_File)'>DOWNLOAD</button>
