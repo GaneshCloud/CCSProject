@@ -14,11 +14,11 @@
         '$scope',
         '$window',
         'dashboardService',
-        'spinnerService',
-        '$mdDialog'
+        'spinnerService'
+
     ];
 
-    function dashboardController($scope,$window,dashboardService,spinnerService,$mdDialog) {
+    function dashboardController($scope,$window,dashboardService,spinnerService) {
 
         $scope.userCredentials = false;
         $scope.unregisteredUser = false;
