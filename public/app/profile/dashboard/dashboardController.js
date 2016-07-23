@@ -24,11 +24,7 @@
         $scope.unregisteredUser = false;
         $scope.userData = [];
         $scope.request = true;
-        //$scope.reqButton = true;
-
-
-
-
+        
         $scope.openProfilePage = function() {
             spinnerService.show('html5spinner');
             dashboardService.profile();
@@ -79,9 +75,7 @@
             }
             return false;
         };
-        // $scope.hideButton=function(){
-        //     $scope.reqButton = false;
-        // }
+
         $scope.showMobNo=function(){
             $scope.request = false;
         }
