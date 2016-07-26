@@ -61,21 +61,17 @@
                           'background': clicked==user_list.id ? 'lightblue' :'white',
                           'cursor': my_id==user_list.id ?  'not-allowed' :'pointer'
                       }" ng-click="clicked_highlight(user_list.id,user_list.user_id)">
-                            <img ng-src="{{profilePicPath+user_list.profilePic}}" class="img-rounded" width="30" height="50">&nbsp;<span style="font-size:8px"> {{ user_list.user_name }}</span>
+                            <img ng-src="{{profilePicPath+user_list.profilePic}}" class="img-rounded" width="25" height="50">&nbsp;<span style="font-size:8px"> {{ user_list.user_name }}</span>
                       <span class="online"  ng-style="{
                           'background-color': my_id==user_list.id ? '':'#0EE700'
-                      }"><span class="glyphicon glyphicon-ok-circle"></span> raed{{readData[$index].readCount}}</span>
-
-
+                      }"><span class="glyphicon glyphicon-ok-circle"></span></span>
+                          Inbox <span class="badge">{{readData[$index].readCount}}</span>
                         </li>
 
                     </ul><br>
 
                 </div>
             </div>
-
-
-
         </div>
         <div class="panel panel-default">
             <div class="panel-body">
@@ -100,9 +96,9 @@
                                     <!--<span ng-show="(data.msg=='' && data.file == null)"><img ng-src="{{data.imagePath}}" width="400" height="100"></span>-->
                                     <!--<span ng-show="(data.msg==!'' && data.image==null && data.file==null)">{{data.msg}}</span>-->
                                     <!--<a ng-if="(data.file!==null)" ng-init="file=data.filePath" ng-click="openFile(file)">{{data.file}}</a>-->
-                                    <span ng-show="showImage(data.image)"><a ng-href="{{uploadImagePath + data.image}}" target="_blank"> <img ng-src="{{uploadImagePath + data.image}}" width="100" heghit="100" class="img-responsive"></a></span>
+                                    <span ng-show="showImage(data.image)"><a ng-href="{{uploadImagePath + data.image}}" target="_blank"> <img ng-src="{{uploadImagePath + data.image}}" width="100" heghit="100" class="img-responsive"><br>{{data.date |  date:'dd.MM.yyyy -h:mma'}}</a></span>
                                     <!--<span  ng-if="data.msg!==''">{{data.msg}}</span>-->
-                                    <a ng-show="showFile(data)" ng-init="file=data.file" ng-click="openFile(uploadFilePath + file)">{{data.file}}</a>
+                                    <a ng-show="showFile(data)" ng-init="file=data.file" ng-click="openFile(uploadFilePath + file)">{{data.file}}<br>{{data.date |  date:'dd.MM.yyyy -h:mma'}}</a>
                                 </div>
                             </div>
                         </div>

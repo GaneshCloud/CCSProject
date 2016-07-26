@@ -119,7 +119,7 @@
 
                 chatService.updateRead(my_userid,selectUserid).then(function(result)
                 {
-                    alert("inside serv");
+
                     // $scope.msgReadData=result.data;
                     $scope.getReadinfo();
 
@@ -200,7 +200,7 @@
                 //$scope.datas = data.length-1;
                 $scope.$apply();
                 $scope.getReadinfo();
-                alert();
+
             });
 
             //function to send messages.
@@ -266,7 +266,7 @@
 
            //to highlight selected row
             $scope.clicked_highlight = function (id,user_id) {
-                alert("inside sel");
+
                 $scope.getChatinfo();
                 var msgs1=[],msgs2=[];
                 $scope.clicked = id;
@@ -299,17 +299,14 @@
 
             $scope.getReadinfo=function()
             {
-alert("inside" +$scope.userData.userid);
                 chatService.getReadinfo($scope.userData.userid).then(function(result)
 
                 {
-                    alert("hai");
 
             if(result.data.length > 0){
                 $scope.readData = result.data;
                 console.log($scope.readData);
-                alert("count "+$scope.readData[0].readCount);
-            }
+                            }
                     else
                         $scope.readData =[];
 
@@ -318,22 +315,12 @@ alert("inside" +$scope.userData.userid);
 
 
                 },function(err){
-                    alert(err);
-                });
+                                    });
             };
 
 
-
-            // $scope.getReadinfo();
-            //displaying the messages.
+            
             socket.on('get msg', function (data) {
-// alert("haaaaaaaaaaaa");
-//                $scope.msgs.push(data);
-                alert();
-                //$scope.is_msg_show = true;
-
-
-
 
                 if(data.sender_id===$scope.selected_id){
                                    $scope.msgs.push(data);
