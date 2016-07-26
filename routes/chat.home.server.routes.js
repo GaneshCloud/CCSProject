@@ -3,6 +3,9 @@ module.exports = function(app) {
     app.post('/chat/sendimage',chat.image);
     app.post('/chat/sendFile',chat.Files);
     app.get('/chat/getChatInfo',chat.chatInfo);
+    app.get('/chat/getReadInfo',chat.getchat);
+    app.post('/chat/msgReadInfo',chat.msgReadInfo);
+    
   //  app.get('/', chat.home);
 
 };

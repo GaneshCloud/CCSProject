@@ -53,7 +53,9 @@ io.on('connection',function(socket) {
                 image:data_server.image,
                 imagePath:data_server.imagePath,
                 file: data_server.file,
-                filePath: data_server. filePath
+                filePath: data_server. filePath,
+                profile_pic:data_server.profile_pic,
+                meg_read:data_server.msg_read
             });
         });
 

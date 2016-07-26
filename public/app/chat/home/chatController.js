@@ -3,9 +3,9 @@
             .module('myApp')
             .controller('chatController', chatController);
 
-        chatController.$inject = ['$scope','$filter','dashboardService','chatService','uploadedChatFilePath','uploadedChatImagePath','uploadedProfilePicturePath','filterFilter','$window'];
+        chatController.$inject = ['$scope','$window','$filter','spinnerService','dashboardService','chatService','uploadedChatFilePath','uploadedChatImagePath','uploadedProfilePicturePath','filterFilter','$window'];
 
-        function chatController($scope,$filter,dashboardService,chatService,uploadedChatFilePath,uploadedChatImagePath,uploadedProfilePicturePath,filterFilter,$window) {
+        function chatController($scope,$window,$filter,spinnerService,dashboardService,chatService,uploadedChatFilePath,uploadedChatImagePath,uploadedProfilePicturePath,filterFilter,$window) {
 
             //var user_name = window.prompt('Enter Your Name'); //getting user name
 
@@ -13,7 +13,7 @@
 
             $scope.clicked = null;
             $scope.selected_id = null;
-            $scope.select_userid=null;
+            $scope.select_userid=null;;
             $scope.msgs = [];
             $scope.myself_msg=[];
             $scope.my_id = null;
@@ -21,8 +21,12 @@
             $scope.message=[];
             $scope.image=null;
             $scope.profilePicPath=uploadedProfilePicturePath;
+            $scope.uploadImagePath=uploadedChatImagePath;
+            $scope.uploadFilePath=uploadedChatFilePath;
             $scope.data=[];
+            $scope.readData=[];
             $scope.myRedObjects=[];
+            $scope.meg_read=0;
 
 
 
@@ -32,15 +36,48 @@
 
                 {
                     $scope.data = result.data;
+                    msgs1 = $filter('filter')($scope.data,{select_userid: $scope.select_userid,my_userid: $scope.userData.userid});//,{},{my_userid: $scope.select_userid},{select_userid: $scope.userData.userid}
+                    msgs2 = $filter('filter')($scope.data,{my_userid2: $scope.select_userid,select_userid2: $scope.userData.userid});//,{},{my_userid: $scope.select_userid},{select_userid: $scope.userData.userid}
+                    for(i=0;i<msgs2.length;i++){
+                        msgs1.push(msgs2[i]);
+                    }
+
+                    // $scope.msgs=msgs1.slice();
+                    $scope.msgs = $filter('orderBy')(msgs1,'date');
+                    //$scope.getChatinfo();
+                    //
 
                 });
             };
 
-            $scope.getChatinfo();
 
 
+
+            // -------------------------lodout------------------------------------------------- //
+            $scope.onLogout = function() {
+
+                if ($window.confirm('Are You Sure ! Do you need to Log Out?')) {
+
+
+                    socket.on('user entrance', function (data, my_id) {
+                        //checking the user id
+                        $scope.user_show = data;
+                        $scope.datas = data.length;
+                    });
+                    spinnerService.show('html5spinner');
+                    dashboardService.logout();
+
+                }
+            };
+            // -------------------------Dashboard------------------------------------------------- //
+            $scope.goToDashboard = function() {
+                spinnerService.show('html5spinner');
+                chatService.goToDashboard();
+
+            };
 
             $scope.uploadImage = function(image) {
+
 
                 $scope.imageChanged = true;
 
@@ -50,7 +87,7 @@
 
                     var data_server = {
                         id: $scope.selected_id,
-                        msg: $scope.msg_text,
+                        msg: null,
                         name: $scope.userData.userid + '-' + $scope.userData.firstName,
                         myid: $scope.my_id,
                         selectUserid: $scope.select_userid,
@@ -59,14 +96,32 @@
                         image: result.data,
                         imagePath: uploadedChatImagePath + result.data,
                         file: null,
-                        filePath: null
+                        filePath: null,
+                        profile_pic:$scope.userData.profilePic,
+                        msg_read: $scope.meg_read
 
                     };
 
 
                     $scope.send_msg(data_server);
                     alert("You send msg successfully!.");
-                    document.getElementById("chatbox").scrollTop=document.getElementById("chatbox").scrollHeight;
+
+
+                });
+
+            };
+
+            $scope.updateRead=function(id)
+            {
+
+                var my_userid= $scope.userData.userid;
+                var selectUserid=$scope.select_userid;
+
+                chatService.updateRead(my_userid,selectUserid).then(function(result)
+                {
+                    alert("inside serv");
+                    // $scope.msgReadData=result.data;
+                    $scope.getReadinfo();
 
                 });
 
@@ -89,52 +144,50 @@
                             image: null,
                             imagePath: null,
                             file: results.data,
-                            filePath: uploadedChatFilePath + results.data
+                            filePath: uploadedChatFilePath + results.data,
+                            profile_pic:$scope.userData.profilePic,
+                            msg_read: $scope.meg_read
 
                         };
 
-
                     $scope.send_msg(data_server);
                     alert("You send msg successfully!.");
-
-
-
-
                 });
 
-
-
             };
 
 
-            $scope.openFile=function(filePath)
+            $scope.openFile=function(file)
             {
 
-                $window.open(filePath);
-                alert('Successfully open');
+                $window.open(file);
+
 
             };
+            $scope.openImage=function(image)
+            {
+                $window.open(image);
 
+
+            };
 
 
             dashboardService.checkAdmin().then(function (result) {
                 $scope.userData = result;
 
-
+                $scope.getChatinfo();
                 socket.emit('user name',  $scope.userData); // sending user name to the server
-
-                var s= $scope.userData.length;
 
             });
 
-            $scope.showImage=function() {
+            $scope.enableImage=function() {
                 document.getElementById("f1").click();
                 //alert("You send msg successfully!.");
 
                 //$scope.file='';
 
             };
-            $scope.showFile=function () {
+            $scope.enableFile=function () {
                 document.getElementById("f2").click();
             };
 
@@ -144,7 +197,10 @@
                     $scope.my_id = my_id;
                 }
                 $scope.user_show = data;
+                //$scope.datas = data.length-1;
                 $scope.$apply();
+                $scope.getReadinfo();
+                alert();
             });
 
             //function to send messages.
@@ -166,7 +222,9 @@
                                 image: null,
                                 imagePath: null,
                                 file: null,
-                                filePath: null
+                                filePath: null,
+                                profile_pic:$scope.userData.profilePic,
+                                msg_read: $scope.meg_read
 
                             };
 
@@ -175,21 +233,61 @@
                     $scope.msg_text = '';
                     $scope.file = null;
                     $scope.docFile=null;
+                    document.getElementById("chatbox").scrollTop=document.getElementById("chatbox").scrollHeight;
                     socket.emit('send msg', data_server);
+
+
                         //socket.emit('send myself',data_server);
                     alert("You send msg successfully!.");
+                    // $scope.$apply();
+
 
 
 
                 }
             };
 
+            $scope.showFile=function(file)
+            {
+              if(file!=null)
+              {
+                  return true;
+              }
+              return false;
+            };
+            $scope.showImage=function(image)
+            {
+                if(image!=null)
+                {
+                    return true;
+                }
+                return false;
+            };
+
            //to highlight selected row
             $scope.clicked_highlight = function (id,user_id) {
+                alert("inside sel");
+                $scope.getChatinfo();
+                var msgs1=[],msgs2=[];
                 $scope.clicked = id;
                 $scope.selected_id = id;
                 $scope.select_userid=user_id;
-                $scope.msgs = $filter('filter')($scope.data, {select_userid: $scope.select_userid} || {my_userid: $scope.userData.userid});
+                console.log($scope.data);
+                $scope.updateRead($scope.select_userid);
+                // msgs1 = $filter('filter')($scope.data,{select_userid: $scope.select_userid,my_userid: $scope.userData.userid});//,{},{my_userid: $scope.select_userid},{select_userid: $scope.userData.userid}
+                // msgs2 = $filter('filter')($scope.data,{my_userid2: $scope.select_userid,select_userid2: $scope.userData.userid});//,{},{my_userid: $scope.select_userid},{select_userid: $scope.userData.userid}
+                // for(i=0;i<msgs2.length;i++){
+                //     msgs1.push(msgs2[i]);
+                // }
+                //
+                // // $scope.msgs=msgs1.slice();
+                // $scope.msgs = $filter('orderBy')(msgs1,'date');
+                // //$scope.getChatinfo();
+                // $scope.updateRead();
+
+
+                
+
             };
 
             //on exit updating the List od users
@@ -198,11 +296,53 @@
                 $scope.$apply();
             });
 
+
+            $scope.getReadinfo=function()
+            {
+alert("inside" +$scope.userData.userid);
+                chatService.getReadinfo($scope.userData.userid).then(function(result)
+
+                {
+                    alert("hai");
+
+            if(result.data.length > 0){
+                $scope.readData = result.data;
+                console.log($scope.readData);
+                alert("count "+$scope.readData[0].readCount);
+            }
+                    else
+                        $scope.readData =[];
+
+
+
+
+
+                },function(err){
+                    alert(err);
+                });
+            };
+
+
+
+            // $scope.getReadinfo();
             //displaying the messages.
             socket.on('get msg', function (data) {
-               $scope.msgs.push(data);
+// alert("haaaaaaaaaaaa");
+//                $scope.msgs.push(data);
+                alert();
                 //$scope.is_msg_show = true;
+
+
+
+
+                if(data.sender_id===$scope.selected_id){
+                                   $scope.msgs.push(data);
+                    $scope.updateRead();
+                }
                 $scope.$apply();
+                document.getElementById("chatbox").scrollTop=document.getElementById("chatbox").scrollHeight;
+                $scope.getReadinfo();
+
             });
 
 

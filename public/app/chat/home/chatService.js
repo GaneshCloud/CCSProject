@@ -38,7 +38,29 @@
                    method:'GET',
                     url:'/chat/getChatInfo'
                 });
+            },
+
+            getReadinfo:function(id)
+            {
+
+                return $http({
+                    method:'GET',
+                    url:'/chat/getReadInfo?id='+id
+                });
+            },
+            updateRead:function(data1,data2)
+            {
+                return $http({
+                    method:'POST',
+                    url:'/chat/msgReadInfo',
+                    data:{my_userid:data1,selectUserid:data2}
+                });
+            },
+            
+
+            goToDashboard: function () {
+                $window.location.href = '/profile/dashboard';
             }
         }
-    };
+    }
 })();
