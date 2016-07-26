@@ -17,8 +17,10 @@ function getUserValidity(userid, password) {
     qry += " p.g_email as googleEmail, p.contact as contact, p.address as address, p.college as college, p.course as course,";
     qry += " p.branch as branch, p.year as year, p.project_fee as projectFees, p.fees_paid as feesPaid, ";
     qry += " p.fees_balance as feesBalance, p.profile_pic as profilePic, p.facebook_img as facebookImage,";
-    qry += " p.google_img as googleImage from personaldata as p where p.userid = '"+userid+"' and p.password = '"+password+"'";
+    qry += " p.google_img as googleImage,p.message_no as msgNumber from personaldata as p where p.userid = '"+userid+"'";
+    qry += " and p.password = '"+password+"'";
     qry += " and status = 'active'";
+
 
 console.log(qry);
    con.query(qry, function(error, results) {

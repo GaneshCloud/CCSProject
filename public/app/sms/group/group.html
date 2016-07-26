@@ -1,0 +1,118 @@
+<div ng-include="'../app/header/adminHeader.html'"></div>
+
+<div class="container">
+    <div class="container-fluid" style="padding: 0px 0px ">
+        <div class="col-lg-12 col-sm-12" style="background: white;min-height: 700px; border: 1px solid #D1D0CF">
+
+            <div ng-include src="'../app/sms/templates/menu.html'"></div>
+            <div class="col-lg-9" style="padding-top: 25px;border-left: 1px solid #D1D0CF;min-height: 700px">   <!--message area-->
+                <div>
+                    <h3>Group</h3>
+                    <!--<div><a href="sms/members" class="btn btn-primary pull-right">Add Members</a></div>-->
+                    <div>
+                        <br>
+                        <label class="control-label">Group Name</label>
+                        <input  class="form-control" ng-model="newGroup.grpName" type="text">
+                        <br>
+                        <button class="btn btn-primary" ng-show="isSave" ng-click="addGroup()">Save</button>
+                        <button class="btn btn-success" ng-hide="isSave" ng-click="addGroup()">Update</button>
+                        <button class="btn btn-primary" ng-hide="isSave" ng-click="newGroupCreation()">New</button>
+
+                    </div>
+
+
+                    <div style="overflow: auto">
+                        <br>
+                        <table class="table table-bordered table-responsive">
+                            <thead>
+                            <tr>
+                                <th>Sl No</th>
+                                <th>Group Name</th>
+                                <th>Members count</th>
+                                <th>edit</th>
+                                <th>Delete</th>
+                            </tr>
+                            </thead>
+
+                            <tr ng-repeat="grp in grpList | filter:paginate">
+                                <td>{{$index+1}}</td>
+                                <td><a href="" ng-click="getMemberByGrpId($index)"> {{grp.grpName}}</a></td>
+                                <td>{{grp.memCount}}</td>
+                                <td><a href="" ng-click="editGroup($index)" class="btn btn-default btn-sm">Edit</a></td>
+                                <td><a href="" ng-click="deleteGroup($index)" class="btn btn-danger btn-sm">Delete</a></td>
+                            </tr>
+
+
+                        </table>
+                    </div>
+
+                    <div class="col-sm-offset-0 col-sm-12" style="padding: 0px">
+
+                        <pagination
+                                ng-model="curPage"
+                                total-items="grpList.length"
+                                items-per-page="itemsPage"
+                                max-size="maxSize"
+                                boundary-links="true">
+                        </pagination>
+
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+
+</div>
+
+
+
+<!--popup window-->
+<div id="popup1" ng-style="popup" class="overlay">
+    <div class="popup" style="overflow: auto; width: 650px; max-height: 600px;background-color: #D1D0CF">
+
+        <h3>Members List</h3>
+        <hr>
+        <a class="close" ng-click="popup={'visibility': 'hide','opacity': 0}">&times;</a>
+        <div class="content">
+
+            <div style="background-color: white;height: 250px; padding: 5px">
+                <table class="table table-bordered">
+
+                    <tr>
+                        <th>Sl No</th>
+                        <th>Name</th>
+                        <th>Mob No</th>
+                        <th>Created Date</th>
+                        <th>Action</th>
+                    </tr>
+
+                    <tbody>
+                    <tr ng-repeat="mem in memberList track by $index">
+                        <td>{{$index+1}}</td>
+                        <td>{{mem.memName}}</td>
+                        <td>{{mem.memMob}}</td>
+                        <td>{{mem.crDate}}</td>
+                        <th><button class="btn btn-xs btn-danger" ng-click="removeFromGroup($index)">Remove from group</button></th>
+
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+

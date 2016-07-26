@@ -6,10 +6,10 @@ var config = require('./config'),
 	bodyParser = require('body-parser'),
 	methodOverride = require('method-override'),
 	passport = require('passport'),
-	session = require('express-session');
-     msopdf = require('../lib');
-     fs= require('fs');
-    path=require('path');
+	session = require('express-session'),
+     msopdf = require('../lib'),
+     fs= require('fs'),
+    path=require('path'),
     exec = require('child_process').exec;
 
 
@@ -18,6 +18,7 @@ module.exports = function() {
 
   if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));
+    
   }
 
   app.use(bodyParser.urlencoded({
@@ -68,11 +69,15 @@ module.exports = function() {
   require('../routes/documents.multipleFileUpload.server.routes')(app);
   require('../routes/documents.star.server.routes')(app);
   require('../routes/documents.viewDocument.server.routes')(app);
-  // require('../routes/documents.search.server.routes')(app);
   require('../routes/project.projectReg.server.route')(app);
   require('../routes/waterMark.unRegister.server.route')(app);
 
+  require('../routes/sms.sendMessage.server.routes')(app);
+  require('../routes/sms.group.server.routes')(app);
+  require('../routes/sms.member.server.routes')(app);
+  require('../routes/fb.login.server.routes')(app);
 
+ 
 
   require('../routes/security.server.routes.js')(app);
   require('../routes/layout.server.routes.js')(app);	//Layout page route

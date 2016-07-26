@@ -38,9 +38,6 @@
             }).when('/profile/changePassword', {
                 templateUrl: '../app/profile/changePassword/changePassword.html',
                 controller: 'changePasswordController'
-            // }).when('/profile/onlinePayment', {
-            //     templateUrl: '../app/profile/onlinePayment/onlinePayment.html',
-            //     controller: 'onlinePaymentController'
             }).when('/logout', {
                 templateUrl: '../app/profile/logout/logout.html',
                 controller: 'logoutController'
@@ -71,9 +68,33 @@
             }).when('/documents/viewDocument', {
                 templateUrl: 'app/documents/viewDocument/viewDocument.html',
                 controller: 'viewDocumentController'
-             }).when('/documents/waterMarkModule', {
-            templateUrl: 'app/documents/waterMarkModule/waterMark.html',
-            controller: 'waterMarkController'
+            }).when('/sms/sendMessage', {
+                templateUrl: 'app/sms/messages/message.html',
+                controller: 'messageController'
+            }).when('/sms/sendMessageByProject', {
+                templateUrl: 'app/sms/messages/messageByProjects.html',
+                controller: 'messageController'
+            }).when('/sms/deliveryReport', {
+                templateUrl: 'app/sms/deliveryReport/deliveryReport.html',
+                controller: 'deliveryController'
+            }).when('/sms/group', {
+                templateUrl: 'app/sms/group/group.html',
+                controller: 'groupController'
+            }).when('/sms/members', {
+                templateUrl: 'app/sms/member/members.html',
+                controller: 'memberController'
+            }).when('/fb/login', {
+                templateUrl: 'app/fbMessage/login/fbLogin.html',
+                controller: 'fbLoginController'
+            }).when('/fb/fbMessageReport', {
+                templateUrl: 'app/fbMessage/fbMessageReport/fbMessageReport.html',
+                controller: 'fbMessageReportController'
+             }).when('/fb/advancedMessage', {
+                templateUrl: 'app/fbMessage/advancedMessage/advancedFbFriendsList.html',
+                controller: 'advancedFbFriendsListController'
+            }).when('/documents/waterMarkModule', {
+                templateUrl: 'app/documents/waterMarkModule/waterMark.html',
+                controller: 'waterMarkController'
             }).when('/error', {
                 templateUrl: '../app/core/error.html'
             }).when('/error/message', {

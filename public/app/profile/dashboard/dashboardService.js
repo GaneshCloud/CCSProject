@@ -57,6 +57,13 @@
                     $window.location.href = '/project/home';
                 }
             },
+            messaging: function () {
+                if(localStorage.getItem('userType') === 'admin') {
+                    $window.location.href = 'sms/sendMessage';
+                }else{
+                    $window.location.href = '/project/home';
+                }
+            },
 
             forum:function () {
                 if(localStorage.getItem('userType') === 'admin') {
@@ -90,6 +97,20 @@
                     console.error(error);
                 });
 
+            },
+            updatePersonalData: function (personalData) {
+
+                return $http({
+                    method: 'post',
+
+                    url: '/connect/updatePersonalData',
+
+                    data: personalData
+
+                });
+            },
+            addFacebookAccount: function () {
+                $window.location.href = '/auth/facebook';
             },
             showError:function (error) {
                 if(error.error.code !== null){

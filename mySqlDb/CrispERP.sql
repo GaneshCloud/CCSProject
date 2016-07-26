@@ -337,11 +337,11 @@ CREATE TABLE IF NOT EXISTS `file_uploading` (
 # Dumping data for table cloudproject.file_uploading: ~5 rows (approximately)
 /*!40000 ALTER TABLE `file_uploading` DISABLE KEYS */;
 INSERT INTO `file_uploading` (`Doc_Caption`, `Doc_Type`, `Department`, `Keywords`, `Description`, `Doc_File`, `id`) VALUES
-	('string:SYNAPSIS', 'string:PDF', 'string:MECHATRONICS', 'fhgf', 'gfddxhg', '15.doc', 8),
-	('string:SYNAPSIS', 'string:WORD', 'string:MECHANICAL', 'dfhggfh', '', '16.doc', 9),
 	('ecee', 'asdgf', 'zdsgfzd', 'zdsgf', 'zsdf', 'angularjs_tutorial1.pdf', 32),
 	('mech', 'DOC', 'mechanical', 'xdfgdfg', 'dfgfd', 'waterMark.doc', 33),
-	('ECE', 'DOC', 'ECE', 'fgh', 'fhgdfgh', 'Doc7e17(1).doc', 34);
+	('SQL', 'DOC', 'BE', 'BE', 'BE', 'SQL.doc', 36),
+	('MATLAB', 'DOC', 'BE', 'vbh', 'dfgd', 'Matlab.doc', 37);
+
 /*!40000 ALTER TABLE `file_uploading` ENABLE KEYS */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
@@ -531,3 +531,297 @@ INSERT INTO `tb_sendmsg` (`id`, `select_userid`, `msg`, `Dates`, `image`, `file`
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+-- phpMyAdmin SQL Dump
+-- version 2.11.1
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: Jul 21, 2016 at 01:20 PM
+-- Server version: 5.0.45
+-- PHP Version: 5.2.4
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+--
+-- Database: `cloudproject`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_fbmessages`
+--
+
+CREATE TABLE `tbl_fbmessages` (
+  `ID` int(11) NOT NULL auto_increment,
+  `fbId` varchar(50) collate latin1_general_ci NOT NULL,
+  `msg` varchar(500) collate latin1_general_ci NOT NULL,
+  `attach` varchar(100) collate latin1_general_ci NOT NULL,
+  `msgDate` varchar(100) collate latin1_general_ci NOT NULL,
+  PRIMARY KEY  (`ID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=96 ;
+
+--
+-- Dumping data for table `tbl_fbmessages`
+--
+
+INSERT INTO `tbl_fbmessages` (`ID`, `fbId`, `msg`, `attach`, `msgDate`) VALUES
+(1, '100002196848042', 'hello this is today', '', '2016-07-20 10:24:29.329'),
+(2, '100002196848042', 'helo', '', '2016-07-20 10:42:59.358'),
+(3, '100002196848042', '', '143(1).pdf', '2016-07-20 10:44:05.422'),
+(4, '100002196848042', '', '191.docx', '2016-07-20 10:44:28.031'),
+(5, '100002196848042', '', '196 (3).docx', '2016-07-20 10:48:11.039'),
+(6, '100002196848042', '', '622.jpg', '2016-07-20 10:49:30.071'),
+(7, '100002196848042', '', '196 (9).docx', '2016-07-20 10:54:11.257'),
+(8, '100002196848042', '', '191.docx', '2016-07-20 10:57:19.437'),
+(9, '100002196848042', '', '191.docx', '2016-07-20 10:59:19.388'),
+(10, '100002196848042', '', '191.docx', '2016-07-20 11:08:09.966'),
+(11, '100002196848042', '', '507 (1).png', '2016-07-20 11:08:31.765'),
+(12, '100002196848042', 'hai', '', '2016-07-20 11:09:06.355'),
+(13, '100002196848042', 'dddddddddddddddd', '', '2016-07-20 16:46:19.993'),
+(82, '100002196848042', '', '191 (1).docx', '2016-07-20 17:19:42.002'),
+(81, '100002196848042', '', '143.pdf', '2016-07-20 17:18:30.405'),
+(80, '100002196848042', '', '506.zip', '2016-07-20 17:15:01.714'),
+(79, '100002196848042', '', '506.zip', '2016-07-20 17:15:00.646'),
+(78, '100002196848042', '', '191.docx', '2016-07-20 17:13:21.588'),
+(77, '100002196848042', '', '191.docx', '2016-07-20 17:11:36.172'),
+(76, '100002196848042', '', '191.docx', '2016-07-20 17:11:36.151'),
+(75, '100002196848042', '', '507 (1).png', '2016-07-20 17:08:53.782'),
+(74, '100002196848042', '', '507 (1).png', '2016-07-20 17:08:53.777'),
+(95, '', '', '196.docx', '2016-07-21 11:42:25.440'),
+(94, '', 'dfgdfgdfgdfgdfgdfgdfgdfgdfgdfgdfddfgdf\ndfgdfgdf', '', '2016-07-21 11:39:46.415'),
+(93, '', 'dfgdfg', '', '2016-07-21 11:38:19.343'),
+(92, '100002196848042', 'hello', '', '2016-07-20 17:50:50.940'),
+(91, '100002196848042', '', '196 (4).docx', '2016-07-20 17:50:29.459'),
+(90, '100002196848042', '', '191.docx', '2016-07-20 17:48:27.256'),
+(89, '100002196848042', '', '191 (1).docx', '2016-07-20 17:47:02.070'),
+(88, '100002196848042', '', 'A Software Design Specification Template.doc', '2016-07-20 17:45:00.003'),
+(87, '100001165679082', '', 'A Software Design Specification Template.doc', '2016-07-20 17:28:58.582'),
+(86, '100002196848042', '', 'A Software Design Specification Template.doc', '2016-07-20 17:28:58.582'),
+(85, '100002196848042', '', '196-7.docx', '2016-07-20 17:25:21.522'),
+(84, '100002196848042', '', '143.pdf', '2016-07-20 17:21:49.565'),
+(83, '100002196848042', '', '143.pdf', '2016-07-20 17:20:03.352');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_fb_msg_sub`
+--
+
+CREATE TABLE `tbl_fb_msg_sub` (
+  `id` int(11) NOT NULL auto_increment,
+  `msgId` int(11) NOT NULL,
+  `fbId` varchar(20) collate latin1_general_ci NOT NULL,
+  `sts` varchar(5) collate latin1_general_ci NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=8 ;
+
+--
+-- Dumping data for table `tbl_fb_msg_sub`
+--
+
+INSERT INTO `tbl_fb_msg_sub` (`id`, `msgId`, `fbId`, `sts`) VALUES
+(1, 93, '100002196848042', '1'),
+(2, 94, '100002196848042', '1'),
+(3, 94, '100001165679082', '1'),
+(4, 94, '100007103940963', '1'),
+(5, 95, '100002196848042', '1'),
+(6, 95, '100007103940963', '1'),
+(7, 95, '100001165679082', '1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_group`
+--
+
+CREATE TABLE `tbl_group` (
+  `id` int(11) NOT NULL auto_increment,
+  `grpName` varchar(50) collate latin1_general_ci NOT NULL,
+  `crDate` varchar(50) collate latin1_general_ci NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=23 ;
+
+--
+-- Dumping data for table `tbl_group`
+--
+
+INSERT INTO `tbl_group` (`id`, `grpName`, `crDate`) VALUES
+(20, 'ccs', '2016-07-14 13:10:00.932'),
+(21, 'crisp', '2016-07-14 13:11:56.573'),
+(22, 'dfgdf', '2016-07-21 15:37:04.997');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_groupmapper`
+--
+
+CREATE TABLE `tbl_groupmapper` (
+  `id` int(11) NOT NULL auto_increment,
+  `grpId` int(11) NOT NULL,
+  `memId` int(11) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=38 ;
+
+--
+-- Dumping data for table `tbl_groupmapper`
+--
+
+INSERT INTO `tbl_groupmapper` (`id`, `grpId`, `memId`) VALUES
+(37, 20, 32),
+(36, 20, 31),
+(34, 20, 27);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_member`
+--
+
+CREATE TABLE `tbl_member` (
+  `id` int(11) NOT NULL auto_increment,
+  `memName` varchar(50) collate latin1_general_ci NOT NULL,
+  `memMob` varchar(12) collate latin1_general_ci NOT NULL,
+  `crDate` varchar(50) collate latin1_general_ci NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=33 ;
+
+--
+-- Dumping data for table `tbl_member`
+--
+
+INSERT INTO `tbl_member` (`id`, `memName`, `memMob`, `crDate`) VALUES
+(31, 'ganesh', '1477258', '2016-07-14 13:28:41.544'),
+(27, 'yoosuf', '9020821578', '2016-07-14 13:13:30.230');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_sms_master`
+--
+
+CREATE TABLE `tbl_sms_master` (
+  `id` int(11) NOT NULL auto_increment,
+  `smsDate` varchar(100) collate latin1_general_ci NOT NULL,
+  `msg` varchar(500) collate latin1_general_ci NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=62 ;
+
+--
+-- Dumping data for table `tbl_sms_master`
+--
+
+INSERT INTO `tbl_sms_master` (`id`, `smsDate`, `msg`) VALUES
+(1, '2016-07-12 13:09:47.347', 'hai'),
+(2, '2016-07-12 13:11:54.843', 'hai'),
+(3, '2016-07-12 13:13:09.703', 'hai'),
+(4, '2016-07-12 13:14:09.510', 'hai'),
+(5, '2016-07-12 13:15:11.469', 'hai'),
+(6, '2016-07-12 13:16:23.446', 'hai'),
+(7, '2016-07-12 13:16:36.516', 'hai'),
+(8, '2016-07-12 13:18:51.924', 'dfgd'),
+(9, '2016-07-12 13:20:22.090', 'dfgd'),
+(10, '2016-07-12 13:21:52.119', 'dfgd'),
+(11, '2016-07-12 13:22:24.471', 'dfgd'),
+(12, '2016-07-12 13:23:47.123', 'dfgd'),
+(13, '2016-07-12 13:25:21.662', 'dfgd'),
+(14, '2016-07-12 13:26:08.838', 'dfgd'),
+(15, '2016-07-12 13:27:04.727', 'dfgd'),
+(16, '2016-07-12 13:28:48.996', 'sdfsdf'),
+(17, '2016-07-12 13:29:56.528', 'haii hello'),
+(18, '2016-07-12 13:30:46.376', 'haii hello'),
+(19, '2016-07-13 16:11:50.704', 'hello this is first application'),
+(20, '2016-07-13 16:19:28.984', 'hello'),
+(21, '2016-07-13 16:20:19.155', 'hello i have completed'),
+(22, '2016-07-13 17:43:55.758', 'hai'),
+(23, '2016-07-13 17:47:54.501', 'dfd'),
+(24, '2016-07-13 17:48:57.201', 'dfgdf'),
+(25, '2016-07-13 17:50:33.613', 'dfgdf'),
+(26, '2016-07-13 17:52:05.193', 'dfgdf'),
+(27, '2016-07-13 17:53:28.694', 'as'),
+(28, '2016-07-13 17:55:24.245', 'as'),
+(29, '2016-07-13 17:56:21.575', 'as'),
+(30, '2016-07-13 17:59:49.849', 'as'),
+(31, '2016-07-13 18:01:14.314', 'as'),
+(32, '2016-07-13 18:02:24.279', ''),
+(33, '2016-07-13 18:04:19.379', ''),
+(34, '2016-07-13 18:13:19.345', 'dfgdf'),
+(35, '2016-07-13 18:38:34.813', 'dfgdf'),
+(36, '2016-07-13 18:40:50.481', 'dfgdf'),
+(37, '2016-07-13 18:41:27.209', 'dfgdf'),
+(38, '2016-07-13 18:43:04.467', 'dsfsdf'),
+(39, '2016-07-13 18:45:33.187', 'dsfsdf'),
+(40, '2016-07-13 18:48:37.788', 'dsfsdf'),
+(41, '2016-07-13 18:50:05.509', 'dsfsdf'),
+(42, '2016-07-13 18:50:49.667', 'dsfsdf'),
+(43, '2016-07-13 18:52:40.066', 'dadas'),
+(44, '2016-07-13 18:54:27.324', 'dadas'),
+(45, '2016-07-13 18:54:57.236', 'dadas'),
+(46, '2016-07-13 18:55:36.240', 'dadas'),
+(47, '2016-07-13 18:57:35.544', 'dadas'),
+(48, '2016-07-13 18:58:38.977', 'dadas'),
+(49, '2016-07-13 18:59:32.722', 'dadas'),
+(50, '2016-07-13 19:04:02.819', 'dadas'),
+(51, '2016-07-13 19:05:48.803', 'dadas'),
+(52, '2016-07-14 09:39:07.952', 'hai'),
+(53, '2016-07-14 09:40:40.431', 'hai'),
+(54, '2016-07-14 09:43:01.789', 'hai'),
+(55, '2016-07-14 09:45:13.757', 'hello'),
+(56, '2016-07-14 09:46:52.328', 'hello'),
+(57, '2016-07-14 09:47:43.444', 'hello'),
+(58, '2016-07-14 09:48:25.536', 'hello'),
+(59, '2016-07-14 09:49:00.142', 'hello  mmm'),
+(60, '2016-07-14 10:01:44.557', 'hello'),
+(61, '2016-07-16 10:05:51.176', 'hello');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_sms_sub`
+--
+
+CREATE TABLE `tbl_sms_sub` (
+  `id` int(11) NOT NULL auto_increment,
+  `smsId` int(11) NOT NULL,
+  `mobNo` varchar(12) collate latin1_general_ci NOT NULL,
+  `smsSts` int(11) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=32 ;
+
+--
+-- Dumping data for table `tbl_sms_sub`
+--
+
+INSERT INTO `tbl_sms_sub` (`id`, `smsId`, `mobNo`, `smsSts`) VALUES
+(1, 15, '9100821578', 0),
+(2, 15, '9100821578', 0),
+(3, 16, '912821578', 0),
+(4, 17, '9100821578', 0),
+(5, 18, '9100821578', 0),
+(6, 18, '8025821578', 0),
+(7, 18, '912821578', 0),
+(8, 19, '', 0),
+(9, 19, '', 0),
+(10, 20, '', 0),
+(11, 20, '', 0),
+(12, 21, '', 0),
+(13, 21, '', 0),
+(14, 21, '', 0),
+(15, 54, '', 0),
+(16, 54, '147258369', 0),
+(17, 54, '95055555', 0),
+(18, 55, '', 0),
+(19, 55, '', 0),
+(20, 55, '147258369', 0),
+(21, 55, '95055555', 0),
+(22, 56, '9895132367', 0),
+(23, 56, '', 0),
+(24, 58, '9895132367', 0),
+(25, 59, '9895132367', 0),
+(26, 59, '147258369', 0),
+(27, 59, '95055555', 0),
+(28, 60, '9020821578', 0),
+(29, 60, '147258369', 0),
+(30, 60, '95055555', 0),
+(31, 61, '9020821578', 0);

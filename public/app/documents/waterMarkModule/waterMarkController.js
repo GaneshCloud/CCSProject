@@ -14,10 +14,13 @@
     function waterMarkController($scope,$http,$window,unRegisterService)
     {
 
-
+        $scope.onLogout = function () {
+            dashboardService.logout();
+        };
         $scope.goToDashboard = function() {
             unRegisterService.goToDashboard();
         };
+
 
         $scope.mechanical=true;
         $scope.CAD=true;
@@ -25,6 +28,7 @@
         $scope.Mini=true;
         $scope.IEEE=true;
         $scope.Software=true;
+        $scope.hideAllDept=true;
 
         $scope.showMechanical=function(){
             $scope.mechanical=true;
@@ -33,6 +37,7 @@
             $scope.Mini=false;
             $scope.IEEE=false;
             $scope.Software=false;
+            $scope.hideAllDept=true;
         };
 
         $scope.showCAD=function(){
@@ -42,6 +47,7 @@
             $scope.Mini=false;
             $scope.IEEE=false;
             $scope.Software=false;
+            $scope.hideAllDept=false;
         };
 
         $scope.showElectronics=function(){
@@ -51,6 +57,7 @@
             $scope.Mini=false;
             $scope.IEEE=false;
             $scope.Software=false;
+            $scope.hideAllDept=false;
         };
 
         $scope.showMini=function(){
@@ -60,6 +67,7 @@
             $scope.Mini=true;
             $scope.IEEE=false;
             $scope.Software=false;
+            $scope.hideAllDept=false;
         };
 
         $scope.showIEEE=function(){
@@ -69,6 +77,7 @@
             $scope.Mini=false;
             $scope.IEEE=true;
             $scope.Software=false;
+            $scope.hideAllDept=false;
         };
 
         $scope.showSoftware=function(){
@@ -78,23 +87,9 @@
             $scope.Mini=false;
             $scope.IEEE=false;
             $scope.Software=true;
+            $scope.hideAllDept=false;
         };
 
-
-// $scope.viewer = pdf.Instance("viewer");
-
-//     $scope.nextPage = function() {
-//         $scope.viewer.nextPage();
-//     };
-
-//     $scope.prevPage = function() {
-//         $scope.viewer.prevPage();
-//     };
-
-//     $scope.pageLoaded = function(curPage, totalPages) {
-//         $scope.currentPage = curPage;
-//         $scope.totalPages = totalPages;
-//     };
 
         $scope.showFile = function(id,file){
 
@@ -120,9 +115,8 @@
 
                     $scope.files=response.data;
 
-                    alert('the file was selected');
+                    //alert('the file was selected');
 
-                    //$scope.window=data;
                 })
                 .catch(function(error){
 

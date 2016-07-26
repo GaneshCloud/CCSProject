@@ -1,0 +1,104 @@
+<style>
+    textarea:focus, input:focus{
+        outline: none;
+    }
+
+
+</style>
+
+<div ng-include="'../app/header/adminHeader.html'"></div>
+<div class="container">
+    <div class="container-fluid" style="padding: 0px 0px ">
+        <div class="col-lg-12 col-sm-12" style="background: white;min-height: 700px; border: 1px solid #D1D0CF">
+
+            <div ng-include src="'../app/sms/templates/menu.html'"></div>
+
+            <div class="col-lg-9" style="padding-top: 25px;border-left: 1px solid #D1D0CF;min-height: 700px">   <!--message area-->
+
+                <h3>Send SMS by  Project wise</h3>
+                <br>
+
+                <div id="projectTab" class="tab-pane fade in active">
+                    <div class="">
+                        <div class=" col-lg-3">
+                            <select class="form-control" ng-options="pr.prId as pr.prCaption for pr in prInfo" ng-model="selProject" ng-change="getContactsByPrId();">
+                                <option value="">Select Project</option>
+                            </select>
+                        </div>
+
+                        <div  class="col-lg-3">
+                            <select class="form-control col-lg-6" ng-options="pr as pr.DEP_NAME for pr in prDepartment" ng-model="selDep" ng-change="getContactsByPrDep();">
+                                <option value="">Select Department</option>
+                            </select>
+                        </div>
+
+                        <div class=" col-lg-2">
+                            <select class="form-control" ng-options="stud as stud.name for stud in contInfo" ng-model="selStud" ng-change="getContactsBySelection();">
+                                <option value="">Select Student</option>
+                            </select>
+                        </div>
+
+                        <div class=" col-lg-2">
+                            <a href="" class="btn btn-primary" ng-click="getAllContacts()">Select All</a>
+                        </div>
+
+                        <div class=" col-lg-2">
+                            <a href="" class="btn btn-danger" ng-click="clearAllContacts()">Clear</a>
+                        </div>
+
+                    </div>
+                </div>
+                <br>
+
+                <br>
+                <div style="height: auto" class="col-lg-12">
+
+                    <div ng-repeat="cont in newSms.selectedContacts track by $index" style="margin-left:5px;margin-bottom:2px;display:inline-block;height: 55px;padding: 2px;;border: 1px solid #9C9B9A;background-color: #EBE9E7" class="col-lg-3">
+                        <div style="padding-left:1px;float: left;height: 50px; border-radius: 50%;" class="col-lg-4">
+                            <img src="images/fb/icon-user.png" style="width: 50px;height: 50px; border-radius: 50%;">
+                        </div>
+                        <div style="height: 50px;padding-left:1px;float: left" class="col-lg-6">
+                           <div style="word-wrap: break-word;overflow: hidden">
+                               <div class="col-lg-12"><label style="overflow: hidden;word-wrap: normal">{{cont.name}}</label></div>
+                               <label style="overflow: hidden;word-wrap: normal">{{cont.mob}}</label>
+                           </div>
+                        </div>
+                        <div class="col-lg-1">
+                            <a href="" ng-click="removeContact($index)" style="">X</a>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <!--<search-box list="contacts"  search-class="form-control" list-class="" output="newSms.selectedContacts">{{contacts}}</search-box>-->
+                <!--<input type="text" class="form-control" ng-model="contactString">-->
+                <br>
+
+                <br>
+                <div>
+                    <div class="tab-content">
+                        <div id="text" class="tab-pane fade in active">
+                            <h3>Text</h3>
+                            <div style="border: 1px solid #EEECEB">
+                                <div><span class="pull-right" style="padding: 5px;width: 100%; text-align:right; border-bottom: 1px solid #D1D0CF">{{newSms.smsText.length+"/"+numSms}}</span></div>
+                                <textarea rows="10"  style="border: none;width: 100%" ng-change="calculateCharacter()"data-ng-model="newSms.smsText"></textarea>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div style="padding: 10px 0px 10px"><button class="btn btn-success btn-md" ng-click="sendSms()">Send</button></div>
+
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+
+</div>
+

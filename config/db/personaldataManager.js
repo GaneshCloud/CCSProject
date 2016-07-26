@@ -26,7 +26,7 @@ function getUserDetails(userType) {
   qry += " p.g_email as googleEmail, p.contact as contact, p.address as address, p.college as college, p.course as course,";
   qry += " p.branch as branch, p.year as year, p.project_fee as projectFees, p.fees_paid as feesPaid, ";
   qry += " p.fees_balance as feesBalance, p.profile_pic as profilePic, p.facebook_img as facebookImage,";
-  qry += " p.google_img as googleImage from personaldata as p where p.userType = '"+userType+"' and p.status = 'active'";
+  qry += " p.google_img as googleImage,p.message_no as msgNumber from personaldata as p where p.userType = '"+userType+"' and p.status = 'active'";
 
   con.query(qry,function(err, results) {
       if (err) {
@@ -49,7 +49,7 @@ function getPersonalData(id) {
   qry += " p.g_email as googleEmail, p.contact as contact, p.address as address, p.college as college, p.course as course,";
   qry += " p.branch as branch, p.year as year, p.project_fee as projectFees, p.fees_paid as feesPaid, ";
   qry += " p.fees_balance as feesBalance, p.profile_pic as profilePic, p.facebook_img as facebookImage,";
-  qry += " p.google_img as googleImage from personaldata as p where p.id = "+id+" and p.status = 'active'";
+  qry += " p.google_img as googleImage,p.message_no as msgNumber from personaldata as p where p.id = "+id+" and p.status = 'active'";
 
   console.log(qry);
 
@@ -68,8 +68,8 @@ function updatePersonalData(userData) {
     var dataUpdate = 'Insert into personaldata(facebook_id,facebook_token,google_id,google_token,userid,password,';
     dataUpdate += 'userType,fname,mname,lname,email,fb_fname,fb_mname,fb_lname,fb_email,';
     dataUpdate += 'g_fname,g_mname,g_lname,g_email,contact,address,college,course,branch,year,project_fee,fees_paid,';
-    dataUpdate += 'fees_balance,createdDate,status,profile_pic,facebook_img,google_img)';
-    dataUpdate += ' values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,now(),?,?,?,?)';
+    dataUpdate += 'fees_balance,createdDate,status,profile_pic,facebook_img,google_img,message_no)';
+    dataUpdate += ' values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,now(),?,?,?,?,?)';
     console.log('Query template' + dataUpdate);
    
         var query = mysql.format(dataUpdate, [userData.facebookId,userData.facebookToken,
@@ -77,7 +77,7 @@ function updatePersonalData(userData) {
           userData.lastName,userData.email,userData.fbFirstName,userData.fbMiddleName,userData.fbLastName,userData.fbEmail,
           userData.googleFirstName,userData.googleMiddleName,userData.googleLastName,userData.googleEmail,userData.contact, userData.address, userData.college,userData.course,
           userData.branch, userData.year, userData.projectFees, userData.feesPaid, userData.feesBalance,
-          'active', userData.profilePic, userData.facebookImage, userData.googleImage]);
+          'active', userData.profilePic, userData.facebookImage, userData.googleImage,userData.msgNumber]);
         console.log('Query to execute:' + query);
         con.query(query, function(error, result) {
           if (error) {
@@ -156,7 +156,7 @@ function updateFacebookPersonalData(req,profile,accessToken) {
     fbDataUpdate += " p.g_email as googleEmail, p.contact as contact, p.address as address, p.college as college, p.course as course,";
     fbDataUpdate += " p.branch as branch, p.year as year, p.project_fee as projectFees, p.fees_paid as feesPaid, ";
     fbDataUpdate += " p.fees_balance as feesBalance, p.profile_pic as profilePic, p.facebook_img as facebookImage,";
-    fbDataUpdate += " p.google_img as googleImage from personaldata as p where p.facebook_id = ? and p.status = ?";
+    fbDataUpdate += " p.google_img as googleImage,p.message_no as msgNumber from personaldata as p where p.facebook_id = ? and p.status = ?";
 
         var query = mysql.format(fbDataUpdate, [profile.id,'active']);
         console.log('Select query:' + query);
@@ -212,7 +212,7 @@ function updateFacebookProfilePicture(profile) {
   fbDataUpdate += " p.g_email as googleEmail, p.contact as contact, p.address as address, p.college as college, p.course as course,";
   fbDataUpdate += " p.branch as branch, p.year as year, p.project_fee as projectFees, p.fees_paid as feesPaid, ";
   fbDataUpdate += " p.fees_balance as feesBalance, p.profile_pic as profilePic, p.facebook_img as facebookImage,";
-  fbDataUpdate += " p.google_img as googleImage from personaldata as p where p.facebook_id = '"+profile.id+"' and p.status = 'active'";
+  fbDataUpdate += " p.google_img as googleImage,p.message_no as msgNumber from personaldata as p where p.facebook_id = '"+profile.id+"' and p.status = 'active'";
 
       con.query(fbDataUpdate, function(error, results) {
         if (error) {
@@ -357,7 +357,7 @@ function updateGooglePersonalData(req,profile,accessToken) {
     fbDataUpdate += " p.g_email as googleEmail, p.contact as contact, p.address as address, p.college as college, p.course as course,";
     fbDataUpdate += " p.branch as branch, p.year as year, p.project_fee as projectFees, p.fees_paid as feesPaid, ";
     fbDataUpdate += " p.fees_balance as feesBalance, p.profile_pic as profilePic, p.facebook_img as facebookImage,";
-    fbDataUpdate += " p.google_img as googleImage from personaldata as p where p.google_id = ? and p.status = ?";
+    fbDataUpdate += " p.google_img as googleImage,p.message_no as msgNumber from personaldata as p where p.google_id = ? and p.status = ?";
 
     var query = mysql.format(fbDataUpdate, [profile.id,'active']);
     console.log('Select query:' + query);
@@ -425,7 +425,7 @@ function updateGoogleProfilePicture(profile) {
   fbDataUpdate += " p.g_email as googleEmail, p.contact as contact, p.address as address, p.college as college, p.course as course,";
   fbDataUpdate += " p.branch as branch, p.year as year, p.project_fee as projectFees, p.fees_paid as feesPaid, ";
   fbDataUpdate += " p.fees_balance as feesBalance, p.profile_pic as profilePic, p.facebook_img as facebookImage,";
-  fbDataUpdate += " p.google_img as googleImage from personaldata as p where p.google_id = '"+profile.id+"' and p.status = 'active'";
+  fbDataUpdate += " p.google_img as googleImage,p.message_no as msgNumber from personaldata as p where p.google_id = '"+profile.id+"' and p.status = 'active'";
 
   con.query(fbDataUpdate, function(error, results) {
     if (error) {

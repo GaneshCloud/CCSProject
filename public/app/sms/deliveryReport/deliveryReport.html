@@ -1,0 +1,120 @@
+
+<div ng-include="'../app/header/adminHeader.html'"></div>
+
+<div class="container">
+    <div class="container-fluid" style="padding: 0px 0px ">
+        <div class="col-lg-12 col-sm-12" style="background: white;min-height: 700px; border: 1px solid #D1D0CF">
+
+            <div ng-include src="'../app/sms/templates/menu.html'"></div>
+            <div class="col-lg-9" style="padding-top: 25px;border-left: 1px solid #D1D0CF;min-height: 700px;">   <!--message area-->
+
+
+                <h3>Delivery Report</h3>
+                <br>
+                <div>
+                        <div class="form-inline">
+                            <div>
+                                <input type="text" ng-model="searchText" class="form-control" placeholder="search">
+                                <!--<button  style="margin-left: 10px" class="form-control btn btn-primary">Search</button>-->
+
+                                <!--<select class="form-control pull-right" ng-model="daySelected" ng-click="gteComparator()" ng-change="searchByDay()">-->
+                                    <!--<option value="3">Last 3 Days</option>-->
+                                    <!--<option value="5">Last 5 Days</option>-->
+                                    <!--<option value="7">Last 7 Days</option>-->
+
+                                <!--</select>-->
+                            </div>
+                            <br>
+
+                        </div>
+                </div>
+
+
+                <div>
+                    <div>
+                        <table class="table table-bordered table-responsive">
+                            <thead>
+                            <tr>
+                                <th>Sl No</th>
+                                <th>Message</th>
+                                <th>Details</th>
+                                <th>Date & Time</th>
+                            </tr>
+
+
+                            </thead>
+                            <tr ng-repeat="msgList in smsList | filter:searchText |orderBy:msgList.msg:true  | filter:paginate">
+                                <td>{{$index+1}}</td>
+                                <td><a href ="" ng-click="getSmsDataById($index)">{{msgList.msg}}</a></td>
+                                <td>Detals: Total{{msgList.contactCount}}</td>
+                                <td>{{msgList.smsDate}}</td>
+                            </tr>
+                        </table>
+
+                    </div>
+
+                    <div class="col-sm-offset-0 col-sm-12" style="padding: 0px">
+
+                        <pagination
+                                ng-model="curPage"
+                                total-items="smsList.length"
+                                items-per-page="itemsPage"
+                                max-size="maxSize"
+                                boundary-links="true">
+                        </pagination>
+
+
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+
+</div>
+
+
+<!--popup window-->
+<div id="popup1" ng-style="popup" class="overlay">
+    <div class="popup" style="overflow: auto; width: 500px; max-height: 600px;background-color: #D1D0CF">
+
+        <h3>Message Report</h3>
+        <hr>
+        <a class="close" ng-click="popup={'visibility': 'hide','opacity': 0}">&times;</a>
+        <div class="content">
+            <h4>Message</h4>
+            <div style="background-color: white;height: 100px;padding: 10px">
+                {{smsDetails[0].msg}}
+            </div>
+
+            <h4>Contacts</h4>
+            <div style="background-color: white;height: 250px; padding: 5px">
+                <table class="table table-bordered">
+
+                    <tr>
+                        <th>Sl No</th>
+                        <th>Mob No</th>
+                        <th>Status</th>
+                    </tr>
+
+                    <tbody>
+                    <tr ng-repeat="cont in smsDetails track by $index">
+                        <td>{{$index+1}}</td>
+                        <td>{{cont.mobNo}}</td>
+                        <td>{{cont.smsSts}}</td>
+
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+

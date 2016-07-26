@@ -112,7 +112,7 @@ module.exports=function(connection){
                 if(ext==='.pdf'){
 
 
-                    var cmd = 'pdftk ./public/uploads/waterMark/'+file+' background ./public/waterMarkLabel.pdf output ./public/uploads/waterMarkpdf/'+file;
+                    var cmd = 'pdftk ./public/uploads/waterMark/'+file+' background ./public/uploads/waterMarkLabel/waterMarkLabel.pdf output ./public/uploads/waterMarkpdf/'+file;
 
                     exec(cmd, function(error, stdout, stderr) {
                         console.log(error);
