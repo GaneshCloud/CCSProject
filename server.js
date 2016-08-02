@@ -30,7 +30,43 @@ io.on('connection',function(socket) {
 
     //Storing users into array as an object
     socket.on('user name', function (userData) {
-        users.push({id: socket.id, user_name: userData.userid+'- '+userData.firstName,user_id:userData.userid,profilePic:userData.profilePic});
+
+        //if (users && users.length) {
+            //for (i = 0; i <= users.length; i++) {
+                //if (users[i].user_id == userData.userid) {
+                    //alert();
+                    
+                    //console.log(userData.profilePic);
+                    //len = users.length;
+                    //len--;
+                    //Sending th user Id and List of users
+                    //io.emit('user entrance', users, users[len].id);
+                //} else {
+                    users.push({
+                        id: socket.id,
+                        user_name: userData.userid + '- ' + userData.firstName,
+                        user_type:userData.userType,
+                        user_id: userData.userid,
+                        profilePic: userData.profilePic
+                    });
+                    console.log(userData.profilePic);
+                    len = users.length;
+                    len--;
+                    //Sending th user Id and List of users
+                    io.emit('user entrance', users, users[len].id);
+                //}
+            //}
+        //}
+        // else {
+        //     users.push({
+        //         id: socket.id,
+        //         user_name: userData.userid + '- ' + userData.firstName,
+        //         user_id: userData.userid,
+        //         profilePic: userData.profilePic
+        //     });
+            //io.emit('user entrance', users, users[len].id);
+        //}
+
         console.log(userData.profilePic);
         len = users.length;
         len--;
@@ -49,7 +85,7 @@ io.on('connection',function(socket) {
                 sender_id:data_server.myid,
                 select_id:data_server.selectUserid,
                 my_userid:data_server.my_userid,
-                date:result[0].Dates,
+                date:result[0].date,
                 image:data_server.image,
                 imagePath:data_server.imagePath,
                 file: data_server.file,

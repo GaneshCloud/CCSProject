@@ -63,6 +63,13 @@
             dashboardService.messaging();
         };
 
+
+        $scope.openChat = function() {
+            spinnerService.show('html5spinner');
+            dashboardService.chat();
+        };
+
+
         $scope.openForum = function() {
             spinnerService.show('html5spinner');
             dashboardService.forum();

@@ -13,7 +13,7 @@
 
             $scope.clicked = null;
             $scope.selected_id = null;
-            $scope.select_userid=null;;
+            $scope.select_userid=null;
             $scope.msgs = [];
             $scope.myself_msg=[];
             $scope.my_id = null;
@@ -105,8 +105,6 @@
 
                     $scope.send_msg(data_server);
                     alert("You send msg successfully!.");
-
-
                 });
 
             };
@@ -176,8 +174,7 @@
                 $scope.userData = result;
 
                 $scope.getChatinfo();
-                socket.emit('user name',  $scope.userData); // sending user name to the server
-
+                socket.emit('user name', $scope.userData); // sending user name to the server
             });
 
             $scope.enableImage=function() {
@@ -304,9 +301,10 @@
                 {
 
             if(result.data.length > 0){
-                $scope.readData = result.data;
+                $scope.readData = result.data[0];
                 console.log($scope.readData);
-                            }
+
+            }
                     else
                         $scope.readData =[];
 
@@ -315,12 +313,21 @@
 
 
                 },function(err){
-                                    });
+
+                });
             };
 
 
-            
+
+            // $scope.getReadinfo();
+            //displaying the messages.
             socket.on('get msg', function (data) {
+//                $scope.msgs.push(data);
+                alert();
+                //$scope.is_msg_show = true;
+
+
+
 
                 if(data.sender_id===$scope.selected_id){
                                    $scope.msgs.push(data);

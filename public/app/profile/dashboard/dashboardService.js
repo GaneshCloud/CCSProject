@@ -64,7 +64,14 @@
                     $window.location.href = '/project/home';
                 }
             },
+            chat: function () {
+                if(localStorage.getItem('userType') === 'admin') {
+                    $window.location.href = '/chat/chathome';
 
+                }else{
+
+                }
+            },
             forum:function () {
                 if(localStorage.getItem('userType') === 'admin') {
                     //Not for Admin

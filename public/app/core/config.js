@@ -29,6 +29,9 @@
             }).when('/profile/dashboard', {
                 templateUrl: '../app/profile/dashboard/dashboard.html',
                 controller: 'dashboardController'
+            }).when('/chat/chathome', {
+                templateUrl: 'app/chat/home/chat.html',
+                controller: 'dashboardController'
             }).when('/profile/adminProfile', {
                 templateUrl: '../app/profile/adminProfile/adminProfile.html',
                 controller: 'adminProfileController'
