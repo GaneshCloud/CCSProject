@@ -33,6 +33,11 @@
         </ul>
     </div>
 </nav>
+<br>
+        <div class="nav navbar-nav navbar-center">
+           &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;<div class="chip1"><span class="glyphicon glyphicon-user"></span> {{userData.firstName}}&nbsp;{{userData.lastName}}</div>
+        </div>
+<br>
 <div class="container-fluid">
     <div class="row content">
         <br>
@@ -51,7 +56,7 @@
             </div>
             <br>
             <br>
-            <div class="panel panel-default">
+            <div  ng-hide="userData.userType==='user'" class="panel panel-default">
                 <div class="panel-body">
                 <ul class="nav nav-pills nav-stacked">
 
@@ -59,7 +64,7 @@
                           'background': clicked==user_list.id ? 'lightblue' :'white',
                           'cursor': my_id==user_list.id ?  'not-allowed' :'pointer'
                       }" ng-click="clicked_highlight(user_list.id,user_list.user_id)">
-                        <img  ng-src="{{profilePicPath+user_list.profilePic}}" class="img-rounded" width="25" height="50">&nbsp;<span style="font-size:8px"> {{ user_list.user_name }}</span>
+                        <div class="chip"> <img  ng-src="{{profilePicPath+user_list.profilePic}}" alt="Person" width="30" height="30">&nbsp;<span style="font-size:8px"> {{ user_list.user_name }}</span></div>
                       <span class="online"  ng-style="{
                           'background-color': my_id==user_list.id ? '':'#0EE700'
                       }"><span class="glyphicon glyphicon-ok-circle"></span></span>
@@ -76,14 +81,14 @@
 
             </div>
             </div>
-            <div class="panel panel-default">
+            <div ng-hide="userData.userType==='admin'" class="panel panel-default">
             <div class="panel-body">Admin<br><br>
                 <ul class="nav nav-pills nav-stacked">
                     <li ng-show="user_list.user_type=='admin'" ng-repeat="user_list in user_show | filter:searchText"  ng-style="{
                           'background': clicked==user_list.id ? 'lightblue' :'white',
                           'cursor': my_id==user_list.id ?  'not-allowed' :'pointer'
                       }" ng-click="clicked_highlight(user_list.id,user_list.user_id)">
-                        <span style="font-size:8px"> {{user_list.user_id}}</span>
+                        <div class="chip"><span style="font-size:8px"> {{user_list.user_id}}</span></div>
                       <span class="online"  ng-style="{
                           'background-color': my_id==user_list.id ? '':'#0EE700'
                       }"><span class="glyphicon glyphicon-ok-circle"></span></span>
@@ -94,6 +99,7 @@
             </div>
         </div>
         </div>
+
         <div class="panel panel-default">
             <div class="panel-body">
                 <div class="col-sm-9">
@@ -102,7 +108,7 @@
 
                     <h4></h4>
 
-                    <div class="chatbox" id="chatbox">
+                    <div class="chatbox" id="chatbox" style="{'background-image':'./images/chat/BiD2mx-CEAAp94S.jpg'}">
                         <!--<div class="panel-heading">-->
                         <!--<div class="attach"> </div>-->
                         <!--</div>-->
